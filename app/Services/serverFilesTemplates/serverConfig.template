@@ -1,0 +1,49 @@
+hostname = "<%= hostname %>";
+password = "<%= password %>";
+passwordAdmin = "<%= password_admin %>";
+serverCommandPassword = "<%= server_command_password %>";
+
+logFile = "server_console.log";
+
+motd[] = {<% _.each(motd, function (message, i) { %>
+<% if (i === motd.length - 1) { %>
+    "<%= message %>"
+<% } else { %>
+    "<%= message %>",
+<% } %>
+<% }); %>};
+motdInterval = <%= motd_interval %>;
+
+maxPlayers = <%= max_players %>;
+kickDuplicate = <%= kick_duplicate ? 1 : 0 %>;
+verifySignatures = <%= verify_signatures %>;
+allowedFilePatching = <%= allowed_file_patching %>;
+
+voteMissionPlayers = <%= vote_mission_players %>;
+voteThreshold = <%= vote_threshold %>;
+
+disableVON = <%= disable_von ? 1 : 0 %>;
+vonCodec = <%= von_codec %>;
+vonCodecQuality = <%= von_codec_quality %>;
+persistent = <%= persistent ? 1 : 0 %>;
+timeStampFormat = <%= timestamp_format %>;
+BattlEye = <%= battleye ? 1 : 0 %>;
+
+disconnectTimeout = <%= disconnect_timeout %>;
+maxDesync = <%= max_desync %>;
+maxPing = <%= max_ping %>;
+maxPacketLoss = <%= max_packet_loss %>;
+
+onUserConnected = "<%= on_user_connected %>";
+onUserDisconnected = "<%= on_user_disconnected %>";
+doubleIdDetected = "<%= double_id_detected %>";
+onUnsignedData = "<%= on_unsigned_data %>";
+onHackedData = "<%= on_hacked_data %>";
+onDifferentData = "<%= on_different_data %>";
+
+class Missions {<% _.each(mission_name, function (mission, i) { %>
+    class <%= `Mission_${i}` %> {
+        template = "<%= mission %>";
+        difficulty = "<%= mission_difficulty %>";
+    };
+<% }); %>};

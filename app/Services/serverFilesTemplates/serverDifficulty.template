@@ -1,0 +1,40 @@
+class DifficultyPresets {
+	class CustomDifficulty {
+		class Options
+		{
+			reducedDamage = <%= reduced_damage ? 1 : 0 %>;
+
+			groupIndicators = <%= group_indicators %>;
+			friendlyTags = <%= friendly_tags %>;
+			enemyTags = <%= enemy_tags %>;
+			detectedMines = <%= detected_mines%>;
+			commands = <%= commands %>;
+			waypoints = <%= waypoints %>;
+			tacticalPing = <%= tactical_ping ? 1 : 0 %>;
+
+			weaponInfo = <%= weapon_info %>;
+			stanceIndicator = <%= stance_indicator %>;
+			staminaBar = <%= stamina_bar ? 1 : 0 %>;
+			weaponCrosshair = <%= weapon_crosshair ? 1 : 0 %>;
+			visionAid = <%= vision_aid ? 1 : 0 %>;
+
+			thirdPersonView = <%= third_person_view ? 1 : 0 %>;
+			cameraShake = <%= camera_shake ? 1 : 0 %>;
+
+			scoreTable = <%= score_table ? 1 : 0 %>;
+			deathMessages = <%= death_messages ? 1 : 0 %>;
+			vonID = <%= von_id ? 1 : 0 %>;
+
+			mapContent = <%= map_content ? 1 : 0 %>;
+			autoReport = <%= auto_report ? 1 : 0 %>;
+			multipleSaves = <%= multiple_saves ? 1 : 0 %>;
+		};
+
+		aiLevelPreset = <%= ai_level_preset %>;
+	};
+
+	class CustomAILevel	{
+		skillAI = <%= skill_ai %>;
+		precisionAI = <%= precision_ai %>;
+	};
+};

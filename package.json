@@ -25,7 +25,15 @@
     "@nuxtjs/axios": "^5.3.6",
     "@nuxtjs/dotenv": "^1.4.0",
     "cross-env": "^7.0.0",
-    "nuxt": "^2.11.0"
+    "get-folder-size": "^2.0.1",
+    "mkdirp": "^1.0.3",
+    "nuxt": "^2.11.0",
+    "request": "^2.88.2",
+    "rmraf": "^1.0.3",
+    "sqlite3": "^4.1.1",
+    "symlink-dir": "^3.1.1",
+    "systeminformation": "^4.22.3",
+    "tail": "^2.0.3"
   },
   "devDependencies": {
     "@nuxtjs/eslint-config": "^2.0.0",

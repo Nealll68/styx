@@ -38,7 +38,7 @@ class UserController {
 	 * GET users/:id
 	 *
 	 * @param {object} ctx
-	 * @param {Request} ctx.params
+	 * @param {Params} ctx.params
 	 */
 	async show ({ params }) {
 		return await User.find(params.id)
@@ -49,7 +49,7 @@ class UserController {
 	 * PUT or PATCH users/:id
 	 *
 	 * @param {object} ctx
-	 * @param {Request} ctx.params
+	 * @param {Params} ctx.params
 	 * @param {Request} ctx.request
 	 */
 	async update ({ params, request }) {
@@ -72,7 +72,7 @@ class UserController {
 	 * DELETE users/:id
 	 *
 	 * @param {object} ctx
-	 * @param {Response} ctx.params
+	 * @param {Params} ctx.params
 	 * @param {Response} ctx.response
 	 */
 	async destroy ({ params, response }) {
@@ -85,6 +85,46 @@ class UserController {
 		}
 				
 		await user.delete()
+		return response.ok()
+	}
+
+	/**
+	 * Login a user with credentials.
+	 * POST auth
+	 *
+	 * @param {object} ctx
+	 * @param {Request} ctx.request
+	 * @param {Response} ctx.response
+	 * @param {Auth} ctx.auth
+	 */
+	async login ({ request, response, auth }) {
+		const { username, password, remember } = request.all()
+
+		try {
+			await auth
+				.remember(remember)
+				.attempt(username, password)
+
+			return response.ok({
+				data: auth.user
+			})
+		} catch (ex) {
+			return response
+				.status(ex.status)
+				.send(ex.code)
+		}
+	}
+
+	/**
+	 * Logout a user.
+	 * POST auth/logout
+	 *
+	 * @param {object} ctx
+	 * @param {Response} ctx.response
+	 * @param {Auth} ctx.auth
+	 */
+	async logout ({ response, auth }) {
+		await auth.logout()
 		return response.ok()
 	}
 }

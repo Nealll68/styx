@@ -1,5 +1,4 @@
 const { resolve } = require('path')
-const colors = require('vuetify/es5/util/colors').default
 
 module.exports = {
   mode: 'universal',
@@ -25,22 +24,31 @@ module.exports = {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#fff' },
+  loading: { 
+    color: '#1EB980' 
+  },
   /*
    ** Global CSS
    */
-  css: [],
+  css: ['~/assets/main.css'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/vuetifyConfirm.client', ssr: false },
+    { src: '~/plugins/adonisWS.client', ssr: false },
+    { src: '~/plugins/vueApexCharts.client', ssr: false },
+    { src: '~/plugins/steamGuard.client', ssr: false },
+    '~/plugins/axios'
+  ],
   /*
    ** Nuxt.js dev-modules
    */
   buildModules: [
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
-    '@nuxtjs/vuetify'
+    '@nuxtjs/vuetify',
+    '@nuxtjs/moment'
   ],
   /*
    ** Nuxt.js modules
@@ -49,32 +57,118 @@ module.exports = {
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv'
+    '@nuxtjs/dotenv',
+    '@nuxtjs/auth',
+    '@nuxtjs/toast'
   ],
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    baseURL: `${process.env.HOST}:${process.env.PORT}/api`
+  },
   /*
-   ** vuetify module configuration
-   ** https://github.com/nuxt-community/vuetify-module
-   */
+  ** Auth module configuration
+  */  
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: { url: 'auth', method: 'post', propertyName: 'data' },
+          logout: { url: 'auth/logout', method: 'post' }
+        },
+        tokenRequired: false,
+        tokenType: false
+      }
+    }
+  },
+  /*
+  ** Router configuration
+  */
+  router: {
+    middleware: ['auth']
+  },
+  /*
+  ** Moment module configuration
+  */
+  moment: {
+    locales: ['fr'],
+    defaultLocale: 'fr'
+  },
+  /*
+  ** Toast module configuration
+  */
+  toast: {
+    position: 'top-right',
+    duration: 6000,
+    keepOnHover: true,
+    iconPack: 'mdi',
+    action: {
+      text: 'Fermer',
+      onClick: (e, toastObject) => {
+        toastObject.goAway(0)
+      }
+    },
+
+    register: [
+      {
+        name: 'appError',
+        message: (payload) => {          
+          if (!payload) {
+            return 'Une erreur s\'est produite'
+          }
+          return payload
+        },
+        options: {
+          icon: 'alert',
+          containerClass: ['app-toast', 'app-error-toast']
+        }
+      },
+      {
+        name: 'appSuccess',
+        message: payload => payload,
+        options: {
+          icon: 'check-circle',
+          containerClass: ['app-toast', 'app-success-toast']
+        }
+      },
+      {
+        name: 'appInfo',
+        message: payload => payload,
+        options: {
+          icon: 'information',
+          containerClass: ['app-toast', 'app-info-toast']
+        }
+      },
+      {
+        name: 'appWarning',
+        message: payload => payload,
+        options: {
+          icon: 'exclamation',
+          containerClass: ['app-toast', 'app-warning-toast']
+        }
+      }
+    ]
+  },
+  /*
+  ** vuetify module configuration
+  ** https://github.com/nuxt-community/vuetify-module
+  */
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
       themes: {
         dark: {
-          primary: colors.blue.darken2,
-          accent: colors.grey.darken3,
-          secondary: colors.amber.darken3,
-          info: colors.teal.lighten1,
-          warning: colors.amber.base,
-          error: colors.deepOrange.accent4,
-          success: colors.green.accent3
-        }
-      }
+          primary: '#1EB980',
+          secondary: '#045D56',
+          tertiary: '#FF6859',
+          quaternary: '#FFCF44',
+          quinary: '#B15DFF',
+          senary: '#72DEFF',
+        },
+      },
     }
   },
   /*
@@ -84,6 +178,10 @@ module.exports = {
     /*
      ** You can extend webpack config here
      */
-    extend(config, ctx) {}
+    extend(config, ctx) {},
+
+    transpile: [
+      '@adonisjs/websocket-client/index'
+    ]
   }
 }

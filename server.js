@@ -23,4 +23,4 @@ new Ignitor(require('@adonisjs/fold'))
   .appRoot(__dirname)
   .wsServer()
   .fireHttpServer()
-  .catch(console.error) // eslint-disable-line no-console
+  .catch(console.error)

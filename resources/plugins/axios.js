@@ -1,6 +1,6 @@
 export default function ({ $axios, app }) {  
     $axios.onError(error => {
-    switch (error.response.data) {
+        switch (error.response.data) {
             case 'E_A3_FOLDER_PATH_UNDEFINED':
                 app.$toast.global.appError('Le chemin vers le dossier d\'Arma 3 n\'est pas défini')
                 break

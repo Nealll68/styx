@@ -26,7 +26,7 @@ Route
 
 Route.post('api/auth', 'UserController.login')
 Route
-    .post('api/auth/logout', 'UserController.logout')
+    .get('api/auth/', 'UserController.me')
     .middleware(['auth'])
 
 Route

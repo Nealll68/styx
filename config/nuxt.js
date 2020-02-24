@@ -45,8 +45,7 @@ module.exports = {
    ** Nuxt.js dev-modules
    */
   buildModules: [
-    // Doc: https://github.com/nuxt-community/eslint-module
-    '@nuxtjs/eslint-module',
+    '@nuxtjs/dotenv',
     '@nuxtjs/vuetify',
     '@nuxtjs/moment'
   ],
@@ -54,32 +53,32 @@ module.exports = {
    ** Nuxt.js modules
    */
   modules: [
-    // Doc: https://axios.nuxtjs.org/usage
-    '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
+    '@nuxtjs/axios',    
     '@nuxtjs/auth',
     '@nuxtjs/toast'
   ],
+  dotenv: {
+    path: resolve(__dirname, '..')
+  },
   /*
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    baseURL: `${process.env.HOST}:${process.env.PORT}/api`
+    baseURL: `http://${process.env.HOST}:${process.env.PORT}/api`,
+    credentials: true
   },
   /*
   ** Auth module configuration
-  */  
+  */
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'auth', method: 'post', propertyName: 'data' },
-          logout: { url: 'auth/logout', method: 'post' }
-        },
-        tokenRequired: false,
-        tokenType: false
+          login: { url: 'auth', method: 'post', propertyName: 'data.token' },
+          user : { url: 'auth', method: 'get', propertyName: 'data' },
+          logout: false
+        }
       }
     }
   },

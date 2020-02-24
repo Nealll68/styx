@@ -98,15 +98,13 @@ class UserController {
 	 * @param {Auth} ctx.auth
 	 */
 	async login ({ request, response, auth }) {
-		const { username, password, remember } = request.all()
+		const { username, password } = request.all()
 
 		try {
-			await auth
-				.remember(remember)
-				.attempt(username, password)
+			const token = await auth.attempt(username, password)
 
 			return response.ok({
-				data: auth.user
+				data: token
 			})
 		} catch (ex) {
 			return response
@@ -116,17 +114,18 @@ class UserController {
 	}
 
 	/**
-	 * Logout a user.
-	 * POST auth/logout
+	 * Get logged user.
+	 * GET auth
 	 *
 	 * @param {object} ctx
 	 * @param {Response} ctx.response
 	 * @param {Auth} ctx.auth
 	 */
-	async logout ({ response, auth }) {
-		await auth.logout()
-		return response.ok()
-	}
+	async me ({ auth, response }) {
+        return response.ok({
+            data: auth.user
+        })
+    }
 }
 
 module.exports = UserController

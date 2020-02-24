@@ -27,7 +27,7 @@
             :options="{
                       chart: {
                         id: 'cpu-chart',
-                        background: '#424242',
+                        background: '#1E1E1E',
                         sparkline: {
                           enabled: true
                         }
@@ -87,7 +87,7 @@
             :options="{
                       chart: {
                         id: 'mem-chart',
-                        background: '#424242',
+                        background: '#1E1E1E',
                         sparkline: {
                           enabled: true
                         }

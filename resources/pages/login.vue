@@ -13,16 +13,6 @@
         md="5"
       >
 				<v-card>
-          <v-card-title class="text-center">
-            <v-list-item dense>
-              <v-list-item-content>                            
-                <v-list-item-title class="font-weight-light headline">COMMANDER</v-list-item-title>
-              </v-list-item-content>
-            </v-list-item>
-          </v-card-title>
-
-          <v-divider></v-divider>
-
 					<v-card-text class="pb-0">
 						<v-form 
               v-model="formIsValid" 

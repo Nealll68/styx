@@ -12,7 +12,7 @@
         sm="8" 
         md="5"
       >
-				<v-card class="elevation-12">
+				<v-card>
           <v-card-title class="text-center">
             <v-list-item dense>
               <v-list-item-content>                            

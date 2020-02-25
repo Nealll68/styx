@@ -1,6 +1,6 @@
 'use strict'
 
-const A3SteamCMD = use('App/Services/A3SteamCMD')
+const SteamCMD = use('App/Services/SteamCMD')
 
 class DownloadController {
 
@@ -8,7 +8,7 @@ class DownloadController {
         const { steamGuard } = request.all()
 
         try {
-            await A3SteamCMD.updateServer(steamGuard)
+            await SteamCMD.updateServer(steamGuard)
             response.ok()
         } catch (ex) {
             return response.status(ex.status).send(ex.code)
@@ -19,7 +19,7 @@ class DownloadController {
         const data = request.all()
         
         try {
-            await A3SteamCMD.downloadWorkshop(data)
+            await SteamCMD.downloadWorkshop(data)
             return response.ok()
         } catch (ex) {
             return response.status(ex.status).send(ex.code)
@@ -28,7 +28,7 @@ class DownloadController {
 
     cancel ({ response }) {
         try {
-            A3SteamCMD.cancel()
+            SteamCMD.cancel()
             return response.ok()
         } catch (ex) {
             return response.status(ex.status).send(ex.code)

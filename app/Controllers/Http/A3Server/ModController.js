@@ -1,22 +1,16 @@
 'use strict'
 
-const anzip = require('anzip')
 const path = require('path')
 const symlinkDir = require('symlink-dir')
 
 const Helpers = use('Helpers')
-const fs = Helpers.promisify(require('fs'))
 const getFolderSize = Helpers.promisify(require('get-folder-size'))
-const Drive = use('Drive')
 
 const Mod = use('App/Models/A3Server/Mod')
 const Config = use('App/Models/Config')
 
-const A3SteamCMD = use('App/Services/A3SteamCMD')
 const SteamWebAPI = use('App/Services/SteamWebAPI')
-
-const A3FolderPathUndefined = use('App/Exceptions/A3FolderPathUndefinedException')
-const InvalidFileExtension = use('App/Exceptions/InvalidFileExtensionException')
+const FileManager = use('App/Services/FileManager')
 
 class ModController {
 
@@ -25,9 +19,7 @@ class ModController {
     }
 
     async indexLocal ({ response }) {
-        const config = await Config.first()
-
-        const modFolders = await fs.readdir(config.a3server_path, { withFileTypes: true })
+        const modFolders = await FileManager.getLocalMods()
         
         return response.ok({
             modFolders: modFolders.filter(dirent => dirent.isDirectory() && dirent.name.substring(0, 1) === '@').map(dirent => dirent.name)
@@ -56,24 +48,7 @@ class ModController {
         const modFile = request.file('file')
 
         try {
-            const config = await Config.first()
-
-            if (!config.a3server_path) throw new A3FolderPathUndefined()
-            if (modFile.extname !== 'zip') throw new InvalidFileExtension()
-
-            await modFile.move(config.a3server_path, {
-                overwrite: true
-            })
-
-            if (!modFile.moved()) {
-                return response.internalServerError(modFile.error())
-            }
-
-            const zipPath = path.join(config.a3server_path, modFile.fileName)
-
-            await anzip(zipPath, { outputPath : config.a3server_path })
-            await Drive.delete(zipPath)
-
+            await FileManager.storeLocalMod(modFile)
             return response.ok()
         } catch (ex) {
             return response.status(ex.status).send(ex.code)
@@ -84,7 +59,7 @@ class ModController {
         try {
             const config = await Config.first()
 
-            const modFolders = await fs.readdir(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410'), { withFileTypes: true })
+            const modFolders = await FileManager.getWorkshopMods()
             const workshopIds = modFolders.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
 
             for (const workshopId of workshopIds) {
@@ -117,7 +92,7 @@ class ModController {
             const mod = await Mod.find(params.id)
             await mod.delete()
     
-            await A3SteamCMD.deleteMod(mod.workshop_id, mod.name)
+            await FileManager.deleteMod(mod.workshop_id, mod.name)
     
             return response.ok()
         } catch (ex) {
@@ -130,7 +105,7 @@ class ModController {
             const mod = await Mod.find(params.id)
             await mod.delete()
 
-            await A3SteamCMD.deleteLocalMod(mod.name)
+            await FileManager.deleteLocalMod(mod.name)
 
             return response.ok()
         } catch (ex) {

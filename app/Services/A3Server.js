@@ -9,12 +9,11 @@ const fs = Helpers.promisify(require('fs'))
 const Tail = require('tail').Tail
 
 const Ws = use('Ws')
-const Drive = use('Drive')
 
 const Config = use('App/Models/Config')
 const A3ServerProfile = use('App/Models/A3Server/Profile')
 
-const A3FileManager = use('App/Services/A3FileManager')
+const FileManager = use('App/Services/FileManager')
 
 class A3Server {
 
@@ -49,15 +48,15 @@ class A3Server {
 
                 if (this.lastStartAt) {
                     if (new Date(serverConfig.updated_at) >= this.lastStartAt) {
-                        await A3FileManager.write('config', profile, serverConfig.toJSON())
+                        await FileManager.write('config', profile, serverConfig.toJSON())
                     }
 
                     if (new Date(serverDifficulty.updated_at) >= this.lastStartAt) {
-                        await A3FileManager.write('difficulty', profile, serverDifficulty.toJSON())
+                        await FileManager.write('difficulty', profile, serverDifficulty.toJSON())
                     }
                 } else {
-                    await A3FileManager.write('config', profile, serverConfig.toJSON())
-                    await A3FileManager.write('difficulty', profile, serverDifficulty.toJSON())
+                    await FileManager.write('config', profile, serverConfig.toJSON())
+                    await FileManager.write('difficulty', profile, serverDifficulty.toJSON())
                 }                
 
                 const params = await profile.serverParam().fetch()
@@ -124,34 +123,6 @@ class A3Server {
         }
     }
 
-    async logFiles () {
-        const config = await Config.first()
-        const profiles = await A3ServerProfile.all()
-
-        let returnData = []
-        for (const profile of profiles.toJSON()) {
-            const files = await fs.readdir(path.join(config.a3server_path, 'commander', profile.name))
-            returnData.push({
-                profile_name: profile.name,
-                files: files.filter(file => file.endsWith('.rpt')).reverse()
-            })
-        }
-
-        return returnData
-    }
-
-    async getLogs (profileName, filename) {
-        const config = await Config.first()
-
-        return await Drive.get(path.join(config.a3server_path, 'commander', profileName, filename), 'UTF-8')
-    }
-
-    async deleteLogs (profileName, filename) {
-        const config = await Config.first()      
-
-        await Drive.delete(path.join(config.a3server_path, 'commander', profileName, filename))
-    }
-
     sendWS (event, data) {
         const a3serverWS = Ws.getChannel('a3-server').topic('a3-server')
         if (a3serverWS) {
@@ -160,11 +131,7 @@ class A3Server {
     }    
 
     get isStarted () {
-        if (this.a3server) {
-            return true
-        } else {
-            return false
-        }
+        return this.a3Server ? true : false
     }
 }
 

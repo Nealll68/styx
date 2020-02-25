@@ -4,7 +4,7 @@ const A3ServerDifficulty = use('App/Models/A3Server/Difficulty')
 
 class DifficultyController {
 
-    async update ({ params, request, response }) {
+    async update ({ params, request }) {
         const data = request.all()
 
         const serverDifficulty = await A3ServerDifficulty.find(params.id)
@@ -14,7 +14,7 @@ class DifficultyController {
         return serverDifficulty
     }
 
-    async reset ({ params, response }) {
+    async reset ({ params }) {
         const difficulty = await A3ServerDifficulty.find(params.id)
 
         await difficulty.delete()

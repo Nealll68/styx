@@ -7,7 +7,7 @@ const A3ServerConfig = use('App/Models/A3Server/Config')
 const A3ServerParam = use('App/Models/A3Server/Param')
 const A3ServerDifficulty = use('App/Models/A3Server/Difficulty')
 
-const A3FileManager = use('App/Services/A3FileManager')
+const FileManager = use('App/Services/FileManager')
 
 const Config = use('App/Models/Config')
 
@@ -62,8 +62,8 @@ class ProfileController {
             const serverConfig = await A3ServerConfig.findBy('profile_id', serverProfile.id)
             const serverDifficulty = await A3ServerDifficulty.findBy('profile_id', serverProfile.id)
 
-            await A3FileManager.write('config', serverProfile, serverConfig.toJSON())
-            await A3FileManager.write('difficulty', serverProfile, serverDifficulty.toJSON())
+            await FileManager.write('config', serverProfile, serverConfig.toJSON())
+            await FileManager.write('difficulty', serverProfile, serverDifficulty.toJSON())
 
             await serverProfile.reload()
             return serverProfile
@@ -108,7 +108,7 @@ class ProfileController {
             newDefaultProfile.save()
         }
 
-        await A3FileManager.deleteProfileFolder(serverProfile.name)
+        await FileManager.deleteProfileFolder(serverProfile.name)
 
         return response.ok()
     }

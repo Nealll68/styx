@@ -4,10 +4,6 @@ const { spawn } = require('child_process')
 const path = require('path')
 const symlinkDir = require('symlink-dir')
 
-const Helpers = use('Helpers')
-const fs = Helpers.promisify(require('fs'))
-const rimraf = Helpers.promisify(require('rimraf'))
-
 const Ws = use('Ws')
 
 const Config = use('App/Models/Config')
@@ -17,11 +13,10 @@ const A3Server = use('App/Services/A3Server')
 
 const A3FolderPathUndefined = use('App/Exceptions/A3FolderPathUndefinedException')
 const SteamCMDPathUndefined = use('App/Exceptions/SteamCMDPathUndefinedException')
-const UnableToAccess = use('App/Exceptions/UnableToAccessException')
 const SteamAccountRequired = use('App/Exceptions/SteamAccountRequiredException')
 const SteamGuardRequired = use('App/Exceptions/SteamGuardRequiredException')
 
-class A3SteamCMD {
+class SteamCMD {
     constructor () {
         this.steamcmd = null
         this.type = null
@@ -143,44 +138,6 @@ class A3SteamCMD {
         this.sendWS('stop', null)
     }
 
-    async deleteMod (workshopItemID, workshopItemName) {
-        try {
-            const config = await Config.first()      
-
-            if (!config.steamcmd_path) {
-                throw new SteamCMDPathUndefined()
-            } else if (!config.a3server_path) {
-                throw new A3FolderPathUndefined()
-            }            
-
-            if (await fs.access(path.join(config.a3server_path, workshopItemName), fs.constants.R_OK | fs.constants.W_OK)) throw new UnableToAccess()
-            
-            await fs.unlink(path.join(config.a3server_path, workshopItemName))
-
-            if (await fs.access(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410', `${workshopItemID}`), fs.constants.R_OK | fs.constants.W_OK)) throw new UnableToAccess()
-
-            await rimraf(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410', `${workshopItemID}`))
-        } catch (ex) {
-            throw ex
-        }
-    }
-
-    async deleteLocalMod (name) {
-        try {
-            const config = await Config.first()      
-
-            if (!config.a3server_path) {
-                throw new A3FolderPathUndefined()
-            }
-
-            if (await fs.access(path.join(config.a3server_path, name), fs.constants.R_OK | fs.constants.W_OK)) throw new UnableToAccess()
-
-            await rimraf(path.join(config.a3server_path, name))
-        } catch (ex) {
-            throw ex
-        }
-    }
-
     sendWS (event, data) {
         const downloadWS = Ws.getChannel('download-info').topic('download-info')
         if (downloadWS) {
@@ -196,4 +153,4 @@ class A3SteamCMD {
     }       
 }
 
-module.exports = new A3SteamCMD()
+module.exports = new SteamCMD()

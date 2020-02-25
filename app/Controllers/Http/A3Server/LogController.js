@@ -2,17 +2,17 @@
 
 const path = require('path')
 
-const A3Server = use('App/Services/A3Server')
+const FileManager = use('App/Services/FileManager')
 const Config = use('App/Models/Config')
 
 class LogController {
 
     async index () {
-        return await A3Server.logFiles()
+        return await FileManager.logFiles()
     }
 
     async show ({ params }) {
-        return await A3Server.getLogs(params.profileName, params.filename)
+        return await FileManager.getLogs(params.profileName, params.filename)
     }
 
     async download ({ params, response}) {
@@ -22,7 +22,7 @@ class LogController {
     }
 
     async destroy ({ params, response }) {
-        await A3Server.deleteLogs(params.profileName, params.filename)
+        await FileManager.deleteLogs(params.profileName, params.filename)
         return response.ok()
     }
 }

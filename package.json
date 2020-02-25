@@ -29,6 +29,7 @@
     "@nuxtjs/axios": "^5.9.5",
     "@nuxtjs/dotenv": "^1.4.0",
     "@nuxtjs/toast": "^3.3.0",
+    "anzip": "^0.2.0",
     "apexcharts": "^3.15.6",
     "cross-env": "^7.0.0",
     "debounce": "^1.2.0",

@@ -90,4 +90,4 @@ sw.*
 *.swp
 
 # Database file
-.sqlite
+database/*.sqlite

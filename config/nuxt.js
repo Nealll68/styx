@@ -98,7 +98,7 @@ module.exports = {
   ** Toast module configuration
   */
   toast: {
-    position: 'top-right',
+    position: 'bottom-center',
     duration: 6000,
     keepOnHover: true,
     iconPack: 'mdi',

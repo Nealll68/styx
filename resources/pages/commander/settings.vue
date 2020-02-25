@@ -60,7 +60,7 @@
 
       <v-divider></v-divider>
       
-      <v-subheader>Vous pouvez préciser un compte steam qui va gérer le téléchargement du jeu et des mods. Il faudra alors simplement préciser le code Steam Guard</v-subheader>      
+      <v-subheader>Vous pouvez préciser un compte steam qui va gérer le téléchargement du jeu et des mods.</v-subheader>      
 
       <v-text-field
         v-model="config.steam_account"

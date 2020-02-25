@@ -58,27 +58,13 @@ class A3Server {
                     await FileManager.write('config', profile, serverConfig.toJSON())
                     await FileManager.write('difficulty', profile, serverDifficulty.toJSON())
                 }                
-
-                const params = await profile.serverParam().fetch()
-
+                
                 const profileFolder = path.join(config.a3server_path, 'commander', profile.name)
 
                 this.lastStartAt = Date.now()
                                 
                 const executable = this.a3Executables[process.platform][config.x64 ? 'arma3server_x64' : 'arma3server']
-                
-                this.a3server = spawn(path.join(config.a3server_path, executable), [                    
-                    `-port=${config.port}`,
-                    `-profiles="${profileFolder}"`,
-                    `-config="${path.join(profileFolder, 'server.cfg')}"`,
-                    `-mod="${profile.mods}"`,
-                    `serverMod="${profile.server_mod}"`,
-                    params.auto_init ? '-autoInit' : '',
-                    params.load_mission_to_memory ? '-loadMissionToMemory' : '',
-                    params.no_logs ? '-noLogs' : '',
-                    params.enable_ht ? '-enableHT' : '',
-                    params.huge_pages ? '-hugepages' : ''
-                ])               
+                this.a3server = spawn(path.join(config.a3server_path, executable), this.buildParams(config, profileFolder, await profile.serverParam().fetch()))               
                 
                 await new Promise(resolve => { setTimeout(resolve, 2000) })
 
@@ -106,13 +92,7 @@ class A3Server {
             throw ex
         }
     }
-
-    stop () {
-        if (this.a3server) {
-            this.a3server.kill()
-        }
-    }
-
+    
     async restart () {        
         try {
             this.stop()
@@ -121,6 +101,30 @@ class A3Server {
         } catch (ex) {
             throw ex
         }
+    }
+
+    stop () {
+        if (this.a3server) {
+            this.a3server.kill()
+        }
+    }
+
+    buildParams (config, profileFolder, params) {
+        let paramsArray = [
+            `-port=${config.port}`,
+            `-profiles="${profileFolder}"`,
+            `-config="${path.join(profileFolder, 'server.cfg')}"`
+        ]
+
+        if (params.mods) paramsArray.push(`-mod="${params.mods}"`)
+        if (params.server_mod) paramsArray.push(`-serverMod="${params.server_mod}"`)
+        if (params.auto_init) paramsArray.push('-autoInit')
+        if (params.load_mission_to_memory) paramsArray.push('-loadMissionToMemory')
+        if (params.no_logs) paramsArray.push('-noLogs')
+        if (params.enable_ht) paramsArray.push('-enableHT') 
+        if (params.huge_pages) paramsArray.push('-hugepages')
+
+        return paramsArray
     }
 
     sendWS (event, data) {

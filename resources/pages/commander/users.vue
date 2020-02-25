@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>   
     <v-alert
-      type="warning"
+      type="error"
       border="left"
       text
       v-if="users.find(element => element.username === 'admin')"

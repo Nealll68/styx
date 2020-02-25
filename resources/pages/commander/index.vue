@@ -1,5 +1,14 @@
 <template>
-  <v-container fluid>    
+  <v-container fluid>
+    <v-alert
+      v-if="!$store.state.config.a3ServerPath"
+      text
+      type="error"
+      border="left"
+    >
+      Aucun chemin vers le dossier Arma 3 et SteamCMD n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
+    </v-alert>
+
     <v-row justify="center">
       <v-col md="6" sm="12">
         <v-card>

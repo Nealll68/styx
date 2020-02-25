@@ -131,6 +131,7 @@ export default {
         const config = await this.$axios.$post('config', this.config)
         this.config.steam_password = ''
         this.config = config
+        this.$store.commit('config/set', config)
       }
 
       this.loading = false

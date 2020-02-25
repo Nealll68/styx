@@ -1,6 +1,15 @@
 <template>
   <v-container fluid>
-    <v-row>
+    <v-alert
+      v-if="!$store.state.config.a3ServerPath"
+      text
+      type="error"
+      border="left"
+    >
+      Aucun chemin vers le dossier Arma 3 n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
+    </v-alert>
+
+    <v-row v-else>
       <v-col md="12" lg="3">
         <profile-list :profiles="profiles" @show-profile="showProfile($event)" @refresh="refreshProfiles()"></profile-list>
       </v-col>

@@ -108,7 +108,7 @@
       text 
       color="success"
       @click="startA3Server()" 
-      :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted"
+      :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
       <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-play</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : 'Démarrer' }}
     </v-btn>
@@ -118,7 +118,7 @@
       text 
       color="warning"
       @click="restartA3Server()" 
-      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted"
+      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
       <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-restart</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : 'Redémarrer' }}
     </v-btn>
@@ -128,7 +128,7 @@
       text 
       color="error"
       @click="stopA3Server()" 
-      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted"
+      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || $store.state.config.config.a3ServerPath"
     >
       <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : 'Arrêter' }}
     </v-btn>
@@ -143,7 +143,7 @@
           :loading="loadingUpdate"
           v-on="on"
           @click="updateServer()"
-          :disabled="$store.state.downloadInfo.type === 'updateServer'"
+          :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
         >
           <v-icon>mdi-update</v-icon>
         </v-btn>

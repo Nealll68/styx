@@ -24,7 +24,10 @@ export default {
     }
   },
 
-  mounted () {
+  async mounted () {
+      const config = await this.$axios.$get('config')
+      this.$store.commit('config/set', config)
+
       this.ws = this.$adonisWs(process.env.WS_URL)
 
       this.ws.connect()

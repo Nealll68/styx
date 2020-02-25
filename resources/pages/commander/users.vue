@@ -97,12 +97,7 @@
             :value="dialogLoading"
             absolute
           >
-            Création en cours...
-            <v-progress-linear 
-              indeterminate 
-              color="accent"
-              class="mb-0"
-            ></v-progress-linear>
+            <v-progress-circular indeterminate></v-progress-circular>
           </v-overlay>
 
           <v-card-text class="pt-5 pb-0">

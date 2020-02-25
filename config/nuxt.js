@@ -58,13 +58,6 @@ module.exports = {
     path: resolve(__dirname, '..')
   },
   /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {
-    baseURL: `http://${process.env.HOST}:${process.env.PORT}/api`
-  },
-  /*
   ** Auth module configuration
   */
   auth: {

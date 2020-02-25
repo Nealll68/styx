@@ -16,6 +16,12 @@ const LightAppBar = () => import('@/components/LightAppBar')
 export default {
   components: {
     LightAppBar
-  }
+  },
+
+  head () {
+    return {
+      title: 'Accueil'
+    }
+  },
 }
 </script>

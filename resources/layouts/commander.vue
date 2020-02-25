@@ -24,6 +24,12 @@ export default {
     }
   },
 
+  head () {
+    return {
+      title: 'Commander'
+    }
+  },
+
   async mounted () {
       const config = await this.$axios.$get('config')
       this.$store.commit('config/set', config)

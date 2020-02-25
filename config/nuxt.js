@@ -8,8 +8,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    //titleTemplate: '%s - Commander',
-    title: 'Commander',
+    titleTemplate: '%s - CP17',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

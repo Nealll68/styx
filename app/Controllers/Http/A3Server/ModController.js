@@ -7,6 +7,7 @@ const symlinkDir = require('symlink-dir')
 const Helpers = use('Helpers')
 const fs = Helpers.promisify(require('fs'))
 const getFolderSize = Helpers.promisify(require('get-folder-size'))
+const Drive = use('Drive')
 
 const Mod = use('App/Models/A3Server/Mod')
 const Config = use('App/Models/Config')
@@ -71,7 +72,7 @@ class ModController {
             const zipPath = path.join(config.a3server_path, modFile.fileName)
 
             await anzip(zipPath, { outputPath : config.a3server_path })
-            await fs.unlink(zipPath)
+            await Drive.delete(zipPath)
 
             return response.ok()
         } catch (ex) {

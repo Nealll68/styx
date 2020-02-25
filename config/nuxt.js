@@ -8,16 +8,14 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - ' + process.env.npm_package_name,
-    title: process.env.npm_package_name || '',
+    //titleTemplate: '%s - Commander',
+    title: 'Commander',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content: process.env.npm_package_description || ''
-      }
+      { name: 'author', content: 'Nealll' },
+      { hid: 'description', name: 'description', content: 'CP17 arma 3 team milsim' },
+      { name: 'keywords', content: 'CP17, Commando Parachutiste 17, Arma 3, Arma, Team, Equipe, Milsim, Communauté, Jeux' }
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },

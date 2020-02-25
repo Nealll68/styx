@@ -8,7 +8,7 @@
         text
         color="primary"
         :loading="loading"
-        :disabled="$store.state.downloadInfo.type === 'updateServer'"
+        :disabled="$store.state.downloadInfo.type === 'updateServer' || !valid"
         @click="save()"
       >
         <v-icon left>mdi-content-save</v-icon>Enregistrer

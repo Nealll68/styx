@@ -436,7 +436,7 @@ export default {
 		async update () {
       this.loadingUpdate = true
       
-      this.serverConfig.motd = this.serverConfig.motd.split('\n').join(';')
+      this.serverConfig.motd = this.serverConfig.motd ? this.serverConfig.motd.split('\n').join(';') : ''
       const response = await this.$axios.$put(`server/config/${this.serverConfig.id}`, this.serverConfig)      
       
       this.$toast.global.appSuccess('Config mise à jour')

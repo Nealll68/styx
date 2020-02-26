@@ -68,7 +68,7 @@ class A3Server {
                 
                 await new Promise(resolve => { setTimeout(resolve, 2000) })
 
-                const logFiles = await this.logFiles()
+                const logFiles = await FileManager.logFiles()
                 const profileLogFiles = logFiles.find(e => e.profile_name === profile.name)
                 const lastLogFile = _.maxBy(profileLogFiles.files, file => {
                     return fs.statSync(path.join(profileFolder, file)).ctime

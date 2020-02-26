@@ -128,7 +128,7 @@
       text 
       color="error"
       @click="stopA3Server()" 
-      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || $store.state.config.config.a3ServerPath"
+      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || $store.state.config.a3ServerPath"
     >
       <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : 'Arrêter' }}
     </v-btn>

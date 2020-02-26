@@ -1,6 +1,5 @@
 export const state = () => ({
-    isStarted: false,
-    logs: []
+    isStarted: false
 })
 
 export const mutations = {
@@ -15,9 +14,5 @@ export const mutations = {
         if (code === 'noProfile') {
             this.$toast.global.appError('Spécifiez un profil par défaut pour démarrer le serveur')
         }
-    },
-
-    logs (state, value) {
-        state.logs.push(value)
     }
 }

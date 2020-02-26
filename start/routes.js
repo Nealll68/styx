@@ -51,6 +51,7 @@ Route.group(() => {
     Route.get('mission/detect', 'MissionController.detect')
 
     Route.get('logs', 'LogController.index')
+    Route.get('logs/current', 'LogController.current')
     Route.get('logs/:profileName/:filename', 'LogController.show')
     Route.get('/logs/download/:profileName/:filename', 'LogController.download')
     Route.delete('logs/:profileName/:filename', 'LogController.destroy')

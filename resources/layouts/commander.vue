@@ -55,10 +55,6 @@ export default {
             this.$store.commit('downloadInfo/init', data)
         })
 
-        downloadInfo.on('logs', data => {
-            this.$store.commit('downloadInfo/addLogs', data)
-        })
-
         downloadInfo.on('stop', code => {
             this.$store.commit('downloadInfo/stop', code)
         })

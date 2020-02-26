@@ -137,9 +137,20 @@
           <v-card-title>
             <v-icon left>mdi-post</v-icon>
             Logs
+
+            <v-spacer></v-spacer>
+
+            <v-btn
+              text
+              @click="refreshLogs()"
+              class="mr-2"
+              color="tertiary"
+            >
+              <v-icon left>mdi-refresh</v-icon> Actualiser
+            </v-btn>
           </v-card-title>
           <v-card-text>
-            <v-sheet 
+            <v-sheet             
               v-if="$store.state.a3Server.isStarted"
               color="grey darken-4" 
               class="pa-2 scrollbar"
@@ -173,13 +184,6 @@ export default {
     }
   },
 
-  updated () {
-    if (this.$store.state.a3Server.isStarted) {
-      const el = document.getElementById('logsContainer')
-      el.scrollTop = el.scrollHeight
-    }
-  },
-
   computed: {
     cpuUsage () {
       let values = []
@@ -203,10 +207,22 @@ export default {
         values.push(this.$moment(element.take_at).format('HH:mm:ss'))
       })
       return values
-    },
+    }
+  },
 
-    serverLogs () {
-      return this.$store.state.a3Server.logs
+  async asyncData ({ $axios }) {
+    const response = await $axios.$get('server/logs/current')
+    return {
+      serverLogs: response.logs.split('\n')
+    }
+  },
+
+  methods: {
+    async refreshLogs () {
+      const response = await this.$axios.$get('server/logs/current')
+      this.serverLogs = response.logs.split('\n')
+      const el = document.getElementById('logsContainer')
+      el.scrollTop = el.scrollHeight
     }
   }
 }

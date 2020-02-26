@@ -15,6 +15,13 @@ class LogController {
         return await FileManager.getLogs(params.profileName, params.filename)
     }
 
+    async current ({ response }) {
+        const logs = await FileManager.currentLog()
+        return response.ok({
+            logs
+        })
+    }
+
     async download ({ params, response}) {
         const config = await Config.first()
 

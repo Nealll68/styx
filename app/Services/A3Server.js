@@ -6,7 +6,6 @@ const { spawn } = require('child_process')
 const path = require('path')
 const _ = require('lodash')
 const fs = Helpers.promisify(require('fs'))
-const Tail = require('tail').Tail
 
 const Ws = use('Ws')
 
@@ -68,21 +67,8 @@ class A3Server {
                 
                 await new Promise(resolve => { setTimeout(resolve, 2000) })
 
-                const logFiles = await FileManager.logFiles()
-                const profileLogFiles = logFiles.find(e => e.profile_name === profile.name)
-                const lastLogFile = _.maxBy(profileLogFiles.files, file => {
-                    return fs.statSync(path.join(profileFolder, file)).ctime
-                })
-
-                const tail = new Tail(path.join(profileFolder, lastLogFile))
-
-                tail.on('line', data => {
-                    this.sendWS('logs', data)
-                })
-
                 this.a3server.on('close', code => {
                     this.a3server = null
-                    tail.unwatch()
                     this.sendWS('stop', code)
                 })
 

@@ -89,6 +89,20 @@ class FileManager {
         return returnData
     }
 
+    async currentLog () {
+        const config = await Config.first()
+        const profile = await A3ServerProfile.findBy('isDefault', true)
+        const profileFolder = path.join(config.a3server_path, 'commander', profile.name)
+
+        const files = await fs.readdir(profileFolder)
+        const logFiles = files.filter(file => file.endsWith('.rpt'))
+        /*const lastLogFile = _.maxBy(logFiles.filter(file => file.endsWith('.rpt')), file => {
+            return fs.statSync(path.join(profileFolder, file)).ctime
+        })*/
+
+        return await Drive.get(path.join(profileFolder, logFiles[logFiles.length - 1]), 'UTF-8')
+    }
+
     async getLogs (profileName, filename) {
         const config = await Config.first()
         return await Drive.get(path.join(config.a3server_path, 'commander', profileName, filename), 'UTF-8')

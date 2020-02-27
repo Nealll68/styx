@@ -145,6 +145,7 @@
               @click="refreshLogs()"
               class="mr-2"
               color="tertiary"
+              :loading="loading"
             >
               <v-icon left>mdi-refresh</v-icon> Actualiser
             </v-btn>
@@ -181,6 +182,7 @@ export default {
   
   data () {
     return {
+      loading: false
     }
   },
 
@@ -219,10 +221,14 @@ export default {
 
   methods: {
     async refreshLogs () {
+      this.loading = true
+
       const response = await this.$axios.$get('server/logs/current')
       this.serverLogs = response.logs.split('\n')
+      
       const el = document.getElementById('logsContainer')
       el.scrollTop = el.scrollHeight
+      this.loading = false
     }
   }
 }

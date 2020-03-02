@@ -123,7 +123,9 @@ export default {
     const missions = await this.$axios.$get('server/mission')
 
     if (this.serverConfig.mission_name) this.activatedMissions = this.serverConfig.mission_name.split(';')
-    if (missions.length > 0) this.missions = missions.map(e => e.filename).filter(e => !this.activatedMissions.includes(e))
+    if (missions.length > 0) this.missions = missions
+                                              .map(e => e.filename.slice(0, -4))
+                                              .filter(e => !this.activatedMissions.includes(e))
 
 		this.loading = false
 	},

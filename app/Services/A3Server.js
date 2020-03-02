@@ -109,6 +109,7 @@ class A3Server {
         if (params.no_logs) paramsArray.push('-noLogs')
         if (params.enable_ht) paramsArray.push('-enableHT') 
         if (params.huge_pages) paramsArray.push('-hugepages')
+        if (params.file_patching) paramsArray.push('-filePatching')
 
         return paramsArray
     }

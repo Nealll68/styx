@@ -79,6 +79,15 @@
 		hint="-enableHT - Active l'utilisation de tous les cœurs logiques du CPU. Si le processeur n'est pas compatible, le paramètre est ignoré"
 		persistent-hint
 	></v-switch>
+
+	<v-switch
+		v-model="serverParams.file_patching"
+		color="primary"
+		inset
+		label="Autoriser le file patching"
+		hint="-filePatching - Autorise le jeu à charger les données décompressées"
+		persistent-hint
+	></v-switch>
 </v-card-text>
 
 </div>

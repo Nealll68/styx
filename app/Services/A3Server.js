@@ -56,14 +56,12 @@ class A3Server {
                 } else {
                     await FileManager.write('config', profile, serverConfig.toJSON())
                     await FileManager.write('difficulty', profile, serverDifficulty.toJSON())
-                }                
-                
-                const profileFolder = path.join(config.a3server_path, 'commander', profile.name)
+                }
 
                 this.lastStartAt = Date.now()
                                 
                 const executable = this.a3Executables[process.platform][config.x64 ? 'arma3server_x64' : 'arma3server']
-                this.a3server = spawn(path.join(config.a3server_path, executable), this.buildParams(config, profileFolder, await profile.serverParam().fetch()))               
+                this.a3server = spawn(path.join(config.a3server_path, executable), this.buildParams(config, profile.name, await profile.serverParam().fetch()))               
                 
                 await new Promise(resolve => { setTimeout(resolve, 2000) })
 
@@ -96,10 +94,13 @@ class A3Server {
         }
     }
 
-    buildParams (config, profileFolder, params) {
+    buildParams (config, profileName, params) {
+        const profileFolder = path.join(config.a3server_path, 'commander', profileName)
+
         let paramsArray = [
             `-port=${config.port}`,
             `-profiles="${profileFolder}"`,
+            `-name=${profileName}`,
             `-config="${path.join(profileFolder, 'server.cfg')}"`
         ]
 

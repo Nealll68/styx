@@ -67,7 +67,7 @@
             size="50"
             color="primary"
             class="mt-5"   
-          >{{ uploadPercentage }}</v-progress-circular>
+          >{{ uploadPercentage }}%</v-progress-circular>
         </div>
       </v-card-text>
 

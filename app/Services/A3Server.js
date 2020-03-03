@@ -82,7 +82,7 @@ class A3Server {
     async restart () {        
         try {
             this.stop()
-            await new Promise(resolve => { setTimeout(resolve, 4000) })
+            await new Promise(resolve => { setTimeout(resolve, 3000) })
             await this.start()
         } catch (ex) {
             throw ex
@@ -92,6 +92,7 @@ class A3Server {
     stop () {
         if (this.a3server) {
             this.a3server.kill()
+            this.a3server = null
         }
     }
 

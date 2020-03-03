@@ -34,7 +34,12 @@ class FileManager {
             const templateFn = _.template(template)
             const content = templateFn(data)
 
-            await Drive.put(path.join(config.a3server_path, 'commander', profile.name, type === 'config' ? 'server.cfg' : `${profile.name}.ArmaProfile`), content)
+            let filePath = path.join(config.a3server_path, 'commander', profile.name, 'server.cfg')
+            if (type !== 'config') {
+                filePath = path.join(config.a3server_path, 'commander', profile.name, 'Users', profile.name, `${profile.name}.Arma3Profile`)
+            }
+
+            await Drive.put(filePath, content)
         } catch (ex) {
             throw ex
         }
@@ -96,9 +101,6 @@ class FileManager {
 
         const files = await fs.readdir(profileFolder)
         const logFiles = files.filter(file => file.endsWith('.rpt'))
-        /*const lastLogFile = _.maxBy(logFiles.filter(file => file.endsWith('.rpt')), file => {
-            return fs.statSync(path.join(profileFolder, file)).ctime
-        })*/
 
         return await Drive.get(path.join(profileFolder, logFiles[logFiles.length - 1]), 'UTF-8')
     }

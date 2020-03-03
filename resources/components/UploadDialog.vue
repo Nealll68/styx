@@ -77,12 +77,14 @@
         <v-btn
           text
           @click="$emit('close')"
+          :disabled="uploadPercentage > 0"
         >Fermer</v-btn>
 
         <v-btn
           text
           color="primary"
           @click="upload()"
+          :disabled="uploadPercentage > 0"
         >Continuer</v-btn>
       </v-card-actions>
     </v-card>

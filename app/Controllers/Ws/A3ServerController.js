@@ -3,12 +3,8 @@
 const A3Server = use('App/Services/A3Server')
 
 class A3ServerController {
-    constructor ({ socket }) {
-        this.socket = socket
-        
-        if (A3Server.isStarted) {
-            this.socket.emit('start')
-        }
+    constructor () {        
+        A3Server.isStarted()
     }
 
     async onStart () {

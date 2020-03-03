@@ -122,8 +122,10 @@ class A3Server {
         }
     }    
 
-    get isStarted () {
-        return this.a3Server ? true : false
+    isStarted () {
+        if (this.a3server !== null) {
+            this.sendWS('start', null)
+        }
     }
 }
 

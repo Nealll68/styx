@@ -4,6 +4,7 @@ const Drive = use('Drive')
 const Helpers = use('Helpers')
 
 const _ = require('lodash')
+const axios = require('axios')
 const path = require('path')
 const anzip = require('anzip')
 const rimraf = Helpers.promisify(require('rimraf'))
@@ -89,6 +90,17 @@ class FileManager {
         })
 
         if (!file.moved()) throw file.error()
+    }
+
+    async storeWorkshopMission (fileUrl, filename) {
+        const config = await Config.first()
+
+        const response = await axios({
+            method: 'get',
+            url: fileUrl,
+            responseType: 'stream'
+        })
+        response.data.pipe(fs.createWriteStream(path.join(config.a3server_path, 'MPMissions', filename)))
     }
 
     async getMissions () {

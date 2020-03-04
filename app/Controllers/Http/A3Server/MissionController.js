@@ -22,7 +22,8 @@ class MissionController {
                     name: missionSplit[0],
                     map: missionSplit[1],
                     size: mission_file.size,
-                    filename: mission_file.fileName
+                    filename: mission_file.fileName,
+                    source: 'Local'
                 })
 
                 await mission.save()
@@ -31,7 +32,8 @@ class MissionController {
                     name: missionSplit[0],
                     map: missionSplit[1],
                     size: mission_file.size,
-                    filename: mission_file.fileName
+                    filename: mission_file.fileName,
+                    source: 'Local'
                 })
             }
             
@@ -39,6 +41,37 @@ class MissionController {
         } catch (ex) {
             return response.status(ex.status).send(ex.code)
         }
+    }
+
+    async storeWorkshop ({ request, response }) {
+        const { workshopId, title, fileSize, fileUrl, filename } = request.all()
+
+        await FileManager.storeWorkshopMission(fileUrl, filename)
+
+        const mission = await Mission.findBy('filename', filename)
+        if (mission) {
+            mission.merge({
+                name: title,
+                map: filename.split('.')[1],
+                size: fileSize,
+                filename,
+                source: 'Workshop',
+                workshop_id: workshopId
+            })
+
+            await mission.save()
+        } else {
+            await Mission.create({
+                name: title,
+                map: filename.split('.')[1],
+                size: fileSize,
+                filename,
+                source: 'Workshop',
+                workshop_id: workshopId
+            })
+        }
+
+        return response.ok()
     }
 
     async detect ({ response }) {

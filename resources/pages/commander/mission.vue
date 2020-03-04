@@ -71,13 +71,22 @@
         <v-card>    
           <v-card-title class="headline">
             <h3>Missions</h3>
-            
+
             <v-chip
               label
               class="mx-2"
             >{{ missions.length }}</v-chip>
 
             <v-spacer></v-spacer>
+
+            <v-btn
+              text
+              @click="refershMissionList()"
+              class="mr-2"
+              color="tertiary"
+            >
+              <v-icon left>mdi-refresh</v-icon> Actualiser
+            </v-btn>
 
             <v-text-field
               v-model="missionSearch"
@@ -114,6 +123,27 @@
               </template>
 
               <template v-slot:item.action="{ item }">
+                <v-btn
+                    v-if="item.source === 'Workshop'" 
+                    text
+                    icon
+                    :href="`https://steamcommunity.com/workshop/filedetails/?id=${item.workshop_id}`"
+                    target="_blank"
+                    :disabled="modsTableLoading"
+                  >
+                    <v-icon>mdi-steam</v-icon>  
+                  </v-btn>
+
+                  <v-btn                    
+                    v-if="$auth.user.privilege >= 1 && item.source === 'Workshop'"
+                    text
+                    icon
+                    @click="updateMission(item.workshop_id)"
+                    :disabled="modsTableLoading"
+                  >
+                    <v-icon>mdi-update</v-icon>  
+                  </v-btn>
+
                 <v-btn
                   v-if="$auth.user.privilege >= 1" 
                   text
@@ -161,7 +191,9 @@ export default {
         { text: 'Nom', value: 'name' },
         { text: 'Carte', value: 'map' },
         { text: 'Taille', value: 'size' },
-        { text: `Date d'ajout`, value: 'updated_at' },
+        { text: 'Source', value: 'source' },
+        { text: 'Workshop ID', value: 'workshop_id' },
+        { text: `Dernière MAJ`, value: 'updated_at' },
         { text: '', value: 'action', sortable: false }
       ],
     }
@@ -186,7 +218,23 @@ export default {
 
     async downloadMission (payload) {
       if (!payload.fileUrl) return this.$toast.global.appError('Impossible de télécharger cette mission depuis le workshop')
-      await this.$axios.$post('server/download/mission', payload)
+      await this.$axios.$post('server/mission/workshop', payload)
+      await this.refershMissionList()
+    },
+
+    async updateMission (workshopId) {
+      const response = await this.$axios.$get(`server/workshop/file/${workshopId}`)
+      const payload = {
+        workshopId: response.publishedfileid,
+        title: response.title,
+        fileSize: response.file_size,
+        fileUrl: response.file_url,
+        filename: response.filename
+      }
+
+      if (!payload.fileUrl) return this.$toast.global.appError('Impossible de télécharger cette mission depuis le workshop')
+      await this.$axios.$post('server/mission/workshop', payload)
+      await this.refershMissionList()
     },
 
     async deleteMission (mission) {

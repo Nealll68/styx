@@ -271,9 +271,9 @@ export default {
       modsSearch: '',
       modsHeaders: [
         { text: 'Nom', value: 'name' },
-        { text: 'Workshop ID', value: 'workshop_id' },
         { text: 'Taille', value: 'size' },
         { text: 'Source', value: 'source' },
+        { text: 'Workshop ID', value: 'workshop_id' },
         { text: 'Dernière MàJ', value: 'server_updated_at' },
         { text: '', value: 'action', sortable: false }
       ],

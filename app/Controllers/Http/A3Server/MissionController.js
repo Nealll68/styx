@@ -1,16 +1,7 @@
 'use strict'
 
-const Helpers = use('Helpers')
-const fs = Helpers.promisify(require('fs'))
-const path = require('path')
-
-const Config = use('App/Models/Config')
 const Mission = use('App/Models/A3Server/Mission')
-
-const Drive = use('Drive')
-
-const A3FolderPathUndefined = use('App/Exceptions/A3FolderPathUndefinedException')
-const InvalidFileExtension = use('App/Exceptions/InvalidFileExtensionException')
+const FileManager = use('App/Services/FileManager')
 
 class MissionController {
     async index () {
@@ -21,18 +12,7 @@ class MissionController {
         const mission_file = request.file('file')
 
         try {
-            const config = await Config.first()
-
-            if (!config.a3server_path) throw new A3FolderPathUndefined()
-            if (mission_file.extname !== 'pbo') throw new InvalidFileExtension()
-
-            await mission_file.move(path.join(config.a3server_path, 'MPMissions'), {
-                overwrite: true
-            })
-
-            if (!mission_file.moved()) {
-                return response.internalServerError(mission_file.error())
-            }
+            await FileManager.storeMission(mission_file)
 
             const missionSplit = mission_file.fileName.split('.')
 
@@ -63,38 +43,29 @@ class MissionController {
 
     async detect ({ response }) {
         try {
-            const config = await Config.first()
-    
-            if (!config.a3server_path) throw new A3FolderPathUndefined()
-    
-            const files = await fs.readdir(path.join(config.a3server_path, 'MPMissions'))
-            const missions = files.filter(element => path.extname(element) === '.pbo')
-    
-            for (const mission of missions) {
-                const exist = await Mission.findBy('filename', mission)
+            for (const mission of await FileManager.getMissions()) {
+                const exist = await Mission.findBy('filename', mission.filename)
                 
                 if (!exist) {
-                    const missionSplit = mission.split('.')
-                    const stat = await fs.stat(path.join(config.a3server_path, 'MPMissions', mission))
-                    
                     await Mission.create({
-                        name: missionSplit[0],
-                        map: missionSplit[1],
-                        size: stat.size,
-                        filename: mission
+                        name: mission.name,
+                        map: mission.map,
+                        size: mission.size,
+                        filename: mission.filename
                     })
                 }
             }
+
+            return response.ok()
         } catch (ex) {
             return response.status(ex.status).send(ex.code)
         }
     }
 
     async destroy ({ params, response }) {
-        const config = await Config.first()
         const mission = await Mission.find(params.id)
 
-        await Drive.delete(path.join(config.a3server_path, 'MPMissions', mission.filename))
+        await FileManager.deleteMission(mission.filename)
         await mission.delete()
 
         return response.ok()

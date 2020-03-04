@@ -78,6 +78,42 @@ class FileManager {
         return await fs.readdir(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410'), { withFileTypes: true })
     }
 
+    async storeMission (file) {
+        const config = await Config.first()
+
+        if (!config.a3server_path) throw new A3FolderPathUndefined()
+        if (file.extname !== 'pbo') throw new InvalidFileExtension()
+
+        await file.move(path.join(config.a3server_path, 'MPMissions'), {
+            overwrite: true
+        })
+
+        if (!file.moved()) throw file.error()
+    }
+
+    async getMissions () {
+        const config = await Config.first()
+    
+        if (!config.a3server_path) throw new A3FolderPathUndefined()
+        
+        const files = await fs.readdir(path.join(config.a3server_path, 'MPMissions'))
+        
+        let missions = []
+        for (const mission of files.filter(element => path.extname(element) === '.pbo')) {
+            const missionInfo = mission.split('.')
+            const stat = await fs.stat(path.join(config.a3server_path, 'MPMissions', mission))
+
+            missions.push({
+                name: missionInfo[0],
+                map: missionInfo[1],
+                size: stat.size,
+                filename: mission
+            })
+        }
+
+        return missions
+    }
+
     async logFiles () {
         const config = await Config.first()
         const profiles = await A3ServerProfile.all()
@@ -161,6 +197,11 @@ class FileManager {
         } catch (ex) {
             throw ex
         }
+    }
+
+    async deleteMission (filename) {
+        const config = await Config.first()
+        await Drive.delete(path.join(config.a3server_path, 'MPMissions', filename))
     }
 }
 

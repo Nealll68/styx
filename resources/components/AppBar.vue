@@ -169,7 +169,7 @@ export default {
   data () {
     return {
       loadingUpdate: false,
-      navDrawer: true,
+      navDrawer: null,
       a3ServerWs: null,
       items: [
         { link: '/commander', name: 'Accueil', icon: 'mdi-view-dashboard' },

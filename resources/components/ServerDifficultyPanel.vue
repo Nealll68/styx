@@ -1,7 +1,10 @@
 <template>
 <div>
 
-<v-card-title>
+<v-toolbar
+  flat
+  short
+>
   <v-spacer></v-spacer>
 
   <v-btn
@@ -30,7 +33,7 @@
   >
     <v-icon left>mdi-content-save</v-icon> Enregistrer la difficulté
   </v-btn>
-</v-card-title>
+</v-toolbar>
 
 <v-card-text>
 	<v-alert

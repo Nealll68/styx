@@ -1,20 +1,21 @@
 <template>
 <div>
 
-<v-card-title>
+<v-toolbar
+	flat
+	short
+>
   <v-spacer></v-spacer>
 
   <v-btn
-    color="primary"
+	color="primary"
     text
     :loading="loadingUpdate"
     @click="save()"
   >
     <v-icon left>mdi-content-save</v-icon> Enregistrer les mods
   </v-btn>
-</v-card-title>
-
-<v-divider></v-divider>
+</v-toolbar>
 
 <v-card-text>
 	<v-text-field

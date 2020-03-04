@@ -36,6 +36,7 @@ module.exports = {
     { src: '~/plugins/adonisWS.client', ssr: false },
     { src: '~/plugins/vueApexCharts.client', ssr: false },
     { src: '~/plugins/steamGuard.client', ssr: false },
+    '~/plugins/formatBytesFilter',
     '~/plugins/axios'
   ],
   /*

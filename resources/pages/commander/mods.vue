@@ -56,8 +56,6 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-divider></v-divider>
-
             <v-subheader>Local</v-subheader>
 
             <v-list-item @click="showModUpload = true">
@@ -133,7 +131,7 @@
                 </template>
 
                 <template v-slot:item.size="{ item }">
-                  {{ formatBytes(item.size) }}
+                  {{ item.size | formatBytes }}
                 </template>
 
                 <template v-slot:item.action="{ item }">
@@ -152,7 +150,7 @@
                     v-if="$auth.user.privilege >= 1 && item.source === 'Workshop'"
                     text
                     icon
-                    @click="downloadMod(item.workshop_id, item.name, item.size, true)"
+                    @click="downloadMod({ workshopId: item.workshop_id, title: item.name, fileSize: item.size, isUpdate: true })"
                     :disabled="modsTableLoading"
                   >
                     <v-icon>mdi-update</v-icon>  
@@ -174,87 +172,7 @@
         </v-card>
       </v-col>
     </v-row>
-  </v-container>
-
-  <v-bottom-sheet v-model="showModList">
-    <v-sheet color="grey darken-4">      
-      <v-container class="app-container">
-        <v-card
-          color="transparent"
-          flat
-        >
-          <v-card-title class="pb-0">
-            <v-row>
-              <v-col>
-                <v-text-field
-                  v-model="workshopId"
-                  filled
-                  label="ID workshop du mod"
-                  prepend-inner-icon="mdi-plus-box"
-                ></v-text-field>
-              </v-col>
-
-              <v-col>
-                <v-text-field
-                  v-model="collectionId"
-                  filled
-                  label="ID de la collection workshop"
-                  prepend-inner-icon="mdi-plus-box-multiple"
-                ></v-text-field>
-              </v-col>
-            </v-row>
-          </v-card-title>
-
-          <v-card-text v-if="getDetailsLoading" class="text-center">
-            <v-progress-circular indeterminate color="primary"></v-progress-circular>
-          </v-card-text>
-
-          <v-card-text v-if="modsDetails.length > 0" style="max-height: 300px" class="scrollbar">
-            <v-list 
-              v-for="mod of modsDetails" 
-              :key="mod.publishedfileid"
-              color="transparent"
-            >
-              <v-list-item>
-                <v-list-item-avatar>
-                  <v-img :src="mod.preview_url"></v-img>
-                </v-list-item-avatar>
-
-                <v-list-item-content>
-                  <v-list-item-title>{{ mod.title }}</v-list-item-title>
-                  <v-list-item-subtitle>Publié le : {{ $moment.unix(mod.time_created).format('DD MMM YYYY') }}</v-list-item-subtitle>
-                  <v-list-item-subtitle>MàJ : {{ $moment.unix(mod.time_updated).format('DD MMM YYYY à HH:mm') }}</v-list-item-subtitle>
-                  <v-list-item-subtitle>Taille : {{ formatBytes(mod.file_size) }}</v-list-item-subtitle>
-                </v-list-item-content>
-
-                <v-list-item-action>
-                  <v-btn
-                    v-if="mods.find(element => element.workshop_id == mod.publishedfileid)"
-                    text
-                    disabled
-                  >
-                    Déjà installé
-                  </v-btn>
-
-                  <v-btn
-                    v-else
-                    color="warning"
-                    text
-                    @click="downloadMod(mod.publishedfileid, mod.title, mod.file_size)"
-                    :disabled="$store.state.downloadInfo.type"      
-                  >
-                    <v-icon left>mdi-download</v-icon>Télécharger
-                  </v-btn>
-                </v-list-item-action>
-              </v-list-item>
-
-              <v-divider inset></v-divider>
-            </v-list>
-          </v-card-text>
-        </v-card>
-      </v-container>    
-    </v-sheet>
-  </v-bottom-sheet>
+  </v-container>  
 
   <v-bottom-sheet v-model="showLocalModList">
     <v-sheet color="grey darken-4">
@@ -316,33 +234,33 @@
     </v-sheet>
   </v-bottom-sheet>
 
+  <workshop-query :show="showModList" @download-info="downloadMod($event)" @close="showModList = false"></workshop-query>
+
   <upload-dialog :show="showModUpload" @close="showModUpload = false"></upload-dialog>
 </div>
 </template>
 
 <script>
-import debounce from 'debounce'
 const UploadDialog = () => import('@/components/UploadDialog')
+const WorkshopQuery = () => import('@/components/WorkshopQuery')
 
 export default {
   layout: 'commander',
 
   components: {
-    UploadDialog
+    UploadDialog,
+    WorkshopQuery
   },
 
   data () {
     return {
+      getDetailsLoading: false,
       modBtnMenu: false,
       showModList: false,
       showModUpload: false,  
       showLocalModList: false,
-      getDetailsLoading: false,
       workshopFileMenu: false,
       workshopCollectionMenu: false,
-      workshopId: null,
-      collectionId: null,
-      modsDetails: [],
       localMods: [],
       modsTableLoading: false,
       modsSearch: '',
@@ -365,16 +283,6 @@ export default {
     }
   },
 
-  watch: {
-    workshopId () {
-      this.getWorkshopDetails()
-    },
-
-    collectionId () {
-      this.getCollectionDetails()
-    }
-  },
-
   methods: {
     async refreshModsList () {
       this.modsTableLoading = true
@@ -388,59 +296,25 @@ export default {
       const localMods = await this.$axios.$get('server/mod/local')
       this.localMods = localMods.modFolders
       this.showLocalModList = true
-    },
+    },    
 
-    getWorkshopDetails: debounce(async function () {
-      this.getDetailsLoading = true
+    async downloadMod (payload) {
+      const { workshopId, title, fileSize, isUpdate = false } = payload
 
-      if (this.workshopId) {
-        try {
-          this.collectionId = null
-          this.modsDetails = []
-    
-          const response = await this.$axios.$get(`server/workshop/file/${this.workshopId}`)
-          this.modsDetails.push(response.response.publishedfiledetails[0])
-        } catch (ex) {
-          this.$toast.global.appError('Erreur : vérifier l\'ID workshop')
-        }
-      }
-
-      this.getDetailsLoading = false
-    }, 500),
-
-    getCollectionDetails: debounce(async function () {
-      this.getDetailsLoading = true
-
-      if (this.collectionId) {
-        try {
-          this.workshopId = null
-          this.modsDetails = []
-
-          const response = await this.$axios.$get(`server/workshop/collection/${this.collectionId}`)
-          this.modsDetails = response
-        } catch (ex) {
-          this.$toast.global.appError('Erreur : vérifier l\'ID workshop')
-        }
-      }
-
-      this.getDetailsLoading = false
-    }, 500),
-
-    async downloadMod (id, name, size, isUpdate = false) {
-      let modName = name
-      let modSize = size
+      let modName = title
+      let modSize = fileSize
       
       if (isUpdate) {
         this.modsTableLoading = true
 
-        const updatedModDetails = await this.$axios.$get(`server/workshop/file/${id}`)
+        const updatedModDetails = await this.$axios.$get(`server/workshop/file/${workshopId}`)
         modName = updatedModDetails.response.publishedfiledetails[0].title
         modSize = updatedModDetails.response.publishedfiledetails[0].file_size
       }
 
       try {
         await this.$axios.$post('server/download/workshop', { 
-          workshopItemID: id, 
+          workshopItemID: workshopId, 
           workshopItemName: modName,
           workshopItemSize: modSize
         })
@@ -450,7 +324,7 @@ export default {
 
           if (steamGuard) {
             await this.$axios.$post('server/download/workshop', {
-              workshopItemID: id,
+              workshopItemID: workshopId,
               workshopItemName: modName,
               workshopItemSize: modSize,
               steamGuard: steamGuard
@@ -499,15 +373,6 @@ export default {
       }
 
       this.modsTableLoading = false
-    },
-
-    formatBytes (bytes) {
-      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-      const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
-
-      if (i === 0) return `${bytes} ${sizes[i]}`
-
-      return `${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`
     }
   }
 }

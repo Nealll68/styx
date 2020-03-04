@@ -90,10 +90,9 @@
             <v-data-table
               :items="missions" 
               :headers="missionHeaders"
+              :items-per-page="10"
               sort-by="updated_at"
 		          sort-desc
-              disable-pagination 
-              hide-default-footer
               no-data-text="Aucune mission ajoutée"
               no-results-text="Aucun résultat"
               :search="missionSearch"

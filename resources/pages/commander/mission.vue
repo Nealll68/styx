@@ -71,6 +71,12 @@
         <v-card>    
           <v-card-title class="headline">
             <h3>Missions</h3>
+            
+            <v-chip
+              label
+              class="mx-2"
+            >{{ missions.length }}</v-chip>
+
             <v-spacer></v-spacer>
 
             <v-text-field

@@ -115,7 +115,7 @@ export default {
           this.modsDetails = []
     
           const response = await this.$axios.$get(`server/workshop/file/${this.workshopId}`)
-          this.modsDetails.push(response.response.publishedfiledetails[0])
+          this.modsDetails.push(response)
         } catch (ex) {
           this.$toast.global.appError('Erreur : vérifier l\'ID workshop')
         }

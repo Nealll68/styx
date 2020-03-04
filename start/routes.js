@@ -77,6 +77,7 @@ Route.group(() => {
     Route.delete('mod/local/:id', 'ModController.destroyLocal')
 
     Route.post('download/workshop', 'DownloadController.downloadWorskhop')
+    Route.post('download/mission', 'DownloadController.downloadMission')
     Route.post('download/update', 'DownloadController.updateServer')
     Route.get('download/cancel', 'DownloadController.cancel')
 })

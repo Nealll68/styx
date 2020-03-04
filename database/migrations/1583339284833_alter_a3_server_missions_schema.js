@@ -8,7 +8,7 @@ class AlterA3ServerMissionsSchema extends Schema {
     this.table('a3_server_missions', (table) => {
       // alter table
       table.integer('workshop_id')
-      table.string('source')
+      table.string('source').defaultTo('Local')
     })
   }
 

@@ -5,6 +5,16 @@
 	flat
 	short
 >
+	<v-chip		 
+		label
+		class="mx-1"
+	>Mods : {{ mods.filter(e => e.activated).length }}</v-chip>
+
+	<v-chip		 
+		label
+		class="mx-1"
+	>Server mods : {{ mods.filter(e => e.server_mod).length }}</v-chip>	
+	
   <v-spacer></v-spacer>
 
   <v-btn

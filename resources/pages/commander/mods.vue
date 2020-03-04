@@ -274,7 +274,7 @@ export default {
         { text: 'Workshop ID', value: 'workshop_id' },
         { text: 'Taille', value: 'size' },
         { text: 'Source', value: 'source' },
-        { text: 'Dernière MàJ sur serveur', value: 'server_updated_at' },
+        { text: 'Dernière MàJ', value: 'server_updated_at' },
         { text: '', value: 'action', sortable: false }
       ],
     }

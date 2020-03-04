@@ -1,5 +1,7 @@
 'use strict'
 
+const Ws = use('Ws')
+
 const Mission = use('App/Models/A3Server/Mission')
 const FileManager = use('App/Services/FileManager')
 
@@ -46,6 +48,13 @@ class MissionController {
     async storeWorkshop ({ request, response }) {
         const { workshopId, title, fileSize, fileUrl, filename } = request.all()
 
+        const downloadWS = Ws.getChannel('download-info').topic('download-info')
+        
+        if (downloadWS) downloadWS.broadcast('start', { 
+                            type: 'downloadMission',
+                            missionName: title
+                        })
+
         await FileManager.storeWorkshopMission(fileUrl, filename)
 
         const mission = await Mission.findBy('filename', filename)
@@ -71,6 +80,7 @@ class MissionController {
             })
         }
 
+        if (downloadWS) downloadWS.broadcast('stop')        
         return response.ok()
     }
 

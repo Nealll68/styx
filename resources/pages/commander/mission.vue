@@ -18,29 +18,53 @@
         v-if="$auth.user.privilege >= 1"
         cols="md-12"
       >
-        <v-tooltip left>
+        <v-menu
+          v-model="menu"
+        >
           <template v-slot:activator="{ on }">
             <v-btn
-              icon
+              v-on="on"
+              text
               color="primary"
               class="float-right"
-              v-on="on"
-              @click="detectExistingMission()"
+              :disabled="$store.state.downloadInfo.type === 'updateServer'"
             >
-              <v-icon>mdi-file-search</v-icon>
-            </v-btn>            
+              <v-icon left>mdi-plus-box</v-icon>Ajouter une mission
+            </v-btn>
           </template>
-          Détecter les missions existantes
-        </v-tooltip>      
 
-        <v-btn
-          text
-          color="primary"
-          class="float-right mx-2"
-          @click="showUploadDialog = true"
-        >
-          <v-icon left>mdi-plus-box</v-icon>Ajouter une mission
-        </v-btn>         
+          <v-list nav>
+            <v-list-item @click="showWorkshopQuery = true">
+              <v-list-item-icon>
+                <v-icon>mdi-steam</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>Depuis le workshop</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="showUploadDialog = true">
+              <v-list-item-icon>
+                <v-icon>mdi-upload</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>Télécharger une mission</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+
+            <v-list-item @click="detectExistingMission()">
+              <v-list-item-icon>
+                <v-icon>mdi-file-search</v-icon>
+              </v-list-item-icon>
+
+              <v-list-item-content>
+                <v-list-item-title>Détecter les missions existantes</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>      
+        </v-menu>         
       </v-col>
 
       <v-col cols="md-12">
@@ -81,7 +105,7 @@
               </template>
 
               <template v-slot:item.size="{ item }">
-                {{ formatBytes(item.size) }}
+                {{ item.size | formatBytes }}
               </template>
 
               <template v-slot:item.action="{ item }">
@@ -103,24 +127,30 @@
     </v-row>
   </v-container>
 
+  <workshop-query :show="showWorkshopQuery" @download-info="downloadMission($event)" @close="showWorkshopQuery = false"></workshop-query>
+
   <upload-dialog :show="showUploadDialog" @file-uploaded="refershMissionList()" @close="showUploadDialog = false" isMission></upload-dialog>
 </div>
 </template>
 
 <script>
 const UploadDialog = () => import('@/components/UploadDialog')
+const WorkshopQuery = () => import('@/components/WorkshopQuery')
 
 export default {
   layout: 'commander',
 
   components: {
-    UploadDialog
+    UploadDialog,
+    WorkshopQuery
   },
 
   data () {
     return {
       showUploadDialog: false,
+      showWorkshopQuery: false,
       tableLoading: false,
+      menu: false,
       missionSearch: '',
       missionHeaders: [
         { text: 'Nom', value: 'name' },
@@ -149,6 +179,11 @@ export default {
       this.tableLoading = false
     },
 
+    async downloadMission (payload) {
+      if (!payload.fileUrl) return this.$toast.global.appError('Impossible de télécharger cette mission depuis le workshop')
+      await this.$axios.$post('server/download/mission', payload)
+    },
+
     async deleteMission (mission) {
       this.tableLoading = true
 
@@ -165,15 +200,6 @@ export default {
       await this.refershMissionList()
 
       this.tableLoading = false
-    },
-
-    formatBytes (bytes) {
-      const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB']
-      const i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)), 10)
-
-      if (i === 0) return `${bytes} ${sizes[i]}`
-
-      return `${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`
     }
   }
 }

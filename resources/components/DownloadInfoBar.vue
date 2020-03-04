@@ -25,6 +25,7 @@
 					class="float-right"
 					color="primary"
 					@click="logsSheet = true"
+					:disabled="$store.state.downloadInfo.type !== 'downloadMission'"
 				>
 					<v-icon left color="primary">mdi-post</v-icon>Logs
 				</v-btn>
@@ -35,6 +36,7 @@
 					class="float-right"
 					@click="cancel()"
 					:loading="loadingCancel"
+					:disabled="$store.state.downloadInfo.type !== 'downloadMission'"
 				>
 					<v-icon left color="error">mdi-download-off</v-icon>Annuler
 				</v-btn>								

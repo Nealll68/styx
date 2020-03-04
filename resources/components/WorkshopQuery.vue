@@ -54,7 +54,7 @@
                   <v-btn
                     color="quaternary"
                     text
-                    @click="downloadInfo(mod.publishedfileid, mod.title, mod.file_size, mod.file_url)"
+                    @click="downloadInfo(mod.publishedfileid, mod.title, mod.file_size, mod.file_url, mod.filename)"
                     :disabled="$store.state.downloadInfo.type"      
                   >
                     <v-icon left>mdi-download</v-icon>Télécharger
@@ -97,12 +97,13 @@ export default {
   },
 
   methods: {
-    downloadInfo (workshopId, title, fileSize, fileUrl) {
+    downloadInfo (workshopId, title, fileSize, fileUrl, filename) {
       this.$emit('download-info', {
         workshopId,
         title,
         fileSize,
-        fileUrl
+        fileUrl,
+        filename
       })
     },
 

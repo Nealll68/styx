@@ -49,6 +49,7 @@ Route.group(() => {
         .resource('mission', 'MissionController')
         .only(['index', 'store', 'destroy'])
     Route.get('mission/detect', 'MissionController.detect')
+    Route.post('mission/workshop', 'MissionController.storeWorkshop')
 
     Route.get('logs', 'LogController.index')
     Route.get('logs/current', 'LogController.current')
@@ -77,7 +78,6 @@ Route.group(() => {
     Route.delete('mod/local/:id', 'ModController.destroyLocal')
 
     Route.post('download/workshop', 'DownloadController.downloadWorskhop')
-    Route.post('download/mission', 'DownloadController.downloadMission')
     Route.post('download/update', 'DownloadController.updateServer')
     Route.get('download/cancel', 'DownloadController.cancel')
 })

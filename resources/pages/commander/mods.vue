@@ -85,6 +85,12 @@
         <v-card>    
           <v-card-title class="headline">
             <h3>Mods</h3>
+
+            <v-chip
+              label
+              class="mx-2"
+            >{{ mods.length }}</v-chip>
+
             <v-spacer></v-spacer>
 
             <v-btn
@@ -113,9 +119,8 @@
               <v-data-table
                 :items="mods" 
                 :headers="modsHeaders"
+                :items-per-page="10"
                 sort-by="name"
-                disable-pagination 
-                hide-default-footer
                 no-data-text="Aucun mods ajouté"
                 no-results-text="Aucun résultat"
                 :search="modsSearch"

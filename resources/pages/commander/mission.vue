@@ -8,7 +8,7 @@
       border="left"
     >
       Aucun chemin vers le dossier Arma 3 n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
-    </v-alert>
+    </v-alert>    
 
     <v-row
       v-else
@@ -102,6 +102,17 @@
           <v-divider></v-divider>
 
           <v-card-text>
+            <v-alert
+              v-show="showDeleteInfo"
+              text
+              type="info"
+              border="left"
+              dense
+              dismissible
+            >
+              Assurez-vous que la mission qui vient d'être supprimée n'est activée dans aucun profil sinon le serveur ne démarrera pas.
+            </v-alert>
+
             <v-data-table
               :items="missions" 
               :headers="missionHeaders"
@@ -196,6 +207,7 @@ export default {
         { text: `Dernière MAJ`, value: 'updated_at' },
         { text: '', value: 'action', sortable: false }
       ],
+      showDeleteInfo: false
     }
   },
 
@@ -243,6 +255,7 @@ export default {
       await this.$axios.$delete(`server/mission/${mission.id}`)
       this.missions.splice(this.missions.indexOf(mission), 1)
 
+      this.showDeleteInfo = true
       this.tableLoading = false
     },
 

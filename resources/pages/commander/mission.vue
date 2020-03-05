@@ -129,7 +129,7 @@
                     icon
                     :href="`https://steamcommunity.com/workshop/filedetails/?id=${item.workshop_id}`"
                     target="_blank"
-                    :disabled="modsTableLoading"
+                    :disabled="tableLoading"
                   >
                     <v-icon>mdi-steam</v-icon>  
                   </v-btn>
@@ -139,7 +139,7 @@
                     text
                     icon
                     @click="updateMission(item.workshop_id)"
-                    :disabled="modsTableLoading"
+                    :disabled="tableLoading"
                   >
                     <v-icon>mdi-update</v-icon>  
                   </v-btn>

@@ -60,9 +60,11 @@ Route.group(() => {
     Route.put('params/:id', 'ParamController.update')
     Route.delete('params/:id', 'ParamController.reset')
 
-    Route.put('config/:id', 'ConfigController.update')
-    Route.delete('config/:id', 'ConfigController.reset')
+    Route.get('config/:name', 'ConfigController.show')
+    Route.put('config/:name', 'ConfigController.update')
+    Route.delete('config/:name', 'ConfigController.reset')
 
+    Route.get('difficulty/:name', 'DifficultyController.show')
     Route.put('difficulty/:id', 'DifficultyController.update')
     Route.delete('difficulty/:id', 'DifficultyController.reset')
 

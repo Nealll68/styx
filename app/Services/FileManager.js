@@ -20,30 +20,36 @@ const InvalidFileExtension = use('App/Exceptions/InvalidFileExtensionException')
 
 class FileManager {
 
-    async write (type, profile, data) {
+    async write (type, profileName, data, reset = false) {
         try {
             const config = await Config.first()
 
             if (!config.a3server_path) throw new A3FolderPathUndefined()
 
-            if (type === 'config') {
-                if (data.motd) data.motd = data.motd.split(';')
-                if (data.mission_name) data.mission_name = data.mission_name.split(';')
+            let filePath = path.join(config.a3server_path, 'commander', profileName, 'server.cfg')
+            if (type === 'difficulty') {
+                filePath = path.join(config.a3server_path, 'commander', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
             }
 
-            const template = await Drive.get(Helpers.appRoot(`app/Services/serverFilesTemplates/server${_.upperFirst(type)}.template`), 'UTF-8')
-            const templateFn = _.template(template)
-            const content = templateFn(data)
+            if (reset) data = await Drive.get(Helpers.appRoot(`app/Services/serverFilesTemplates/server${_.upperFirst(type)}.template`), 'UTF-8')
 
-            let filePath = path.join(config.a3server_path, 'commander', profile.name, 'server.cfg')
-            if (type !== 'config') {
-                filePath = path.join(config.a3server_path, 'commander', profile.name, 'Users', profile.name, `${profile.name}.Arma3Profile`)
-            }
-
-            await Drive.put(filePath, content)
+            await Drive.put(filePath, data)
         } catch (ex) {
             throw ex
         }
+    }
+
+    async getFileContent (type, profileName) {
+        const config = await Config.first()
+
+        if (!config.a3server_path) throw new A3FolderPathUndefined()
+
+        let filePath = path.join(config.a3server_path, 'commander', profileName, 'server.cfg')
+        if (type === 'difficulty') {
+            filePath = path.join(config.a3server_path, 'commander', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
+        }
+
+        return await Drive.get(filePath, 'UTF-8')
     }
 
     async storeLocalMod (file) {

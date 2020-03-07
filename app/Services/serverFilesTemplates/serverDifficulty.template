@@ -1,40 +1,57 @@
-class DifficultyPresets {
-	class CustomDifficulty {
+class DifficultyPresets
+{
+	class CustomDifficulty
+	{
 		class Options
 		{
-			reducedDamage = <%= reduced_damage ? 1 : 0 %>;
+			/* Simulation */
 
-			groupIndicators = <%= group_indicators %>;
-			friendlyTags = <%= friendly_tags %>;
-			enemyTags = <%= enemy_tags %>;
-			detectedMines = <%= detected_mines%>;
-			commands = <%= commands %>;
-			waypoints = <%= waypoints %>;
-			tacticalPing = <%= tactical_ping ? 1 : 0 %>;
+			reducedDamage = 0;		// Reduced damage
 
-			weaponInfo = <%= weapon_info %>;
-			stanceIndicator = <%= stance_indicator %>;
-			staminaBar = <%= stamina_bar ? 1 : 0 %>;
-			weaponCrosshair = <%= weapon_crosshair ? 1 : 0 %>;
-			visionAid = <%= vision_aid ? 1 : 0 %>;
+			/* Situational awareness */
 
-			thirdPersonView = <%= third_person_view ? 1 : 0 %>;
-			cameraShake = <%= camera_shake ? 1 : 0 %>;
+			groupIndicators = 0;	// Group indicators (0 = never, 1 = limited distance, 2 = always)
+			friendlyTags = 0;		// Friendly name tags (0 = never, 1 = limited distance, 2 = always)
+			enemyTags = 0;			// Enemy name tags (0 = never, 1 = limited distance, 2 = always)
+			detectedMines = 0;		// Detected mines (0 = never, 1 = limited distance, 2 = always)
+			commands = 1;			// Commands (0 = never, 1 = fade out, 2 = always)
+			waypoints = 1;			// Waypoints (0 = never, 1 = fade out, 2 = always)
+			tacticalPing = 0;		// Tactical ping (0 = disable, 1 = enable)
 
-			scoreTable = <%= score_table ? 1 : 0 %>;
-			deathMessages = <%= death_messages ? 1 : 0 %>;
-			vonID = <%= von_id ? 1 : 0 %>;
+			/* Personal awareness */
 
-			mapContent = <%= map_content ? 1 : 0 %>;
-			autoReport = <%= auto_report ? 1 : 0 %>;
-			multipleSaves = <%= multiple_saves ? 1 : 0 %>;
+			weaponInfo = 2;			// Weapon info (0 = never, 1 = fade out, 2 = always)
+			stanceIndicator = 2;	// Stance indicator (0 = never, 1 = fade out, 2 = always)
+			staminaBar = 0;			// Stamina bar
+			weaponCrosshair = 0;	// Weapon crosshair
+			visionAid = 0;			// Vision aid
+
+			/* View */
+
+			thirdPersonView = 0;	// 3rd person view
+			cameraShake = 1;		// Camera shake
+
+			/* Multiplayer */
+
+			scoreTable = 1;			// Score table
+			deathMessages = 1;		// Killed by
+			vonID = 1;				// VoN ID
+
+			/* Misc */
+
+			mapContent = 0;			// Extended map content
+			autoReport = 0;			// (former autoSpot) Automatic reporting of spotted enemied by players only. This doesn't have any effect on AIs.
+			multipleSaves = 0;		// Multiple saves
 		};
-
-		aiLevelPreset = <%= ai_level_preset %>;
+		
+		// aiLevelPreset defines AI skill level and is counted from 0 and can have following values: 0 (Low), 1 (Normal), 2 (High), 3 (Custom).
+		// when 3 (Custom) is chosen, values of skill and precision are taken from the class CustomAILevel.
+		aiLevelPreset = 3;
 	};
 
-	class CustomAILevel	{
-		skillAI = <%= skill_ai %>;
-		precisionAI = <%= precision_ai %>;
+	class CustomAILevel
+	{
+		skillAI = 0.5;
+		precisionAI = 0.5;
 	};
 };

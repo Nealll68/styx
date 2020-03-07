@@ -36,25 +36,7 @@ class A3Server {
                 if (!profile) {
                     this.sendWS('stop', 'noProfile')
                     return
-                }
-
-                const serverConfig = await profile.serverConfig().fetch()
-                const serverDifficulty = await profile.serverDifficulty().fetch()
-
-                if (this.lastStartAt) {
-                    if (new Date(serverConfig.updated_at) >= this.lastStartAt) {
-                        await FileManager.write('config', profile, serverConfig.toJSON())
-                    }
-
-                    if (new Date(serverDifficulty.updated_at) >= this.lastStartAt) {
-                        await FileManager.write('difficulty', profile, serverDifficulty.toJSON())
-                    }
-                } else {
-                    await FileManager.write('config', profile, serverConfig.toJSON())
-                    await FileManager.write('difficulty', profile, serverDifficulty.toJSON())
-                }
-
-                this.lastStartAt = Date.now()
+                }                
                                 
                 const executable = this.a3Executables[process.platform][config.x64 ? 'arma3server_x64' : 'arma3server']
                 this.a3server = spawn(path.join(config.a3server_path, executable), this.buildParams(config, profile.name, await profile.serverParam().fetch()))               

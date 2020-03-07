@@ -1,29 +1,31 @@
 'use strict'
 
-const A3ServerConfig = use('App/Models/A3Server/Config')
+const FileManager = use('App/Services/FileManager')
 
 class ConfigController {
 
+    async show ({ params, response }) {
+        const config = await FileManager.getFileContent('config', params.name)
+        return response.ok({
+            data: config
+        })
+    }
+
     async update ({ params, request, response }) {
-        const data = request.all()
+        const { config } = request.all()
 
-        const config = await A3ServerConfig.findOrFail(params.id)
-        config.merge(data)
-        await config.save()
-
-        return config
+        await FileManager.write('config', params.name, config)
+        return response.ok()
     }
 
 
     async reset ({ params, response }) {
-        const config = await A3ServerConfig.find(params.id)
-
-        await config.delete()
-
-        await A3ServerConfig.create({ profile_id: config.profile_id })
-        const newConfig = await A3ServerConfig.findBy('profile_id', config.profile_id)
-
-        return newConfig
+        await FileManager.write('config', params.name, null, true)
+        const config = await FileManager.getFileContent('config', params.name)
+        
+        return response.ok({
+            data: config
+        })       
     }
 }
 

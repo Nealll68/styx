@@ -1,28 +1,30 @@
 'use strict'
 
-const A3ServerDifficulty = use('App/Models/A3Server/Difficulty')
+const FileManager = use('App/Services/FileManager')
 
 class DifficultyController {
 
-    async update ({ params, request }) {
-        const data = request.all()
-
-        const serverDifficulty = await A3ServerDifficulty.find(params.id)
-        serverDifficulty.merge(data)
-        await serverDifficulty.save()            
-
-        return serverDifficulty
+    async show ({ params, response }) {
+        const difficulty = await FileManager.getFileContent('difficulty', params.name)
+        return response.ok({
+            data: difficulty
+        })
     }
 
-    async reset ({ params }) {
-        const difficulty = await A3ServerDifficulty.find(params.id)
+    async update ({ params, request, response }) {
+        const { difficulty } = request.all()
 
-        await difficulty.delete()
+        await FileManager.write('difficulty', params.name, difficulty)
+        return response.ok()
+    }
 
-        await A3ServerDifficulty.create({ profile_id: difficulty.profile_id })
-        const newDifficulty = await A3ServerDifficulty.findBy('profile_id', difficulty.profile_id)
-
-        return newDifficulty
+    async reset ({ params, response }) {
+        await FileManager.write('difficulty', params.name, null, true)
+        const difficulty = await FileManager.getFileContent('difficulty', params.name)
+        
+        return response.ok({
+            data: difficulty
+        })
     }
 
 }

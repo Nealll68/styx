@@ -1,49 +1,69 @@
-hostname = "<%= hostname %>";
-password = "<%= password %>";
-passwordAdmin = "<%= password_admin %>";
-serverCommandPassword = "<%= server_command_password %>";
+// server.cfg
+//
+// comments are written with "//" in front of them.
+
+
+// GLOBAL SETTINGS
+hostname = "Arma 3 server";
+password = "";
+passwordAdmin = "xyz";
+serverCommandPassword = "xyzxyz";
 
 logFile = "server_console.log";
 
-motd[] = {<% _.each(motd, function (message, i) { %>
-<% if (i === motd.length - 1) { %>
-    "<%= message %>"
-<% } else { %>
-    "<%= message %>",
-<% } %>
-<% }); %>};
-motdInterval = <%= motd_interval %>;
+// WELCOME MESSAGE ("message of the day")
+// It can be several lines, separated by comma
+// Empty messages "" will not be displayed at all but are only for increasing the interval
+motd[] = {
+};
+motdInterval = 5;
 
-maxPlayers = <%= max_players %>;
-kickDuplicate = <%= kick_duplicate ? 1 : 0 %>;
-verifySignatures = <%= verify_signatures %>;
-allowedFilePatching = <%= allowed_file_patching %>;
 
-voteMissionPlayers = <%= vote_mission_players %>;
-voteThreshold = <%= vote_threshold %>;
+// JOINING RULES
+maxPlayers = 64;
+kickDuplicate = 1;
+verifySignatures = 2;
+allowedFilePatching = 0;
+filePatchingExceptions[] = {};
 
-disableVON = <%= disable_von ? 1 : 0 %>;
-vonCodec = <%= von_codec %>;
-vonCodecQuality = <%= von_codec_quality %>;
-persistent = <%= persistent ? 1 : 0 %>;
-timeStampFormat = <%= timestamp_format %>;
-BattlEye = <%= battleye ? 1 : 0 %>;
+// VOTING
+voteMissionPlayers = 1;
+voteThreshold = 0.33;
 
-disconnectTimeout = <%= disconnect_timeout %>;
-maxDesync = <%= max_desync %>;
-maxPing = <%= max_ping %>;
-maxPacketLoss = <%= max_packet_loss %>;
 
-onUserConnected = "<%= on_user_connected %>";
-onUserDisconnected = "<%= on_user_disconnected %>";
-doubleIdDetected = "<%= double_id_detected %>";
-onUnsignedData = "<%= on_unsigned_data %>";
-onHackedData = "<%= on_hacked_data %>";
-onDifferentData = "<%= on_different_data %>";
+// INGAME SETTINGS
+disableVoN = 0;
+vonCodec = 1;
+vonCodecQuality = 30;
+persistent = 1;
+timeStampFormat = "short";
+BattlEye = 1;
+allowedLoadFileExtensions[] = {"hpp","sqs","sqf","fsm","cpp","paa","txt","xml","inc","ext","sqm","ods","fxy","lip","csv","kb","bik","bikb","html","htm","biedi"};
+allowedPreprocessFileExtensions[] = {"hpp","sqs","sqf","fsm","cpp","paa","txt","xml","inc","ext","sqm","ods","fxy","lip","csv","kb","bik","bikb","html","htm","biedi"};
+allowedHTMLLoadExtensions[] = {"htm","html","xml","txt"};
+//allowedHTMLLoadURIs[] = {};
 
-class Missions {<% _.each(mission_name, function (mission, i) { %>
-    class <%= `Mission_${i}` %> {
-        template = "<%= mission %>";
-        difficulty = "<%= mission_difficulty %>";
-    };
-<% }); %>};
+// TIMEOUTS
+disconnectTimeout = 5;
+maxDesync = 150;
+maxPing= 200;
+maxPacketLoss= 50;
+
+// SCRIPTING ISSUES
+onUserConnected = "";
+onUserDisconnected = "";
+doubleIdDetected = "";
+
+// SIGNATURE VERIFICATION
+onUnsignedData = "kick (_this select 0)";
+onHackedData = "kick (_this select 0)";
+onDifferentData = "";
+
+
+// MISSIONS CYCLE (see below)
+randomMissionOrder = true;
+autoSelectMission = true;
+
+class Missions {};
+
+missionWhitelist[] = {};

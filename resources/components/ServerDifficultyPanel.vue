@@ -42,430 +42,84 @@
 		type="info" 
 		dense
 	>
-		Pour utiliser une difficulté personalisée vous devez l'activer dans les paramètres de mission en sélectionnant "Personalisé" pour la difficulté
+		Pour utiliser une difficulté personalisée indiqué "Custom" dans le fichier de configuration du serveur.
 	</v-alert>
+
+  <v-overlay 
+    :value="loadingContent"
+    absolute
+  >
+    <v-progress-circular       
+      indeterminate
+      size="64"
+      color="primary"
+    ></v-progress-circular>
+  </v-overlay>
+
+  <v-textarea
+    v-model="difficulty"
+    filled
+    auto-grow
+    :disabled="loadingUpdate || loadingReset || loadingContent"
+    spellcheck="false"
+    autocorrect="off"
+    autocapitalize="off"
+  ></v-textarea>
 </v-card-text>
-
-<v-divider></v-divider>
-
-<v-expansion-panels 
-	multiple
-	accordion
-  v-model="panels"
->
-	<v-expansion-panel>
-		<v-expansion-panel-header>
-			<template v-slot:actions>
-				<v-icon color="primary">$expand</v-icon>
-			</template>
-			Simulation
-		</v-expansion-panel-header>
-		<v-expansion-panel-content>
-			<v-switch
-				v-model="serverDifficulty.reduced_damage"
-				color="primary"
-				inset
-				label="Dégâts limités"
-			></v-switch>
-
-			<p>Niveau IA</p>
-			<v-radio-group 
-        v-model="serverDifficulty.ai_level_preset" 
-        row
-      >
-        <v-radio 
-          label="Novice" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Normal" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Expert" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-				<v-radio 
-          label="Personnalisé" 
-          :value="3"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<v-slider
-				v-model="serverDifficulty.skill_ai"
-				color="primary"
-				label="Compétence"
-				min="0"
-				max="1"
-				step="0.05"
-				thumb-label="always"
-				v-show="serverDifficulty.ai_level_preset === 3"
-				class="mt-4"
-			></v-slider>
-
-			<v-slider
-				v-model="serverDifficulty.precision_ai"
-				color="primary"
-				label="Précision"
-				min="0"
-				max="1"
-				step="0.05"
-				thumb-label="always"
-				v-show="serverDifficulty.ai_level_preset === 3"
-				class="mt-4"
-			></v-slider>
-		</v-expansion-panel-content>
-	</v-expansion-panel>
-
-	<v-expansion-panel>
-		<v-expansion-panel-header>
-			<template v-slot:actions>
-				<v-icon color="primary">$expand</v-icon>
-			</template>
-			Perception de la situation
-		</v-expansion-panel-header>
-		<v-expansion-panel-content>
-			<p>Indicateurs de groupe</p>
-      <v-radio-group 
-        v-model="serverDifficulty.group_indicators" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Distance limitée" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<p>Tags alliés</p>
-      <v-radio-group 
-        v-model="serverDifficulty.friendly_tags" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Distance limitée" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<p>Tags ennemis</p>
-      <v-radio-group 
-        v-model="serverDifficulty.enemy_tags" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Distance limitée" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<p>Mines détectées</p>
-      <v-radio-group 
-        v-model="serverDifficulty.detected_mines" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Distance limitée" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<p>Commandes</p>
-      <v-radio-group 
-        v-model="serverDifficulty.commands" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Fondu" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<p>Points de passage</p>
-      <v-radio-group 
-        v-model="serverDifficulty.waypoints" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Fondu" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<v-switch
-				v-model="serverDifficulty.tactical_ping"
-				color="primary"
-				inset
-				label="Ping tactique"
-			></v-switch>
-		</v-expansion-panel-content>
-	</v-expansion-panel>
-
-	<v-expansion-panel>
-		<v-expansion-panel-header>
-			<template v-slot:actions>
-				<v-icon color="primary">$expand</v-icon>
-			</template>
-			Perception personnelle
-		</v-expansion-panel-header>
-		<v-expansion-panel-content>
-			<p>Info sur l'arme</p>
-      <v-radio-group 
-        v-model="serverDifficulty.weapon_info" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Fondu" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<p>Indicateur de position</p>
-      <v-radio-group 
-        v-model="serverDifficulty.stance_indicator" 
-        row
-      >
-        <v-radio 
-          label="Cacher" 
-          :value="0"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Fondu" 
-          :value="1"
-          color="primary"
-        ></v-radio>
-        <v-radio 
-          label="Montrer" 
-          :value="2"
-          color="primary"
-        ></v-radio>
-      </v-radio-group>
-
-			<v-switch
-				v-model="serverDifficulty.stamina_bar"
-				color="primary"
-				inset
-				label="Barre d'endurance"
-			></v-switch>
-
-			<v-switch
-				v-model="serverDifficulty.weapon_crosshair"
-				color="primary"
-				inset
-				label="Réticule"
-			></v-switch>
-
-			<v-switch
-				v-model="serverDifficulty.vision_aid"
-				color="primary"
-				inset
-				label="Aide à la vision"
-			></v-switch>
-		</v-expansion-panel-content>
-	</v-expansion-panel>
-
-
-	<v-expansion-panel>
-		<v-expansion-panel-header>
-			<template v-slot:actions>
-				<v-icon color="primary">$expand</v-icon>
-			</template>
-			Vue
-		</v-expansion-panel-header>
-		<v-expansion-panel-content>
-			<v-switch
-				v-model="serverDifficulty.third_person_view"
-				color="primary"
-				inset
-				label="Vue extérieure"
-			></v-switch>
-
-			<v-switch
-				v-model="serverDifficulty.camera_shake"
-				color="primary"
-				inset
-				label="Vibrations caméra"
-			></v-switch>
-		</v-expansion-panel-content>
-	</v-expansion-panel>
-
-	<v-expansion-panel>
-		<v-expansion-panel-header>
-			<template v-slot:actions>
-				<v-icon color="primary">$expand</v-icon>
-			</template>
-			Multijoueur
-		</v-expansion-panel-header>
-		<v-expansion-panel-content>
-			<v-switch
-				v-model="serverDifficulty.score_table"
-				color="primary"
-				inset
-				label="Tableau des scores"
-			></v-switch>
-
-			<v-switch
-				v-model="serverDifficulty.death_messages"
-				color="primary"
-				inset
-				label="Tué par"
-			></v-switch>
-
-			<v-switch
-				v-model="serverDifficulty.von_id"
-				color="primary"
-				inset
-				label="VON ID"
-			></v-switch>
-		</v-expansion-panel-content>
-	</v-expansion-panel>
-
-	<v-expansion-panel>
-		<v-expansion-panel-header>
-			<template v-slot:actions>
-				<v-icon color="primary">$expand</v-icon>
-			</template>
-			Autre
-		</v-expansion-panel-header>
-		<v-expansion-panel-content>
-			<v-switch
-				v-model="serverDifficulty.map_content"
-				color="primary"
-				inset
-				label="Données de carte"
-			></v-switch>
-
-			<v-switch
-				v-model="serverDifficulty.auto_report"
-				color="primary"
-				inset
-				label="Rapports automatiques"
-			></v-switch>
-
-			<v-switch
-				v-model="serverDifficulty.multiple_saves"
-				color="primary"
-				inset
-				label="Sauvegardes multiples"
-			></v-switch>
-		</v-expansion-panel-content>
-	</v-expansion-panel>
-</v-expansion-panels>
 
 </div>
 </template>
 
 <script>
 export default {
-	props: ['serverDifficulty'],
+	props: ['profile'],
 
 	data () {
 		return {
-			panels: [0, 1, 2, 3, 4, 5],
+			loadingContent: false,
 			loadingUpdate: false,
-			loadingReset: false
+      loadingReset: false,
+      difficulty: null
 		}
 	},
 
+	async mounted () {
+    this.loadingContent = true
+
+    this.difficulty = await this.$axios.$get(`server/difficulty/${this.profile.name}`)
+
+    this.loadingContent = false
+  },
+
 	methods: {
 		async update () {
-			this.loadingUpdate = true	
-			
-			const response = await this.$axios.$put(`server/difficulty/${this.serverDifficulty.id}`, this.serverDifficulty)			
-			this.$toast.global.appSuccess('Difficulté mise à jour')
+      this.loadingUpdate = true
+      
+      await this.$axios.$put(`server/difficulty/${this.profile.name}`, {
+        config: this.difficulty
+      })
+      
+      this.$toast.global.appSuccess('Diffculté mise à jour')
 			
 			this.loadingUpdate = false			
 		},
 
 		async reset () {
-			this.loadingReset = true
+      this.loadingReset = true
 
-			const response = await this.$axios.$delete(`server/difficulty/${this.serverDifficulty.id}`)
-			this.$emit('update', { component: 'difficulty', data: response })
-			
-			this.$toast.global.appSuccess('Difficulté remise par défaut')
-			
+      const confirm = await this.$confirm('Etes-vous sûr de vouloir rétatblir la difficulté par défaut ?', { 
+        title: 'Rétablir par défaut', 
+        buttonTrueText: 'Continuer', 
+        buttonFalseText: 'Annuler', 
+        color: 'warning',
+        persistent: true
+      })
+      
+      if (confirm) {
+        this.difficulty = await this.$axios.$delete(`server/difficulty/${this.profile.name}`)  
+        this.$toast.global.appSuccess('Diffculté remise par défaut')
+      }
+
 			this.loadingReset = false
 		}
 	}

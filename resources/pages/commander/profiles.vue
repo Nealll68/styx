@@ -39,8 +39,7 @@
             v-model="tab"
             grow
             show-arrows
-          >
-            <v-tab>Mission</v-tab>           
+          >         
             <v-tab>Mods</v-tab>
             <v-tab>Paramètres</v-tab>
             <v-tab>Configuration</v-tab>
@@ -48,12 +47,6 @@
           </v-tabs>
 
           <v-tabs-items v-model="tab">
-            <v-tab-item>
-              <server-mission-panel 
-                :server-config="profile.config" 
-                @update="updateComponents($event)"
-              ></server-mission-panel>
-            </v-tab-item>
 
             <v-tab-item>
               <server-mods-panel 
@@ -84,8 +77,7 @@
             <v-tab-item>
               <server-config-panel
                 v-if="$auth.user.privilege >= 1"
-                :server-config="profile.config" 
-                @update="updateComponents($event)"
+                :profile="profile.profile"
               ></server-config-panel>
 
               <v-card-text v-else>
@@ -100,10 +92,7 @@
             </v-tab-item>
 
             <v-tab-item>
-              <server-difficulty-panel 
-                :server-difficulty="profile.difficulty" 
-                @update="updateComponents($event)"
-              ></server-difficulty-panel>
+              <server-difficulty-panel :profile="profile.profile"></server-difficulty-panel>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
@@ -114,7 +103,6 @@
 
 <script>
 const ProfileList = () => import('@/components/ProfileList')
-const ServerMissionPanel = () => import('@/components/ServerMissionPanel')
 const ServerModsPanel = () => import('@/components/ServerModsPanel')
 const ServerParamsPanel = () => import('@/components/ServerParamsPanel')
 const ServerConfigPanel = () => import('@/components/ServerConfigPanel')
@@ -125,7 +113,6 @@ export default {
 
   components: {
     ProfileList,
-    ServerMissionPanel,
     ServerModsPanel,
     ServerParamsPanel,
     ServerConfigPanel,
@@ -169,13 +156,7 @@ export default {
 
     updateComponents ({ component, data }) {
       if (component === 'params') {
-        this.profile.params = data  
-      } else if (component === 'config') {
-        this.profile.config = data
-      } else if (component === 'difficulty') {
-        this.profile.difficulty = data
-      } else if (component === 'mission') {
-        this.profile.config = data
+        this.profile.params = data
       }
     }
   }

@@ -65,8 +65,8 @@ Route.group(() => {
     Route.delete('config/:name', 'ConfigController.reset')
 
     Route.get('difficulty/:name', 'DifficultyController.show')
-    Route.put('difficulty/:id', 'DifficultyController.update')
-    Route.delete('difficulty/:id', 'DifficultyController.reset')
+    Route.put('difficulty/:name', 'DifficultyController.update')
+    Route.delete('difficulty/:name', 'DifficultyController.reset')
 
     Route.get('workshop/file/:id', 'WorkshopController.getFileDetails')
     Route.get('workshop/collection/:id', 'WorkshopController.getCollectionDetails')

@@ -6,9 +6,7 @@ class ConfigController {
 
     async show ({ params, response }) {
         const config = await FileManager.getFileContent('config', params.name)
-        return response.ok({
-            data: config
-        })
+        return response.ok(config)
     }
 
     async update ({ params, request, response }) {
@@ -23,9 +21,7 @@ class ConfigController {
         await FileManager.write('config', params.name, null, true)
         const config = await FileManager.getFileContent('config', params.name)
         
-        return response.ok({
-            data: config
-        })       
+        return response.ok(config)       
     }
 }
 

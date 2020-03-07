@@ -6,9 +6,7 @@ class DifficultyController {
 
     async show ({ params, response }) {
         const difficulty = await FileManager.getFileContent('difficulty', params.name)
-        return response.ok({
-            data: difficulty
-        })
+        return response.ok(difficulty)
     }
 
     async update ({ params, request, response }) {
@@ -22,9 +20,7 @@ class DifficultyController {
         await FileManager.write('difficulty', params.name, null, true)
         const difficulty = await FileManager.getFileContent('difficulty', params.name)
         
-        return response.ok({
-            data: difficulty
-        })
+        return response.ok(difficulty)
     }
 
 }

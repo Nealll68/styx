@@ -8,20 +8,8 @@ class Profile extends Model {
         return 'a3_server_profiles'
     }
 
-    serverConfig () {
-        return this.hasOne('App/Models/A3Server/Config')
-    }
-
-    serverBasic () {
-        return this.hasOne('App/Models/A3Server/Basic')
-    }
-
     serverParam () {
         return this.hasOne('App/Models/A3Server/Param')
-    }
-
-    serverDifficulty () {
-        return this.hasOne('App/Models/A3Server/Difficulty')
     }
 
     getIsDefault (isDefault) {

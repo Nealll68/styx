@@ -1,21 +1,21 @@
 export const state = () => ({
   locales: [
     {
-      code: "en",
-      name: "EN"
+      code: 'en',
+      name: 'EN'
     },
     {
-      code: "fr",
-      name: "FR"
+      code: 'fr',
+      name: 'FR'
     }
   ],
-  locale: "en"
-});
+  locale: 'en'
+})
 
 export const mutations = {
   setLang(state, locale) {
     if (state.locales.find(el => el.code === locale)) {
-      state.locale = locale;
+      state.locale = locale
     }
   }
-};
+}

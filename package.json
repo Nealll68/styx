@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "Arma 3 server web interface",
   "author": "Nealll68",
+  "license": "MIT",
   "private": true,
   "scripts": {
     "serve:dev": "yarn dev",

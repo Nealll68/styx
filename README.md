@@ -15,7 +15,7 @@
 
 👤 **Nealll**
 
-* Website: https:\\nealll.dev
+* Website: [nealll.dev](https://nealll.dev)
 * Twitter: [@Nealll68](https://twitter.com/Nealll68)
 * Github: [@Nealll68](https://github.com/Nealll68)
 

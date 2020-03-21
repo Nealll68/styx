@@ -100,7 +100,7 @@
         class="text-center"
         cols="12"
       >
-        {{ new Date().getFullYear() }} — Created by <a href="https://steamcommunity.com/profiles/76561198064656478/" target="_blank">Nealll</a>
+        {{ new Date().getFullYear() }} — Created by <a href="https://nealll.dev" target="_blank">Nealll</a>
       </v-col>
     </v-footer>
   </div>

@@ -1,0 +1,31 @@
+{
+  "menu": {
+    "index": "Home",
+    "profiles": "Profiles",
+    "mods": "Mods",
+    "missions": "Missions",
+    "logs": "Logs",
+    "users": "Users",
+    "settings": "Settings",
+    "logout": "Logout",
+    "myAccount": "My account",
+    "updateServer": "Update the server"
+  },
+
+  "privileges": {
+    "normal": "Normal",
+    "admin": "Admin",
+    "supAdmin": "Super Admin"
+  },
+
+  "serverState": {
+    "start": "Start",
+    "restart": "Restart",
+    "stop": "Stop",
+    "startProgress": "Starting the server...",
+    "restartProgress": "Restarting the server...",
+    "stopProgress": "Stopping the server..."
+  },
+
+  "errors": {}
+}

@@ -1,176 +1,176 @@
-const { resolve } = require('path')
+const { resolve } = require("path");
 
 module.exports = {
-  mode: 'universal',
-  dev: process.env.NODE_ENV === 'development',
-  srcDir: resolve(__dirname, '..', 'resources'),
+  mode: "universal",
+  dev: process.env.NODE_ENV === "development",
+  srcDir: resolve(__dirname, "..", "resources"),
   /*
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s - CP17',
+    titleTemplate: "%s - CP17",
     meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { name: 'author', content: 'Nealll' },
-      { hid: 'description', name: 'description', content: 'CP17 arma 3 team milsim' },
-      { name: 'keywords', content: 'CP17, Commando Parachutiste 17, Arma 3, Arma, Team, Equipe, Milsim, Communauté, Jeux' }
+      { charset: "utf-8" },
+      { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "author", content: "Nealll" },
+      {
+        hid: "description",
+        name: "description",
+        content: "CP17 arma 3 team milsim"
+      },
+      {
+        name: "keywords",
+        content:
+          "CP17, Commando Parachutiste 17, Arma 3, Arma, Team, Equipe, Milsim, Communauté, Jeux"
+      }
     ],
-    link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
+    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }]
   },
   /*
    ** Customize the progress-bar color
    */
-  loading: { 
-    color: '#1EB980' 
+  loading: {
+    color: "#1EB980"
   },
   /*
    ** Global CSS
    */
-  css: ['~/assets/main.css'],
+  css: ["~/assets/main.css"],
   /*
    ** Plugins to load before mounting the App
    */
   plugins: [
-    { src: '~/plugins/vuetifyConfirm.client', ssr: false },
-    { src: '~/plugins/adonisWS.client', ssr: false },
-    { src: '~/plugins/vueApexCharts.client', ssr: false },
-    { src: '~/plugins/steamGuard.client', ssr: false },
-    '~/plugins/formatBytesFilter',
-    '~/plugins/axios'
+    { src: "~/plugins/vuetifyConfirm.client", ssr: false },
+    { src: "~/plugins/adonisWS.client", ssr: false },
+    { src: "~/plugins/vueApexCharts.client", ssr: false },
+    { src: "~/plugins/steamGuard.client", ssr: false },
+    "~/plugins/formatBytesFilter",
+    "~/plugins/axios",
+    "~/plugins/i18n"
   ],
   /*
    ** Nuxt.js dev-modules
    */
-  buildModules: [
-    '@nuxtjs/dotenv',
-    '@nuxtjs/vuetify',
-    '@nuxtjs/moment'
-  ],
+  buildModules: ["@nuxtjs/dotenv", "@nuxtjs/vuetify", "@nuxtjs/moment"],
   /*
    ** Nuxt.js modules
    */
-  modules: [
-    '@nuxtjs/axios',    
-    '@nuxtjs/auth',
-    '@nuxtjs/toast'
-  ],
+  modules: ["@nuxtjs/axios", "@nuxtjs/auth", "@nuxtjs/toast"],
   dotenv: {
-    path: resolve(__dirname, '..')
+    path: resolve(__dirname, "..")
   },
   /*
-  ** Auth module configuration
-  */
+   ** Auth module configuration
+   */
   auth: {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'auth', method: 'post', propertyName: 'data.token' },
-          user : { url: 'auth', method: 'get', propertyName: 'data' },
+          login: { url: "auth", method: "post", propertyName: "data.token" },
+          user: { url: "auth", method: "get", propertyName: "data" },
           logout: false
         }
       }
     }
   },
   /*
-  ** Router configuration
-  */
+   ** Router configuration
+   */
   router: {
-    middleware: ['auth']
+    middleware: ["auth", "i18n"]
   },
   /*
-  ** Moment module configuration
-  */
+   ** Moment module configuration
+   */
   moment: {
-    locales: ['fr'],
-    defaultLocale: 'fr'
+    locales: ["fr"],
+    defaultLocale: "fr"
   },
   /*
-  ** Toast module configuration
-  */
+   ** Toast module configuration
+   */
   toast: {
-    position: 'bottom-center',
+    position: "bottom-center",
     duration: 6000,
     keepOnHover: true,
-    iconPack: 'mdi',
+    iconPack: "mdi",
     action: {
-      text: 'Fermer',
+      text: "Fermer",
       onClick: (e, toastObject) => {
-        toastObject.goAway(0)
+        toastObject.goAway(0);
       }
     },
 
     register: [
       {
-        name: 'appError',
-        message: (payload) => {          
+        name: "appError",
+        message: payload => {
           if (!payload) {
-            return 'Une erreur s\'est produite'
+            return "Une erreur s'est produite";
           }
-          return payload
+          return payload;
         },
         options: {
-          icon: 'alert',
-          containerClass: ['app-toast', 'app-error-toast']
+          icon: "alert",
+          containerClass: ["app-toast", "app-error-toast"]
         }
       },
       {
-        name: 'appSuccess',
+        name: "appSuccess",
         message: payload => payload,
         options: {
-          icon: 'check-circle',
-          containerClass: ['app-toast', 'app-success-toast']
+          icon: "check-circle",
+          containerClass: ["app-toast", "app-success-toast"]
         }
       },
       {
-        name: 'appInfo',
+        name: "appInfo",
         message: payload => payload,
         options: {
-          icon: 'information',
-          containerClass: ['app-toast', 'app-info-toast']
+          icon: "information",
+          containerClass: ["app-toast", "app-info-toast"]
         }
       },
       {
-        name: 'appWarning',
+        name: "appWarning",
         message: payload => payload,
         options: {
-          icon: 'exclamation',
-          containerClass: ['app-toast', 'app-warning-toast']
+          icon: "exclamation",
+          containerClass: ["app-toast", "app-warning-toast"]
         }
       }
     ]
   },
   /*
-  ** vuetify module configuration
-  ** https://github.com/nuxt-community/vuetify-module
-  */
+   ** vuetify module configuration
+   ** https://github.com/nuxt-community/vuetify-module
+   */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
+    customVariables: ["~/assets/variables.scss"],
     theme: {
       dark: true,
       themes: {
         dark: {
-          primary: '#1EB980',
-          secondary: '#045D56',
-          tertiary: '#FF6859',
-          quaternary: '#FFCF44',
-          quinary: '#B15DFF',
-          senary: '#72DEFF',
-        },
-      },
+          primary: "#1EB980",
+          secondary: "#045D56",
+          tertiary: "#FF6859",
+          quaternary: "#FFCF44",
+          quinary: "#B15DFF",
+          senary: "#72DEFF"
+        }
+      }
     }
   },
   /*
    ** Build configuration
    */
   build: {
+    vendor: ["vue-i18n"],
     /*
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
 
-    transpile: [
-      '@adonisjs/websocket-client/index'
-    ]
+    transpile: ["@adonisjs/websocket-client/index"]
   }
-}
+};

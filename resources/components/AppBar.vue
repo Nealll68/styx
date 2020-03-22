@@ -110,7 +110,7 @@
       @click="startA3Server()" 
       :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-play</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : 'Démarrer' }}
+      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-play</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
     </v-btn>
 
     <v-btn
@@ -172,8 +172,8 @@ export default {
       navDrawer: null,
       a3ServerWs: null,
       items: [
-        { link: '/commander', name: $t('menu.home'), icon: 'mdi-view-dashboard' },
-        { link: '/commander/profiles', name: 'Profils', icon: 'mdi-settings' },
+        { link: '/commander', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
+        { link: '/commander/profiles', name: 'Profils', icon: 'mdi-folder-cog' },
         { link: '/commander/mods', name: 'Mods', icon: 'mdi-toy-brick' },
         { link: '/commander/mission', name: 'Missions', icon: 'mdi-target' },        
         { link: '/commander/logs', name: 'Logs', icon: 'mdi-post' }

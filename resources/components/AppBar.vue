@@ -82,7 +82,7 @@
           icon
           v-on="on"          
         >
-          <v-icon>mdi-web</v-icon>
+          <v-icon>mdi-translate</v-icon>
         </v-btn>
       </template>
 

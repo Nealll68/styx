@@ -42,7 +42,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Mon compte</v-list-item-title>
+            <v-list-item-title>{{ $t('menu.myAccount') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
 
@@ -55,7 +55,7 @@
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>Déconnexion</v-list-item-title>
+            <v-list-item-title>{{ $t('menu.logout') }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -74,6 +74,34 @@
     >
       <v-icon>mdi-menu</v-icon>
     </v-btn>
+
+    
+    <v-menu bottom right>
+      <template v-slot:activator="{ on }">
+        <v-btn
+          icon
+          v-on="on"          
+        >
+          <v-icon>mdi-web</v-icon>
+        </v-btn>
+      </template>
+
+      <v-list nav>
+        <v-list-item
+          v-for="locale in $store.state.i18n.locales"
+          :key="locale.code"
+          @click="switchLocale(locale.code)"
+        >
+          <v-list-item-content>
+            <v-list-item-title>{{ locale.name }}</v-list-item-title>
+          </v-list-item-content>
+
+          <v-list-item-icon v-if="locale.code === $store.state.i18n.locale">
+            <v-icon color="primary">mdi-check</v-icon>
+          </v-list-item-icon>
+        </v-list-item>
+      </v-list>
+    </v-menu>
 
     <v-chip 
       small 
@@ -120,7 +148,7 @@
       @click="restartA3Server()" 
       :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-restart</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : 'Redémarrer' }}
+      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-restart</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
     </v-btn>
 
     <v-btn
@@ -130,7 +158,7 @@
       @click="stopA3Server()" 
       :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : 'Arrêter' }}
+      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
     </v-btn>
     
     <v-tooltip 
@@ -173,12 +201,12 @@ export default {
       a3ServerWs: null,
       items: [
         { link: '/commander', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
-        { link: '/commander/profiles', name: 'Profils', icon: 'mdi-folder-cog' },
-        { link: '/commander/mods', name: 'Mods', icon: 'mdi-toy-brick' },
-        { link: '/commander/mission', name: 'Missions', icon: 'mdi-target' },        
-        { link: '/commander/logs', name: 'Logs', icon: 'mdi-post' }
+        { link: '/commander/profiles', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
+        { link: '/commander/mods', name: this.$t('menu.mods'), icon: 'mdi-toy-brick' },
+        { link: '/commander/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
+        { link: '/commander/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }
       ],
-      privileges: ['Normal', 'Administrateur', 'Super Administrateur']
+      privileges: [this.$t('privileges.normal'), this.$t('privileges.admin'), this.$t('privileges.supAdmin')]
     }
   },
 
@@ -190,8 +218,8 @@ export default {
   },
 
   created () {
-    if (this.$auth.user.privilege >= 1) this.items.push({ link: '/commander/users', name: 'Utilisateurs', icon: 'mdi-account-group' })
-    if (this.$auth.user.privilege === 2) this.items.push({ link: '/commander/settings', name: 'Paramètres', icon: 'mdi-cogs' })    
+    if (this.$auth.user.privilege >= 1) this.items.push({ link: '/commander/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
+    if (this.$auth.user.privilege === 2) this.items.push({ link: '/commander/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
   },
 
   mounted () {
@@ -222,17 +250,22 @@ export default {
   methods: {
     startA3Server () {
       this.a3ServerWs.emit('start')
-      this.$toast.global.appInfo('Démarrage du serveur...')
+      this.$toast.global.appInfo(this.$t('serverState.startProgress'))
     },
 
     restartA3Server () {
       this.a3ServerWs.emit('restart')
-      this.$toast.global.appInfo('Redémarrage du serveur...')
+      this.$toast.global.appInfo(this.$t('serverState.restartProgress'))
     },
 
     stopA3Server () {
       this.a3ServerWs.emit('stop')
-      this.$toast.global.appInfo('Arrêt du serveur...')
+      this.$toast.global.appInfo(this.$t('serverState.stopProgress'))
+    },
+
+    switchLocale (code) {
+      document.cookie = `i18n_locale=${code}`
+      location.reload()
     },
 
     async updateServer (guard = null) {

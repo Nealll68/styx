@@ -212,11 +212,15 @@ export default {
     }
   },
 
-  async asyncData ({ $axios }) {
-    const response = await $axios.$get('server/logs/current')
-    return {
-      serverLogs: response.logs.split('\n')
+  async mounted () {
+    this.loading = true
+
+    if (this.$store.state.a3Server.isStarted) {
+      const response = await this.$axios.$get('server/logs/current')
+      this.serverLogs = response.logs.split('\n')  
     }
+
+    this.loading = false
   },
 
   methods: {

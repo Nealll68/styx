@@ -2,11 +2,11 @@ export const state = () => ({
   locales: [
     {
       code: 'en',
-      name: 'EN'
+      name: 'English'
     },
     {
       code: 'fr',
-      name: 'FR'
+      name: 'Français'
     }
   ],
   locale: 'en'

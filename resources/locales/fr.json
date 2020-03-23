@@ -198,7 +198,7 @@
     "noMods": "Aucun mod ajouté",
     "alreadyAdded": "Déjà ajouté",
     "noLocalMod": "Aucun mod trouvé dans le dossier Arma 3",
-    "importSuccess": "Les mods qui ont pu être détectés ont était importés",
+    "importSuccess": "Les mods qui ont pu être détectés ont été importés",
     "notEntirelyDeleted": "Le mod n'a pas été correctement supprimé car certains dossier n'existe pas ou l'application n'y a pas accès"
   },
 
@@ -210,19 +210,17 @@
     "armaPathHint": "Chemin absolu vers le dossier ou est installé Arma 3",
     "port": "Port",
     "steamAccountMessage": "Vous pouvez préciser un compte steam qui va gérer le téléchargement du jeu et des mods.",
-    "steamWorkshopInfo": "Pour pouvoir utiliser les fonctionalités liées workshop le compte doit posséder Arma 3",
+    "steamWorkshopInfo": "Pour pouvoir utiliser les fonctionnalités liées workshop le compte doit posséder Arma 3",
     "passwordHint": "Le mot de passe n'est jamais affiché. Pour le modifier précisez-le à nouveau",
     "steamGuardProtection": "Protégé par Steam Guard",
     "steamGuardHint": "Si oui, le code Steam Guard vous sera demandé avant chaque téléchargement"
   },
 
   "user": {
-    "title": "Mon compte",
-    "updated": "Modification enregistré"
+    "updated": "Compte mis à jour"
   },
 
   "users": {
-    "title": "Utilisateurs",
     "adminUserAlert": "Il est vivement déconseillé de laisser le compte par défaut (admin) activé",
     "add": "Créer un utilisateur",
     "search": "Rechecher un utilisateur",
@@ -232,11 +230,11 @@
     "updated": "Utilisateur mis à jour",
     "deleted": "Utilisateur supprimé",
     "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer cette utilisateur ?",
-    "supAdminError": "Suppresion impossible : il doit toujours y avoir un compte super admin d'actif"
+    "supAdminError": "Suppression impossible : il doit toujours y avoir un compte super admin d'actif"
   },
 
   "login": {
     "signIn": "Se connecter",
-    "wrongCredentials": "Nom d'utilisateur et/ou mot de passe invalide"
+    "wrongCredentials": "Nom d'utilisateur ou mot de passe invalide"
   }
 }

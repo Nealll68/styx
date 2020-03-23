@@ -190,7 +190,7 @@
           <v-icon>mdi-update</v-icon>
         </v-btn>
       </template>
-      Mettre à jour le serveur
+      {{ $t('menu.updateServer') }}
     </v-tooltip>
   </v-app-bar>
 

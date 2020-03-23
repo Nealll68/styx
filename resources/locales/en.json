@@ -153,7 +153,7 @@
   },
 
   "profiles": {
-    "howToCreate": "You can create a profile using the Create profile button",
+    "howToCreate": "You can create a profile by entering a name in the field and clicking on '+'",
     "noNameError": "Please specify a name for the profile",
     "created": "Profile created",
     "updated": "Profile updated",

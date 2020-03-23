@@ -23,7 +23,7 @@
       <v-col cols="md-12">
         <v-card>    
           <v-card-title class="headline">
-            <h3>{{ $t('users.title') }}</h3>
+            <h3>{{ $t('menu.users') }}</h3>
 
             <v-spacer></v-spacer>
             

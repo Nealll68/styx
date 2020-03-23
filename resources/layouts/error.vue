@@ -1,20 +1,26 @@
 <template>
-  <v-app dark>
     <v-container class="app-container">
-      <h1>{{ $t('errors.errorPageTitle') }}</h1>
-        
-      <p class="display-4 font-weight-light mb-0 mt-5">{{ statusCode }}</p>        
-      <p class="font-italic">{{ message }}</p>
+      <v-row justify="center">
+        <v-card class="text-center">
+          <v-card-title>
+            <h1>😟 {{ $t('errors.errorPageTitle') }}</h1>
+          </v-card-title>
 
-      <h2>{{ $t('errors.errorPageDetails') }}</h2>
-      {{ errorMessage }}
+          <v-card-text>
+              <p class="display-4 font-weight-black mb-0 mt-5">{{ statusCode }}</p>        
+              <p class="font-italic">{{ message }}</p>
+              
+              <h2>{{ $t('errors.errorPageDetails') }}</h2>
+              {{ errorMessage }}
+          </v-card-text>
+        </v-card>          
+      </v-row>
     </v-container>
-  </v-app>
 </template>
 
 <script>
 export default {
-  layout: 'empty',
+  layout: 'commander',
 
   props: {
     error: {

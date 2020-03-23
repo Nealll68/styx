@@ -27,5 +27,217 @@
     "stopProgress": "Arrêt du serveur..."
   },
 
-  "errors": {}
+  "errors": {
+    "undefinedPath": "Aucun chemin vers le dossier Arma 3 n'a été spécifié. Rendez-vous sur la page Paramètres pour le définir.",
+    "notAllowed": "Vous n'avez pas les permissions nécessaire pour modifier cette catégorie",
+    "undefinedArmaPath": "Le chemin vers le dossier Arma 3 n'est pas défini",
+    "undefinedSteamPath": "Le chemin vers le dossier SteamCMD n'est pas défini",
+    "incorrectSteamPath": "Le chemin spécifié pour SteamCMD ne contient pas 'steamcmd.exe'",
+    "steamAccountRequired": "Un compte Steam est requis pour effectuer cette action",
+    "errorPageTitle": "Oups... une erreur est survenue",
+    "errorPageDetails": "Détails",
+    "pageNotFound": "Page non trouvée",
+    "internalServerError": "Erreur interne au serveur",
+    "unauthorized": "Non autorisé",
+    "other": "Une erreur s'est produite"
+  },
+
+  "rules": {
+    "required": "Champ requis",
+    "usernameRequired": "Nom d'utilisateur requis",
+    "passwordRequired": "Mot de passe requis",
+    "privilegeRequired": "Un niveau de privilège est requis",
+    "password": {
+      "minLength": "Minimum 8 caractères requis",
+      "lowercaseRequired": "Doit contenir au moins 1 caractère minuscule",
+      "uppercaseRequired": "Doit contenir au moins 1 caractère majuscule",
+      "numericRequired": "Doit contenir au moins 1 caractère numérique",
+      "specialRequired": "Doit contenir au moins 1 caractère spécial"
+    }
+  },
+
+  "common": {
+    "refresh": "Actualiser",
+    "deletion": "Suppression",
+    "continue": "Continuer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "download": "Télécharger",
+    "noResult": "Aucun résultat",
+    "fromWorkhop": "Depuis le Workshop",
+    "add": "Ajouter",
+    "name": "Nom",
+    "size": "Taille",
+    "source": "Source",
+    "lastUpdate": "Dernière MàJ",
+    "save": "Enregistrer",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "passwordRecommendation": "Le mot de passe doit avoir au minimum 8 caractères et contenir au moins :<br/>- 1 lettre minuscule<br/>- 1 lettre majuscule<br/>- 1 chiffre<br/>- 1 caractère spécial",
+    "privilege": "Privilège",
+    "help": "Aide",
+    "reset": "Réinitialiser",
+    "confirmReset": "Etes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?"
+  },
+
+  "download": {
+    "updateServer": "Mise à jour du serveur en cours...",
+    "downloadMod": "Téléchargement du mod {modName}",
+    "downloadMission": "Téléchargement de la mission {missionName}",
+    "serverUpdated": "Serveur mis à jour",
+    "modDownloaded": "Mod téléchargé",
+    "missionDownloaded": "Mission téléchargée",
+    "steamGuardCodeError": "Echec de connexion avec le code Steam Guard",
+    "diskSpaceError": "Echec : pas assez d'espace ou le compte spécifié ne possède pas Arma 3"
+  },
+
+  "upload": {
+    "updateLocalModInfo": "Si vous voulez mettre à jour un mod local, supprimez-le avant.",
+    "updateMission": "Pour mettre à jour une mission il suffitt de la retélécharger sur le serveur.",
+    "modRules": "Points importants",
+    "modNaming": "Le dossier du mod doit être correctement nommé (avec un '@' devant le nom et sans espace)",
+    "modZip": "Le dossier du mod doit être mis dans un .zip",
+    "missionRules": "Points importants",
+    "missionNaming": "La mission doit être correctement nommée (sans espace et un nom de map valide)",
+    "missionExtension": "La mission doit être un fichier avec comme extension .pbo",
+    "missionLabel": "Fichier PBO",
+    "modLabel": "Dossier ZIP contenant le mod",
+    "selectFileError": "Veuillez sélectionner un fichier",
+    "success": "Téléchargement réussi",
+    "fileExtensionError": "Le fichier doit être un {extension}"
+  },
+
+  "workshop": {
+    "idWorkshop": "ID de l'objet workshop",
+    "idCollection": "ID de la collection workshop",
+    "publishedAt": "Publié le :",
+    "idError": "Erreur : vérifier l'ID workshop"
+  },
+
+  "config": {
+    "updated": "Configuration enregistrée",
+    "reseted": "Configuration réinitialisée"
+  },
+
+  "difficulty": {
+    "information": "Pour utiliser une difficulté personalisée indiquez 'Custom' dans le fichier de configuration du serveur.",
+    "updated": "Difficulté enregistrée",
+    "reseted": "Difficulté réinitialisée"    
+  },
+
+  "serverMod": {
+    "modsActivated": "Mods activés",
+    "serverModsActivated": "Server mods activés",
+    "updated": "Mods enregistré"
+  },
+
+  "params": {
+    "updated": "Paramètres mis à jour",
+    "reseted": "Paramètres réinitialisé",
+    "autoInitLabel": "Initialisation automatique de la mission",
+    "autoInitHint": "-autoInit : Initialise la mission comme le premier client le fait. Si activé, vérifier que la mission soit persistente sinon le serveur ne démarre pas",
+    "loadMissionToMemoryLabel": "Charger la mission dans la mémoire",
+    "loadMissionToMemoryHint": "-loadMissionToMemory : Met la mission en cache lors du premier téléchargement",
+    "noLogsLabel": "Pas de logs",
+    "noLogsHint": "-noLogs : Désactive l'écriture de logs",
+    "hugePagesLabel": "Autoriser les pages volumineuses",
+    "hugePagesHint": "hugepages : Active les pages volumineuses pour le serveur et les clients",
+    "enableHTLabel": "Activer l'HyperThreading",
+    "enableHTHint": "-enableHT : Active l'utilisation de tous les cœurs logiques du CPU. Si le processeur n'est pas compatible, le paramètre est ignoré",
+    "filePatchingLabel": "Autoriser le file patching",
+    "filePatchingHint": "-filePatching : Autorise le jeu à charger les données décompressées"
+  },
+
+  "index": {
+    "logsTitle": "Logs",
+    "noLogs": "Les logs ne s'affichent que si le serveur est démarré."
+  },
+
+  "profiles": {
+    "title": "Profils",
+    "howToCreate": "Vous pouvez créer un profil utilisant le bouton Créer un profil",
+    "noNameError": "Merci de préciser un nom pour le profil",
+    "created": "Profil créé",
+    "updated": "Profil mis à jour",
+    "deleted": "Profil supprimé",
+    "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer ce profil ?",
+
+    "tabTitles": {
+      "mods": "Mods",
+      "parameters": "Paramètres",
+      "configuration": "Configuration",
+      "difficulty": "Difficulté"
+    }
+  },
+
+  "logs": {
+    "deleteAll": "Tout supprimer",
+    "filterInfo": "Les logs sont classés par profils. Cliquez sur un profil pour afficher les logs lui concernant.",
+    "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer ce fichier de logs ?",
+    "confirmAllDelete": "Etes-vous sûr de vouloir définitivement supprimer tous les fichiers de logs ?"
+  },
+
+  "mission": {
+    "title": "Missions",
+    "add": "Ajouter une mission",    
+    "upload": "Télécharger une mission",
+    "detectMission": "Détecter les missions existantes",
+    "search": "Rechercher une mission",
+    "afterDeleteMessage": "Assurez-vous que la mission qui vient d'être supprimée n'est activée dans aucun profil sinon le serveur ne démarrera pas.",
+    "noMission": "Aucune mission ajoutée",
+    "workshopDownloadError": "Impossible de télécharger cette mission depuis le workshop",
+    "map": "Carte"
+  },
+
+  "mods": {
+    "title": "Mods",
+    "add": "Ajouter un mod",
+    "addLocal": "Ajouter un mod local",
+    "detect": "Détecter les mods existants",
+    "upload": "Télécharger un mod",
+    "local": "Local",
+    "search": "Rechercher un mod",
+    "noMods": "Aucun mod ajouté",
+    "alreadyAdded": "Déjà ajouté",
+    "noLocalMod": "Aucun mod trouvé dans le dossier Arma 3",
+    "importSuccess": "Les mods qui ont pu être détectés ont était importés",
+    "notEntirelyDeleted": "Le mod n'a pas été correctement supprimé car certains dossier n'existe pas ou l'application n'y a pas accès"
+  },
+
+  "settings": {
+    "title": "Configuration de Commander",
+    "steamCMDLabel": "Chemin SteamCMD",
+    "steamCMDHint": "Chemin absolu vers le dossier ou est installé SteamCMD",
+    "armaPathLabel": "Chemin Arma 3",
+    "armaPathHint": "Chemin absolu vers le dossier ou est installé Arma 3",
+    "port": "Port",
+    "steamAccountMessage": "Vous pouvez préciser un compte steam qui va gérer le téléchargement du jeu et des mods.",
+    "passwordHint": "Le mot de passe n'est jamais affiché. Pour le modifier précisez-le à nouveau",
+    "steamGuardProtection": "Protégé par Steam Guard",
+    "steamGuardHint": "Si oui, le code Steam Guard vous sera demandé avant chaque téléchargement"
+  },
+
+  "user": {
+    "title": "Mon compte",
+    "updated": "Modification enregistré"
+  },
+
+  "users": {
+    "title": "Utilisateurs",
+    "adminUserAlert": "Il est vivement déconseillé de laisser le compte par défaut (admin) activé",
+    "add": "Créer un utilisateur",
+    "search": "Rechecher un utilisateur",
+    "noUser": "Aucun utilisateur créé",
+    "createdAt": "Créé le",
+    "created": "Utilisateur créé",
+    "updated": "Utilisateur mis à jour",
+    "deleted": "Utilisateur supprimé",
+    "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer cette utilisateur ?",
+    "supAdminError": "Suppresion impossible : il doit toujours y avoir un compte super admin d'actif"
+  },
+
+  "login": {
+    "signIn": "Se connecter",
+    "wrongCredentials": "Nom d'utilisateur et/ou mot de passe invalide"
+  }
 }

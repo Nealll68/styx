@@ -6,9 +6,7 @@
       text
       type="error"
       border="left"
-    >
-      Aucun chemin vers le dossier Arma 3 et SteamCMD n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
-    </v-alert>
+    >{{ $t('errors.undefinedPath') }}</v-alert>
 
     <v-row 
       v-else
@@ -29,7 +27,7 @@
               class="float-right"
               :disabled="$store.state.downloadInfo.type === 'updateServer'"
             >
-              <v-icon left>mdi-toy-brick-plus</v-icon>Ajouter un mod
+              <v-icon left>mdi-toy-brick-plus</v-icon>{{ $t('mods.add') }}
             </v-btn>
           </template>
 
@@ -42,7 +40,7 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Depuis le workshop</v-list-item-title>
+                <v-list-item-title>{{ $t('common.fromWorkshop') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -52,11 +50,11 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Détecter ceux existants</v-list-item-title>
+                <v-list-item-title>{{ $t('mods.detect') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
-            <v-subheader>Local</v-subheader>
+            <v-subheader>{{ $t('mods.local') }}</v-subheader>
 
             <v-list-item @click="showModUpload = true">
               <v-list-item-icon>
@@ -64,7 +62,7 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Télécharger un mod</v-list-item-title>
+                <v-list-item-title>{{ $t('mods.upload') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -74,7 +72,7 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Ajouter un mod existant</v-list-item-title>
+                <v-list-item-title>{{ $t('mods.addLocal') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>      
@@ -84,7 +82,7 @@
       <v-col cols="md-12">
         <v-card>    
           <v-card-title class="headline">
-            <h3>Mods</h3>
+            <h3>{{ $t('mods.title') }}</h3>
 
             <v-chip
               label
@@ -99,13 +97,13 @@
               class="mr-2"
               color="tertiary"
             >
-              <v-icon left>mdi-refresh</v-icon> Actualiser
+              <v-icon left>mdi-refresh</v-icon>{{ $t('common.refresh') }}
             </v-btn>
 
             <v-text-field
               v-model="modsSearch"
               append-icon="mdi-toy-brick-search"
-              label="Rechercher un mod"
+              :label="$('mods.search')"
               single-line
               hide-details
               filled
@@ -121,8 +119,8 @@
                 :headers="modsHeaders"
                 :items-per-page="10"
                 sort-by="name"
-                no-data-text="Aucun mods ajouté"
-                no-results-text="Aucun résultat"
+                :no-data-text="$t('noMods')"
+                :no-results-text="$t('common.noResult')"
                 :search="modsSearch"
                 :loading="modsTableLoading"
               >           
@@ -206,9 +204,7 @@
                     v-if="mods.find(element => element.name == mod)"
                     text
                     disabled
-                  >
-                    Déjà ajouté
-                  </v-btn>
+                  >{{ $t('mods.alreadyAdded') }}</v-btn>
 
                   <v-btn
                     v-else
@@ -216,7 +212,7 @@
                     text
                     @click="addLocalMod(mod)"         
                   >
-                    <v-icon left>mdi-plus-box</v-icon>Ajouter
+                    <v-icon left>mdi-plus-box</v-icon>{{ $t('common.add') }}
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
@@ -230,9 +226,7 @@
               type="info"
               border="left"
               text
-            >
-              Aucun mods trouvé dans le dossier Arma 3
-            </v-alert>
+            >{{ $t('mods.noLocalMod') }}</v-alert>
           </v-card-text>
         </v-card>
       </v-container>
@@ -270,11 +264,11 @@ export default {
       modsTableLoading: false,
       modsSearch: '',
       modsHeaders: [
-        { text: 'Nom', value: 'name' },
-        { text: 'Taille', value: 'size' },
-        { text: 'Source', value: 'source' },
+        { text: this.$t('common.name'), value: 'name' },
+        { text: this.$t('common.size'), value: 'size' },
+        { text: this.$t('common.source'), value: 'source' },
         { text: 'Workshop ID', value: 'workshop_id' },
-        { text: 'Dernière MàJ', value: 'server_updated_at' },
+        { text: this.$t('common.lastUpdate'), value: 'server_updated_at' },
         { text: '', value: 'action', sortable: false }
       ],
     }
@@ -347,7 +341,7 @@ export default {
       await this.$axios.$get('server/mod/detect')
       await this.refreshModsList()
 
-      this.$toast.global.appSuccess('Les mods qui ont pus être détectés ont était importés')
+      this.$toast.global.appSuccess(this.$t('mods.importSuccess'))
       this.modsTableLoading = false
     },
 
@@ -373,7 +367,7 @@ export default {
         this.mods.splice(this.mods.indexOf(mod), 1)
       } catch (ex) {
         if (ex.response.data === 'E_UNABLE_TO_ACCESS') {
-          this.$toast.global.appError(`Le mod n'a pas été correctement supprimé car certains dossier n'existe pas ou l'application n'y a pas accès`)
+          this.$toast.global.appError(this.$t('mods.notEntirelyDeleted'))
         }
       }
 

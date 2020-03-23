@@ -1,141 +1,135 @@
 <template>
-<div>
+  <div>
+    <v-toolbar flat short>
+      <v-chip label class="mx-1"
+        >{{ $t('serverMod.modsActivated') }} : {{ mods.filter(e => e.activated).length }}</v-chip
+      >
 
-<v-toolbar
-	flat
-	short
->
-	<v-chip		 
-		label
-		class="mx-1"
-	>Mods : {{ mods.filter(e => e.activated).length }}</v-chip>
+      <v-chip label class="mx-1"
+        >{{ $t('serverMod.serverModsActivated') }} : {{ mods.filter(e => e.server_mod).length }}</v-chip
+      >
 
-	<v-chip		 
-		label
-		class="mx-1"
-	>Server mods : {{ mods.filter(e => e.server_mod).length }}</v-chip>	
-	
-  <v-spacer></v-spacer>
+      <v-spacer></v-spacer>
 
-  <v-btn
-	color="primary"
-    text
-    :loading="loadingUpdate"
-    @click="save()"
-  >
-    <v-icon left>mdi-content-save</v-icon> Enregistrer les mods
-  </v-btn>
-</v-toolbar>
+      <v-btn color="primary" text :loading="loadingUpdate" @click="save()">
+        <v-icon left>mdi-content-save</v-icon>{{ $t('save') }}
+      </v-btn>
+    </v-toolbar>
 
-<v-card-text>
-	<v-text-field
-		v-model="modsSearch"
-		append-icon="mdi-toy-brick-search"
-		label="Rechercher un mod"
-		single-line
-		hide-details
-		filled
-		dense
-	></v-text-field> 
-</v-card-text>
+    <v-card-text>
+      <v-text-field
+        v-model="modsSearch"
+        append-icon="mdi-toy-brick-search"
+        :label="$t('mods.search')"
+        single-line
+        hide-details
+        filled
+        dense
+      ></v-text-field>
+    </v-card-text>
 
-<v-card-text>
-	<v-data-table
-		:items="mods" 
-		:headers="modsHeaders"
-		disable-pagination
-		sort-by="activated"
-		sort-desc
-		hide-default-footer
-		no-data-text="Aucun mods ajouté"
-		no-results-text="Aucun résultat"
-		:search="modsSearch"
-		:loading="loading"
-	>
-		 <template v-slot:item.activated="{ item }">
-			 <v-checkbox
-			 	v-model="item.activated"
-				:disabled="item.server_mod ? true : false"
-			 	color="primary"
-				hide-details
-				class="pt-0 my-2"	
-			 ></v-checkbox>
-		 </template>
+    <v-card-text>
+      <v-data-table
+        :items="mods"
+        :headers="modsHeaders"
+        disable-pagination
+        sort-by="activated"
+        sort-desc
+        hide-default-footer
+        :no-data-text="$t('mods.noMods')"
+        :no-results-text="$t('common.noResult')"
+        :search="modsSearch"
+        :loading="loading"
+      >
+        <template v-slot:item.activated="{ item }">
+          <v-checkbox
+            v-model="item.activated"
+            :disabled="item.server_mod ? true : false"
+            color="primary"
+            hide-details
+            class="pt-0 my-2"
+          ></v-checkbox>
+        </template>
 
-		 <template v-slot:item.server_mod="{ item }">
-			 <v-checkbox
-			 	v-model="item.server_mod"
-				:disabled="item.activated ? true : false"
-			 	color="primary"
-				hide-details
-				class="pt-0 my-2"				 	
-			 ></v-checkbox>
-		 </template>
-	</v-data-table>
-</v-card-text>
-
-</div>
+        <template v-slot:item.server_mod="{ item }">
+          <v-checkbox
+            v-model="item.server_mod"
+            :disabled="item.activated ? true : false"
+            color="primary"
+            hide-details
+            class="pt-0 my-2"
+          ></v-checkbox>
+        </template>
+      </v-data-table>
+    </v-card-text>
+  </div>
 </template>
 
 <script>
 export default {
-	props: ['serverParams'],
+  props: ['serverParams'],
 
-	data () {
-		return {
-			loading: false,
-			loadingUpdate: false,
-			mods: [],
-			modsSearch: '',
+  data() {
+    return {
+      loading: false,
+      loadingUpdate: false,
+      mods: [],
+      modsSearch: '',
       modsHeaders: [
         { text: 'Nom', value: 'name' },
         { text: '-mod', value: 'activated' },
         { text: '-serverMod', value: 'server_mod' }
-      ],     
-		}
-	},
+      ]
+    }
+  },
 
-	async mounted () {
-		this.loading = true
-		
-		let activatedMods = []
-		if (this.serverParams.mods) {
-			activatedMods = this.serverParams.mods.split(';')
-		}
-		
-		let activatedServerMods = []
-		if (this.serverParams.server_mod) {
-			activatedServerMods = this.serverParams.server_mod.split(';')
-		}	
+  async mounted() {
+    this.loading = true
 
-		this.mods = await this.$axios.$get('server/mod')
+    let activatedMods = []
+    if (this.serverParams.mods) {
+      activatedMods = this.serverParams.mods.split(';')
+    }
 
-		this.mods.forEach(element => {
-			if (activatedMods.includes(element.name)) {
-				element.activated = true
-			} else if (activatedServerMods.includes(element.name)) {
-				element.server_mod = true
-			}
-		})
+    let activatedServerMods = []
+    if (this.serverParams.server_mod) {
+      activatedServerMods = this.serverParams.server_mod.split(';')
+    }
 
-		this.loading = false
-	},
+    this.mods = await this.$axios.$get('server/mod')
 
-	methods: {
-		async save () {
-			this.loadingUpdate = true
-			const mods = this.mods.filter(element => element.activated).map(element => element.name).join(';')
-			const serverMods = this.mods.filter(element => element.server_mod).map(element => element.name).join(';')
+    this.mods.forEach(element => {
+      if (activatedMods.includes(element.name)) {
+        element.activated = true
+      } else if (activatedServerMods.includes(element.name)) {
+        element.server_mod = true
+      }
+    })
 
-			await this.$axios.$put(`server/params/${this.serverParams.id}`, {
-				mods,
-				server_mod: serverMods
-			})
-				
-			this.$toast.global.appSuccess('Paramètres mis à jour')
+    this.loading = false
+  },
 
-			this.loadingUpdate = false
-		}
-	}
+  methods: {
+    async save() {
+      this.loadingUpdate = true
+      const mods = this.mods
+        .filter(element => element.activated)
+        .map(element => element.name)
+        .join(';')
+      const serverMods = this.mods
+        .filter(element => element.server_mod)
+        .map(element => element.name)
+        .join(';')
+
+      await this.$axios.$put(`server/params/${this.serverParams.id}`, {
+        mods,
+        server_mod: serverMods
+      })
+
+      this.$toast.global.appSuccess(this.$t('serverMod.updated'))
+
+      this.loadingUpdate = false
+    }
+  }
 }
 </script>

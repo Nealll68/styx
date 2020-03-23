@@ -2,7 +2,7 @@
 <v-container class="app-container">
   <v-card>
     <v-card-title>
-      <v-icon left>mdi-cogs</v-icon>Configuration de Commander
+      <v-icon left>mdi-cogs</v-icon>{{ $t('settings.title') }}
       <v-spacer></v-spacer>
       <v-btn
         text
@@ -11,7 +11,7 @@
         :disabled="$store.state.downloadInfo.type === 'updateServer' || !valid"
         @click="save()"
       >
-        <v-icon left>mdi-content-save</v-icon>Enregistrer
+        <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
       </v-btn>
     </v-card-title>
 
@@ -22,8 +22,8 @@
         <v-text-field
           v-model="config.steamcmd_path"
           filled
-          label="Chemin SteamCMD"
-          hint="Chemin absolu vers le dossier ou est installé SteamCMD"
+          :label="$t('settings.steamCMDLabel')"
+          :hint="$t('settings.steamCMDHint')"
           persistent-hint
           clearable
           :rules="requiredRule"
@@ -32,8 +32,8 @@
         <v-text-field
           v-model="config.a3server_path"
           filled
-          label="Chemin Arma 3 serveur"
-          hint="Chemin absolu vers le dossier ou est installé Arma 3"
+          :label="$t('settings.armaPathLabel')"
+          :hint="$t('settings.armaPathHint')"
           persistent-hint
           clearable
           class="mt-2"
@@ -43,7 +43,7 @@
         <v-text-field
           v-model="config.port"
           filled
-          label="Port"
+          :label="$t('settings.port')"
           type="number"
           clearable
           class="mt-2"
@@ -60,22 +60,22 @@
 
       <v-divider></v-divider>
       
-      <v-subheader>Vous pouvez préciser un compte steam qui va gérer le téléchargement du jeu et des mods.</v-subheader>      
+      <v-subheader>{{ $t('settings.steamAccountMessage') }}</v-subheader>      
 
       <v-text-field
         v-model="config.steam_account"
         filled
-        label="Nom d'utilisateur"
+        :label="$t('common.username')"
         clearable
       ></v-text-field>
 
       <v-text-field
         v-model="config.steam_password"
         filled
-        label="Mot de passe"
+        :label="$t('common.password')"
         clearable
         type="password"
-        hint="Le mot de passe n'est jamais affiché. Pour le modifier précisez-le à nouveau"
+        :hint="$t('settings.passwordHint')"
         persistent-hint
       ></v-text-field>
 
@@ -83,8 +83,8 @@
         v-model="config.steam_guard"
         color="primary"
         inset
-        label="Protégé par Steam Guard"
-        hint="Si oui, le code Steam Guard vous sera demandé avant chaque téléchargement"
+        :label="$t('settings.steamGuardProtection')"
+        :hint="$t('settings.steamGuardHint')"
         persistent-hint
       ></v-switch>
     </v-card-text>

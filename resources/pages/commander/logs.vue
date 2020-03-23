@@ -5,9 +5,7 @@
       text
       type="error"
       border="left"
-    >
-      Aucun chemin vers le dossier Arma 3 n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
-    </v-alert>
+    >{{ $t('errors.undefinedPath') }}</v-alert>
 
     <v-row v-else>
       <v-col md="12" lg="3">
@@ -20,7 +18,7 @@
               :loading="deleteAllLoading"
               @click="deleteAllLogs()"
             >
-              <v-icon left>mdi-delete-forever</v-icon> Tout supprimer
+              <v-icon left>mdi-delete-forever</v-icon> {{ $t('logs.deleteAll') }}
             </v-btn>
           </v-card-text>
 
@@ -30,7 +28,7 @@
             max-height="500px" 
             class="scrollbar"
           >
-            <v-subheader>Profils</v-subheader>
+            <v-subheader>{{ $t('profiles.title') }}</v-subheader>
 
             <v-list-group 
               v-for="item of logFiles"
@@ -71,14 +69,14 @@
         <v-card>
           <template v-if="logs">
             <v-card-title>
-              <v-icon left>mdi-post</v-icon> {{ logs.filename }}
+              <v-icon left>mdi-post</v-icon>{{ logs.filename }}
               <v-spacer></v-spacer>
               <v-btn
                 color="primary"
                 text
                 @click="downloadLog(logs.profileName, logs.filename)"
               >
-                <v-icon left>mdi-download</v-icon>Télécharger
+                <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
               </v-btn>
             </v-card-title>
 
@@ -89,7 +87,8 @@
                 max-height="700px"
               >
                 <div 
-                  v-for="log of logs.logs"
+                  v-for="(log, i) of logs.logs"
+                  :key="i"
                   class="my-2"
                 >
                   {{ log }}
@@ -103,9 +102,7 @@
               type="info"
               border="left"
               text
-            >
-              Les logs sont classés par profils. Cliquez sur un profil pour afficher les logs lui concernant.              
-            </v-alert>
+            >{{ $t('logs.filterInfo') }}</v-alert>
           </v-card-text>
         </v-card>
       </v-col>
@@ -159,10 +156,10 @@ export default {
     },
 
     async deleteLogs (profileName, filename) {      
-      const confirm = await this.$confirm('Etes-vous sûr de vouloir définitivement supprimer ce fichier de logs ?', { 
-        title: 'Suppression', 
-        buttonTrueText: 'Continuer', 
-        buttonFalseText: 'Annuler', 
+      const confirm = await this.$confirm(this.$t('logs.confirmDeletion'), { 
+        title: this.$t('common.deletion'), 
+        buttonTrueText: this.$t('common.continue'), 
+        buttonFalseText: this.$t('common.cancel'), 
         color: 'error',
         persistent: true
       })
@@ -180,10 +177,10 @@ export default {
     },
 
     async deleteAllLogs () {
-      const confirm = await this.$confirm('Etes-vous sûr de vouloir définitivement supprimer tous les fichiers de logs ?', { 
-        title: 'Suppression', 
-        buttonTrueText: 'Continuer', 
-        buttonFalseText: 'Annuler', 
+      const confirm = await this.$confirm(this.$t('logs.confirmAllDelete'), { 
+        title: this.$t('common.deletion'), 
+        buttonTrueText: this.$t('common.continue'), 
+        buttonFalseText: this.$t('common.cancel'),
         color: 'error',
         persistent: true
       })

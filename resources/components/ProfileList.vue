@@ -27,7 +27,7 @@
   <v-divider></v-divider> 
 
   <v-list>
-    <v-subheader>Profils</v-subheader>
+    <v-subheader>{{ $t('profiles.title') }}</v-subheader>
     <v-list-item-group 
       v-model="selectedProfile" 
       mandatory
@@ -103,11 +103,11 @@ export default {
         })
 
         this.profiles.push(profile)
-        this.$toast.global.appSuccess('Profil créé')             
+        this.$toast.global.appSuccess(this.$t('profiles.created'))             
 
         this.profileName = null
       } else {
-        this.$toast.global.appError('Merci de préciser un nom pour le profil')
+        this.$toast.global.appError(this.$t('profiles.noNameError'))
       }
 
       this.loading = false
@@ -121,16 +121,16 @@ export default {
       })
 
       this.$emit('refresh')
-      this.$toast.global.appSuccess('Profil mis à jour')
+      this.$toast.global.appSuccess(this.$t('profiles.updated'))
 
       this.loading = false
     },
 
     async deleteProfile (profile) {
-      const confirm = await this.$confirm('Etes-vous sûr de vouloir définitivement supprimer ce profil ?', { 
-        title: 'Suppression', 
-        buttonTrueText: 'Continuer', 
-        buttonFalseText: 'Annuler', 
+      const confirm = await this.$confirm(this.$t('profile.confirmDeletion'), { 
+        title: this.$t('common.deletion'), 
+        buttonTrueText: this.$t('common.continue'), 
+        buttonFalseText: this.$t('common.cancel'), 
         color: 'error',
         persistent: true
       })
@@ -146,7 +146,7 @@ export default {
           this.profiles[index] = response
         }
 
-        this.$toast.global.appSuccess('Profil supprimé')
+        this.$toast.global.appSuccess(this.$t('profiles.deleted'))
 
         this.loading = false
       }

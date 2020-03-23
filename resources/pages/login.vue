@@ -21,7 +21,7 @@
 							<v-text-field 
                 v-model="username"
                 :rules="requiredRule"
-                label="Pseudo"
+                :label="$t('common.username')"
                 name="username"
                 prepend-inner-icon="mdi-account"
                 filled
@@ -30,7 +30,7 @@
 							<v-text-field 
                 v-model="password"
                 :rules="requiredRule"
-                label="Mot de passe"
+                :label="$t('common.password')"
                 name="password"
                 prepend-inner-icon="mdi-lock"
                 :type="showPassword ? 'text' : 'password'"
@@ -47,7 +47,7 @@
               text
               @click="login()"
               :loading="loading"
-            >Connexion</v-btn>
+            >{{ $t('login.signIn') }}</v-btn>
 					</v-card-actions>
 				</v-card>
 			</v-col>
@@ -67,7 +67,7 @@ export default {
       username: '',
       password: '',
       requiredRule: [
-        v => !!v || 'Champ requis'
+        v => !!v || this.$t('rules.required')
       ]
     }
   },
@@ -88,7 +88,7 @@ export default {
           this.$router.push('/commander/')
         } catch (ex) {
           if (ex.response.data === 'E_PASSWORD_MISMATCH' || ex.response.data === 'E_USER_NOT_FOUND') {
-            this.$toast.global.appError('Le pseudo et/ou le mot de passe sont invalide')
+            this.$toast.global.appError(this.$t('wrongCredentials'))
           }
         }
       }

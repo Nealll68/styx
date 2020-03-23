@@ -6,7 +6,7 @@
       type="error"
       border="left"
     >
-      Aucun chemin vers le dossier Arma 3 n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
+      {{ $t('errors.undefinedPath') }}
     </v-alert>
 
     <v-row v-else>
@@ -21,7 +21,7 @@
           type="info"
           v-if="profile === null"
         >
-          Vous pouvez créer un profil utilisant le bouton "Créer un profil"
+          {{ $t('profiles.howToCreate') }}
         </v-alert>
 
         <v-card v-else>
@@ -40,10 +40,10 @@
             grow
             show-arrows
           >         
-            <v-tab>Mods</v-tab>
-            <v-tab>Paramètres</v-tab>
-            <v-tab>Configuration</v-tab>
-            <v-tab>Difficulté</v-tab>
+            <v-tab>{{ $t('profiles.tabTitles.mods') }}</v-tab>
+            <v-tab>{{ $t('profiles.tabTitles.parameters') }}</v-tab>
+            <v-tab>{{ $t('profiles.tabTitles.configuration') }}</v-tab>
+            <v-tab>{{ $t('profiles.tabTitles.difficulty') }}</v-tab>
           </v-tabs>
 
           <v-tabs-items v-model="tab">
@@ -67,9 +67,7 @@
                   type="warning"
                   border="left"
                   text
-                >
-                  Vous n'avez pas les permissions nécessaire pour modifier cette catégorie
-                </v-alert>
+                >{{ $t('errors.notAllowed') }}</v-alert>
               </v-card-text>
 
             </v-tab-item>
@@ -85,9 +83,7 @@
                   type="warning"
                   border="left"
                   text
-                >
-                  Vous n'avez pas les permissions nécessaire pour modifier cette catégorie
-                </v-alert>
+                >{{ $t('errors.notAllowed') }}</v-alert>
               </v-card-text>
             </v-tab-item>
 

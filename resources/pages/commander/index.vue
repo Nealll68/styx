@@ -6,7 +6,7 @@
       type="error"
       border="left"
     >
-      Aucun chemin vers le dossier Arma 3 et SteamCMD n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
+      {{ $t('errors.undefinedPath') }}
     </v-alert>
 
     <v-row justify="center">
@@ -136,7 +136,7 @@
         <v-card>
           <v-card-title>
             <v-icon left>mdi-post</v-icon>
-            Logs
+            {{ $t('index.logsTitle') }}
 
             <v-spacer></v-spacer>
 
@@ -147,7 +147,7 @@
               color="tertiary"
               :loading="loading"
             >
-              <v-icon left>mdi-refresh</v-icon> Actualiser
+              <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
             </v-btn>
           </v-card-title>
           <v-card-text>
@@ -168,7 +168,7 @@
               type="info"
               border="left" 
               text     
-            >Les logs ne s'affichent que si le serveur est démarré</v-alert>
+            >{{ $t('index.noLogs') }}</v-alert>
           </v-card-text>
         </v-card>
       </v-col>

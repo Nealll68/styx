@@ -31,13 +31,13 @@
       <v-btn
         text
         @click="closeDialog()"
-      >Annuler</v-btn>
+      >{{ $t('common.cancel') }}</v-btn>
 
       <v-btn
         text
         color="primary"
         @click="sendCode()"
-      >Continuer</v-btn>
+      >{{ $t('common.contiue') }}</v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>
@@ -50,7 +50,7 @@ export default {
       value: '',
       formValid: false,
       requiredRule: [
-        v => !!v || 'Champs requis'
+        v => !!v || this.$t('rules.required')
       ]
     }
   },

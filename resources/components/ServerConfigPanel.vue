@@ -13,7 +13,7 @@
     href="https://community.bistudio.com/wiki/server.cfg#Example_Configuration_File"			
     target="_blank"
   >
-    <v-icon left>mdi-help-circle</v-icon> Aide
+    <v-icon left>mdi-help-circle</v-icon>{{ $t('common.help') }}
   </v-btn>
 
   <v-btn
@@ -22,7 +22,7 @@
     :loading="loadingReset"
     @click="reset()"	
   >
-    <v-icon left>mdi-alert-circle</v-icon> Rétablir par défaut			
+    <v-icon left>mdi-alert-circle</v-icon>{{ $t('common.sreset') }}			
   </v-btn>
 
   <v-btn
@@ -31,7 +31,7 @@
     :loading="loadingUpdate"
     @click="update()"
   >
-    <v-icon left>mdi-content-save</v-icon> Enregistrer la config
+    <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
   </v-btn>
 </v-toolbar>
 
@@ -90,7 +90,7 @@ export default {
         config: this.config
       })
       
-      this.$toast.global.appSuccess('Config mise à jour')
+      this.$toast.global.appSuccess(this.$t('config.updated'))
 			
 			this.loadingUpdate = false			
 		},
@@ -98,17 +98,17 @@ export default {
 		async reset () {
       this.loadingReset = true
 
-      const confirm = await this.$confirm('Etes-vous sûr de vouloir rétatblir la configuration par défaut ?', { 
-        title: 'Rétablir par défaut', 
-        buttonTrueText: 'Continuer', 
-        buttonFalseText: 'Annuler', 
+      const confirm = await this.$confirm(this.$t('common.confirmReset'), { 
+        title: this.$t('common.reset'), 
+        buttonTrueText: this.$t('common.continue'), 
+        buttonFalseText: this.$t('common.cancel'), 
         color: 'warning',
         persistent: true
       })
       
       if (confirm) {
         this.config = await this.$axios.$delete(`server/config/${this.profile.name}`)  
-        this.$toast.global.appSuccess('Config remise par défaut')
+        this.$toast.global.appSuccess(this.$t('config.reseted'))
       }
 
 			this.loadingReset = false

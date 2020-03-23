@@ -13,7 +13,7 @@
     href="https://community.bistudio.com/wiki/server.armaprofile#Example_Configuration_File"			
     target="_blank"
   >
-    <v-icon left>mdi-help-circle</v-icon> Aide
+    <v-icon left>mdi-help-circle</v-icon>{{ $t('common.help') }}
   </v-btn>
 
   <v-btn
@@ -22,7 +22,7 @@
     :loading="loadingReset"
     @click="reset()"		
   >
-    <v-icon left>mdi-alert-circle</v-icon> Rétablir par défaut			
+    <v-icon left>mdi-alert-circle</v-icon>{{ $t('common.reset') }}			
   </v-btn>
 
   <v-btn
@@ -31,7 +31,7 @@
     :loading="loadingUpdate"
     @click="update()"
   >
-    <v-icon left>mdi-content-save</v-icon> Enregistrer la difficulté
+    <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
   </v-btn>
 </v-toolbar>
 
@@ -41,9 +41,7 @@
 		text 
 		type="info" 
 		dense
-	>
-		Pour utiliser une difficulté personalisée indiqué "Custom" dans le fichier de configuration du serveur.
-	</v-alert>
+	>{{ $t('difficulty.information') }}</v-alert>
 
   <v-overlay 
     :value="loadingContent"
@@ -99,7 +97,7 @@ export default {
         config: this.difficulty
       })
       
-      this.$toast.global.appSuccess('Diffculté mise à jour')
+      this.$toast.global.appSuccess(this.$t('difficulty.updated'))
 			
 			this.loadingUpdate = false			
 		},
@@ -107,17 +105,17 @@ export default {
 		async reset () {
       this.loadingReset = true
 
-      const confirm = await this.$confirm('Etes-vous sûr de vouloir rétatblir la difficulté par défaut ?', { 
-        title: 'Rétablir par défaut', 
-        buttonTrueText: 'Continuer', 
-        buttonFalseText: 'Annuler', 
+      const confirm = await this.$confirm(this.$t('common.confirmReset'), { 
+        title: this.$t('common.reset'), 
+        buttonTrueText: this.$t('common.continue'), 
+        buttonFalseText: this.$t('common.cancel'),
         color: 'warning',
         persistent: true
       })
       
       if (confirm) {
         this.difficulty = await this.$axios.$delete(`server/difficulty/${this.profile.name}`)  
-        this.$toast.global.appSuccess('Diffculté remise par défaut')
+        this.$toast.global.appSuccess(this.$t('difficulty.reseted'))
       }
 
 			this.loadingReset = false

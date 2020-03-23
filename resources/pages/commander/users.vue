@@ -5,9 +5,7 @@
       border="left"
       text
       v-if="users.find(element => element.username === 'admin')"
-    >
-      Il est vivement déconseillé de laisser le compte par défaut (admin) activé
-    </v-alert>
+    >{{ $t('users.adminUserAlert') }}</v-alert>
 
     <v-row justify="center">
       <v-col cols="md-12">
@@ -18,22 +16,21 @@
           class="float-right" 
           @click="dialog = !dialog"
         >
-          <v-icon left>mdi-account-plus</v-icon>
-          Créer un utilisateur
+          <v-icon left>mdi-account-plus</v-icon>{{ $t('users.add') }}
         </v-btn>
       </v-col>
 
       <v-col cols="md-12">
         <v-card>    
           <v-card-title class="headline">
-            <h3>Utilisateurs</h3>
+            <h3>{{ $t('users.title') }}</h3>
 
             <v-spacer></v-spacer>
             
             <v-text-field
               v-model="usersTableSearch"
               append-icon="mdi-account-search"
-              label="Rechercher un utilisateur"
+              :label="$t('users.search')"
               single-line
               hide-details
               filled
@@ -49,8 +46,8 @@
                 :headers="usersTableHeaders"
                 disable-pagination 
                 hide-default-footer
-                no-data-text="Aucun utilisateur créé"
-                no-results-text="Aucun résultat"
+                :no-data-text="$t('users.noUser')"
+                :no-results-text="$t('common.noResult')"
                 :search="usersTableSearch"
                 :loading="usersTableLoading"
               >
@@ -108,7 +105,7 @@
               <v-text-field
                 v-model="formData.username"
                 :rules="formRules.usernameRules"
-                label="Nom d'utilisateur"
+                :label="$t('common.username')"
                 name="username"
                 prepend-inner-icon="mdi-account"
                 filled
@@ -117,7 +114,7 @@
               <v-text-field
                 v-model="formData.password"
                 :rules="formRules.passwordRules"
-                label="Mot de passe"
+                :label="$t('common.password')"
                 name="password"
                 prepend-inner-icon="mdi-lock"
                 :type="showPassword ? 'text' : 'password'"
@@ -130,18 +127,14 @@
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on">mdi-help</v-icon>
                     </template>
-                    Le mot de passe doit avoir au minimum 8 caractères et contenir :                    
-                    <br/>- Au moins 1 lettre minuscule
-                    <br/>- Au moins 1 lettre majuscule
-                    <br/>- Au moins 1 chiffre
-                    <br/>- Au moins 1 caractère spécial
+                    {{ $t('common.passwordRecommendation') }}
                   </v-tooltip>
                 </template>
               </v-text-field>
             
               <v-select 
                 v-model="formData.privilege" 
-                label="Privilège" 
+                :label="$t('privilege')" 
                 :items="privileges"
                 :rules="formRules.privilegeRules"
                 filled
@@ -154,13 +147,13 @@
             <v-btn 
               text
               @click="dialog = false; $refs.form.reset()"
-            >Annuler</v-btn>
+            >{{ $t('common.cancel') }}</v-btn>
 
             <v-btn
               color="primary"
               text @click="saveUser()"
               :disabled="!formIsValid"
-            >Valider</v-btn>
+            >{{ $t('common.save') }}</v-btn>
           </v-card-actions>
         </v-card>
     </v-dialog>
@@ -186,29 +179,29 @@ export default {
       editFormDataIndex: -1,
       formRules: {
         usernameRules: [
-          v => !!v || 'Pseudo requis'
+          v => !!v || this.$t('rules.usernameRequired')
         ],
         passwordRules: [
-          v => !!v || 'Mot de passe requis',
-          v => (v || '').length >= 8 || 'Minimum 8 caractères requis',
-          v => /^(?=.*[a-z])/.test(v) || 'Doit contenir au moins 1 caractère minuscule',
-          v => /^(?=.*[A-Z])/.test(v) || 'Doit contenir au moins 1 caractère majuscule',
-          v => /^(?=.*[0-9])/.test(v) || 'Doit contenir au moins 1 caractère numérique',
-          v => /(?=.*?[#?!@$%^&*-])/.test(v) || 'Doit contenir au moins 1 caractère spécial'
+          v => !!v || this.$t('rules.passwordRequired'),
+          v => (v || '').length >= 8 || this.$t('rules.password.minLength'),
+          v => /^(?=.*[a-z])/.test(v) || this.$t('rules.password.lowercaseRequired'),
+          v => /^(?=.*[A-Z])/.test(v) || this.$t('rules.password.uppercaseRequired'),
+          v => /^(?=.*[0-9])/.test(v) || this.$t('rules.password.numericRequired'),
+          v => /(?=.*?[#?!@$%^&*-])/.test(v) || this.$t('rules.password.specialRequired')
         ],
         privilegeRules: [
-          v => !!v || 'Un niveau de privilège est requis'
+          v => !!v || this.$t('rules.privilegeRequired')
         ]
       },
       usersTableLoading: false,
       usersTableSearch: '',
       usersTableHeaders: [
-        { text: 'Pseudo', value: 'username' },
-        { text: 'Privilège', value: 'privilege' },
-        { text: 'Date de création', value: 'created_at' },
-        { text: 'Actions', value: 'action', sortable: false }
+        { text: this.$t('common.username'), value: 'username' },
+        { text: this.$t('common.privilege'), value: 'privilege' },
+        { text: this.$t('users.createdAt'), value: 'created_at' },
+        { text: '', value: 'action', sortable: false }
       ],
-      privileges: ['Normal', 'Administrateur', 'Super Administrateur']
+      privileges: [this.$t('privilege.normal'), this.$t('privilege.admin'), this.$t('privilege.supAdmin')]
     }
   },
 
@@ -229,7 +222,7 @@ export default {
 
           this.editFormDataIndex = -1
 
-          this.$toast.global.appSuccess('Utilisateur mis à jour')
+          this.$toast.global.appSuccess(this.$t('users.updated'))
         } else {
           const newUser = await this.$axios.$post('user', {
             username: this.formData.username,
@@ -239,7 +232,7 @@ export default {
           
           this.users.push(newUser)        
           
-          this.$toast.global.appSuccess('Utilisateur créé')
+          this.$toast.global.appSuccess(this.$t('users.created'))
         }
 
         this.$refs.form.reset()
@@ -250,10 +243,10 @@ export default {
     },
 
     async deleteUser (user) {
-      const confirm = await this.$confirm('Etes-vous sûr de vouloir définitivement supprimer cette utilisateur ?', { 
-        title: 'Suppression', 
-        buttonTrueText: 'Continuer', 
-        buttonFalseText: 'Annuler', 
+      const confirm = await this.$confirm(this.$t('users.confirmDeletion'), { 
+        title: this.$t('common.deletion'), 
+        buttonTrueText: this.$t('common.continue'), 
+        buttonFalseText: this.$t('common.cancel'), 
         color: 'error',
         persistent: true
       })
@@ -265,10 +258,10 @@ export default {
           await this.$axios.$delete(`user/${user.id}`)
           
           this.users.splice(this.users.indexOf(user), 1)
-          this.$toast.global.appSuccess('Utilisateur supprimé')
+          this.$toast.global.appSuccess(this.$t('users.deleted'))
         } catch (ex) {
           if (ex.response.data === 'E_SUPER_ADMIN_REQUIRED') {
-            this.$toast.global.appError('Suppresion impossible : il doit toujours y avoir un compte super admin d\'actif')
+            this.$toast.global.appError(this.$t('users.supAdminError'))
           }
         }
 

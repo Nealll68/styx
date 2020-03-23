@@ -6,9 +6,7 @@
       text
       type="error"
       border="left"
-    >
-      Aucun chemin vers le dossier Arma 3 n'a été spécifié. Rendez-vous dans la page "Paramètres" pour le définir.
-    </v-alert>    
+    >{{ $t('errors.undefinedPath') }}</v-alert>    
 
     <v-row
       v-else
@@ -29,7 +27,7 @@
               class="float-right"
               :disabled="$store.state.downloadInfo.type === 'updateServer'"
             >
-              <v-icon left>mdi-plus-box</v-icon>Ajouter une mission
+              <v-icon left>mdi-plus-box</v-icon>{{ $t('mission.add') }}
             </v-btn>
           </template>
 
@@ -40,7 +38,7 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Depuis le workshop</v-list-item-title>
+                <v-list-item-title>{{ $t('common.fromWorkshop') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -50,7 +48,7 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Télécharger une mission</v-list-item-title>
+                <v-list-item-title>{{ $t('mission.upload') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
 
@@ -60,7 +58,7 @@
               </v-list-item-icon>
 
               <v-list-item-content>
-                <v-list-item-title>Détecter les missions existantes</v-list-item-title>
+                <v-list-item-title>{{ $t('mission.detectMission') }}</v-list-item-title>
               </v-list-item-content>
             </v-list-item>
           </v-list>      
@@ -70,7 +68,7 @@
       <v-col cols="md-12">
         <v-card>    
           <v-card-title class="headline">
-            <h3>Missions</h3>
+            <h3>{{ $t('mission.title') }}</h3>
 
             <v-chip
               label
@@ -85,13 +83,13 @@
               class="mr-2"
               color="tertiary"
             >
-              <v-icon left>mdi-refresh</v-icon> Actualiser
+              <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
             </v-btn>
 
             <v-text-field
               v-model="missionSearch"
               append-icon="mdi-magnify"
-              label="Rechercher une mission"
+              :label="$t('search')"
               single-line
               hide-details
               filled
@@ -109,9 +107,7 @@
               border="left"
               dense
               dismissible
-            >
-              Assurez-vous que la mission qui vient d'être supprimée n'est activée dans aucun profil sinon le serveur ne démarrera pas.
-            </v-alert>
+            >{{ $t('mission.afterDeleteMessage') }}</v-alert>
 
             <v-data-table
               :items="missions" 
@@ -119,8 +115,8 @@
               :items-per-page="10"
               sort-by="updated_at"
 		          sort-desc
-              no-data-text="Aucune mission ajoutée"
-              no-results-text="Aucun résultat"
+              :no-data-text="$t('mission.noMission')"
+              :no-results-text="$t('noResult')"
               :search="missionSearch"
               :loading="tableLoading"
             >           
@@ -199,12 +195,12 @@ export default {
       menu: false,
       missionSearch: '',
       missionHeaders: [
-        { text: 'Nom', value: 'name' },
-        { text: 'Carte', value: 'map' },
-        { text: 'Taille', value: 'size' },
-        { text: 'Source', value: 'source' },
+        { text: this.$t('common.name'), value: 'name' },
+        { text: this.$t('mission.map'), value: 'map' },
+        { text: this.$t('common.size'), value: 'size' },
+        { text: this.$t('common.source'), value: 'source' },
         { text: 'Workshop ID', value: 'workshop_id' },
-        { text: `Dernière MAJ`, value: 'updated_at' },
+        { text: this.$t('common.lastUpdate'), value: 'updated_at' },
         { text: '', value: 'action', sortable: false }
       ],
       showDeleteInfo: false
@@ -229,7 +225,7 @@ export default {
     },
 
     async downloadMission (payload) {
-      if (!payload.fileUrl) return this.$toast.global.appError('Impossible de télécharger cette mission depuis le workshop')
+      if (!payload.fileUrl) return this.$toast.global.appError(this.$t('mission.workshopDownloadError'))
       await this.$axios.$post('server/mission/workshop', payload)
       await this.refershMissionList()
     },
@@ -244,7 +240,7 @@ export default {
         filename: response.filename
       }
 
-      if (!payload.fileUrl) return this.$toast.global.appError('Impossible de télécharger cette mission depuis le workshop')
+      if (!payload.fileUrl) return this.$toast.global.appError(this.$t('mission.workshopDownloadError'))
       await this.$axios.$post('server/mission/workshop', payload)
       await this.refershMissionList()
     },

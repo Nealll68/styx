@@ -12,7 +12,7 @@
           border="left"
           text
           dense
-        >Si vous voulez mettre à jour un mod local, supprimez-le avant.</v-alert>
+        >{{ $t('updateLocalModInfo') }}</v-alert>
 
         <v-alert
           v-if="!isMission"
@@ -20,10 +20,10 @@
           border="left"
           text
           dense
-        >Points important :
+        >{{ $t('missionRules') }} :
           <ul>
-            <li>Le dossier du mod doit être correctement nommé (avec un "@" devant le nom et sans espace)</li>
-            <li>Le dossier du mod doit être mis dans un .zip</li>
+            <li>{{ $t('modNaming') }}</li>
+            <li>{{ $t('modZip') }}</li>
           </ul>
         </v-alert>
 
@@ -33,7 +33,7 @@
           border="left"
           text
           dense
-        >Pour mettre à jour une mission il suffitt de la retélécharger sur le serveur.</v-alert>
+        >{{ $t('updateMission') }}</v-alert>
 
         <v-alert
           v-if="isMission"
@@ -41,10 +41,10 @@
           border="left"
           text
           dense
-        >Points important :
+        >{{ $t('missionRules') }} :
           <ul>
-            <li>La mission doit être correctement nommée (sans espace et un nom de map valide)</li>
-            <li>La mission doit être un fichier avec comme extension .pbo</li>
+            <li>{{ $t('missionNaming') }}</li>
+            <li>{{ $t('missionExtension') }}</li>
           </ul>
         </v-alert>    
       </v-card-title>
@@ -52,7 +52,7 @@
       <v-card-text>
         <v-file-input
           v-model="file"
-          :label="isMission ? 'Fichier PBO' : 'Dossier ZIP contenant le mod'"
+          :label="isMission ? $t('upload.missionLabel') : $t('upload.modLabel')"
           :accept="isMission ? '.pbo' : '.zip'"
           filled
           hide-details
@@ -78,14 +78,14 @@
           text
           @click="$emit('close')"
           :disabled="uploadPercentage > 0"
-        >Fermer</v-btn>
+        >{{ $t('common.close') }}</v-btn>
 
         <v-btn
           text
           color="primary"
           @click="upload()"
           :disabled="uploadPercentage > 0"
-        >Continuer</v-btn>
+        >{{ $t('common.continue') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -110,7 +110,7 @@ export default {
 
   methods: {
     async upload () {
-      if (!this.file) return this.$toast.global.appInfo('Veuillez sélectionner un fichier')
+      if (!this.file) return this.$toast.global.appInfo($t('selectFileError'))
 
       try {
         let formData = new FormData()
@@ -128,21 +128,13 @@ export default {
         this.$emit('file-uploaded')
         this.uploadPercentage = 0
 
-        if (this.isMission) {
-          this.$toast.global.appSuccess('Téléchargement réussi')
-        } else {
-          this.$toast.global.appSuccess('Téléchargement réussi. Utilisez "Ajouter un mod existant" pour l\'utiliser')
-        }
+        this.$toast.global.appSuccess(this.$t('upload.success'))
 
         this.file = null
         this.$emit('close')
       } catch (ex) {
         if (ex.response.data === 'E_INVALID_FILE_EXTENSION') {
-          if (this.isMission) {
-            this.$toast.global.appError('Le fichier doit être un pbo')
-          } else {
-            this.$toast.global.appError('Le fichier doit être un zip')
-          }
+          this.$toast.global.appError(this.$t('upload.fileExtensionError', { extension: this.isMission ? 'pbo' : 'zip' }))
         }
       }
     },

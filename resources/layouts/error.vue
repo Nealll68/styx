@@ -1,12 +1,12 @@
 <template>
   <v-app dark>
     <v-container class="app-container">
-      <h1>Oups... une erreur est survenue</h1>
+      <h1>{{ $t('errors.errorPageTitle') }}</h1>
         
       <p class="display-4 font-weight-light mb-0 mt-5">{{ statusCode }}</p>        
       <p class="font-italic">{{ message }}</p>
 
-      <h2>Détails :</h2>
+      <h2>{{ $t('errors.errorPageDetails') }}</h2>
       {{ errorMessage }}
     </v-container>
   </v-app>
@@ -23,15 +23,6 @@ export default {
     }
   },
   
-  data () {
-    return {
-      pageNotFound: 'Page non trouvée',
-      internalServerError: 'Erreur interne au serveur',
-      unauthorized: 'Accès interdit',
-      otherError: 'Une erreur s\'est produite'
-    }
-  },
-
   computed: {
     statusCode () {
       return (this.error && this.error.statusCode) || 500
@@ -44,19 +35,19 @@ export default {
     message () {
       switch (this.statusCode) {
         case 404: 
-          return this.pageNotFound
+          return this.$t('errors.pageNotFound')
           break
 
         case 500: 
-          return this.internalServerError
+          return this.$t('errors.internalServerError')
           break
 
         case 401: 
-          return this.unauthorized
+          return this.$t('errors.unauthorized')
           break
 
         default: 
-          return this.otherError
+          return this.$t('errors.other')
       }
     }
   }

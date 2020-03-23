@@ -23,7 +23,7 @@
               <v-text-field 
                 v-model="formData.password" 
                 :rules="formData.password !== '' ? formRules.passwordRules : []" 
-                :label="$t('password')" 
+                :label="$t('common.password')" 
                 name="password" 
                 prepend-inner-icon="mdi-lock" 
                 :type="showPassword ? 'text' : 'password'" 

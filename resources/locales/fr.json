@@ -149,7 +149,8 @@
 
   "index": {
     "logsTitle": "Logs",
-    "noLogs": "Les logs ne s'affichent que si le serveur est démarré."
+    "noLogs": "Les logs ne s'affichent que si le serveur est démarré.",
+    "automaticRefresh": "Actualisation automatique"
   },
 
   "profiles": {
@@ -211,6 +212,7 @@
     "armaPathHint": "Chemin absolu vers le dossier ou est installé Arma 3",
     "port": "Port",
     "steamAccountMessage": "Vous pouvez préciser un compte steam qui va gérer le téléchargement du jeu et des mods.",
+    "steamWorkshopInfo": "Pour pouvoir utiliser les fonctionalités liées workshop le compte doit posséder Arma 3",
     "passwordHint": "Le mot de passe n'est jamais affiché. Pour le modifier précisez-le à nouveau",
     "steamGuardProtection": "Protégé par Steam Guard",
     "steamGuardHint": "Si oui, le code Steam Guard vous sera demandé avant chaque téléchargement"

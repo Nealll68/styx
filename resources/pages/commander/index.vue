@@ -16,12 +16,14 @@
             <v-list>
               <v-list-item>
                 <v-list-item-icon class="mr-5">
-                  <v-icon size="50" color="tertiary">mdi-chip</v-icon>    
+                  <v-icon size="50" color="tertiary">mdi-chip</v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-subtitle>CPU</v-list-item-subtitle>
-                  <v-list-item-title class="display-1 font-weight-light">{{ cpuUsage[cpuUsage.length - 1] }}%</v-list-item-title>
+                  <v-list-item-title class="display-1 font-weight-light"
+                    >{{ cpuUsage[cpuUsage.length - 1] }}%</v-list-item-title
+                  >
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -29,42 +31,46 @@
           <apexchart
             v-show="cpuUsage.length >= 2"
             type="area"
-            :series="[{
-                      name: 'CPU',
-                      data: cpuUsage
-                    }]"
+            :series="[
+              {
+                name: 'CPU',
+                data: cpuUsage
+              }
+            ]"
             :options="{
-                      chart: {
-                        id: 'cpu-chart',
-                        background: '#1E1E1E',
-                        sparkline: {
-                          enabled: true
-                        }
-                      },
-                      xaxis: {
-                        categories: takeAt                        
-                      },
-                      yaxis: {
-                        min: 0,
-                        max: 100
-                      },
-                      theme: {
-                        mode: 'dark',
-                        monochrome: {
-                          enabled: true,
-                          color: '#FF6859',
-                          shadeTo: 'dark',
-                          shadeIntensity: 0.65
-                        },
-                      },
-                      tooltip: {
-                        y: [{
-                          formatter (v) {
-                            return `${v}%`
-                          }
-                        }]
-                      }
-                    }"
+              chart: {
+                id: 'cpu-chart',
+                background: '#1E1E1E',
+                sparkline: {
+                  enabled: true
+                }
+              },
+              xaxis: {
+                categories: takeAt
+              },
+              yaxis: {
+                min: 0,
+                max: 100
+              },
+              theme: {
+                mode: 'dark',
+                monochrome: {
+                  enabled: true,
+                  color: '#FF6859',
+                  shadeTo: 'dark',
+                  shadeIntensity: 0.65
+                }
+              },
+              tooltip: {
+                y: [
+                  {
+                    formatter(v) {
+                      return `${v}%`
+                    }
+                  }
+                ]
+              }
+            }"
             height="150px"
           ></apexchart>
         </v-card>
@@ -76,12 +82,14 @@
             <v-list>
               <v-list-item>
                 <v-list-item-icon class="mr-5">
-                  <v-icon size="50" color="quaternary">mdi-memory</v-icon>    
+                  <v-icon size="50" color="quaternary">mdi-memory</v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-content>
                   <v-list-item-subtitle>MEM</v-list-item-subtitle>
-                  <v-list-item-title class="display-1 font-weight-light">{{ memUsed[memUsed.length - 1] }}%</v-list-item-title>
+                  <v-list-item-title class="display-1 font-weight-light"
+                    >{{ memUsed[memUsed.length - 1] }}%</v-list-item-title
+                  >
                 </v-list-item-content>
               </v-list-item>
             </v-list>
@@ -89,42 +97,46 @@
           <apexchart
             v-show="memUsed.length >= 2"
             type="area"
-            :series="[{
-                      name: 'MEM',
-                      data: memUsed
-                    }]"
+            :series="[
+              {
+                name: 'MEM',
+                data: memUsed
+              }
+            ]"
             :options="{
-                      chart: {
-                        id: 'mem-chart',
-                        background: '#1E1E1E',
-                        sparkline: {
-                          enabled: true
-                        }
-                      },
-                      xaxis: {
-                        categories: takeAt
-                      },
-                      yaxis: {
-                        min: 0,
-                        max: 100
-                      },
-                      theme: {
-                        mode: 'dark',
-                        monochrome: {
-                          enabled: true,
-                          color: '#FFCF44',
-                          shadeTo: 'dark',
-                          shadeIntensity: 0.65
-                        },
-                      },
-                      tooltip: {
-                        y: [{
-                          formatter (v) {
-                            return `${v}%`
-                          }
-                        }]
-                      }
-                    }"
+              chart: {
+                id: 'mem-chart',
+                background: '#1E1E1E',
+                sparkline: {
+                  enabled: true
+                }
+              },
+              xaxis: {
+                categories: takeAt
+              },
+              yaxis: {
+                min: 0,
+                max: 100
+              },
+              theme: {
+                mode: 'dark',
+                monochrome: {
+                  enabled: true,
+                  color: '#FFCF44',
+                  shadeTo: 'dark',
+                  shadeIntensity: 0.65
+                }
+              },
+              tooltip: {
+                y: [
+                  {
+                    formatter(v) {
+                      return `${v}%`
+                    }
+                  }
+                ]
+              }
+            }"
             height="150px"
           ></apexchart>
         </v-card>
@@ -142,7 +154,7 @@
 
             <v-switch
               v-model="automaticRefresh"
-              label="Actualisation automatique"
+              :label="$t('index.automaticRefresh')"
               inset
               color="primary"
               class="mr-2"
@@ -160,24 +172,21 @@
             </v-btn>
           </v-card-title>
           <v-card-text>
-            <v-sheet             
+            <v-sheet
               v-if="$store.state.a3Server.isStarted"
-              color="grey darken-4" 
+              color="grey darken-4"
               class="pa-2 scrollbar"
-              id ="logsContainer"
+              id="logsContainer"
               height="500px"
             >
               <div v-for="(log, i) of serverLogs" :key="i" class="my-2">
-								{{ log }}
-							</div>
+                {{ log }}
+              </div>
             </v-sheet>
 
-            <v-alert
-              v-else
-              type="info"
-              border="left" 
-              text     
-            >{{ $t('index.noLogs') }}</v-alert>
+            <v-alert v-else type="info" border="left" text>{{
+              $t('index.noLogs')
+            }}</v-alert>
           </v-card-text>
         </v-card>
       </v-col>
@@ -188,8 +197,8 @@
 <script>
 export default {
   layout: 'commander',
-  
-  data () {
+
+  data() {
     return {
       loading: false,
       interval: null,
@@ -198,7 +207,7 @@ export default {
   },
 
   computed: {
-    cpuUsage () {
+    cpuUsage() {
       let values = []
       this.$store.state.monitor.measures.forEach(element => {
         values.push(element.cpu_usage)
@@ -206,7 +215,7 @@ export default {
       return values
     },
 
-    memUsed () {
+    memUsed() {
       let values = []
       this.$store.state.monitor.measures.forEach(element => {
         values.push(element.mem_used)
@@ -214,7 +223,7 @@ export default {
       return values
     },
 
-    takeAt () {
+    takeAt() {
       let values = []
       this.$store.state.monitor.measures.forEach(element => {
         values.push(this.$moment(element.take_at).format('HH:mm:ss'))
@@ -223,31 +232,31 @@ export default {
     }
   },
 
-  async created () {
+  async created() {
     if (this.$store.state.a3Server.isStarted) {
       await this.refreshLogs()
     }
     this.automaticLogsRefresh()
   },
 
-  beforeDestroy () {
+  beforeDestroy() {
     clearInterval(this.interval)
   },
 
   methods: {
-    async refreshLogs () {
+    async refreshLogs() {
       this.loading = true
 
       const response = await this.$axios.$get('server/logs/current')
       this.serverLogs = response.logs.split('\n')
-      
+
       const el = document.getElementById('logsContainer')
       el.scrollTop = el.scrollHeight
 
       this.loading = false
     },
 
-    automaticLogsRefresh () {
+    automaticLogsRefresh() {
       this.interval = setInterval(async () => {
         if (this.automaticRefresh && this.$store.state.a3Server.isStarted) {
           await this.refreshLogs()

@@ -76,17 +76,27 @@
     </v-btn>
 
     
-    <v-menu bottom right>
+    <v-menu 
+      bottom
+      right
+      transition="slide-y-transition"
+    >
       <template v-slot:activator="{ on }">
         <v-btn
-          icon
+          text
+          small
           v-on="on"          
         >
-          <v-icon>mdi-translate</v-icon>
+          <v-icon left>mdi-translate</v-icon>
+          {{ activatedLocale }}
+          <v-icon right>mdi-menu-down</v-icon>
         </v-btn>
       </template>
 
-      <v-list nav>
+      <v-list 
+        nav 
+        dense
+      >
         <v-list-item
           v-for="locale in $store.state.i18n.locales"
           :key="locale.code"
@@ -214,6 +224,11 @@ export default {
     measure () {
       const length = this.$store.state.monitor.measures.length
       return this.$store.state.monitor.measures[length - 1]
+    },
+
+    activatedLocale () {
+      const locale = this.$store.state.i18n.locales.find(el => el.code === this.$store.state.i18n.locale)
+      return locale.name
     }
   },
 

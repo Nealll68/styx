@@ -1,4 +1,27 @@
 {
+  "common": {
+    "refresh": "Actualiser",
+    "deletion": "Suppression",
+    "continue": "Continuer",
+    "cancel": "Annuler",
+    "close": "Fermer",
+    "download": "Télécharger",
+    "noResult": "Aucun résultat",
+    "fromWorkhop": "Depuis le Workshop",
+    "add": "Ajouter",
+    "name": "Nom",
+    "size": "Taille",
+    "source": "Source",
+    "lastUpdate": "Dernière MàJ",
+    "save": "Enregistrer",
+    "username": "Nom d'utilisateur",
+    "password": "Mot de passe",
+    "privilege": "Privilège",
+    "help": "Aide",
+    "reset": "Réinitialiser",
+    "confirmReset": "Etes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?"
+  },
+  
   "menu": {
     "index": "Accueil",
     "profiles": "Profils",
@@ -54,29 +77,6 @@
       "numericRequired": "Doit contenir au moins 1 caractère numérique",
       "specialRequired": "Doit contenir au moins 1 caractère spécial"
     }
-  },
-
-  "common": {
-    "refresh": "Actualiser",
-    "deletion": "Suppression",
-    "continue": "Continuer",
-    "cancel": "Annuler",
-    "close": "Fermer",
-    "download": "Télécharger",
-    "noResult": "Aucun résultat",
-    "fromWorkhop": "Depuis le Workshop",
-    "add": "Ajouter",
-    "name": "Nom",
-    "size": "Taille",
-    "source": "Source",
-    "lastUpdate": "Dernière MàJ",
-    "save": "Enregistrer",
-    "username": "Nom d'utilisateur",
-    "password": "Mot de passe",
-    "privilege": "Privilège",
-    "help": "Aide",
-    "reset": "Réinitialiser",
-    "confirmReset": "Etes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?"
   },
 
   "download": {

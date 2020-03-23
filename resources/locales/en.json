@@ -1,4 +1,27 @@
 {
+  "common": {
+    "refresh": "Refresh",
+    "deletion": "Deletion",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "close": "Close",
+    "download": "Download",
+    "noResult": "No result",
+    "fromWorkhop": "From the workshop",
+    "add": "Add",
+    "name": "Name",
+    "size": "Size",
+    "source": "Source",
+    "lastUpdate": "Last update",
+    "save": "Save",
+    "username": "Username",
+    "password": "Password",
+    "privilege": "Privilege",
+    "help": "Help",
+    "reset": "Reset",
+    "confirmReset": "Are you sure you want to reset to the default values?"
+  },
+  
   "menu": {
     "index": "Home",
     "profiles": "Profiles",
@@ -54,29 +77,6 @@
       "numericRequired": "Must contain at least 1 numeric character",
       "specialRequired": "Must contain at least 1 special character"
     }
-  },
-
-  "common": {
-    "refresh": "Refresh",
-    "deletion": "Deletion",
-    "continue": "Continue",
-    "cancel": "Cancel",
-    "close": "Close",
-    "download": "Download",
-    "noResult": "No result",
-    "fromWorkhop": "From the workshop",
-    "add": "Add",
-    "name": "Name",
-    "size": "Size",
-    "source": "Source",
-    "lastUpdate": "Last update",
-    "save": "Save",
-    "username": "Username",
-    "password": "Password",
-    "privilege": "Privilege",
-    "help": "Help",
-    "reset": "Reset",
-    "confirmReset": "Are you sure you want to reset to the default values?"
   },
 
   "download": {

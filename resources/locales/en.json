@@ -9,13 +9,13 @@
     "settings": "Settings",
     "logout": "Logout",
     "myAccount": "My account",
-    "updateServer": "Update the server"
+    "updateServer": "Update server"
   },
 
   "privileges": {
     "normal": "Normal",
     "admin": "Admin",
-    "supAdmin": "Super Admin"
+    "supAdmin": "Super admin"
   },
 
   "serverState": {
@@ -27,5 +27,214 @@
     "stopProgress": "Stopping the server..."
   },
 
-  "errors": {}
+  "errors": {
+    "undefinedPath": "No path to the Arma 3 folder was specified. Go to Settings page to define it.",
+    "notAllowed": "You do not have the required permissions to modify this category.",
+    "undefinedArmaPath": "The path to the Arma 3 folder is not defined",
+    "undefinedSteamPath": "The path to the SteamCMD folder is not defined",
+    "incorrectSteamPath": "Path specified for SteamCMD does not contain 'steamcmd.exe'",
+    "steamAccountRequired": "A Steam account is required to perform this action",
+    "errorPageTitle": "Oops... an error occured",
+    "errorPageDetails": "Details",
+    "pageNotFound": "Page not found",
+    "internalServerError": "Internal server error",
+    "unauthorized": "Unauthorized",
+    "other": "An error has occured"
+  },
+
+  "rules": {
+    "required": "Required field",
+    "usernameRequired": "Username required",
+    "passwordRequired": "Password required",
+    "privilegeRequired": "A level of privilege is required",
+    "password": {
+      "minLength": "Minimum 8 characters required",
+      "lowercaseRequired": "Must contain at least 1 lowercase character",
+      "uppercaseRequired": "Must contain at least 1 uppercase character",
+      "numericRequired": "Must contain at least 1 numeric character",
+      "specialRequired": "Must contain at least 1 special character"
+    }
+  },
+
+  "common": {
+    "refresh": "Refresh",
+    "deletion": "Deletion",
+    "continue": "Continue",
+    "cancel": "Cancel",
+    "close": "Close",
+    "download": "Download",
+    "noResult": "No result",
+    "fromWorkhop": "From the workshop",
+    "add": "Add",
+    "name": "Name",
+    "size": "Size",
+    "source": "Source",
+    "lastUpdate": "Last update",
+    "save": "Save",
+    "username": "Username",
+    "password": "Password",
+    "privilege": "Privilege",
+    "help": "Help",
+    "reset": "Reset",
+    "confirmReset": "Are you sure you want to reset to the default values?"
+  },
+
+  "download": {
+    "updateServer": "Updating server...",
+    "downloadMod": "Downloading mod {modName}",
+    "downloadMission": "Downloading mission {missionName}",
+    "serverUpdated": "Server updated",
+    "modDownloaded": "Mod downloaded",
+    "missionDownloaded": "Mission downloaded",
+    "steamGuardCodeError": "Connection failed with Steam Guard code",
+    "diskSpaceError": "Failed: not enough space or the specified account does not have Arma 3"
+  },
+
+  "upload": {
+    "updateLocalModInfo": "If you want to update a local mod, delete it first.",
+    "updateMission": "To update a mission, you just have to redownload it on the server.",
+    "importantPoints": "Important points",
+    "modNaming": "The mod folder must be correctly named (with an '@' in front of the name and without spaces)",
+    "modZip": "The mod folder must be put in a .zip",
+    "missionNaming": "The mission must be correctly named (without spaces and a valid map name)",
+    "missionExtension": "The mission must be a .pbo file",
+    "missionLabel": "PBO File",
+    "modLabel": "ZIP folder containing the mod",
+    "selectFileError": "Please select a file",
+    "success": "Download successful",
+    "fileExtensionError": "The file must be a {extension}"
+  },
+
+  "workshop": {
+    "idWorkshop": "Workshop item ID",
+    "idCollection": "Workshop collection ID",
+    "publishedAt": "Published on:",
+    "idError": "Error: check workshop ID"
+  },
+
+  "config": {
+    "updated": "Configuration saved",
+    "reseted": "Configuration reseted"
+  },
+
+  "difficulty": {
+    "information": "To use a custom difficulty, indicate 'Custom' in the server configuration file.",
+    "updated": "Difficulty saved",
+    "reseted": "Difficulty reseted"
+  },
+
+  "serverMod": {
+    "modsActivated": "Activated mods",
+    "serverModsActivated": "Activated server mods",
+    "updated": "Mods saved"
+  },
+
+  "params": {
+    "updated": "Parameters updated",
+    "reseted": "Parameters reseted",
+    "autoInitLabel": "Automatically initialize mission",
+    "autoInitHint": "-autoInit: Automatically initialize mission just like first client does. Server config file must contain 'Persistent=1', if it's 0 autoInit skips",
+    "loadMissionToMemoryLabel": "Load mission into memory",
+    "loadMissionToMemoryHint": "-loadMissionToMemory: Server will load mission into memory on first client downloading it",
+    "noLogsLabel": "No logs",
+    "noLogsHint": "-noLogs",
+    "hugePagesLabel": "Enables hugepages",
+    "hugePagesHint": "-hugepages: Enables hugepages with the default memory allocator for both client/server",
+    "enableHTLabel": "Enable Hyper-Threading",
+    "enableHTHint": "-enableHT : Enables the use of all logical CPU cores. If your CPU does not support Hyper-Threading or similar technology, this parameter is ignored",
+    "filePatchingLabel": "Authorize file patching",
+    "filePatchingHint": "-filePatching : Allow the game to load unpacked data"
+  },
+
+  "index": {
+    "logsTitle": "Logs",
+    "noLogs": "The logs are only displayed if the server is started",
+    "automaticRefresh": "Automatic refresh"
+  },
+
+  "profiles": {
+    "howToCreate": "You can create a profile using the Create profile button",
+    "noNameError": "Please specify a name for the profile",
+    "created": "Profile created",
+    "updated": "Profile updated",
+    "deleted": "Profile deleted",
+    "confirmDeletion": "Are you sure you want to permanently delete this profile?",
+
+    "tabTitles": {
+      "mods": "Mods",
+      "parameters": "Parameters",
+      "configuration": "Configuration",
+      "difficulty": "Difficulty"
+    }
+  },
+
+  "logs": {
+    "deleteAll": "Delete all",
+    "filterInfo": "The logs are classified by profiles. Click on a profile to view its logs.",
+    "confirmDeletion": "Are you sure you want to permanently delete this log file?",
+    "confirmAllDelete": "Are you sure you want to permanently delete all log files?"
+  },
+
+  "mission": {
+    "title": "Missions",
+    "add": "Add a mission",    
+    "upload": "Upload a mission",
+    "detectMission": "Detect existing missions",
+    "search": "Find a mission",
+    "afterDeleteMessage": "Make sure that the mission which has just been deleted is not activated in any profile, otherwise the server will not start.",
+    "noMission": "No mission added",
+    "workshopDownloadError": "Unable to download this mission from the workshop",
+    "map": "Map"
+  },
+
+  "mods": {
+    "title": "Mods",
+    "add": "Add a mod",
+    "addLocal": "Add a local mod",
+    "detect": "Detect existing mods",
+    "upload": "Upload a mod",
+    "local": "Local",
+    "search": "Find a mod",
+    "noMods": "No mod added",
+    "alreadyAdded": "Already added",
+    "noLocalMod": "No mod found in the Arma 3 folder",
+    "importSuccess": "Mods that could be detected have been imported",
+    "notEntirelyDeleted": "The mod was not deleted correctly because some folder does not exist or the application does not have access to it"
+  },
+
+  "settings": {
+    "title": "Commander configuration",
+    "steamCMDLabel": "SteamCMD path",
+    "steamCMDHint": "Absolute path to the folder where SteamCMD is installed",
+    "armaPathLabel": "Arma 3 path",
+    "armaPathHint": "Absolute path to the folder where Arma 3 is installed",
+    "port": "Port",
+    "steamAccountMessage": "You can specify a steam account that will manage the download of the game and mods.",
+    "steamWorkshopInfo": "To be able to use the workshop related functionalities the account must have Arma 3",
+    "passwordHint": "The password is never displayed. To modify it, specify it again",
+    "steamGuardProtection": "Protected by Steam Guard",
+    "steamGuardHint": "If yes, you will be asked for the Steam Guard code before each download"
+  },
+
+  "user": {
+    "updated": "Account updated"
+  },
+
+  "users": {
+    "adminUserAlert": "It is strongly advised not to leave the default account (admin) activated",
+    "add": "Create user",
+    "search": "Find a utilisateur",
+    "noUser": "No user added",
+    "createdAt": "Created date",
+    "created": "User created",
+    "updated": "User updated",
+    "deleted": "User deleted",
+    "confirmDeletion": "Are you sure you want to permanently delete this user?",
+    "supAdminError": "Impossible to delete: there must always be an active super admin account"
+  },
+
+  "login": {
+    "signIn": "Sign in",
+    "wrongCredentials": "Invalid username or password"
+  }
 }

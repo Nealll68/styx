@@ -51,14 +51,18 @@
                   <v-list-item-title>{{ mod.title }}</v-list-item-title>
                   <v-list-item-subtitle
                     >{{ $t('workshop.publishedAt') }}
-                    {{ $moment.unix(mod.time_created).format('DD MMM YYYY') }}</v-list-item-subtitle
+                    {{ 
+                      $moment
+                        .unix(mod.time_created)
+                        .format('ll')
+                    }}</v-list-item-subtitle
                   >
                   <v-list-item-subtitle
                     >MàJ :
                     {{
                       $moment
                         .unix(mod.time_updated)
-                        .format('DD MMM YYYY à HH:mm')
+                        .format('lll')
                     }}</v-list-item-subtitle
                   >
                   <v-list-item-subtitle

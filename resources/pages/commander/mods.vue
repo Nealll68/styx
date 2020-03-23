@@ -126,11 +126,11 @@
               >           
 
                 <template v-slot:item.created_at="{ item }">
-                  {{ $moment(item.created_at).format('DD MMM YYYY') }}
+                  {{ $moment(item.created_at).format('ll') }}
                 </template>
 
                 <template v-slot:item.server_updated_at="{ item }">
-                  {{ $moment(item.server_updated_at).format('DD MMM YYYY à HH:mm') }}
+                  {{ $moment(item.server_updated_at).format('lll') }}
                 </template>
 
                 <template v-slot:item.size="{ item }">

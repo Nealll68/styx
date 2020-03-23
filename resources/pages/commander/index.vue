@@ -226,7 +226,7 @@ export default {
     takeAt() {
       let values = []
       this.$store.state.monitor.measures.forEach(element => {
-        values.push(this.$moment(element.take_at).format('HH:mm:ss'))
+        values.push(this.$moment(element.take_at).format('LTS'))
       })
       return values
     }

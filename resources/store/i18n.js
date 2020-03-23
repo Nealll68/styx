@@ -16,6 +16,7 @@ export const mutations = {
   setLang(state, locale) {
     if (state.locales.find(el => el.code === locale)) {
       state.locale = locale
+      this.$moment.locale(locale)
     }
   }
 }

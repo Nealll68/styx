@@ -16,7 +16,7 @@
       v-model="profileName"
       filled
       dense
-      label="Nom"
+      :label="$t('common.name')"
       hide-details
       append-icon="mdi-plus"
       @click:append="saveProfile()"

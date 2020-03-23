@@ -165,7 +165,6 @@ module.exports = {
    ** Build configuration
    */
   build: {
-    vendor: ["vue-i18n"],
     /*
      ** You can extend webpack config here
      */

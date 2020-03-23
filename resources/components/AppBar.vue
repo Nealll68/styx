@@ -283,8 +283,11 @@ export default {
     },
 
     switchLocale (code) {
-      document.cookie = `i18n_locale=${code}`
-      location.reload()
+      this.$cookies.set("locale", code, {
+        path: "/"
+      })
+
+      window.location.reload(true)
     },
 
     async updateServer (guard = null) {

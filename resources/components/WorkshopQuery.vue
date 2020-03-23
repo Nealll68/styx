@@ -18,7 +18,7 @@
                 <v-text-field
                   v-model="collectionId"
                   filled
-                  :label="$t('idCollection')"
+                  :label="$t('workshop.idCollection')"
                   prepend-inner-icon="mdi-plus-box-multiple"
                 ></v-text-field>
               </v-col>

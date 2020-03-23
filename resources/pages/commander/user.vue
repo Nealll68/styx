@@ -4,7 +4,7 @@
       <v-col cols="md-6">
         <v-card>
           <v-card-title>
-            <span class="heandline">{{ $('user.title') }}</span>            
+            <span class="heandline">{{ $t('user.title') }}</span>            
           </v-card-title>
 
           <v-divider></v-divider>

@@ -207,7 +207,7 @@ export default {
         { text: this.$t('users.createdAt'), value: 'created_at' },
         { text: '', value: 'action', sortable: false }
       ],
-      privileges: [this.$t('privilege.normal'), this.$t('privilege.admin'), this.$t('privilege.supAdmin')]
+      privileges: [this.$t('privileges.normal'), this.$t('privileges.admin'), this.$t('privileges.supAdmin')]
     }
   },
 

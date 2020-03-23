@@ -12,7 +12,7 @@
           border="left"
           text
           dense
-        >{{ $t('updateLocalModInfo') }}</v-alert>
+        >{{ $t('upload.updateLocalModInfo') }}</v-alert>
 
         <v-alert
           v-if="!isMission"
@@ -20,10 +20,10 @@
           border="left"
           text
           dense
-        >{{ $t('missionRules') }} :
+        >{{ $t('upload.missionRules') }} :
           <ul>
-            <li>{{ $t('modNaming') }}</li>
-            <li>{{ $t('modZip') }}</li>
+            <li>{{ $t('upload.modNaming') }}</li>
+            <li>{{ $t('upload.modZip') }}</li>
           </ul>
         </v-alert>
 
@@ -33,7 +33,7 @@
           border="left"
           text
           dense
-        >{{ $t('updateMission') }}</v-alert>
+        >{{ $t('upload.updateMission') }}</v-alert>
 
         <v-alert
           v-if="isMission"
@@ -41,10 +41,10 @@
           border="left"
           text
           dense
-        >{{ $t('missionRules') }} :
+        >{{ $t('upload.missionRules') }} :
           <ul>
-            <li>{{ $t('missionNaming') }}</li>
-            <li>{{ $t('missionExtension') }}</li>
+            <li>{{ $t('upload.missionNaming') }}</li>
+            <li>{{ $t('upload.missionExtension') }}</li>
           </ul>
         </v-alert>    
       </v-card-title>
@@ -110,7 +110,7 @@ export default {
 
   methods: {
     async upload () {
-      if (!this.file) return this.$toast.global.appInfo($t('selectFileError'))
+      if (!this.file) return this.$toast.global.appInfo($t('upload.selectFileError'))
 
       try {
         let formData = new FormData()

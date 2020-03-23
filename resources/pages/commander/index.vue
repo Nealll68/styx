@@ -140,12 +140,21 @@
 
             <v-spacer></v-spacer>
 
+            <v-switch
+              v-model="automaticRefresh"
+              label="Actualisation automatique"
+              inset
+              color="primary"
+              class="mr-2"
+            ></v-switch>
+
             <v-btn
               text
               @click="refreshLogs()"
               class="mr-2"
               color="tertiary"
               :loading="loading"
+              :disabled="automaticRefresh || !$store.state.a3Server.isStarted"
             >
               <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
             </v-btn>
@@ -158,7 +167,7 @@
               id ="logsContainer"
               height="500px"
             >
-              <div v-for="log of serverLogs" class="my-2">
+              <div v-for="(log, i) of serverLogs" :key="i" class="my-2">
 								{{ log }}
 							</div>
             </v-sheet>
@@ -182,7 +191,9 @@ export default {
   
   data () {
     return {
-      loading: false
+      loading: false,
+      interval: null,
+      automaticRefresh: true
     }
   },
 
@@ -212,15 +223,15 @@ export default {
     }
   },
 
-  async mounted () {
-    this.loading = true
-
+  async created () {
     if (this.$store.state.a3Server.isStarted) {
-      const response = await this.$axios.$get('server/logs/current')
-      this.serverLogs = response.logs.split('\n')  
+      await this.refreshLogs()
     }
+    this.automaticLogsRefresh()
+  },
 
-    this.loading = false
+  beforeDestroy () {
+    clearInterval(this.interval)
   },
 
   methods: {
@@ -232,7 +243,16 @@ export default {
       
       const el = document.getElementById('logsContainer')
       el.scrollTop = el.scrollHeight
+
       this.loading = false
+    },
+
+    automaticLogsRefresh () {
+      this.interval = setInterval(async () => {
+        if (this.automaticRefresh && this.$store.state.a3Server.isStarted) {
+          await this.refreshLogs()
+        }
+      }, 3000)
     }
   }
 }

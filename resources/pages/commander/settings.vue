@@ -28,7 +28,6 @@
             :hint="$t('settings.steamCMDHint')"
             persistent-hint
             clearable
-            :rules="requiredRule"
           ></v-text-field>
 
           <v-text-field
@@ -113,7 +112,7 @@ export default {
         steam_password: ''
       },
       valid: false,
-      requiredRule: [v => !!v || 'Champs requis']
+      requiredRule: [v => !!v || this.$t('rules.required')]
     }
   },
 
@@ -135,6 +134,7 @@ export default {
         this.config.steam_password = ''
         this.config = config
         this.$store.commit('config/set', config)
+        this.$toast.global.appSuccess(this.$t('params.updated'))
       }
 
       this.loading = false

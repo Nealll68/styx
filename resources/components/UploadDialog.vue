@@ -20,7 +20,7 @@
           border="left"
           text
           dense
-        >{{ $t('upload.missionRules') }} :
+        >{{ $t('upload.importantPoints') }} :
           <ul>
             <li>{{ $t('upload.modNaming') }}</li>
             <li>{{ $t('upload.modZip') }}</li>
@@ -41,7 +41,7 @@
           border="left"
           text
           dense
-        >{{ $t('upload.missionRules') }} :
+        >{{ $t('upload.importantPoints') }} :
           <ul>
             <li>{{ $t('upload.missionNaming') }}</li>
             <li>{{ $t('upload.missionExtension') }}</li>

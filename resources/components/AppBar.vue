@@ -83,13 +83,17 @@
     >
       <template v-slot:activator="{ on }">
         <v-btn
-          text
-          small
+          :icon="$vuetify.breakpoint.smAndDown"
+          :small="$vuetify.breakpoint.mdAndUp"
+          text          
           v-on="on"          
         >
-          <v-icon left>mdi-translate</v-icon>
-          {{ activatedLocale }}
-          <v-icon right>mdi-menu-down</v-icon>
+          <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-translate</v-icon>
+          {{ $vuetify.breakpoint.smAndDown ? '' : activatedLocale }}
+          <v-icon 
+            v-show="$vuetify.breakpoint.mdAndUp"
+            right 
+          >mdi-menu-down</v-icon>
         </v-btn>
       </template>
 

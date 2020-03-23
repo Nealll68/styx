@@ -28,7 +28,7 @@
             max-height="500px" 
             class="scrollbar"
           >
-            <v-subheader>{{ $t('profiles.title') }}</v-subheader>
+            <v-subheader>{{ $t('menu.profiles') }}</v-subheader>
 
             <v-list-group 
               v-for="item of logFiles"

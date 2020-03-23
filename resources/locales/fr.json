@@ -14,8 +14,8 @@
 
   "privileges": {
     "normal": "Normal",
-    "admin": "Administrateur",
-    "supAdmin": "Super Administrateur"
+    "admin": "Admin",
+    "supAdmin": "Super admin"
   },
 
   "serverState": {
@@ -93,12 +93,11 @@
   "upload": {
     "updateLocalModInfo": "Si vous voulez mettre à jour un mod local, supprimez-le avant.",
     "updateMission": "Pour mettre à jour une mission il suffitt de la retélécharger sur le serveur.",
-    "modRules": "Points importants",
+    "importantPoints": "Points importants",
     "modNaming": "Le dossier du mod doit être correctement nommé (avec un '@' devant le nom et sans espace)",
     "modZip": "Le dossier du mod doit être mis dans un .zip",
-    "missionRules": "Points importants",
     "missionNaming": "La mission doit être correctement nommée (sans espace et un nom de map valide)",
-    "missionExtension": "La mission doit être un fichier avec comme extension .pbo",
+    "missionExtension": "La mission doit être un fichier .pbo",
     "missionLabel": "Fichier PBO",
     "modLabel": "Dossier ZIP contenant le mod",
     "selectFileError": "Veuillez sélectionner un fichier",
@@ -119,7 +118,7 @@
   },
 
   "difficulty": {
-    "information": "Pour utiliser une difficulté personalisée indiquez 'Custom' dans le fichier de configuration du serveur.",
+    "information": "Pour utiliser une difficulté personnalisée indiquez 'Custom' dans le fichier de configuration du serveur.",
     "updated": "Difficulté enregistrée",
     "reseted": "Difficulté réinitialisée"    
   },
@@ -140,7 +139,7 @@
     "noLogsLabel": "Pas de logs",
     "noLogsHint": "-noLogs : Désactive l'écriture de logs",
     "hugePagesLabel": "Autoriser les pages volumineuses",
-    "hugePagesHint": "hugepages : Active les pages volumineuses pour le serveur et les clients",
+    "hugePagesHint": "-hugepages : Active les pages volumineuses pour le serveur et les clients",
     "enableHTLabel": "Activer l'HyperThreading",
     "enableHTHint": "-enableHT : Active l'utilisation de tous les cœurs logiques du CPU. Si le processeur n'est pas compatible, le paramètre est ignoré",
     "filePatchingLabel": "Autoriser le file patching",
@@ -154,7 +153,6 @@
   },
 
   "profiles": {
-    "title": "Profils",
     "howToCreate": "Vous pouvez créer un profil utilisant le bouton Créer un profil",
     "noNameError": "Merci de préciser un nom pour le profil",
     "created": "Profil créé",

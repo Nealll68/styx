@@ -27,7 +27,7 @@
   <v-divider></v-divider> 
 
   <v-list>
-    <v-subheader>{{ $t('profiles.title') }}</v-subheader>
+    <v-subheader>{{ $t('menu.profiles') }}</v-subheader>
     <v-list-item-group 
       v-model="selectedProfile" 
       mandatory

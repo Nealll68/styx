@@ -73,7 +73,6 @@
     "save": "Enregistrer",
     "username": "Nom d'utilisateur",
     "password": "Mot de passe",
-    "passwordRecommendation": "Le mot de passe doit avoir au minimum 8 caractères et contenir au moins :<br/>- 1 lettre minuscule<br/>- 1 lettre majuscule<br/>- 1 chiffre<br/>- 1 caractère spécial",
     "privilege": "Privilège",
     "help": "Aide",
     "reset": "Réinitialiser",

@@ -127,7 +127,13 @@
                     <template v-slot:activator="{ on }">
                       <v-icon v-on="on">mdi-help</v-icon>
                     </template>
-                    {{ $t('common.passwordRecommendation') }}
+                    <ul>
+                      <li>{{ $t('rules.password.minLength') }}</li>
+                      <li>{{ $t('rules.password.lowercaseRequired') }}</li>
+                      <li>{{ $t('rules.password.uppercaseRequired') }}</li>
+                      <li>{{ $t('rules.password.numericRequired') }}</li>
+                      <li>{{ $t('rules.password.specialRequired') }}</li>
+                    </ul>
                   </v-tooltip>
                 </template>
               </v-text-field>

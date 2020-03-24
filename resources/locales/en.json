@@ -7,7 +7,7 @@
     "close": "Close",
     "download": "Download",
     "noResult": "No result",
-    "fromWorkhop": "From the workshop",
+    "fromWorkshop": "From the workshop",
     "add": "Add",
     "name": "Name",
     "size": "Size",
@@ -19,7 +19,8 @@
     "privilege": "Privilege",
     "help": "Help",
     "reset": "Reset",
-    "confirmReset": "Are you sure you want to reset to the default values?"
+    "confirmReset": "Are you sure you want to reset to the default values?",
+    "rowsPerPage": "Rows per page"
   },
   
   "menu": {
@@ -223,7 +224,7 @@
   "users": {
     "adminUserAlert": "It is strongly advised not to leave the default account (admin) activated",
     "add": "Create user",
-    "search": "Find a utilisateur",
+    "search": "Find a user",
     "noUser": "No user added",
     "createdAt": "Created date",
     "created": "User created",

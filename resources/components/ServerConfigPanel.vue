@@ -22,7 +22,7 @@
     :loading="loadingReset"
     @click="reset()"	
   >
-    <v-icon left>mdi-alert-circle</v-icon>{{ $t('common.sreset') }}			
+    <v-icon left>mdi-alert-circle</v-icon>{{ $t('common.reset') }}			
   </v-btn>
 
   <v-btn

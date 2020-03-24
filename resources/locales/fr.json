@@ -7,7 +7,7 @@
     "close": "Fermer",
     "download": "Télécharger",
     "noResult": "Aucun résultat",
-    "fromWorkhop": "Depuis le Workshop",
+    "fromWorkshop": "Depuis le Workshop",
     "add": "Ajouter",
     "name": "Nom",
     "size": "Taille",
@@ -19,7 +19,8 @@
     "privilege": "Privilège",
     "help": "Aide",
     "reset": "Réinitialiser",
-    "confirmReset": "Etes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?"
+    "confirmReset": "Etes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?",
+    "rowsPerPage": "Lignes par page"
   },
   
   "menu": {

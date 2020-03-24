@@ -103,7 +103,7 @@
             <v-text-field
               v-model="modsSearch"
               append-icon="mdi-toy-brick-search"
-              :label="$('mods.search')"
+              :label="$t('mods.search')"
               single-line
               hide-details
               filled
@@ -119,7 +119,7 @@
                 :headers="modsHeaders"
                 :items-per-page="10"
                 sort-by="name"
-                :no-data-text="$t('noMods')"
+                :no-data-text="$t('mods.noMods')"
                 :no-results-text="$t('common.noResult')"
                 :search="modsSearch"
                 :loading="modsTableLoading"

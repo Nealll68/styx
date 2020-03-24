@@ -89,7 +89,7 @@
             <v-text-field
               v-model="missionSearch"
               append-icon="mdi-magnify"
-              :label="$t('search')"
+              :label="$t('mission.search')"
               single-line
               hide-details
               filled
@@ -116,7 +116,7 @@
               sort-by="updated_at"
 		          sort-desc
               :no-data-text="$t('mission.noMission')"
-              :no-results-text="$t('noResult')"
+              :no-results-text="$t('common.noResult')"
               :search="missionSearch"
               :loading="tableLoading"
             >           

@@ -1,13 +1,6 @@
 <template>
   <v-container fluid>
-    <v-alert
-      v-if="!$store.state.config.a3ServerPath"
-      text
-      type="error"
-      border="left"
-    >{{ $t('errors.undefinedPath') }}</v-alert>
-
-    <v-row v-else>
+    <v-row>
       <v-col md="12" lg="3">
         <v-card>
           <v-card-text>
@@ -113,6 +106,7 @@
 <script>
 export default {
   layout: 'commander',
+  middleware: 'undefinedPath',
 
   data () {
     return {

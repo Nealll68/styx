@@ -1,15 +1,7 @@
 <template>
 <div>
   <v-container fluid>
-    <v-alert
-      v-if="!$store.state.config.a3ServerPath"
-      text
-      type="error"
-      border="left"
-    >{{ $t('errors.undefinedPath') }}</v-alert>    
-
     <v-row
-      v-else
       justify="center"
     >
       <v-col 
@@ -186,6 +178,7 @@ const WorkshopQuery = () => import('@/components/WorkshopQuery')
 
 export default {
   layout: 'commander',
+  middleware: 'undefinedPath',
 
   components: {
     UploadDialog,

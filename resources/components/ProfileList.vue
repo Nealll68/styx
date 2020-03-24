@@ -127,7 +127,7 @@ export default {
     },
 
     async deleteProfile (profile) {
-      const confirm = await this.$confirm(this.$t('profile.confirmDeletion'), { 
+      const confirm = await this.$confirm(this.$t('profiles.confirmDeletion'), { 
         title: this.$t('common.deletion'), 
         buttonTrueText: this.$t('common.continue'), 
         buttonFalseText: this.$t('common.cancel'), 

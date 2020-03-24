@@ -156,8 +156,9 @@
             >{{ $t('common.cancel') }}</v-btn>
 
             <v-btn
+              depressed
               color="primary"
-              text @click="saveUser()"
+              @click="saveUser()"
               :disabled="!formIsValid"
             >{{ $t('common.save') }}</v-btn>
           </v-card-actions>

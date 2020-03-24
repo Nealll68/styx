@@ -5,12 +5,10 @@
         <v-icon left>mdi-cogs</v-icon>{{ $t('settings.title') }}
         <v-spacer></v-spacer>
         <v-btn
-          text
+          depressed
           color="primary"
           :loading="loading"
-          :disabled="
-            $store.state.downloadInfo.type === 'updateServer' || !valid
-          "
+          :disabled="$store.state.downloadInfo.type === 'updateServer' || !valid "
           @click="save()"
         >
           <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}

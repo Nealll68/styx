@@ -12,7 +12,7 @@
       <v-spacer></v-spacer>
 
       <v-btn color="primary" text :loading="loadingUpdate" @click="save()">
-        <v-icon left>mdi-content-save</v-icon>{{ $t('save') }}
+        <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
       </v-btn>
     </v-toolbar>
 

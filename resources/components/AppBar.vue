@@ -20,7 +20,14 @@
         color="primary"
       >
         <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-badge
+            :value="item.link === '/commander/settings' && !$store.state.config.a3ServerPath"
+            icon="mdi-exclamation"
+            color="error"
+            overlap
+          >
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-badge>          
         </v-list-item-icon>
 
         <v-list-item-content>

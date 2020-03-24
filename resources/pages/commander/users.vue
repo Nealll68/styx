@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>   
     <v-alert
-      type="error"
+      type="warning"
       border="left"
       text
       v-if="users.find(element => element.username === 'admin')"
@@ -11,7 +11,7 @@
       <v-col cols="md-12">
         <v-btn 
           v-if="$auth.user.privilege === 2"
-          text
+          depressed
           color="primary" 
           class="float-right" 
           @click="dialog = !dialog"

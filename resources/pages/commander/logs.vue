@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
-    <v-row>
+    <path-error v-if="!$store.state.config.a3ServerPath"></path-error>
+
+    <v-row v-else>
       <v-col md="12" lg="3">
         <v-card>
           <v-card-text>
@@ -104,9 +106,14 @@
 </template>
 
 <script>
+const PathError = () => import('@/components/PathError')
+
 export default {
   layout: 'commander',
-  middleware: 'undefinedPath',
+
+  components: {
+    PathError
+  },
 
   data () {
     return {

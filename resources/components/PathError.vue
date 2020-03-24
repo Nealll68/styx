@@ -20,9 +20,3 @@
   </v-alert>
 </v-container>
 </template>
-
-<script>
-export default {
-  layout: 'commander'
-}
-</script>

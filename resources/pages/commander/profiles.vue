@@ -1,6 +1,8 @@
 <template>
   <v-container fluid>
-    <v-row>
+    <path-error v-if="!$store.state.config.a3ServerPath"></path-error>
+
+    <v-row v-else>
       <v-col md="12" lg="3">
         <profile-list :profiles="profiles" @show-profile="showProfile($event)" @refresh="refreshProfiles()"></profile-list>
       </v-col>
@@ -89,6 +91,7 @@
 </template>
 
 <script>
+const PathError = () => import('@/components/PathError')
 const ProfileList = () => import('@/components/ProfileList')
 const ServerModsPanel = () => import('@/components/ServerModsPanel')
 const ServerParamsPanel = () => import('@/components/ServerParamsPanel')
@@ -97,9 +100,9 @@ const ServerDifficultyPanel = () => import('@/components/ServerDifficultyPanel')
 
 export default {
   layout: 'commander',
-  middleware: 'undefinedPath',
 
   components: {
+    PathError,
     ProfileList,
     ServerModsPanel,
     ServerParamsPanel,

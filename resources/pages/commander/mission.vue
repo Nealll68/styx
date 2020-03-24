@@ -1,7 +1,10 @@
 <template>
 <div>
   <v-container fluid>
+    <path-error v-if="!$store.state.config.a3ServerPath"></path-error>
+
     <v-row
+      v-else
       justify="center"
     >
       <v-col 
@@ -173,14 +176,15 @@
 </template>
 
 <script>
+const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
 const WorkshopQuery = () => import('@/components/WorkshopQuery')
 
 export default {
-  layout: 'commander',
-  middleware: 'undefinedPath',
+  layout: 'commander',  
 
   components: {
+    PathError,
     UploadDialog,
     WorkshopQuery
   },

@@ -42,23 +42,23 @@
         :loading="loading"
       >
         <template v-slot:item.activated="{ item }">
-          <v-checkbox
+          <v-simple-checkbox
             v-model="item.activated"
             :disabled="item.server_mod ? true : false"
             color="primary"
             hide-details
             class="pt-0 my-2"
-          ></v-checkbox>
+          ></v-simple-checkbox>
         </template>
 
         <template v-slot:item.server_mod="{ item }">
-          <v-checkbox
+          <v-simple-checkbox
             v-model="item.server_mod"
             :disabled="item.activated ? true : false"
             color="primary"
             hide-details
             class="pt-0 my-2"
-          ></v-checkbox>
+          ></v-simple-checkbox>
         </template>
       </v-data-table>
     </v-card-text>

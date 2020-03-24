@@ -1,39 +1,13 @@
 <template>
 <div>
 
-<v-toolbar
-  flat
-  short
->
-  <v-spacer></v-spacer>
-
-  <v-btn
-    color="tertiary"
-    text
-    href="https://community.bistudio.com/wiki/server.armaprofile#Example_Configuration_File"			
-    target="_blank"
-  >
-    <v-icon left>mdi-help-circle</v-icon>{{ $t('common.help') }}
-  </v-btn>
-
-  <v-btn
-    color="quaternary"
-    text
-    :loading="loadingReset"
-    @click="reset()"		
-  >
-    <v-icon left>mdi-alert-circle</v-icon>{{ $t('common.reset') }}			
-  </v-btn>
-
-  <v-btn
-    color="primary"
-    text
-    :loading="loadingUpdate"
-    @click="update()"
-  >
-    <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
-  </v-btn>
-</v-toolbar>
+<panel-header
+  help-link="https://community.bistudio.com/wiki/server.armaprofile#Example_Configuration_File"
+  :loadingReset="loadingReset"
+  :loadingUpdate="loadingUpdate"
+  @reset="reset()"
+  @save="update()"
+></panel-header>
 
 <v-card-text>
 	<v-alert
@@ -69,6 +43,8 @@
 </template>
 
 <script>
+const PanelHeader = () => import('@/components/PanelHeader')
+
 export default {
 	props: ['profile'],
 
@@ -79,7 +55,11 @@ export default {
       loadingReset: false,
       difficulty: null
 		}
-	},
+  },
+  
+  components: {
+    PanelHeader
+  },
 
 	async mounted () {
     this.loadingContent = true

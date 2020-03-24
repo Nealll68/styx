@@ -128,6 +128,7 @@
       small 
       label 
       outlined
+      :color="$auth.user.privilege === 0 ? 'senary' : 'tertiary'"
       class="mx-1 hidden-sm-and-down"
     >
       <v-icon 

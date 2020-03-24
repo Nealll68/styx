@@ -20,7 +20,9 @@
     "help": "Aide",
     "reset": "Réinitialiser",
     "confirmReset": "Etes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?",
-    "rowsPerPage": "Lignes par page"
+    "rowsPerPage": "Lignes par page",
+    "of": "de",
+    "all": "Tout"
   },
   
   "menu": {

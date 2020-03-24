@@ -20,7 +20,9 @@
     "help": "Help",
     "reset": "Reset",
     "confirmReset": "Are you sure you want to reset to the default values?",
-    "rowsPerPage": "Rows per page"
+    "rowsPerPage": "Rows per page",
+    "of": "of",
+    "all": "All"
   },
   
   "menu": {

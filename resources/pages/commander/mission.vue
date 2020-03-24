@@ -111,14 +111,19 @@
 
             <v-data-table
               :items="missions" 
-              :headers="missionHeaders"
-              :items-per-page="10"
+              :headers="missionHeaders" 
+              :items-per-page="10"             
               sort-by="updated_at"
 		          sort-desc
               :no-data-text="$t('mission.noMission')"
               :no-results-text="$t('common.noResult')"
               :search="missionSearch"
               :loading="tableLoading"
+              :footer-props="{
+                itemsPerPageText: $t('common.rowsPerPage'),
+                itemsPerPageAllText: $t('common.all'),
+                pageText: `{0}-{1} ${$t('common.of')} {2}`
+              }"
             >           
 
               <template v-slot:item.updated_at="{ item }">
@@ -161,7 +166,7 @@
                 >
                   <v-icon>mdi-delete</v-icon>  
                 </v-btn>         
-              </template>                
+              </template>
             </v-data-table>
           </v-card-text>
         </v-card>

@@ -123,6 +123,11 @@
                 :no-results-text="$t('common.noResult')"
                 :search="modsSearch"
                 :loading="modsTableLoading"
+                :footer-props="{
+                  itemsPerPageText: $t('common.rowsPerPage'),
+                  itemsPerPageAllText: $t('common.all'),
+                  pageText: `{0}-{1} ${$t('common.of')} {2}`
+                }"
               >           
 
                 <template v-slot:item.created_at="{ item }">

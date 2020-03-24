@@ -17,5 +17,5 @@ export default ({ app, store }) => {
     return `/${link}`
   }
 
-  app.$moment.locale(store.state.i18n.locale)
+  app.$moment.locale(store.state.i18n.locale)    
 }

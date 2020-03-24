@@ -34,7 +34,7 @@
       >{{ $t('common.cancel') }}</v-btn>
 
       <v-btn
-        text
+        depressed
         color="primary"
         @click="sendCode()"
       >{{ $t('common.contiue') }}</v-btn>

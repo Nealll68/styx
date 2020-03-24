@@ -81,7 +81,7 @@
         >{{ $t('common.close') }}</v-btn>
 
         <v-btn
-          text
+          depressed
           color="primary"
           @click="upload()"
           :disabled="uploadPercentage > 0"

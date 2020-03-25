@@ -60,15 +60,27 @@
           single-line
         ></v-file-input>
 
-        <div class="text-center">
-          <v-progress-circular
-            v-show="uploadPercentage > 0"
-            v-model="uploadPercentage"
-            size="50"
-            color="primary"
-            class="mt-5"   
-          >{{ uploadPercentage }}%</v-progress-circular>
-        </div>
+        <v-sheet 
+          v-show="uploadPercentage > 0"
+          class="text-center" 
+        >
+          <div class="mt-5 mb-2">
+            <v-progress-circular            
+              v-model="uploadPercentage"
+              size="64"
+              color="primary"
+            >{{ uploadPercentage }}%</v-progress-circular>
+          </div>
+
+          <v-btn
+            outlined
+            color="error"
+            small
+            @click="source.cancel()"
+          >
+            <v-icon left>mdi-upload-off</v-icon>{{ $t('common.cancel') }}
+          </v-btn>
+        </v-sheet>
       </v-card-text>
 
       <v-card-actions>
@@ -84,7 +96,7 @@
           depressed
           color="primary"
           @click="upload()"
-          :disabled="uploadPercentage > 0"
+          :disabled="uploadPercentage > 0 || !file"
         >{{ $t('common.continue') }}</v-btn>
       </v-card-actions>
     </v-card>
@@ -104,7 +116,8 @@ export default {
   data () {
     return {
       file: null,
-      uploadPercentage: 0
+      uploadPercentage: 0,
+      source: null
     }
   },
 
@@ -113,10 +126,13 @@ export default {
       if (!this.file) return this.$toast.global.appInfo($t('upload.selectFileError'))
 
       try {
+        this.source = this.$axios.CancelToken.source()
+
         let formData = new FormData()
         formData.append('file', this.file)
 
         await this.$axios.$post(this.isMission ? 'server/mission' : 'server/mod', formData, {
+          cancelToken: this.source,
           headers: {
             'content-type': 'multipart/form-data'
           },

@@ -3,11 +3,11 @@
     <path-error v-if="!$store.state.config.a3ServerPath"></path-error>
 
     <v-row v-else>
-      <v-col md="12" lg="3">
+      <v-col sm="12" md="12" lg="3">
         <profile-list :profiles="profiles" @show-profile="showProfile($event)" @refresh="refreshProfiles()"></profile-list>
       </v-col>
 
-      <v-col md="12" lg="9">
+      <v-col sm="12" md="12" lg="9">
         <v-alert 
           border="left" 
           text 

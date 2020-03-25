@@ -1,7 +1,9 @@
 <template>
-  <v-toolbar
+<div>
+<v-toolbar
   flat
   short
+  class="hidden-sm-and-down"
 >
   <v-spacer></v-spacer>
 
@@ -32,6 +34,37 @@
     <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
   </v-btn>
 </v-toolbar>
+
+<v-bottom-navigation 
+  app
+  grow
+  class="hidden-md-and-up"
+>
+  <v-btn
+    :href="helpLink"
+    target="_blank"
+  >
+    <span>{{ $t('common.help') }}</span>
+    <v-icon>mdi-help-circle</v-icon>
+  </v-btn>
+
+  <v-btn
+    :loading="loadingReset"
+    @click="$emit('reset')"	
+  >
+    <span>{{ $t('common.reset') }}</span>
+    <v-icon>mdi-alert-circle</v-icon>
+  </v-btn>
+
+  <v-btn
+    :loading="loadingUpdate"
+    @click="$emit('save')"
+  >
+    <span>{{ $t('common.save') }}</span>
+    <v-icon>mdi-content-save</v-icon>
+  </v-btn>
+</v-bottom-navigation>
+</div>
 </template>
 
 <script>

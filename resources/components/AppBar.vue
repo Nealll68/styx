@@ -7,7 +7,7 @@
     :mini-variant="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
   >
     <div class="d-flex justify-center my-5">
-      <v-img src="/logo_cp17_light_150x150.png" max-height="50" max-width="50"></v-img>
+      <v-img src="/logo.png" max-height="50" max-width="50"></v-img>
     </div>
 
     <v-list nav>      

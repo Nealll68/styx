@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-system-bar
-      v-if="$store.state.downloadInfo.type"
+      v-if="$store.state.downloadInfo.type || true"
       app
       fixed
       window
@@ -20,17 +20,22 @@
 
           <v-col>
             <v-btn
+              :icon="$vuetify.breakpoint.smAndDown"
               text
               class="float-right"
               color="primary"
               @click="logsSheet = true"
               :disabled="$store.state.downloadInfo.type !== 'downloadMission'"
             >
-              <v-icon left color="primary">mdi-post</v-icon
-              >{{ $t('index.logsTitle') }}
+              <v-icon 
+                :left="$vuetify.breakpoint.smAndDown" 
+                color="primary"
+              >mdi-post</v-icon>
+              {{ $vuetify.breakpoint.smAndDown ? '' : $t('index.logsTitle') }}
             </v-btn>
 
             <v-btn
+              :icon="$vuetify.breakpoint.smAndDown"
               text
               color="error"
               class="float-right"
@@ -38,8 +43,10 @@
               :loading="loadingCancel"
               :disabled="$store.state.downloadInfo.type !== 'downloadMission'"
             >
-              <v-icon left color="error">mdi-download-off</v-icon
-              >{{ $t('common.cancel') }}
+              <v-icon 
+                :left="$vuetify.breakpoint.smAndDown"
+                color="error"
+              >mdi-download-off</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('common.cancel') }}
             </v-btn>
           </v-col>
         </v-row>

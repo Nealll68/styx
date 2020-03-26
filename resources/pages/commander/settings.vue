@@ -60,9 +60,12 @@
         <v-divider></v-divider>
 
         <v-subheader>{{ $t('settings.steamAccountMessage') }}</v-subheader>
-        <v-alert text dense type="warning">{{
-          $t('settings.steamWorkshopInfo')
-        }}</v-alert>
+        <v-alert 
+          text
+          dense
+          type="warning"
+          border="left"
+        >{{ $t('settings.steamWorkshopInfo') }}</v-alert>
 
         <v-text-field
           v-model="config.steam_account"

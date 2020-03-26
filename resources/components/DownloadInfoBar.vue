@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-system-bar
-      v-if="$store.state.downloadInfo.type || true"
+      v-if="$store.state.downloadInfo.type"
       app
       fixed
       window

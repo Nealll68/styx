@@ -28,14 +28,14 @@
               :disabled="$store.state.downloadInfo.type !== 'downloadMission'"
             >
               <v-icon 
-                :left="$vuetify.breakpoint.smAndDown" 
+                :left="$vuetify.breakpoint.mdAndUp" 
                 color="primary"
               >mdi-post</v-icon>
               {{ $vuetify.breakpoint.smAndDown ? '' : $t('index.logsTitle') }}
             </v-btn>
 
             <v-btn
-              :icon="$vuetify.breakpoint.smAndDown"
+              :icon="$vuetify.breakpoint.mdAndUp"
               text
               color="error"
               class="float-right"
@@ -44,7 +44,7 @@
               :disabled="$store.state.downloadInfo.type !== 'downloadMission'"
             >
               <v-icon 
-                :left="$vuetify.breakpoint.smAndDown"
+                :left="$vuetify.breakpoint.mdAndUp"
                 color="error"
               >mdi-download-off</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('common.cancel') }}
             </v-btn>

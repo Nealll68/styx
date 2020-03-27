@@ -40,13 +40,13 @@ module.exports = {
    ** Plugins to load before mounting the App
    */
   plugins: [
+    '~/plugins/i18n',
     { src: '~/plugins/vuetifyConfirm.client', ssr: false },
     { src: '~/plugins/adonisWS.client', ssr: false },
     { src: '~/plugins/vueApexCharts.client', ssr: false },
     { src: '~/plugins/steamGuard.client', ssr: false },
     '~/plugins/formatBytesFilter',
-    '~/plugins/axios',
-    '~/plugins/i18n'
+    '~/plugins/axios'    
   ],
   /*
    ** Nuxt.js dev-modules

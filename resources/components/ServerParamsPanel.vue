@@ -86,6 +86,7 @@ export default {
 
   methods: {
     async update() {
+      this.$emit('loading', true)
       this.loadingUpdate = true
 
       const response = await this.$axios.$put(
@@ -95,19 +96,20 @@ export default {
       this.$toast.global.appSuccess(this.$t('params.updated'))
 
       this.loadingUpdate = false
+      this.$emit('loading', false)
     },
 
     async reset() {
+      this.$emit('loading', true)
       this.loadingReset = true
 
-      const response = await this.$axios.$delete(
-        `server/params/${this.serverParams.id}`
-      )
-      this.$emit('update', { component: 'params', data: response })
+      const response = await this.$axios.$delete(`server/params/${this.serverParams.id}`)
+      this.$emit('update', response)
 
       this.$toast.global.appSuccess(this.$t('params.reseted'))
 
       this.loadingReset = false
+      this.$emit('loading', false)
     }
   }
 }

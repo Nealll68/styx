@@ -4,7 +4,11 @@
 
     <v-row v-else>
       <v-col sm="12" md="12" lg="3">
-        <profile-list :profiles="profiles" @show-profile="showProfile($event)" @refresh="refreshProfiles()"></profile-list>
+        <profile-list 
+          :profiles="profiles" 
+          @show-profile="showProfile($event)"
+          @refresh="refreshProfiles()"
+        ></profile-list>
       </v-col>
 
       <v-col sm="12" md="12" lg="9">
@@ -17,17 +21,10 @@
           {{ $t('profiles.howToCreate') }}
         </v-alert>
 
-        <v-card v-else>
-          <v-overlay 
-            :value="loading" 
-            absolute
-          >
-            <v-progress-circular 
-              indeterminate 
-              color="primary"
-            ></v-progress-circular>
-          </v-overlay>
-
+        <v-card 
+          v-else
+          :loading="loading"
+        >
           <v-tabs 
             v-model="tab"
             grow
@@ -44,7 +41,7 @@
             <v-tab-item>
               <server-mods-panel 
                 :server-params="profile.params"
-                @update="updateComponents($event)"
+                @loading="loading = $event"
               ></server-mods-panel>
             </v-tab-item>
 
@@ -52,7 +49,8 @@
               <server-params-panel 
                 v-if="$auth.user.privilege >= 1"
                 :server-params="profile.params" 
-                @update="updateComponents($event)"
+                @update="profile.params = $event"
+                @loading="loading = $event"
               ></server-params-panel>
 
               <v-card-text v-else>
@@ -69,6 +67,7 @@
               <server-config-panel
                 v-if="$auth.user.privilege >= 1"
                 :profile="profile.profile"
+                @loading="loading = $event"
               ></server-config-panel>
 
               <v-card-text v-else>
@@ -81,7 +80,10 @@
             </v-tab-item>
 
             <v-tab-item>
-              <server-difficulty-panel :profile="profile.profile"></server-difficulty-panel>
+              <server-difficulty-panel 
+                :profile="profile.profile"
+                @loading="loading = $event"
+              ></server-difficulty-panel>
             </v-tab-item>
           </v-tabs-items>
         </v-card>
@@ -143,12 +145,6 @@ export default {
 
     async refreshProfiles () {
       this.profiles = await this.$axios.$get('server/profile')
-    },
-
-    updateComponents ({ component, data }) {
-      if (component === 'params') {
-        this.profile.params = data
-      }
     }
   }
 }

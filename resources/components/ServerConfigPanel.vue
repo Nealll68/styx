@@ -10,22 +10,11 @@
 ></panel-header>
 
 <v-card-text>
-  <v-overlay 
-    :value="loadingContent"
-    absolute
-  >
-    <v-progress-circular       
-      indeterminate
-      size="64"
-      color="primary"
-    ></v-progress-circular>
-  </v-overlay>
-
   <v-textarea
     v-model="config"
     filled
     auto-grow
-    :disabled="loadingUpdate || loadingReset || loadingContent"
+    :disabled="loadingUpdate || loadingReset"
     spellcheck="false"
     autocorrect="off"
     autocapitalize="off"
@@ -43,7 +32,6 @@ export default {
 
 	data () {
 		return {
-      loadingContent: false,
 			loadingUpdate: false,
       loadingReset: false,
       config: null
@@ -55,15 +43,16 @@ export default {
   },
   
   async mounted () {
-    this.loadingContent = true
+    this.$emit('loading', true)
 
     this.config = await this.$axios.$get(`server/config/${this.profile.name}`)
 
-    this.loadingContent = false
+    this.$emit('loading', false)
   },
 
 	methods: {
 		async update () {
+      this.$emit('loading', true)
       this.loadingUpdate = true
       
       await this.$axios.$put(`server/config/${this.profile.name}`, {
@@ -72,10 +61,12 @@ export default {
       
       this.$toast.global.appSuccess(this.$t('config.updated'))
 			
-			this.loadingUpdate = false			
+      this.loadingUpdate = false	
+      this.$emit('loading', false)		
 		},
 
 		async reset () {
+      this.$emit('loading', true)
       this.loadingReset = true
 
       const confirm = await this.$confirm(this.$t('common.confirmReset'), { 
@@ -87,11 +78,13 @@ export default {
       })
       
       if (confirm) {
-        this.config = await this.$axios.$delete(`server/config/${this.profile.name}`)  
+        this.config = await this.$axios.$delete(`server/config/${this.profile.name}`)
+        
         this.$toast.global.appSuccess(this.$t('config.reseted'))
       }
 
-			this.loadingReset = false
+      this.loadingReset = false
+      this.$emit('loading', false)
 		}
 	}
 }

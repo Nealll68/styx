@@ -1,16 +1,5 @@
 <template>
-<v-card>
-  <v-overlay 
-    :value="loading"
-    absolute
-  >
-    <v-progress-circular       
-      indeterminate
-      size="64"
-      color="primary"
-    ></v-progress-circular>
-  </v-overlay>
-
+<v-card :loading="loading">
   <v-card-text>
     <v-text-field
       v-model="profileName"

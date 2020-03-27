@@ -111,11 +111,14 @@ export default {
 
   methods: {
     async save() {
+      this.$emit('loading', true)
       this.loadingUpdate = true
+
       const mods = this.mods
         .filter(element => element.activated)
         .map(element => element.name)
         .join(';')
+      
       const serverMods = this.mods
         .filter(element => element.server_mod)
         .map(element => element.name)
@@ -129,6 +132,7 @@ export default {
       this.$toast.global.appSuccess(this.$t('serverMod.updated'))
 
       this.loadingUpdate = false
+      this.$emit('loading', false)
     }
   }
 }

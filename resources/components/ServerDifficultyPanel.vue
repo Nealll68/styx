@@ -17,22 +17,11 @@
 		dense
 	>{{ $t('difficulty.information') }}</v-alert>
 
-  <v-overlay 
-    :value="loadingContent"
-    absolute
-  >
-    <v-progress-circular       
-      indeterminate
-      size="64"
-      color="primary"
-    ></v-progress-circular>
-  </v-overlay>
-
   <v-textarea
     v-model="difficulty"
     filled
     auto-grow
-    :disabled="loadingUpdate || loadingReset || loadingContent"
+    :disabled="loadingUpdate || loadingReset"
     spellcheck="false"
     autocorrect="off"
     autocapitalize="off"
@@ -50,7 +39,6 @@ export default {
 
 	data () {
 		return {
-			loadingContent: false,
 			loadingUpdate: false,
       loadingReset: false,
       difficulty: null
@@ -62,15 +50,16 @@ export default {
   },
 
 	async mounted () {
-    this.loadingContent = true
+    this.$emit('loading', true)
 
     this.difficulty = await this.$axios.$get(`server/difficulty/${this.profile.name}`)
 
-    this.loadingContent = false
+    this.$emit('loading', false)
   },
 
 	methods: {
 		async update () {
+      this.$emit('loading', true)
       this.loadingUpdate = true
       
       await this.$axios.$put(`server/difficulty/${this.profile.name}`, {
@@ -79,10 +68,12 @@ export default {
       
       this.$toast.global.appSuccess(this.$t('difficulty.updated'))
 			
-			this.loadingUpdate = false			
+      this.loadingUpdate = false
+      this.$emit('loading', false)			
 		},
 
 		async reset () {
+      this.$emit('loading', true)
       this.loadingReset = true
 
       const confirm = await this.$confirm(this.$t('common.confirmReset'), { 
@@ -98,7 +89,8 @@ export default {
         this.$toast.global.appSuccess(this.$t('difficulty.reseted'))
       }
 
-			this.loadingReset = false
+      this.loadingReset = false
+      this.$emit('loading', false)
 		}
 	}
 }

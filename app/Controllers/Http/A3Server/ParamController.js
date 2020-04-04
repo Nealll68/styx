@@ -4,26 +4,26 @@ const A3ServerParam = use('App/Models/A3Server/Param')
 
 class ParamController {
 
-    async update ({ params, request, response }) {
+    async update ({ params, request }) {
         const data = request.all()
 
-        const startupParams = await A3ServerParam.findOrFail(params.id)
+        const serverParams = await A3ServerParam.find(params.id)
 
-        startupParams.merge(data)
-        await startupParams.save()
+        serverParams.merge(data)
+        await serverParams.save()
 
-        return startupParams
+        return serverParams
     }
 
-    async reset ({ params, response }) {
-        const profile = await A3ServerParam.find(params.id)
+    async reset ({ params }) {
+        const serverParams = await A3ServerParam.find(params.id)
 
-        await profile.delete()
+        await serverParams.delete()
 
-        await A3ServerParam.create({ profile_id: profile.profile_id })
-        const newProfile = await A3ServerParam.findBy('profile_id', profile.profile_id)
+        await A3ServerParam.create({ profile_id: serverParams.profile_id })
+        const newServerParams = await A3ServerParam.findBy('profile_id', serverParams.profile_id)
 
-        return newProfile
+        return newServerParams
     }
 }
 

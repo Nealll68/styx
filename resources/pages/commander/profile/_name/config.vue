@@ -1,35 +1,31 @@
 <template>
-<div>
+<v-card flat>
+  <panel-header
+    help-link="https://community.bistudio.com/wiki/server.cfg#Example_Configuration_File"
+    :loadingReset="loadingReset"
+    :loadingUpdate="loadingUpdate"
+    @reset="reset()"
+    @save="update()"
+  ></panel-header>
 
-<panel-header
-  help-link="https://community.bistudio.com/wiki/server.cfg#Example_Configuration_File"
-  :loadingReset="loadingReset"
-  :loadingUpdate="loadingUpdate"
-  @reset="reset()"
-  @save="update()"
-></panel-header>
-
-<v-card-text>
-  <v-textarea
-    v-model="config"
-    filled
-    auto-grow
-    :disabled="loadingUpdate || loadingReset"
-    spellcheck="false"
-    autocorrect="off"
-    autocapitalize="off"
-  ></v-textarea>
-</v-card-text>
-
-</div>
+  <v-card-text>
+    <v-textarea
+      v-model="config"
+      filled
+      auto-grow
+      :disabled="loadingUpdate || loadingReset"
+      spellcheck="false"
+      autocorrect="off"
+      autocapitalize="off"
+    ></v-textarea>
+  </v-card-text>
+</v-card>
 </template>
 
 <script>
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
-	props: ['profile'],
-
 	data () {
 		return {
 			loadingUpdate: false,
@@ -45,7 +41,7 @@ export default {
   async mounted () {
     this.$emit('loading', true)
 
-    this.config = await this.$axios.$get(`server/config/${this.profile.name}`)
+    this.config = await this.$axios.$get(`server/config/${this.$route.params.name}`)
 
     this.$emit('loading', false)
   },
@@ -55,7 +51,7 @@ export default {
       this.$emit('loading', true)
       this.loadingUpdate = true
       
-      await this.$axios.$put(`server/config/${this.profile.name}`, {
+      await this.$axios.$put(`server/config/${this.$route.params.name}`, {
         config: this.config
       })
       
@@ -70,15 +66,12 @@ export default {
       this.loadingReset = true
 
       const confirm = await this.$confirm(this.$t('common.confirmReset'), { 
-        title: this.$t('common.reset'), 
-        buttonTrueText: this.$t('common.continue'), 
-        buttonFalseText: this.$t('common.cancel'), 
-        color: 'warning',
-        persistent: true
+        title: this.$t('common.reset'),
+        color: 'warning'
       })
       
       if (confirm) {
-        this.config = await this.$axios.$delete(`server/config/${this.profile.name}`)
+        this.config = await this.$axios.$delete(`server/config/${this.$route.params.name}`)
         
         this.$toast.global.appSuccess(this.$t('config.reseted'))
       }

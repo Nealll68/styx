@@ -156,12 +156,15 @@
   },
 
   "profiles": {
-    "howToCreate": "You can create a profile by entering a name in the field and clicking on '+'",
+    "howToCreate": "You can create a profile by entering a name in the field and clicking on the icon",
     "noNameError": "Please specify a name for the profile",
+    "nameUsed": "This name is already used",
     "created": "Profile created",
     "updated": "Profile updated",
     "deleted": "Profile deleted",
     "confirmDeletion": "Are you sure you want to permanently delete this profile?",
+    "setAsDefault": "Set as default",
+    "delete": "Delete",
 
     "tabTitles": {
       "mods": "Mods",

@@ -21,15 +21,19 @@ class ProfileController {
     }
 
     async show ({ params, response }) {
-        const serverProfile = await A3ServerProfile.find(params.id)
-        const serverParams = await serverProfile.serverParam().fetch()
-        
-        let profileJSON = {
-            profile: serverProfile.toJSON(),
-            params: serverParams.toJSON()
+        try {
+            const serverProfile = await A3ServerProfile.findByOrFail('name', params.id)
+            const serverParams = await serverProfile.serverParam().fetch()
+            
+            let profileJSON = {
+                profile: serverProfile.toJSON(),
+                params: serverParams.toJSON()
+            }
+    
+            return response.ok(profileJSON)
+        } catch (ex) {
+            return response.status(ex.status).send(ex.code)
         }
-
-        return response.ok(profileJSON)
     }
 
     async store ({ request, response }) {
@@ -87,8 +91,9 @@ class ProfileController {
         await serverParams.delete()
         await serverProfile.delete()
 
-        if (serverProfile.default && await A3ServerProfile.getCount() > 0) {
+        if (serverProfile.isDefault && await A3ServerProfile.getCount() > 0) {
             const newDefaultProfile = await A3ServerProfile.first()
+            console.log(newDefaultProfile)
             newDefaultProfile.merge({ isDefault: true })
             newDefaultProfile.save()
         }

@@ -4,7 +4,7 @@ const FileManager = use('App/Services/FileManager')
 
 class DifficultyController {
 
-    async show ({ params, response }) {
+    async show ({ params, response }) {        
         const difficulty = await FileManager.getFileContent('difficulty', params.name)
         return response.ok(difficulty)
     }

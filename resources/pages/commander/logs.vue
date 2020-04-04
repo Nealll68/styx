@@ -158,11 +158,8 @@ export default {
 
     async deleteLogs (profileName, filename) {      
       const confirm = await this.$confirm(this.$t('logs.confirmDeletion'), { 
-        title: this.$t('common.deletion'), 
-        buttonTrueText: this.$t('common.continue'), 
-        buttonFalseText: this.$t('common.cancel'), 
-        color: 'error',
-        persistent: true
+        title: this.$t('common.deletion'),
+        color: 'error'
       })
 
       if (confirm) {
@@ -179,11 +176,8 @@ export default {
 
     async deleteAllLogs () {
       const confirm = await this.$confirm(this.$t('logs.confirmAllDelete'), { 
-        title: this.$t('common.deletion'), 
-        buttonTrueText: this.$t('common.continue'), 
-        buttonFalseText: this.$t('common.cancel'),
-        color: 'error',
-        persistent: true
+        title: this.$t('common.deletion'),
+        color: 'error'
       })
 
       if (confirm) {

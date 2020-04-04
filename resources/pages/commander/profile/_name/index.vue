@@ -1,17 +1,27 @@
 <template>
-  <div>
-    <v-toolbar flat short>
-      <v-chip label class="mx-1"
-        >{{ $t('serverMod.modsActivated') }} : {{ mods.filter(e => e.activated).length }}</v-chip
-      >
+  <v-card flat>
+    <v-toolbar 
+      flat 
+      short
+    >
+      <v-chip 
+        label
+        class="mx-1"
+      >{{ $t('serverMod.modsActivated') }} : {{ mods.filter(e => e.activated).length }}</v-chip>
 
-      <v-chip label class="mx-1"
-        >{{ $t('serverMod.serverModsActivated') }} : {{ mods.filter(e => e.server_mod).length }}</v-chip
-      >
+      <v-chip
+        label
+        class="mx-1"
+      >{{ $t('serverMod.serverModsActivated') }} : {{ mods.filter(e => e.server_mod).length }}</v-chip>
 
       <v-spacer></v-spacer>
 
-      <v-btn color="primary" text :loading="loadingUpdate" @click="save()">
+      <v-btn 
+        color="primary" 
+        text 
+        :loading="loadingUpdate" 
+        @click="save()"
+      >
         <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
       </v-btn>
     </v-toolbar>
@@ -62,38 +72,41 @@
         </template>
       </v-data-table>
     </v-card-text>
-  </div>
+  </v-card>
 </template>
 
 <script>
 export default {
-  props: ['serverParams'],
-
-  data() {
+  data () {
     return {
       loading: false,
       loadingUpdate: false,
       mods: [],
       modsSearch: '',
       modsHeaders: [
-        { text: 'Nom', value: 'name' },
+        { text: this.$t('common.name'), value: 'name' },
         { text: '-mod', value: 'activated' },
         { text: '-serverMod', value: 'server_mod' }
-      ]
+      ],
+      paramsId: null
     }
   },
 
-  async mounted() {
+  async mounted () {
     this.loading = true
 
+    const profile = await this.$axios.$get(`server/profile/${this.$route.params.name}`)        
+    const params = profile.params
+    this.paramsId = params.id
+
     let activatedMods = []
-    if (this.serverParams.mods) {
-      activatedMods = this.serverParams.mods.split(';')
+    if (params.mods) {
+      activatedMods = params.mods.split(';')
     }
 
     let activatedServerMods = []
-    if (this.serverParams.server_mod) {
-      activatedServerMods = this.serverParams.server_mod.split(';')
+    if (params.server_mod) {
+      activatedServerMods = params.server_mod.split(';')
     }
 
     this.mods = await this.$axios.$get('server/mod')
@@ -110,7 +123,7 @@ export default {
   },
 
   methods: {
-    async save() {
+    async save () {
       this.$emit('loading', true)
       this.loadingUpdate = true
 
@@ -124,7 +137,7 @@ export default {
         .map(element => element.name)
         .join(';')
 
-      await this.$axios.$put(`server/params/${this.serverParams.id}`, {
+      await this.$axios.$put(`server/params/${this.paramsId}`, {
         mods,
         server_mod: serverMods
       })

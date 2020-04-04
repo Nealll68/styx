@@ -223,7 +223,7 @@ export default {
       a3ServerWs: null,
       items: [
         { link: '/commander', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
-        { link: '/commander/profiles', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
+        { link: '/commander/profile', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
         { link: '/commander/mods', name: this.$t('menu.mods'), icon: 'mdi-toy-brick' },
         { link: '/commander/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
         { link: '/commander/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }

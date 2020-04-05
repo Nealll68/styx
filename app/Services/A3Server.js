@@ -73,7 +73,7 @@ class A3Server {
     }
 
     buildParams (config, profileName, params) {
-        const profileFolder = path.join(config.a3server_path, 'commander', profileName)
+        const profileFolder = path.join(config.a3server_path, 'demeter', profileName)
 
         let paramsArray = [
             `-port=${config.port}`,

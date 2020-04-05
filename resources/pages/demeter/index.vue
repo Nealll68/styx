@@ -191,7 +191,7 @@
 const PathError = () => import('@/components/PathError')
 
 export default {
-  layout: 'commander',
+  layout: 'demeter',
 
   components: {
     PathError

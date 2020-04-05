@@ -209,7 +209,7 @@
   },
 
   "settings": {
-    "title": "Commander configuration",
+    "title": "Demeter configuration",
     "steamCMDLabel": "SteamCMD path",
     "steamCMDHint": "Absolute path to the folder where SteamCMD is installed",
     "armaPathLabel": "Arma 3 path",

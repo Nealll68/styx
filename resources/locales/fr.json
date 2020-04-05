@@ -209,7 +209,7 @@
   },
 
   "settings": {
-    "title": "Configuration de Commander",
+    "title": "Configuration de Demeter",
     "steamCMDLabel": "Chemin SteamCMD",
     "steamCMDHint": "Chemin absolu vers le dossier ou est installé SteamCMD",
     "armaPathLabel": "Chemin Arma 3",

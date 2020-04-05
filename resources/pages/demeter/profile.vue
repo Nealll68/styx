@@ -27,7 +27,7 @@
                 v-for="profile in profiles" 
                 :key="profile.id"
                 nuxt
-                :to="`/commander/profile/${profile.name}`"
+                :to="`/demeter/profile/${profile.name}`"
                 color="primary"
               >
                 <v-list-item-content>
@@ -82,28 +82,28 @@
               <v-tab
                 exact
                 nuxt
-                :to="`/commander/profile/${$route.params.name}`"
+                :to="`/demeter/profile/${$route.params.name}`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.mods') }}</v-tab>
 
               <v-tab
                 exact
                 nuxt
-                :to="`/commander/profile/${$route.params.name}/params`"
+                :to="`/demeter/profile/${$route.params.name}/params`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.parameters') }}</v-tab>
 
               <v-tab
                 exact
                 nuxt
-                :to="`/commander/profile/${$route.params.name}/config`"
+                :to="`/demeter/profile/${$route.params.name}/config`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.configuration') }}</v-tab>
 
               <v-tab
                 exact
                 nuxt
-                :to="`/commander/profile/${$route.params.name}/difficulty`"
+                :to="`/demeter/profile/${$route.params.name}/difficulty`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.difficulty') }}</v-tab>
             </v-tabs>
@@ -128,7 +128,7 @@
 const PathError = () => import('@/components/PathError')
 
 export default {
-  layout: 'commander',
+  layout: 'demeter',
 
   components: {
     PathError
@@ -149,7 +149,7 @@ export default {
       const defaultProfile = profiles.find(e => e.isDefault)
 
       if (defaultProfile) {
-        redirect(`/commander/profile/${defaultProfile.name}`)
+        redirect(`/demeter/profile/${defaultProfile.name}`)
       }
       return true
     }
@@ -228,7 +228,7 @@ export default {
         
         await this.$axios.$delete(`server/profile/${profile.id}`) 
         this.profiles = await this.$axios.$get('server/profile')      
-        this.$router.push('/commander/profile')
+        this.$router.push('/demeter/profile')
 
         this.$toast.global.appSuccess(this.$t('profiles.deleted'))
 

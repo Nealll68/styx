@@ -21,7 +21,7 @@
       >
         <v-list-item-icon>
           <v-badge
-            :value="item.link === '/commander/settings' && !$store.state.config.a3ServerPath"
+            :value="item.link === '/demeter/settings' && !$store.state.config.a3ServerPath"
             icon="mdi-exclamation"
             color="error"
             overlap
@@ -40,7 +40,7 @@
       <v-list nav>
         <v-list-item
           nuxt
-          to="/commander/user"
+          to="/demeter/user"
           exact
           color="primary"
         >
@@ -222,11 +222,11 @@ export default {
       navDrawer: null,
       a3ServerWs: null,
       items: [
-        { link: '/commander', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
-        { link: '/commander/profile', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
-        { link: '/commander/mods', name: this.$t('menu.mods'), icon: 'mdi-toy-brick' },
-        { link: '/commander/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
-        { link: '/commander/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }
+        { link: '/demeter', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
+        { link: '/demeter/profile', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
+        { link: '/demeter/mods', name: this.$t('menu.mods'), icon: 'mdi-toy-brick' },
+        { link: '/demeter/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
+        { link: '/demeter/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }
       ],
       privileges: [this.$t('privileges.normal'), this.$t('privileges.admin'), this.$t('privileges.supAdmin')]
     }
@@ -245,8 +245,8 @@ export default {
   },
 
   created () {
-    if (this.$auth.user.privilege >= 1) this.items.push({ link: '/commander/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
-    if (this.$auth.user.privilege === 2) this.items.push({ link: '/commander/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
+    if (this.$auth.user.privilege >= 1) this.items.push({ link: '/demeter/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
+    if (this.$auth.user.privilege === 2) this.items.push({ link: '/demeter/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
   },
 
   mounted () {

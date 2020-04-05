@@ -99,7 +99,7 @@
 
 <script>
 export default {
-  layout: 'commander',
+  layout: 'demeter',
 
   data() {
     return {

@@ -26,9 +26,9 @@ class FileManager {
 
             if (!config.a3server_path) throw new A3FolderPathUndefined()
 
-            let filePath = path.join(config.a3server_path, 'commander', profileName, 'server.cfg')
+            let filePath = path.join(config.a3server_path, 'demeter', profileName, 'server.cfg')
             if (type === 'difficulty') {
-                filePath = path.join(config.a3server_path, 'commander', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
+                filePath = path.join(config.a3server_path, 'demeter', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
             }
 
             if (reset) data = await Drive.get(Helpers.appRoot(`app/Services/serverFilesTemplates/server${_.upperFirst(type)}.template`), 'UTF-8')
@@ -44,9 +44,9 @@ class FileManager {
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
 
-        let filePath = path.join(config.a3server_path, 'commander', profileName, 'server.cfg')
+        let filePath = path.join(config.a3server_path, 'demeter', profileName, 'server.cfg')
         if (type === 'difficulty') {
-            filePath = path.join(config.a3server_path, 'commander', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
+            filePath = path.join(config.a3server_path, 'demeter', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
         }
 
         return await Drive.get(filePath, 'UTF-8')
@@ -138,7 +138,7 @@ class FileManager {
 
         let returnData = []
         for (const profile of profiles.toJSON()) {
-            const files = await fs.readdir(path.join(config.a3server_path, 'commander', profile.name))
+            const files = await fs.readdir(path.join(config.a3server_path, 'demeter', profile.name))
             returnData.push({
                 profile_name: profile.name,
                 files: files.filter(file => file.endsWith('.rpt')).reverse()
@@ -151,7 +151,7 @@ class FileManager {
     async currentLog () {
         const config = await Config.first()
         const profile = await A3ServerProfile.findBy('isDefault', true)
-        const profileFolder = path.join(config.a3server_path, 'commander', profile.name)
+        const profileFolder = path.join(config.a3server_path, 'demeter', profile.name)
 
         const files = await fs.readdir(profileFolder)
         const logFiles = files.filter(file => file.endsWith('.rpt'))
@@ -161,7 +161,7 @@ class FileManager {
 
     async getLogs (profileName, filename) {
         const config = await Config.first()
-        return await Drive.get(path.join(config.a3server_path, 'commander', profileName, filename), 'UTF-8')
+        return await Drive.get(path.join(config.a3server_path, 'demeter', profileName, filename), 'UTF-8')
     }
 
     async deleteProfileFolder (profileName) {
@@ -170,7 +170,7 @@ class FileManager {
 
             if (!config.a3server_path) throw new A3FolderPathUndefined()
 
-            await rimraf(path.join(config.a3server_path, 'commander', profileName))
+            await rimraf(path.join(config.a3server_path, 'demeter', profileName))
         } catch (ex) {
             throw ex
         }
@@ -178,7 +178,7 @@ class FileManager {
 
     async deleteLogs (profileName, filename) {
         const config = await Config.first()
-        await Drive.delete(path.join(config.a3server_path, 'commander', profileName, filename))
+        await Drive.delete(path.join(config.a3server_path, 'demeter', profileName, filename))
     }
 
     async deleteMod (workshopItemID, workshopItemName) {

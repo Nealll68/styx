@@ -13,7 +13,7 @@
         outlined
         color="error"
         nuxt
-        to="/commander/settings"
+        to="/demeter/settings"
       >{{ $t('menu.settings') }}</v-btn>
     </v-col>
     </v-row>

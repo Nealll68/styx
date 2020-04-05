@@ -181,7 +181,7 @@ const UploadDialog = () => import('@/components/UploadDialog')
 const WorkshopQuery = () => import('@/components/WorkshopQuery')
 
 export default {
-  layout: 'commander',  
+  layout: 'demeter',  
 
   components: {
     PathError,

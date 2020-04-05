@@ -26,7 +26,7 @@ export default {
 
   head () {
     return {
-      title: 'Commander'
+      title: 'Demeter'
     }
   },
 

@@ -169,7 +169,7 @@
 
 <script>
 export default {
-  layout: 'commander',
+  layout: 'demeter',
   middleware: 'privilege_1',
 
   data () {

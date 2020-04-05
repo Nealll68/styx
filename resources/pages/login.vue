@@ -13,7 +13,14 @@
         md="5"
       >
 				<v-card>
-					<v-card-text class="pb-0">
+          <v-card-title class="d-flex flex-column">
+            <v-img src="/logo.png" max-height="100" max-width="100"></v-img>
+            <div class="font-weight-thin display-1">DEMETER</div>
+          </v-card-title>
+
+          <v-divider></v-divider>
+
+					<v-card-text>
 						<v-form 
               v-model="formIsValid" 
               ref="form"
@@ -40,7 +47,8 @@
               ></v-text-field>
 						</v-form>
 					</v-card-text>
-					<v-card-actions class="pt-0">
+
+					<v-card-actions>
 						<v-btn 
               color="primary"
               block

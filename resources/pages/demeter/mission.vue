@@ -17,7 +17,7 @@
           <template v-slot:activator="{ on }">
             <v-btn
               v-on="on"
-              depressed
+              outlined
               color="primary"
               class="float-right"
               :disabled="$store.state.downloadInfo.type === 'updateServer'"

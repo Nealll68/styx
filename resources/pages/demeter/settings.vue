@@ -5,7 +5,7 @@
         <v-icon left>mdi-cogs</v-icon>{{ $t('settings.title') }}
         <v-spacer></v-spacer>
         <v-btn
-          depressed
+          outlined
           color="primary"
           :loading="loading"
           :disabled="$store.state.downloadInfo.type === 'updateServer' || !valid "

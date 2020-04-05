@@ -11,7 +11,7 @@
       <v-col cols="md-12">
         <v-btn 
           v-if="$auth.user.privilege === 2"
-          depressed
+          outlined
           color="primary" 
           class="float-right" 
           @click="dialog = !dialog"

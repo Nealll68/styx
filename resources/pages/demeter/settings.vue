@@ -1,9 +1,13 @@
 <template>
-  <v-container class="app-container">
+  <v-container fluid>
     <v-card>
-      <v-card-title>
-        <v-icon left>mdi-cogs</v-icon>{{ $t('settings.title') }}
+      <v-toolbar flat>
+        <v-toolbar-title>
+          <v-icon left>mdi-cogs</v-icon>{{ $t('settings.title') }}
+        </v-toolbar-title>
+
         <v-spacer></v-spacer>
+
         <v-btn
           outlined
           color="primary"
@@ -13,86 +17,99 @@
         >
           <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
         </v-btn>
-      </v-card-title>
+      </v-toolbar>
+      <v-tabs :vertical="$vuetify.breakpoint.smAndUp">
+        <v-tab>
+          <v-icon left>mdi-gamepad-square</v-icon>Arma 3
+        </v-tab>
+        <v-tab>
+          <v-icon left>mdi-steam</v-icon>Steam
+        </v-tab>
 
-      <v-divider></v-divider>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <v-form v-model="valid" ref="form">
+                <v-text-field
+                  v-model="config.a3server_path"
+                  filled
+                  :label="$t('settings.armaPathLabel')"
+                  :hint="$t('settings.armaPathHint')"
+                  persistent-hint
+                  clearable
+                  class="mt-2"
+                  :rules="requiredRule"
+                ></v-text-field>
 
-      <v-card-text>
-        <v-form v-model="valid" ref="form">
-          <v-text-field
-            v-model="config.steamcmd_path"
-            filled
-            :label="$t('settings.steamCMDLabel')"
-            :hint="$t('settings.steamCMDHint')"
-            persistent-hint
-            clearable
-          ></v-text-field>
+                <v-text-field
+                  v-model="config.port"
+                  filled
+                  :label="$t('settings.port')"
+                  type="number"
+                  clearable
+                  class="mt-2"
+                  :rules="requiredRule"
+                ></v-text-field>
 
-          <v-text-field
-            v-model="config.a3server_path"
-            filled
-            :label="$t('settings.armaPathLabel')"
-            :hint="$t('settings.armaPathHint')"
-            persistent-hint
-            clearable
-            class="mt-2"
-            :rules="requiredRule"
-          ></v-text-field>
+                <v-switch
+                  v-model="config.x64"
+                  color="primary"
+                  inset
+                  :label="$t('settings.64bit')"
+                ></v-switch>
+              </v-form>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+        <v-tab-item>
+          <v-card flat>
+            <v-card-text>
+              <v-text-field
+                v-model="config.steamcmd_path"
+                filled
+                :label="$t('settings.steamCMDLabel')"
+                :hint="$t('settings.steamCMDHint')"
+                persistent-hint
+                clearable
+              ></v-text-field>
 
-          <v-text-field
-            v-model="config.port"
-            filled
-            :label="$t('settings.port')"
-            type="number"
-            clearable
-            class="mt-2"
-            :rules="requiredRule"
-          ></v-text-field>
-        </v-form>
+              <v-subheader>{{ $t('settings.steamAccountMessage') }}</v-subheader>
+              <v-alert 
+                text
+                dense
+                type="warning"
+                border="left"
+              >{{ $t('settings.steamWorkshopInfo') }}</v-alert>
 
-        <v-switch
-          v-model="config.x64"
-          color="primary"
-          inset
-          label="Version 64bit"
-        ></v-switch>
+              <v-text-field
+                v-model="config.steam_account"
+                filled
+                :label="$t('common.username')"
+                clearable
+              ></v-text-field>
 
-        <v-divider></v-divider>
+              <v-text-field
+                v-model="config.steam_password"
+                filled
+                :label="$t('common.password')"
+                clearable
+                type="password"
+                :hint="$t('settings.passwordHint')"
+                persistent-hint
+              ></v-text-field>
 
-        <v-subheader>{{ $t('settings.steamAccountMessage') }}</v-subheader>
-        <v-alert 
-          text
-          dense
-          type="warning"
-          border="left"
-        >{{ $t('settings.steamWorkshopInfo') }}</v-alert>
-
-        <v-text-field
-          v-model="config.steam_account"
-          filled
-          :label="$t('common.username')"
-          clearable
-        ></v-text-field>
-
-        <v-text-field
-          v-model="config.steam_password"
-          filled
-          :label="$t('common.password')"
-          clearable
-          type="password"
-          :hint="$t('settings.passwordHint')"
-          persistent-hint
-        ></v-text-field>
-
-        <v-switch
-          v-model="config.steam_guard"
-          color="primary"
-          inset
-          :label="$t('settings.steamGuardProtection')"
-          :hint="$t('settings.steamGuardHint')"
-          persistent-hint
-        ></v-switch>
-      </v-card-text>
+              <v-switch
+                v-model="config.steam_guard"
+                color="primary"
+                inset
+                :label="$t('settings.steamGuardProtection')"
+                :hint="$t('settings.steamGuardHint')"
+                persistent-hint
+              ></v-switch>
+            </v-card-text>
+          </v-card>
+        </v-tab-item>
+      </v-tabs>
     </v-card>
   </v-container>
 </template>

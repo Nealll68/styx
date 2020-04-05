@@ -219,7 +219,8 @@
     "steamWorkshopInfo": "To be able to use the workshop related functionalities the account must have Arma 3",
     "passwordHint": "The password is never displayed. To modify it, specify it again",
     "steamGuardProtection": "Protected by Steam Guard",
-    "steamGuardHint": "If yes, you will be asked for the Steam Guard code before each download"
+    "steamGuardHint": "If yes, you will be asked for the Steam Guard code before each download",
+    "64bit": "64bit version"
   },
 
   "user": {

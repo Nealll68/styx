@@ -39,7 +39,8 @@
               <v-list-item 
                 v-for="logFile in item.files" 
                 :key="logFile"
-                @click="showLogs(item.profile_name, logFile)"
+                nuxt
+                :to="`/demeter/logs/${item.profile_name}/${logFile}`"
               >
                   <v-list-item-content>
                     <v-list-item-title>{{ logFile.substring(16, 35) }}</v-list-item-title>
@@ -61,45 +62,7 @@
       </v-col>
 
       <v-col md="12" lg="9">
-        <v-card>
-          <template v-if="logs">
-            <v-card-title>
-              <v-icon left>mdi-post</v-icon>{{ logs.filename }}
-              <v-spacer></v-spacer>
-              <v-btn
-                color="primary"
-                text
-                @click="downloadLog(logs.profileName, logs.filename)"
-              >
-                <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
-              </v-btn>
-            </v-card-title>
-
-            <v-card-text>
-              <v-sheet
-                color="grey darken-4" 
-                class="pa-2 scrollbar"
-                max-height="700px"
-              >
-                <div 
-                  v-for="(log, i) of logs.logs"
-                  :key="i"
-                  class="my-2"
-                >
-                  {{ log }}
-                </div>
-              </v-sheet>           
-            </v-card-text>
-          </template>
-
-          <v-card-text v-else>
-            <v-alert
-              type="info"
-              border="left"
-              text
-            >{{ $t('logs.filterInfo') }}</v-alert>
-          </v-card-text>
-        </v-card>
+        <nuxt-child />
       </v-col>
     </v-row>
   </v-container>

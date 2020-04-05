@@ -93,7 +93,7 @@ class ProfileController {
 
         if (serverProfile.isDefault && await A3ServerProfile.getCount() > 0) {
             const newDefaultProfile = await A3ServerProfile.first()
-            console.log(newDefaultProfile)
+            
             newDefaultProfile.merge({ isDefault: true })
             newDefaultProfile.save()
         }

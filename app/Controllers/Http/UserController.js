@@ -78,8 +78,8 @@ class UserController {
 	async destroy ({ params, response }) {
 		const user = await User.find(params.id)
 
-		if (user.privilege === 2) {
-			if (await User.query().where('privilege', 2).getCount() === 1) {
+		if (user.privilege === 1) {
+			if (await User.query().where('privilege', 1).getCount() === 1) {
 				return response.forbidden('E_SUPER_ADMIN_ACCOUNT_REQUIRED')
 			}
 		}

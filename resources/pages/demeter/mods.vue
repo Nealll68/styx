@@ -7,10 +7,7 @@
       v-else
       justify="center"
     >
-      <v-col 
-        v-if="$auth.user.privilege === 1"
-        cols="md-12"
-      >
+      <v-col cols="12">
         <v-menu
           v-model="modBtnMenu"
         >
@@ -74,7 +71,7 @@
         </v-menu>
       </v-col>
 
-      <v-col cols="md-12">
+      <v-col cols="12">
         <v-card>    
           <v-card-title class="headline">
             <h3>{{ $t('mods.title') }}</h3>

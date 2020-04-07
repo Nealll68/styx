@@ -11,7 +11,7 @@ hooks.after.httpServer(async () => {
         await User.create({
             username: 'admin',
             password: 'admin',
-            privilege: 2
+            privilege: 1
         })
     }
 

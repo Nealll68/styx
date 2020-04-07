@@ -39,9 +39,8 @@
   },
 
   "privileges": {
-    "normal": "Normal",
-    "admin": "Admin",
-    "supAdmin": "Super admin"
+    "sergeant": "Sergent",
+    "commander": "Commandant"
   },
 
   "serverState": {

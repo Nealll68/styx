@@ -18,8 +18,6 @@
             <div class="font-weight-thin display-1">DEMETER</div>
           </v-card-title>
 
-          <v-divider></v-divider>
-
 					<v-card-text>
 						<v-form 
               v-model="formIsValid" 

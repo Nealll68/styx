@@ -8,7 +8,7 @@
       justify="center"
     >
       <v-col 
-        v-if="$auth.user.privilege >= 1"
+        v-if="$auth.user.privilege === 1"
         cols="md-12"
       >
         <v-menu
@@ -142,7 +142,7 @@
                   </v-btn>
 
                   <v-btn                    
-                    v-if="$auth.user.privilege >= 1 && item.source === 'Workshop'"
+                    v-if="$auth.user.privilege === 1 && item.source === 'Workshop'"
                     text
                     icon
                     @click="updateMission(item.workshop_id)"
@@ -152,7 +152,7 @@
                   </v-btn>
 
                 <v-btn
-                  v-if="$auth.user.privilege >= 1" 
+                  v-if="$auth.user.privilege === 1" 
                   text
                   icon
                   color="error"

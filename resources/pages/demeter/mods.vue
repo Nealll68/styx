@@ -8,7 +8,7 @@
       justify="center"
     >
       <v-col 
-        v-if="$auth.user.privilege >= 1"
+        v-if="$auth.user.privilege === 1"
         cols="md-12"
       >
         <v-menu
@@ -150,7 +150,7 @@
                   </v-btn>
 
                   <v-btn                    
-                    v-if="$auth.user.privilege >= 1 && item.source === 'Workshop'"
+                    v-if="$auth.user.privilege === 1 && item.source === 'Workshop'"
                     text
                     icon
                     @click="downloadMod({ workshopId: item.workshop_id, title: item.name, fileSize: item.size, isUpdate: true })"
@@ -160,7 +160,7 @@
                   </v-btn>
 
                   <v-btn
-                    v-if="$auth.user.privilege >= 1"
+                    v-if="$auth.user.privilege === 1"
                     text
                     icon
                     color="error"

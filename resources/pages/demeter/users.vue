@@ -10,7 +10,7 @@
     <v-row justify="center">
       <v-col cols="md-12">
         <v-btn 
-          v-if="$auth.user.privilege === 2"
+          v-if="$auth.user.privilege === 1"
           outlined
           color="primary" 
           class="float-right" 
@@ -61,7 +61,7 @@
 
                 <template v-slot:item.action="{ item }">
                   <v-btn
-                    v-if="$auth.user.privilege > item.privilege || $auth.user.privilege === 2" 
+                    v-if="$auth.user.privilege > item.privilege || $auth.user.privilege === 1" 
                     text 
                     icon
                   >
@@ -69,7 +69,7 @@
                   </v-btn>
                   
                   <v-btn
-                    v-if="$auth.user.privilege > item.privilege || $auth.user.privilege === 2"
+                    v-if="$auth.user.privilege > item.privilege || $auth.user.privilege === 1"
                     text
                     icon
                     color="error"
@@ -208,7 +208,7 @@ export default {
         { text: this.$t('users.createdAt'), value: 'created_at' },
         { text: '', value: 'action', sortable: false }
       ],
-      privileges: [this.$t('privileges.normal'), this.$t('privileges.admin'), this.$t('privileges.supAdmin')]
+      privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')]
     }
   },
 

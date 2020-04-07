@@ -192,7 +192,7 @@
     </v-btn>
     
     <v-tooltip 
-      v-if="$auth.user.privilege === 2"
+      v-if="$auth.user.privilege === 1"
       bottom
     >
       <template v-slot:activator="{ on }">
@@ -236,7 +236,7 @@ export default {
         { link: '/demeter/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
         { link: '/demeter/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }
       ],
-      privileges: [this.$t('privileges.normal'), this.$t('privileges.admin'), this.$t('privileges.supAdmin')]
+      privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')]
     }
   },
 
@@ -253,8 +253,10 @@ export default {
   },
 
   created () {
-    if (this.$auth.user.privilege >= 1) this.items.push({ link: '/demeter/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
-    if (this.$auth.user.privilege === 2) this.items.push({ link: '/demeter/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
+    if (this.$auth.user.privilege === 1) {
+      this.items.push({ link: '/demeter/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
+      this.items.push({ link: '/demeter/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
+    }
   },
 
   mounted () {

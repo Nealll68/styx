@@ -148,7 +148,7 @@
 
     <v-row justify="center">
       <v-col cols="12">
-        <v-card>
+        <v-card :loading="loading">
           <v-card-title>
             <v-icon left>mdi-post</v-icon>
             {{ $t('index.logsTitle') }}
@@ -168,8 +168,7 @@
               @click="refreshLogs()"
               class="mr-2"
               color="tertiary"
-              :loading="loading"
-              :disabled="automaticRefresh || !$store.state.a3Server.isStarted"
+              :disabled="loading || automaticRefresh || !$store.state.a3Server.isStarted"
             >
               <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
             </v-btn>

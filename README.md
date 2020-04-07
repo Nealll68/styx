@@ -1,4 +1,9 @@
-<h1 align="center">Welcome to Demeter 👋</h1>
+<p align="center">
+  <img alt="Logo" src="https://raw.githubusercontent.com/Nealll68/demeter/master/resources/static/logo.png">
+</p>
+
+<h1 align="center">Welcome to Demeter</h1>
+
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/Nealll68/demeter/blob/master/LICENCE" target="_blank">
@@ -10,6 +15,11 @@
 </p>
 
 > A web interface to control an Arma 3 server
+
+## Notes
+
+* Do not actually support Arma 3 Linux server
+* Can manage only one instance of server (maybe i will work on multiple instance support)
 
 ## Author
 
@@ -23,14 +33,7 @@
 
 Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Nealll68/demeter/issues). 
 
-## Show your support
-
-Give a ⭐️ if this project helped you!
-
 ## 📝 License
 
 Copyright © 2020 [Nealll](https://github.com/Nealll68).<br />
 This project is [MIT](https://github.com/Nealll68/demeter/blob/master/LICENCE) licensed.
-
-***
-_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

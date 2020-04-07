@@ -5,6 +5,11 @@
     <v-row justify="center">
       <v-col md="6" sm="12">
         <v-card>
+          <v-progress-linear
+            :value="cpuUsage[cpuUsage.length - 1]"
+            color="tertiary"
+          ></v-progress-linear>
+
           <v-card-text class="py-0">
             <v-list>
               <v-list-item>
@@ -71,6 +76,11 @@
 
       <v-col md="6" sm="12">
         <v-card>
+          <v-progress-linear
+            :value="memUsed[memUsed.length - 1]"
+            color="quaternary"
+          ></v-progress-linear>
+
           <v-card-text class="py-0">
             <v-list>
               <v-list-item>

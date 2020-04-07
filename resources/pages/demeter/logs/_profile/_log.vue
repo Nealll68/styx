@@ -1,47 +1,101 @@
 <template>
   <v-card>
-    <template v-if="logs">
-      <v-card-title>
-        <v-icon left>mdi-post</v-icon>{{ logs.filename }}
-        <v-spacer></v-spacer>
-        <v-btn
-          color="primary"
-          text
-          @click="downloadLog(logs.profileName, logs.filename)"
-        >
-          <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
-        </v-btn>
-      </v-card-title>
+    <v-banner
+      app
+      sticky
+      single-line
+    >
+      <v-icon slot="icon">mdi-post</v-icon>
+      {{ logs.filename }}
 
-      <v-card-text>
-        <v-sheet
-          color="grey darken-4" 
-          class="pa-2 scrollbar"
-          max-height="700px"
-        >
-          <div 
-            v-for="(log, i) of logs.logs"
-            :key="i"
-            class="my-2"
-          >
-            {{ log }}
-          </div>
-        </v-sheet>           
-      </v-card-text>
-    </template>
-
-    <v-card-text v-else>
-      <v-alert
-        type="info"
-        border="left"
+      <template v-slot:actions>
+      <v-btn
+        color="primary"
         text
-      >{{ $t('logs.filterInfo') }}</v-alert>
+        @click="downloadLog(logs.profileName, logs.filename)"
+      >
+        <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
+      </v-btn>
+      </template>
+    </v-banner>
+
+    <v-card-text>
+      <v-sheet
+        color="grey darken-4" 
+        class="pa-2"
+      >
+        <div 
+          v-for="(log, i) of logs.logs"
+          :key="i"
+          class="my-2"
+        >
+          {{ log }}
+        </div>
+      </v-sheet>           
     </v-card-text>
+
+    <v-fab-transition>
+      <v-btn
+        v-scroll="onScroll"
+        v-show="fab"
+        fab
+        fixed
+        bottom
+        right
+        color="primary"
+        @click="$vuetify.goTo(0)"
+      >
+        <v-icon>mdi-arrow-up</v-icon>
+      </v-btn>
+    </v-fab-transition>
   </v-card>
 </template>
 
 <script>
 export default {
-  layout: 'demeter'
+  data: () => ({
+    fab: false
+  }),
+
+  async asyncData ({ $axios, params, error }) {
+    const profileName = params.profile
+    const filename = params.log
+    const response = await $axios.$get(`server/logs/${profileName}/${filename}`).catch (() => {
+      return false
+    })
+
+    if (!response) return error ({ statusCode: 404, message: "Unable to find the log file" })
+
+    return {
+      logs: {
+        profileName,
+        filename,
+        logs: response.split('\r\n')
+      }
+    }
+  },
+
+  methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 300
+    },
+
+    async downloadLog (profileName, filename) {
+      const response = await this.$axios({
+        url: `server/logs/download/${profileName}/${filename}`,
+        method: 'GET',
+        responseType: 'blob'
+      })
+
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', filename)
+      document.body.appendChild(link)
+      link.click()
+    },
+  }
 }
 </script>

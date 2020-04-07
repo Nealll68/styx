@@ -95,30 +95,6 @@ export default {
   },
 
   methods: {
-    async showLogs (profileName, filename) {
-      const logs = await this.$axios.$get(`server/logs/${profileName}/${filename}`)      
-      this.logs = {
-        profileName,
-        filename,
-        logs: logs.split('\r\n')
-      }
-    },
-
-    async downloadLog (profileName, filename) {
-      const response = await this.$axios({
-        url: `server/logs/download/${profileName}/${filename}`,
-        method: 'GET',
-        responseType: 'blob'
-      })
-
-      const url = window.URL.createObjectURL(new Blob([response.data]))
-      const link = document.createElement('a')
-      link.href = url
-      link.setAttribute('download', filename)
-      document.body.appendChild(link)
-      link.click()
-    },
-
     async deleteLogs (profileName, filename) {      
       const confirm = await this.$confirm(this.$t('logs.confirmDeletion'), { 
         title: this.$t('common.deletion'),

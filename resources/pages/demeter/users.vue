@@ -90,13 +90,6 @@
       max-width="600px"
     >      
       <v-card>
-          <v-overlay 
-            :value="dialogLoading"
-            absolute
-          >
-            <v-progress-circular indeterminate></v-progress-circular>
-          </v-overlay>
-
           <v-card-text class="pt-5 pb-0">
             <v-form 
               v-model="formIsValid" 
@@ -160,6 +153,7 @@
               color="primary"
               @click="saveUser()"
               :disabled="!formIsValid"
+              :loading="dialogLoading"
             >{{ $t('common.save') }}</v-btn>
           </v-card-actions>
         </v-card>

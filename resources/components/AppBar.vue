@@ -137,19 +137,27 @@
       >mdi-account</v-icon> {{ $auth.user.username }} - {{ privileges[$auth.user.privilege] }}            
     </v-chip>
 
-    <v-chip 
-      small 
-      label 
-      outlined
-      class="mx-1 hidden-sm-and-down"
-    >CPU : <span v-if="measure" class="ml-1">{{ measure.cpu_usage }}%</span></v-chip>
+    <v-progress-circular
+      :value="measure.cpu_usage"
+      color="tertiary"
+      class="mx-2 hidden-xs-only"
+    >
+      <v-icon 
+        small
+        color="tertiary"
+      >mdi-chip</v-icon>
+    </v-progress-circular>
 
-    <v-chip 
-      small 
-      label 
-      outlined
-      class="mx-1 hidden-sm-and-down"
-    >MEM : <span v-if="measure" class="ml-1">{{ measure.mem_used }}%</span></v-chip>
+    <v-progress-circular
+      :value="measure.mem_used"
+      color="quaternary"
+      class="mx-2 hidden-xs-only"
+    >
+      <v-icon 
+        small
+        color="quaternary"
+      >mdi-memory</v-icon>
+    </v-progress-circular>
 
     <v-spacer></v-spacer>
 

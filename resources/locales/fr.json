@@ -236,7 +236,7 @@
     "updated": "Utilisateur mis à jour",
     "deleted": "Utilisateur supprimé",
     "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer cette utilisateur ?",
-    "supAdminError": "Suppression impossible : il doit toujours y avoir un compte super admin d'actif"
+    "supAdminError": "Suppression impossible : il doit toujours y avoir un compte commandant d'actif"
   },
 
   "login": {

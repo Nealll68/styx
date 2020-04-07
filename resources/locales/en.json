@@ -236,7 +236,7 @@
     "updated": "User updated",
     "deleted": "User deleted",
     "confirmDeletion": "Are you sure you want to permanently delete this user?",
-    "supAdminError": "Impossible to delete: there must always be an active super admin account"
+    "supAdminError": "Impossible to delete: there must always be an active commander account"
   },
 
   "login": {

@@ -10,7 +10,7 @@
       <v-img src="/logo.png" max-height="50" max-width="50"></v-img>
     </div>
 
-    <v-list nav>      
+    <v-list>      
       <v-list-item 
         v-for="item in items" 
         :key="item.name"
@@ -37,7 +37,7 @@
     </v-list>
 
     <template v-slot:append>
-      <v-list nav>
+      <v-list>
         <v-list-item
           nuxt
           to="/demeter/user"

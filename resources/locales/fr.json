@@ -156,7 +156,7 @@
   },
 
   "profiles": {
-    "howToCreate": "Vous pouvez créer un profil en entrant un nom dans le champ et en cliquant sur l'icône",
+    "howToCreate": "Vous pouvez créer un profil en cliquant sur l'icône '+' et en entrant un nom dans le champ",
     "noNameError": "Merci de préciser un nom pour le profil",
     "nameUsed": "Ce nom est déjà utilisé",
     "created": "Profil créé",

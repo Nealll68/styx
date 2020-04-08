@@ -63,16 +63,50 @@
 
           <v-spacer></v-spacer>
 
-          <v-text-field
-            v-model="profileName"
-            filled
-            dense
-            :label="$t('common.name')"
-            hide-details
-            single-line
-            append-outer-icon="mdi-folder-plus"
-            @click:append-outer="saveProfile()"
-          ></v-text-field>         
+          <v-menu
+            v-model="menu"
+            :close-on-content-click="false"
+            :nudge-width="200"
+            offset-x
+          >
+            <template v-slot:activator="{ on }">
+               <v-btn
+                  v-on="on"
+                  icon
+                  color="primary"
+                >
+                  <v-icon>mdi-plus</v-icon>
+                </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-text>
+                <v-text-field
+                  filled
+                  dense
+                  v-model="profileName"
+                  :label="$t('common.name')"
+                  hide-details
+                  single-line
+                ></v-text-field>
+              </v-card-text>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+
+                <v-btn 
+                  text 
+                  @click="menu = false"
+                >{{ $t('common.close') }}</v-btn>
+
+                <v-btn 
+                  color="primary" 
+                  outlined 
+                  @click="saveProfile"
+                >{{ $t('common.save') }}</v-btn>
+              </v-card-actions>
+            </v-card>
+          </v-menu>        
 
           <template v-slot:extension>
             <v-tabs 
@@ -138,7 +172,8 @@ export default {
     return {
       loading: false,
       loadingPage: false,
-      profileName: ''
+      profileName: '',
+      menu: false
     }
   },
 
@@ -179,6 +214,7 @@ export default {
   methods: {
     async saveProfile () {
       this.loading = true
+      this.menu = false
 
       if (this.profiles.some(e => e.name.toLowerCase() === this.profileName.toLowerCase())) {
         return this.$toast.global.appError(this.$t('profiles.nameUsed'))

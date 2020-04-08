@@ -6,12 +6,12 @@
     >
       <v-chip 
         label
-        class="mx-1"
+        class="mx-1 hidden-xs-only"
       >{{ $t('serverMod.modsActivated') }} : {{ mods.filter(e => e.activated).length }}</v-chip>
 
       <v-chip
         label
-        class="mx-1"
+        class="mx-1 hidden-xs-only"
       >{{ $t('serverMod.serverModsActivated') }} : {{ mods.filter(e => e.server_mod).length }}</v-chip>
 
       <v-spacer></v-spacer>

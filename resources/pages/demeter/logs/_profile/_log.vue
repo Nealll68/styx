@@ -9,13 +9,25 @@
       {{ logs.filename }}
 
       <template v-slot:actions>
-      <v-btn
-        color="primary"
-        text
-        @click="downloadLog(logs.profileName, logs.filename)"
-      >
-        <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
-      </v-btn>
+        <v-btn
+          color="primary"
+          text
+          @click="downloadLog(logs.profileName, logs.filename)"
+          :loading="downloadLoading"
+          :disable="deleteLoading"
+        >
+          <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
+        </v-btn>
+
+        <v-btn
+          color="error"
+          text
+          @click="deleteLog(logs.profileName, logs.filename)"
+          :loading="deleteLoading"
+          :disable="downloadLoading"
+        >
+          <v-icon left>mdi-delete-forever</v-icon>{{ $t('common.delete') }}
+        </v-btn>
       </template>
     </v-banner>
 
@@ -54,6 +66,8 @@
 <script>
 export default {
   data: () => ({
+    downloadLoading: false,
+    deleteLoading: false,
     fab: false
   }),
 
@@ -83,6 +97,8 @@ export default {
     },
 
     async downloadLog (profileName, filename) {
+      this.downloadLoading = true
+
       const response = await this.$axios({
         url: `server/logs/download/${profileName}/${filename}`,
         method: 'GET',
@@ -95,7 +111,31 @@ export default {
       link.setAttribute('download', filename)
       document.body.appendChild(link)
       link.click()
+
+      this.downloadLoading = false
     },
+
+    async deleteLog (profileName, filename) {
+      this.deleteLoading = true
+
+      const confirm = await this.$confirm(this.$t('logs.confirmDeletion'), { 
+        title: this.$t('common.deletion'),
+        color: 'error'
+      })
+
+      if (confirm) {
+        await this.$axios.$delete(`server/logs/${profileName}/${filename}`)
+
+        this.deleteLoading = false
+
+        this.$emit('refresh')
+        this.$router.push('/demeter/logs')
+
+        if (this.logs.profileName === profileName) {
+          this.logs = null
+        }
+      }      
+    }
   }
 }
 </script>

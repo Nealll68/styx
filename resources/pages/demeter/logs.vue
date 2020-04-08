@@ -4,16 +4,16 @@
 
     <v-row v-else>
       <v-col md="12" lg="3">
-        <v-card>
+        <v-card :loading="loading">
           <v-card-text>
             <v-btn
               text
               color="error"
               block
-              :loading="deleteAllLoading"
+              :disable="loading"
               @click="deleteAllLogs()"
             >
-              <v-icon left>mdi-delete-forever</v-icon> {{ $t('logs.deleteAll') }}
+              <v-icon left>mdi-delete-sweep</v-icon> {{ $t('logs.deleteAll') }}
             </v-btn>
           </v-card-text>
 
@@ -42,19 +42,9 @@
                 nuxt
                 :to="`/demeter/logs/${item.profile_name}/${logFile}`"
               >
-                  <v-list-item-content>
-                    <v-list-item-title>{{ logFile.substring(16, 35) }}</v-list-item-title>
-                  </v-list-item-content>
-
-                  <v-list-item-action>
-                    <v-btn
-                      icon
-                      color="error"
-                      @click.stop="deleteLogs(item.profile_name, logFile)"
-                    >
-                      <v-icon>mdi-delete</v-icon>
-                    </v-btn>
-                  </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>{{ logFile.substring(16, 35) }}</v-list-item-title>
+                </v-list-item-content>
               </v-list-item>
             </v-list-group>
           </v-list>
@@ -62,7 +52,7 @@
       </v-col>
 
       <v-col md="12" lg="9">
-        <nuxt-child />
+        <nuxt-child @refresh="refresh" />
       </v-col>
     </v-row>
   </v-container>
@@ -80,9 +70,7 @@ export default {
 
   data () {
     return {
-      selectedLog: null,
-      logs: null,
-      deleteAllLoading: false
+      loading: false
     }
   },
 
@@ -94,23 +82,11 @@ export default {
     }
   },
 
-  methods: {
-    async deleteLogs (profileName, filename) {      
-      const confirm = await this.$confirm(this.$t('logs.confirmDeletion'), { 
-        title: this.$t('common.deletion'),
-        color: 'error'
-      })
-
-      if (confirm) {
-        await this.$axios.$delete(`server/logs/${profileName}/${filename}`)
-
-        const index = this.logFiles.findIndex(element => element.profile_name === profileName)
-        this.logFiles[index].files.splice(this.logFiles[index].files.indexOf(filename), 1)
-
-        if (this.logs.profileName === profileName) {
-          this.logs = null
-        }
-      }      
+  methods: { 
+    async refresh () {
+      this.loading = true
+      this.logFiles = await this.$axios.$get('server/logs')
+      this.loading = false
     },
 
     async deleteAllLogs () {
@@ -120,7 +96,7 @@ export default {
       })
 
       if (confirm) {
-        this.deleteAllLoading = true
+        this.loading = true
 
         for (const profile of this.logFiles) {
           for (const filename of profile.files) {
@@ -131,7 +107,7 @@ export default {
         }
         
         this.logs = null
-        this.deleteAllLoading = false
+        this.loading = false
       }
     }
   }

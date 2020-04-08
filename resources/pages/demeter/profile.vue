@@ -58,7 +58,7 @@
             :disabled="!$route.params.name || profiles.length === 1"
             @click="deleteProfile()"
           >
-            <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-delete</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('profiles.delete') }}
+            <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-delete</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.delete') }}
           </v-btn>
 
           <v-spacer></v-spacer>

@@ -5,6 +5,7 @@
     "continue": "Continuer",
     "cancel": "Annuler",
     "close": "Fermer",
+    "delete": "Supprimer",
     "download": "Télécharger",
     "noResult": "Aucun résultat",
     "fromWorkshop": "Depuis le Workshop",
@@ -163,7 +164,6 @@
     "deleted": "Profil supprimé",
     "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer ce profil ?",
     "setAsDefault": "Définir par defaut",
-    "delete": "Supprimer",
 
     "tabTitles": {
       "mods": "Mods",

@@ -4,7 +4,8 @@
     "deletion": "Deletion",
     "continue": "Continue",
     "cancel": "Cancel",
-    "close": "Close",
+    "close": "Close",    
+    "delete": "Delete",
     "download": "Download",
     "noResult": "No result",
     "fromWorkshop": "From the workshop",
@@ -163,7 +164,6 @@
     "deleted": "Profile deleted",
     "confirmDeletion": "Are you sure you want to permanently delete this profile?",
     "setAsDefault": "Set as default",
-    "delete": "Delete",
 
     "tabTitles": {
       "mods": "Mods",

@@ -16,7 +16,7 @@
         :key="item.name"
         nuxt
         :to="item.link"
-        exact
+        :exact="item.link === '/demeter'"
         color="primary"
       >
         <v-list-item-icon>

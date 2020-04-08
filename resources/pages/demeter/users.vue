@@ -2,8 +2,9 @@
   <v-container fluid>   
     <v-alert
       type="warning"
-      border="left"
+      prominent
       text
+      outlined
       v-if="users.find(element => element.username === 'admin')"
     >{{ $t('users.adminUserAlert') }}</v-alert>
 

@@ -34,14 +34,12 @@
         <v-btn
           text
           @click="close"
-        >Cancel</v-btn>
+        >{{ $t('common.cancel') }}</v-btn>
 
         <v-btn
           :color="type"
           @click="confirm"
-        >
-          Continue
-        </v-btn>
+        >{{ $t('common.continue') }}</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>

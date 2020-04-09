@@ -46,8 +46,7 @@
     "symlink-dir": "^3.1.1",
     "systeminformation": "^4.22.3",
     "vue-apexcharts": "^1.5.2",
-    "vue-i18n": "^8.15.5",
-    "vuetify-confirm": "^2.0.2"
+    "vue-i18n": "^8.15.5"
   },
   "devDependencies": {
     "@nuxtjs/moment": "^1.6.0",

@@ -45,6 +45,7 @@ module.exports = {
     { src: '~/plugins/vueApexCharts.client', ssr: false },
     { src: '~/plugins/steamGuard.client', ssr: false },
     { src: '~/plugins/confirm.client', ssr: false },
+    { src: '~/plugins/snackbar.client', ssr: false },
     '~/plugins/formatBytesFilter',
     '~/plugins/axios'    
   ],
@@ -55,7 +56,8 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth', '@nuxtjs/toast', 'cookie-universal-nuxt'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth', 'cookie-universal-nuxt'],
+
   dotenv: {
     path: resolve(__dirname, '..')
   },
@@ -85,61 +87,6 @@ module.exports = {
   moment: {
     locales: ['fr'],
     defaultLocale: 'en'
-  },
-  /*
-   ** Toast module configuration
-   */
-  toast: {
-    position: 'bottom-center',
-    duration: 6000,
-    keepOnHover: true,
-    iconPack: 'mdi',
-    action: {
-      text: 'Fermer',
-      onClick: (e, toastObject) => {
-        toastObject.goAway(0)
-      }
-    },
-
-    register: [
-      {
-        name: 'appError',
-        message: payload => {
-          if (!payload) {
-            return "Une erreur s'est produite"
-          }
-          return payload
-        },
-        options: {
-          icon: 'alert',
-          containerClass: ['app-toast', 'app-error-toast']
-        }
-      },
-      {
-        name: 'appSuccess',
-        message: payload => payload,
-        options: {
-          icon: 'check-circle',
-          containerClass: ['app-toast', 'app-success-toast']
-        }
-      },
-      {
-        name: 'appInfo',
-        message: payload => payload,
-        options: {
-          icon: 'information',
-          containerClass: ['app-toast', 'app-info-toast']
-        }
-      },
-      {
-        name: 'appWarning',
-        message: payload => payload,
-        options: {
-          icon: 'exclamation',
-          containerClass: ['app-toast', 'app-warning-toast']
-        }
-      }
-    ]
   },
   /*
    ** vuetify module configuration

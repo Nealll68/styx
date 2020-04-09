@@ -65,7 +65,8 @@
     "pageNotFound": "Page not found",
     "internalServerError": "Internal server error",
     "unauthorized": "Unauthorized",
-    "other": "An error has occured"
+    "other": "An error has occured",
+    "undefinedDefaultProfile": "You need to specify a default profile to start the server"
   },
 
   "rules": {

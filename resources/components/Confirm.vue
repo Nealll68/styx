@@ -31,7 +31,7 @@
 
       <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn
+        <!--<v-btn
           text
           @click="close"
         >{{ $t('common.cancel') }}</v-btn>
@@ -39,7 +39,7 @@
         <v-btn
           :color="type"
           @click="confirm"
-        >{{ $t('common.continue') }}</v-btn>
+        >{{ $t('common.continue') }}</v-btn>-->
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -52,6 +52,10 @@ export default {
   data: () => ({
     value: false
   }),
+
+  mounted () {
+    console.log(this.$t('common'))
+  },
 
   methods: {
     confirm () {

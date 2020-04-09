@@ -29,7 +29,6 @@
     "@nuxtjs/auth": "^4.8.5",
     "@nuxtjs/axios": "^5.9.5",
     "@nuxtjs/dotenv": "^1.4.0",
-    "@nuxtjs/toast": "^3.3.0",
     "anzip": "^0.2.0",
     "apexcharts": "^3.15.6",
     "axios": "^0.19.2",

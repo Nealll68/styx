@@ -118,9 +118,10 @@ export default {
     async deleteLog (profileName, filename) {
       this.deleteLoading = true
 
-      const confirm = await this.$confirm(this.$t('logs.confirmDeletion'), { 
+      const confirm = await this.$confirm({ 
         title: this.$t('common.deletion'),
-        color: 'error'
+        message: this.$t('logs.confirmDeletion'),
+        type: 'error'
       })
 
       if (confirm) {

@@ -90,9 +90,10 @@ export default {
     },
 
     async deleteAllLogs () {
-      const confirm = await this.$confirm(this.$t('logs.confirmAllDelete'), { 
+      const confirm = await this.$confirm({ 
         title: this.$t('common.deletion'),
-        color: 'error'
+        message: this.$t('logs.confirmAllDelete'),
+        type: 'error'
       })
 
       if (confirm) {

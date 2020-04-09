@@ -245,9 +245,10 @@ export default {
     },
 
     async deleteUser (user) {
-      const confirm = await this.$confirm(this.$t('users.confirmDeletion'), { 
+      const confirm = await this.$confirm({ 
         title: this.$t('common.deletion'),
-        color: 'error'
+        message: this.$t('users.confirmDeletion'),
+        type: 'error'
       })
 
       if (confirm) {

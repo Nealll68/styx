@@ -252,9 +252,10 @@ export default {
     },
 
     async deleteProfile () {
-      const confirm = await this.$confirm(this.$t('profiles.confirmDeletion'), { 
+      const confirm = await this.$confirm({ 
         title: this.$t('common.deletion'),
-        color: 'error'
+        message: this.$t('profiles.confirmDeletion'),
+        type: 'error'
       })
 
       if (confirm) {

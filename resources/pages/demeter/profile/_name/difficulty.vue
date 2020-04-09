@@ -72,9 +72,10 @@ export default {
       this.$emit('loading', true)
       this.loadingReset = true
 
-      const confirm = await this.$confirm(this.$t('common.confirmReset'), { 
-        title: this.$t('common.reset'),         
-        color: 'warning'
+      const confirm = await this.$confirm({ 
+        title: this.$t('common.reset'),
+        message: this.$t('common.confirmReset'),      
+        type: 'warning'
       })
       
       if (confirm) {

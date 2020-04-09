@@ -105,7 +105,10 @@ export default {
 
         await this.$auth.fetchUser()
 
-        this.$toast.global.appSuccess(this.$t('user.updated'))
+        this.$snackbar({
+          type: 'success',
+          message: this.$t('user.updated')
+        })
       }
 
       this.loading = false

@@ -224,7 +224,10 @@ export default {
     },
 
     async downloadMission (payload) {
-      if (!payload.fileUrl) return this.$toast.global.appError(this.$t('mission.workshopDownloadError'))
+      if (!payload.fileUrl) return this.$snackbar({
+        type: 'error',
+        message: this.$t('mission.workshopDownloadError')
+      })
       await this.$axios.$post('server/mission/workshop', payload)
       await this.refershMissionList()
     },
@@ -239,7 +242,10 @@ export default {
         filename: response.filename
       }
 
-      if (!payload.fileUrl) return this.$toast.global.appError(this.$t('mission.workshopDownloadError'))
+      if (!payload.fileUrl) return this.$snackbar({
+        type: 'error',
+        message: this.$t('mission.workshopDownloadError')
+      })
       await this.$axios.$post('server/mission/workshop', payload)
       await this.refershMissionList()
     },

@@ -217,7 +217,10 @@ export default {
       this.menu = false
 
       if (this.profiles.some(e => e.name.toLowerCase() === this.profileName.toLowerCase())) {
-        return this.$toast.global.appError(this.$t('profiles.nameUsed'))
+        return this.$snackbar({
+          type: 'error',
+          message: this.$t('profiles.nameUsed')
+        })
       }
 
       if (this.profileName) {
@@ -226,11 +229,17 @@ export default {
         })
 
         this.profiles.push(profile)
-        this.$toast.global.appSuccess(this.$t('profiles.created'))             
+        this.$snackbar({
+          type: 'success',
+          message: this.$t('profiles.created')
+        })             
 
         this.profileName = null
       } else {
-        this.$toast.global.appError(this.$t('profiles.noNameError'))
+        this.$snackbar({
+          type: 'error',
+          message: this.$t('profiles.noNameError')
+        })
       }
 
       this.loading = false
@@ -246,7 +255,10 @@ export default {
       })
 
       this.profiles = await this.$axios.$get('server/profile')
-      this.$toast.global.appSuccess(this.$t('profiles.updated'))
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('profiles.updated')
+      })
 
       this.loading = false
     },
@@ -267,7 +279,10 @@ export default {
         this.profiles = await this.$axios.$get('server/profile')      
         this.$router.push('/demeter/profile')
 
-        this.$toast.global.appSuccess(this.$t('profiles.deleted'))
+        this.$snackbar({
+          type: 'success',
+          message: this.$t('profiles.deleted')
+        })
 
         this.loading = false
       }

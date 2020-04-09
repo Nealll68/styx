@@ -11,7 +11,10 @@ export const mutations = {
         state.isStarted = false
 
         if (code === 'noProfile') {
-            this.$toast.global.appError('Spécifiez un profil par défaut pour démarrer le serveur')
+            this.$snackbar({
+                type: 'error',
+                message: this.$t('errors.undefinedDefaultProfile')
+            })
         }
     }
 }

@@ -38,19 +38,34 @@ export const mutations = {
     if (!code || code === 0) {
       switch (state.type) {
         case 'updateServer':
-          this.$toast.global.appSuccess(this.$t('download.serverUpdated'))
+          this.$snackbar({
+            type: 'success',
+            message: this.$t('download.serverUpdated')
+          })
           break
         case 'downloadMod':
-          this.$toast.global.appSuccess(this.$t('download.modDownloaded'))
+          this.$snackbar({
+            type: 'success',
+            message: this.$t('download.modDownloaded')
+          })
           break
         case 'downloadMission':
-          this.$toast.global.appSuccess(this.$t('download.missonDownloaded'))
+          this.$snackbar({
+            type: 'success',
+            message: this.$t('download.missonDownloaded')
+          })
           break
       }
     } else if (code === 5) {
-      this.$toast.global.appError(this.$t('download.steamGuardCodeError'))
+      this.$snackbar({
+        type: 'error',
+        message: this.$t('download.steamGuardCodeError')
+      })
     } else if (code === 8) {
-      this.$toast.global.appError(this.$t('download.diskSpaceError'))
+      this.$snackbar({
+        type: 'error',
+        message: this.$t('download.diskSpaceError')
+      })
     }
 
     state.type = null

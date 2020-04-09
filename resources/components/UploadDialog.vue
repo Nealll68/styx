@@ -123,7 +123,10 @@ export default {
 
   methods: {
     async upload () {
-      if (!this.file) return this.$toast.global.appInfo($t('upload.selectFileError'))
+      if (!this.file) return this.$snackbar({
+        type: 'info',
+        message: $t('upload.selectFileError')
+      })
 
       try {
         this.source = this.$axios.CancelToken.source()
@@ -144,13 +147,19 @@ export default {
         this.$emit('file-uploaded')
         this.uploadPercentage = 0
 
-        this.$toast.global.appSuccess(this.$t('upload.success'))
+        this.$snackbar({
+          type: 'success',
+          message:this.$t('upload.success')
+        })
 
         this.file = null
         this.$emit('close')
       } catch (ex) {
         if (ex.response.data === 'E_INVALID_FILE_EXTENSION') {
-          this.$toast.global.appError(this.$t('upload.fileExtensionError', { extension: this.isMission ? 'pbo' : 'zip' }))
+          this.$snackbar({
+            type: 'error',
+            message: this.$t('upload.fileExtensionError', { extension: this.isMission ? 'pbo' : 'zip' })
+          })
         }
       }
     },

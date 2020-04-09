@@ -340,7 +340,10 @@ export default {
       await this.$axios.$get('server/mod/detect')
       await this.refreshModsList()
 
-      this.$toast.global.appSuccess(this.$t('mods.importSuccess'))
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('mods.importSuccess')
+      })
       this.modsTableLoading = false
     },
 
@@ -366,7 +369,10 @@ export default {
         this.mods.splice(this.mods.indexOf(mod), 1)
       } catch (ex) {
         if (ex.response.data === 'E_UNABLE_TO_ACCESS') {
-          this.$toast.global.appError(this.$t('mods.notEntirelyDeleted'))
+          this.$snackbar({ 
+            type: 'warning',
+            message: this.$t('mods.notEntirelyDeleted')
+          })
         }
       }
 

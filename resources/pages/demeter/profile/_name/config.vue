@@ -55,7 +55,10 @@ export default {
         config: this.config
       })
       
-      this.$toast.global.appSuccess(this.$t('config.updated'))
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('config.updated')
+      })
 			
       this.loadingUpdate = false	
       this.$emit('loading', false)		
@@ -74,7 +77,10 @@ export default {
       if (confirm) {
         this.config = await this.$axios.$delete(`server/config/${this.$route.params.name}`)
         
-        this.$toast.global.appSuccess(this.$t('config.reseted'))
+        this.$snackbar({
+          type: 'success',
+          message: this.$t('config.reseted')
+        })
       }
 
       this.loadingReset = false

@@ -288,17 +288,26 @@ export default {
   methods: {
     startA3Server () {
       this.a3ServerWs.emit('start')
-      this.$toast.global.appInfo(this.$t('serverState.startProgress'))
+      this.$snackbar({
+        type: 'info',
+        message: this.$t('serverState.startProgress')
+      })
     },
 
     restartA3Server () {
       this.a3ServerWs.emit('restart')
-      this.$toast.global.appInfo(this.$t('serverState.restartProgress'))
+      this.$snackbar({
+        type: 'info',
+        message: this.$t('serverState.restartProgress')
+      })
     },
 
     stopA3Server () {
       this.a3ServerWs.emit('stop')
-      this.$toast.global.appInfo(this.$t('serverState.stopProgress'))
+      this.$snackbar({
+        type: 'info',
+        message: this.$t('serverState.stopProgress')
+      })
     },
 
     switchLocale (code) {

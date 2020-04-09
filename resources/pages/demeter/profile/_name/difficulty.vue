@@ -62,7 +62,10 @@ export default {
         config: this.difficulty
       })
       
-      this.$toast.global.appSuccess(this.$t('difficulty.updated'))
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('difficulty.updated')
+      })
 			
       this.loadingUpdate = false
       this.$emit('loading', false)			
@@ -80,7 +83,10 @@ export default {
       
       if (confirm) {
         this.difficulty = await this.$axios.$delete(`server/difficulty/${this.$route.params.name}`)  
-        this.$toast.global.appSuccess(this.$t('difficulty.reseted'))
+        this.$snackbar({
+          type: 'success',
+          message: this.$t('difficulty.reseted')
+        })
       }
 
       this.loadingReset = false

@@ -149,7 +149,10 @@ export default {
           )
           this.modsDetails.push(response)
         } catch (ex) {
-          this.$toast.global.appError(this.$t('workshop.idError'))
+          this.$snackbar({
+            type: 'error',
+            message: this.$t('workshop.idError')
+          })
         }
       }
 
@@ -167,7 +170,10 @@ export default {
           const response = await this.$axios.$get(`server/workshop/collection/${this.collectionId}`)
           this.modsDetails = response
         } catch (ex) {
-          this.$toast.global.appError(this.$t('workshop.idError'))
+          this.$snackbar({
+            type: 'error',
+            message: this.$t('workshop.idError')
+          })
         }
       }
 

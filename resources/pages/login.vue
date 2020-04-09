@@ -94,7 +94,10 @@ export default {
           this.$router.push('/demeter')
         } catch (ex) {
           if (ex.response.data === 'E_PASSWORD_MISMATCH' || ex.response.data === 'E_USER_NOT_FOUND') {
-            this.$toast.global.appError(this.$t('login.wrongCredentials'))
+            this.$snackbar({
+              type: 'error', 
+              message:this.$t('login.wrongCredentials')
+            })
           }
         }
       }

@@ -224,7 +224,10 @@ export default {
 
           this.editFormDataIndex = -1
 
-          this.$toast.global.appSuccess(this.$t('users.updated'))
+          this.$snackbar({
+            type: 'success',
+            message: this.$t('users.updated')
+          })
         } else {
           const newUser = await this.$axios.$post('user', {
             username: this.formData.username,
@@ -234,7 +237,10 @@ export default {
           
           this.users.push(newUser)        
           
-          this.$toast.global.appSuccess(this.$t('users.created'))
+          this.$snackbar({
+            type: 'success',
+            message: this.$t('users.created')
+          })
         }
 
         this.$refs.form.reset()
@@ -258,10 +264,16 @@ export default {
           await this.$axios.$delete(`user/${user.id}`)
           
           this.users.splice(this.users.indexOf(user), 1)
-          this.$toast.global.appSuccess(this.$t('users.deleted'))
+          this.$snackbar({
+            type: 'success',
+            message: this.$t('users.deleted')
+          })
         } catch (ex) {
           if (ex.response.data === 'E_SUPER_ADMIN_REQUIRED') {
-            this.$toast.global.appError(this.$t('users.supAdminError'))
+            this.$snackbar({
+              type: 'error',
+              message: this.$t('users.supAdminError')
+            })
           }
         }
 

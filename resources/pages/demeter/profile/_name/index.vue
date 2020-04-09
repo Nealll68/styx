@@ -142,7 +142,10 @@ export default {
         server_mod: serverMods
       })
 
-      this.$toast.global.appSuccess(this.$t('serverMod.updated'))
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('serverMod.updated')
+      })
 
       this.loadingUpdate = false
       this.$emit('loading', false)

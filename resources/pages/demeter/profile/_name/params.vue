@@ -97,7 +97,10 @@ export default {
         `server/params/${this.params.id}`,
         this.params
       )
-      this.$toast.global.appSuccess(this.$t('params.updated'))
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('params.updated')
+      })
 
       this.loadingUpdate = false
       this.$emit('loading', false)
@@ -109,7 +112,10 @@ export default {
 
       this.params = await this.$axios.$delete(`server/params/${this.params.id}`)     
 
-      this.$toast.global.appSuccess(this.$t('params.reseted'))
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('params.reseted')
+      })
 
       this.loadingReset = false
       this.$emit('loading', false)

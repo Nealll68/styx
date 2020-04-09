@@ -153,7 +153,10 @@ export default {
         this.config.steam_password = ''
         this.config = config
         this.$store.commit('config/set', config)
-        this.$toast.global.appSuccess(this.$t('params.updated'))
+        this.$snackbar({
+          type: 'success',
+          message: this.$t('params.updated')
+        })
       }
 
       this.loading = false

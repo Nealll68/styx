@@ -193,7 +193,7 @@
     </v-btn>
     
     <v-tooltip 
-      v-if="$auth.user.privilege === 1"
+      v-if="$auth.user.privilege === 1 && $store.state.config.steamCmdPath"
       bottom
     >
       <template v-slot:activator="{ on }">

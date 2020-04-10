@@ -84,7 +84,7 @@
                         mod.filename
                       )
                     "
-                    :disabled="$store.state.downloadInfo.type"
+                    :disabled="$store.state.downloadInfo.type ? true : false"
                   >
                     <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
                   </v-btn>

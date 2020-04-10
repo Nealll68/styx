@@ -26,7 +26,10 @@
           <v-list nav>
             <v-subheader>Workshop</v-subheader>
 
-            <v-list-item @click="showModList = true">
+            <v-list-item 
+              :disabled="!$store.state.config.steamCmdPath"
+              @click="showModList = true"
+            >
               <v-list-item-icon>
                 <v-icon>mdi-steam</v-icon>
               </v-list-item-icon>
@@ -36,7 +39,10 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="detectWorkshopMods()">
+            <v-list-item 
+              :disabled="!$store.state.config.steamCmdPath"
+              @click="detectWorkshopMods()"
+            >
               <v-list-item-icon>
                 <v-icon>mdi-folder-search</v-icon>
               </v-list-item-icon>
@@ -317,6 +323,7 @@ export default {
           workshopItemSize: modSize
         })
       } catch (ex) {
+        console.log(ex)
         if (ex.response.data === 'E_STEAM_GUARD_REQUIRED') {
           const steamGuard = await this.$steamGuard()
 

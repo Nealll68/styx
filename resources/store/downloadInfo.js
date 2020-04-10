@@ -1,12 +1,10 @@
 export const state = () => ({
   type: null,
-  title: null,
-  logs: []
+  title: null
 })
 
 export const mutations = {
   init(state, value) {
-    state.logs = []
     state.type = value.type
 
     switch (value.type) {
@@ -23,14 +21,6 @@ export const mutations = {
           missionName: value.missionName
         })
         break
-    }
-  },
-
-  addLogs(state, value) {
-    if (Array.isArray(value)) {
-      state.logs = state.logs.concat(value)
-    } else {
-      state.logs.push(value)
     }
   },
 

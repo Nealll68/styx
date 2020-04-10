@@ -20,7 +20,6 @@ class SteamCMD {
     constructor () {
         this.steamcmd = null
         this.type = null
-        this.logs = []
     }
 
     async updateServer (steamGuard = null) {
@@ -53,13 +52,7 @@ class SteamCMD {
 
             this.steamcmd.on('close', code => {
                 this.type = null
-                this.logs = []
                 this.sendWS('stop', code)
-            })
-
-            this.steamcmd.stdout.on('data', data => {
-                this.logs.push(data.toString())
-                this.sendWS('logs', data.toString())
             })
         } catch (ex) {
             throw ex
@@ -117,14 +110,7 @@ class SteamCMD {
                 }
 
                 this.type = null
-                this.logs = []
                 this.sendWS('stop', code)
-            })
-
-            this.steamcmd.stdout.on('data', data => {
-                const stringData = data.toString()
-                this.logs.push(stringData)
-                this.sendWS('logs', stringData)
             })
         } catch (ex) {
             throw ex
@@ -134,7 +120,6 @@ class SteamCMD {
     cancel () {
         this.steamcmd.kill()
         this.type = null
-        this.logs = []
         this.sendWS('stop', null)
     }
 
@@ -147,8 +132,7 @@ class SteamCMD {
 
     get downloadInfo () {
         return {
-            type: this.type,
-            logs: this.logs
+            type: this.type
         }
     }       
 }

@@ -125,7 +125,7 @@ export default {
     async upload () {
       if (!this.file) return this.$snackbar({
         type: 'info',
-        message: $t('upload.selectFileError')
+        message: this.$t('upload.selectFileError')
       })
 
       try {
@@ -135,7 +135,7 @@ export default {
         formData.append('file', this.file)
 
         await this.$axios.$post(this.isMission ? 'server/mission' : 'server/mod', formData, {
-          cancelToken: this.source,
+          cancelToken: this.source.token,
           headers: {
             'content-type': 'multipart/form-data'
           },
@@ -155,6 +155,7 @@ export default {
         this.file = null
         this.$emit('close')
       } catch (ex) {
+        console.log(ex)
         if (ex.response.data === 'E_INVALID_FILE_EXTENSION') {
           this.$snackbar({
             type: 'error',

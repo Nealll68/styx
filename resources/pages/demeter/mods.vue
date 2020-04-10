@@ -323,7 +323,6 @@ export default {
           workshopItemSize: modSize
         })
       } catch (ex) {
-        console.log(ex)
         if (ex.response.data === 'E_STEAM_GUARD_REQUIRED') {
           const steamGuard = await this.$steamGuard()
 
@@ -335,6 +334,11 @@ export default {
               steamGuard: steamGuard
             })
           }
+        } else if (ex.response.data === 'E_STEAM_ACCOUNT_REQUIRED') {
+          this.$snackbar({
+            type: 'error',
+            message: this.$t('errors.steamAccountRequired')
+          })
         }
       }
 

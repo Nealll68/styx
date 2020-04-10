@@ -1,15 +1,20 @@
 <template>
-  <v-dialog
+<v-dialog
   value="true"
   max-width="300px"
   persistent
 >
   <v-card>
-    <v-card-title>Steam Guard</v-card-title>
+    <v-progress-linear
+      :value="100"
+      color="primary"
+    ></v-progress-linear>
 
-    <v-divider></v-divider>
+    <v-card-title primary-title>
+      <v-icon left>mdi-steam</v-icon> Steam Guard
+    </v-card-title>
 
-    <v-card-text class="mt-2 pb-0">
+    <v-card-text>
       <v-form
         v-model="formValid"
         ref="guardForm"
@@ -23,21 +28,18 @@
       </v-form>      
     </v-card-text>
 
-    <v-divider></v-divider>
-
     <v-card-actions>
       <v-spacer></v-spacer>
       
       <v-btn
         text
         @click="closeDialog()"
-      >{{ $t('common.cancel') }}</v-btn>
+      >{{ cancelBtnText }}</v-btn>
 
       <v-btn
-        depressed
         color="primary"
         @click="sendCode()"
-      >{{ $t('common.contiue') }}</v-btn>
+      >{{ continueBtnText }}</v-btn>
     </v-card-actions>
   </v-card>
 </v-dialog>
@@ -45,12 +47,14 @@
 
 <script>
 export default {
+  props: ['continueBtnText', 'cancelBtnText', 'requiredRuleText', ],
+
   data () {
     return {
       value: '',
       formValid: false,
       requiredRule: [
-        v => !!v || this.$t('rules.required')
+        v => !!v || this.requiredRuleText
       ]
     }
   },

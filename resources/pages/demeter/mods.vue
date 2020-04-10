@@ -312,8 +312,8 @@ export default {
         this.modsTableLoading = true
 
         const updatedModDetails = await this.$axios.$get(`server/workshop/file/${workshopId}`)
-        modName = updatedModDetails.response.publishedfiledetails[0].title
-        modSize = updatedModDetails.response.publishedfiledetails[0].file_size
+        modName = updatedModDetails.title
+        modSize = updatedModDetails.file_size
       }
 
       try {

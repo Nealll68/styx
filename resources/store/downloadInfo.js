@@ -42,7 +42,7 @@ export const mutations = {
         case 'downloadMission':
           this.app.$snackbar({
             type: 'success',
-            message: this.app.i18n.t('download.missonDownloaded')
+            message: this.app.i18n.t('download.missionDownloaded')
           })
           break
       }

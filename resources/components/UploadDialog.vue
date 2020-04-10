@@ -155,7 +155,6 @@ export default {
         this.file = null
         this.$emit('close')
       } catch (ex) {
-        console.log(ex)
         if (ex.response.data === 'E_INVALID_FILE_EXTENSION') {
           this.$snackbar({
             type: 'error',

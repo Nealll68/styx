@@ -11,15 +11,15 @@ export const mutations = {
 
     switch (value.type) {
       case 'updateServer':
-        state.title = this.$t('download.updateServer')
+        state.title = this.app.i18n.t('download.updateServer')
         break
       case 'downloadMod':
-        state.title = this.$t('download.downloadMod', {
+        state.title = this.app.i18n.t('download.downloadMod', {
           modName: value.modName
         })
         break
       case 'downloadMission':
-        state.title = this.$t('download.downloadMission', {
+        state.title = this.app.i18n.t('download.downloadMission', {
           missionName: value.missionName
         })
         break
@@ -38,33 +38,33 @@ export const mutations = {
     if (!code || code === 0) {
       switch (state.type) {
         case 'updateServer':
-          this.$snackbar({
+          this.app.$snackbar({
             type: 'success',
-            message: this.$t('download.serverUpdated')
+            message: this.app.i18n.t('download.serverUpdated')
           })
           break
         case 'downloadMod':
-          this.$snackbar({
+          this.app.$snackbar({
             type: 'success',
-            message: this.$t('download.modDownloaded')
+            message: this.app.i18n.t('download.modDownloaded')
           })
           break
         case 'downloadMission':
-          this.$snackbar({
+          this.app.$snackbar({
             type: 'success',
-            message: this.$t('download.missonDownloaded')
+            message: this.app.i18n.t('download.missonDownloaded')
           })
           break
       }
     } else if (code === 5) {
-      this.$snackbar({
+      this.app.$snackbar({
         type: 'error',
-        message: this.$t('download.steamGuardCodeError')
+        message: this.app.i18n.t('download.steamGuardCodeError')
       })
     } else if (code === 8) {
-      this.$snackbar({
+      this.app.$snackbar({
         type: 'error',
-        message: this.$t('download.diskSpaceError')
+        message: this.app.i18n.t('download.diskSpaceError')
       })
     }
 

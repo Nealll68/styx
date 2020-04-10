@@ -45,7 +45,7 @@ module.exports = {
     { src: '~/plugins/vueApexCharts.client', ssr: false },
     { src: '~/plugins/steamGuard.client', ssr: false },
     { src: '~/plugins/confirm.client', ssr: false },
-    { src: '~/plugins/snackbar.client', ssr: false },
+    '~/plugins/snackbar',
     '~/plugins/formatBytesFilter'
   ],
   /*

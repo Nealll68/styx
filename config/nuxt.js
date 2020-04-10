@@ -46,8 +46,7 @@ module.exports = {
     { src: '~/plugins/steamGuard.client', ssr: false },
     { src: '~/plugins/confirm.client', ssr: false },
     { src: '~/plugins/snackbar.client', ssr: false },
-    '~/plugins/formatBytesFilter',
-    '~/plugins/axios'    
+    '~/plugins/formatBytesFilter'
   ],
   /*
    ** Nuxt.js dev-modules

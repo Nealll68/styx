@@ -118,7 +118,8 @@
 
   "config": {
     "updated": "Configuration enregistrée",
-    "reseted": "Configuration réinitialisée"
+    "reseted": "Configuration réinitialisée",
+    "missionDialogSubheader": "Nom exacte des missions disponible à copier et insérer dans le champ 'template'"
   },
 
   "difficulty": {

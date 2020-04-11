@@ -4,8 +4,9 @@
 
     <v-row justify="center">
       <v-col md="6" sm="12">
-        <v-card>
+        <v-card :disabled="cpuUsage.length === 0">
           <v-progress-linear
+            :indeterminate="cpuUsage.length === 0"
             :value="cpuUsage[cpuUsage.length - 1]"
             color="tertiary"
           ></v-progress-linear>
@@ -75,8 +76,9 @@
       </v-col>
 
       <v-col md="6" sm="12">
-        <v-card>
+        <v-card :disabled="memUsed.length === 0">
           <v-progress-linear
+            :indeterminate="memUsed.length === 0"
             :value="memUsed[memUsed.length - 1]"
             color="quaternary"
           ></v-progress-linear>

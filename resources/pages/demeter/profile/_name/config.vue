@@ -16,7 +16,9 @@
         <v-btn 
           color="primary" 
           v-on="on"
-        >{{ $t('menu.missions') }}</v-btn>
+        >
+          <v-icon left>mdi-target</v-icon>{{ $t('menu.missions') }}
+        </v-btn>
       </template>
 
       <v-card>

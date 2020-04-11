@@ -210,7 +210,7 @@ export default {
     return {
       loading: false,
       interval: null,
-      automaticRefresh: true
+      automaticRefresh: false
     }
   },
 

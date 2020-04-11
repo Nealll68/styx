@@ -62,6 +62,21 @@
       autocapitalize="off"
     ></v-textarea>
   </v-card-text>
+
+  <v-fab-transition>
+    <v-btn
+      v-scroll="onScroll"
+      v-show="fab"
+      fab
+      fixed
+      bottom
+      right
+      color="primary"
+      @click="$vuetify.goTo(0)"
+    >
+      <v-icon>mdi-arrow-up</v-icon>
+    </v-btn>
+  </v-fab-transition>
 </v-card>
 </template>
 
@@ -73,7 +88,8 @@ export default {
 		return {
 			loadingUpdate: false,
       loadingReset: false,
-      dialog: false
+      dialog: false,
+      fab: false
 		}
   },
 
@@ -92,6 +108,12 @@ export default {
   },
 
 	methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 300
+    },
+
 		async update () {
       this.$emit('loading', true)
       this.loadingUpdate = true

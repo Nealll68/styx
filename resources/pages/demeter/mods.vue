@@ -17,7 +17,7 @@
               outlined
               color="primary"
               class="float-right"
-              :disabled="$store.state.downloadInfo.type === 'updateServer'"
+              :disabled="$store.state.downloadInfo.type ? true : false"
             >
               <v-icon left>mdi-toy-brick-plus</v-icon>{{ $t('mods.add') }}
             </v-btn>
@@ -157,7 +157,7 @@
                     text
                     icon
                     @click="downloadMod({ workshopId: item.workshop_id, title: item.name, fileSize: item.size, isUpdate: true })"
-                    :disabled="modsTableLoading"
+                    :disabled="modsTableLoading || $store.state.downloadInfo.type ? true : false"
                   >
                     <v-icon>mdi-update</v-icon>  
                   </v-btn>

@@ -143,7 +143,7 @@
                     text
                     icon
                     @click="updateMission(item.workshop_id)"
-                    :disabled="tableLoading"
+                    :disabled="tableLoading || $store.state.downloadInfo.type ? true : false"
                   >
                     <v-icon>mdi-update</v-icon>  
                   </v-btn>

@@ -76,7 +76,7 @@
             outlined
             color="error"
             small
-            @click="source.cancel()"
+            @click="cancelUpload"
           >
             <v-icon left>mdi-upload-off</v-icon>{{ $t('common.cancel') }}
           </v-btn>
@@ -163,6 +163,17 @@ export default {
         }
       }
     },
+
+    cancelUpload () {
+      this.source.cancel()
+      this.uploadPercentage = 0
+      this.file = null
+
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('upload.canceled')
+      })        
+    }
   }
 }
 </script>

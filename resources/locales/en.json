@@ -106,7 +106,8 @@
     "modLabel": "ZIP folder containing the mod",
     "selectFileError": "Please select a file",
     "success": "Download successful",
-    "fileExtensionError": "The file must be a {extension}"
+    "fileExtensionError": "The file must be a {extension}",
+    "canceled": "Upload canceled"
   },
 
   "workshop": {

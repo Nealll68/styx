@@ -36,8 +36,7 @@ export default {
 	data () {
 		return {
 			loadingUpdate: false,
-      loadingReset: false,
-      difficulty: null
+      loadingReset: false
 		}
   },
   
@@ -45,12 +44,11 @@ export default {
     PanelHeader
   },
 
-	async mounted () {
-    this.$emit('loading', true)
-
-    this.difficulty = await this.$axios.$get(`server/difficulty/${this.$route.params.name}`)
-
-    this.$emit('loading', false)
+	async asyncData ({ $axios, params }) {
+    const difficulty = await $axios.$get(`server/difficulty/${params.name}`)
+    return {
+      difficulty
+    }
   },
 
 	methods: {

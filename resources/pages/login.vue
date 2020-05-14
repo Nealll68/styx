@@ -97,7 +97,7 @@ export default {
             }
           })
 
-          this.$router.push('/demeter')
+          this.$router.push('/')
         } catch (ex) {
           if (ex.response.data === 'E_PASSWORD_MISMATCH' || ex.response.data === 'E_USER_NOT_FOUND') {
             this.$snackbar({

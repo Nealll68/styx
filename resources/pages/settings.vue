@@ -116,7 +116,7 @@
 
 <script>
 export default {
-  layout: 'demeter',
+  layout: 'interface',
   middleware: 'privilege_1',
 
   data() {

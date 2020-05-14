@@ -16,12 +16,12 @@
         :key="item.name"
         nuxt
         :to="item.link"
-        :exact="item.link === '/demeter'"
+        :exact="item.link === '/'"
         color="primary"
       >
         <v-list-item-icon>
           <v-badge
-            :value="item.link === '/demeter/settings' && !$store.state.config.a3ServerPath"
+            :value="item.link === '/settings' && !$store.state.config.a3ServerPath"
             icon="mdi-exclamation"
             color="error"
             overlap
@@ -40,7 +40,7 @@
       <v-list>
         <v-list-item
           nuxt
-          to="/demeter/user"
+          to="/user"
           exact
           color="primary"
         >
@@ -255,8 +255,8 @@ export default {
 
   created () {
     if (this.$auth.user.privilege === 1) {
-      this.items.push({ link: '/demeter/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
-      this.items.push({ link: '/demeter/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
+      this.items.push({ link: '/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
+      this.items.push({ link: '/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
     }
   },
 

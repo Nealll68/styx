@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  layout: 'demeter',
+  layout: 'interface',
 
   props: {
     error: {

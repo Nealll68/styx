@@ -66,7 +66,7 @@
 
 <script>
 export default {
-  layout: 'demeter',
+  layout: 'interface',
 
   data () {
     return {

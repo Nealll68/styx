@@ -25,7 +25,7 @@ class LogController {
     async download ({ params, response}) {
         const config = await Config.first()
 
-        return response.attachment(path.join(config.a3server_path, 'demeter', params.profileName, params.filename))
+        return response.attachment(path.join(config.a3server_path, 'styx', params.profileName, params.filename))
     }
 
     async destroy ({ params, response }) {

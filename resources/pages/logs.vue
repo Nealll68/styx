@@ -40,7 +40,7 @@
                 v-for="logFile in item.files" 
                 :key="logFile"
                 nuxt
-                :to="`/demeter/logs/${item.profile_name}/${logFile}`"
+                :to="`/logs/${item.profile_name}/${logFile}`"
               >
                 <v-list-item-content>
                   <v-list-item-title>{{ logFile.substring(16, 35) }}</v-list-item-title>
@@ -62,7 +62,7 @@
 const PathError = () => import('@/components/PathError')
 
 export default {
-  layout: 'demeter',
+  layout: 'interface',
 
   components: {
     PathError

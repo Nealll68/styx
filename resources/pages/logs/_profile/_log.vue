@@ -130,7 +130,7 @@ export default {
         this.deleteLoading = false
 
         this.$emit('refresh')
-        this.$router.push('/demeter/logs')
+        this.$router.push('/logs')
 
         if (this.logs.profileName === profileName) {
           this.logs = null

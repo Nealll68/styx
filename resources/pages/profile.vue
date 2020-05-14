@@ -27,7 +27,7 @@
                 v-for="profile in profiles" 
                 :key="profile.id"
                 nuxt
-                :to="`/demeter/profile/${profile.name}`"
+                :to="`/profile/${profile.name}`"
                 color="primary"
               >
                 <v-list-item-content>
@@ -116,28 +116,28 @@
               <v-tab
                 exact
                 nuxt
-                :to="`/demeter/profile/${$route.params.name}`"
+                :to="`/profile/${$route.params.name}`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.mods') }}</v-tab>
 
               <v-tab
                 exact
                 nuxt
-                :to="`/demeter/profile/${$route.params.name}/params`"
+                :to="`/profile/${$route.params.name}/params`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.parameters') }}</v-tab>
 
               <v-tab
                 exact
                 nuxt
-                :to="`/demeter/profile/${$route.params.name}/config`"
+                :to="`/profile/${$route.params.name}/config`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.configuration') }}</v-tab>
 
               <v-tab
                 exact
                 nuxt
-                :to="`/demeter/profile/${$route.params.name}/difficulty`"
+                :to="`/profile/${$route.params.name}/difficulty`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.difficulty') }}</v-tab>
             </v-tabs>
@@ -162,7 +162,7 @@
 const PathError = () => import('@/components/PathError')
 
 export default {
-  layout: 'demeter',
+  layout: 'interface',
 
   components: {
     PathError
@@ -184,7 +184,7 @@ export default {
       const defaultProfile = profiles.find(e => e.isDefault)
 
       if (defaultProfile) {
-        redirect(`/demeter/profile/${defaultProfile.name}`)
+        redirect(`/profile/${defaultProfile.name}`)
       }
       return true
     }
@@ -277,7 +277,7 @@ export default {
         
         await this.$axios.$delete(`server/profile/${profile.id}`) 
         this.profiles = await this.$axios.$get('server/profile')      
-        this.$router.push('/demeter/profile')
+        this.$router.push('/profile')
 
         this.$snackbar({
           type: 'success',

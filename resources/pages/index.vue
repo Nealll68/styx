@@ -1,141 +1,278 @@
 <template>
-  <div>
-    <v-app-bar 
-      app
-      elevate-on-scroll 
-      color="rgba(33, 33, 33, 0.8)" 
-      fixed
-    >
-      <v-container>
-        <v-row align="center">
-          <v-col md="4" class="hidden-sm-and-down">
-            <nuxt-link to="/" class="headline text-uppercase font-weight-light menu-link">CP17</nuxt-link>
-          </v-col>
-          <v-col md="4" class="d-flex justify-center">
-            <v-img src="/logo_cp17_light_150x150.png" max-height="50" max-width="50" class="hidden-sm-and-down"></v-img>
-          </v-col>
-          <v-col md="4" class="d-flex justify-end">
-            <v-btn text small nuxt to="/demeter">Accéder à <span class="font-italic">Demeter</span></v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-app-bar>
+  <v-container fluid>
+    <path-error v-if="!$store.state.config.a3ServerPath"></path-error>
 
-    <v-sheet height="100%">
-      <v-img 
-        src="/main_background.jpg" 
-        height="100%"
-      >
+    <v-row justify="center">
+      <v-col md="6" sm="12">
+        <v-card :disabled="cpuUsage.length === 0">
+          <v-progress-linear
+            :indeterminate="cpuUsage.length === 0"
+            :value="cpuUsage[cpuUsage.length - 1]"
+            color="tertiary"
+          ></v-progress-linear>
 
-        <v-container fluid class="landing-container px-12">
-          <v-row 
-            align="center"
-            style="height: 100%"
-            class="pb-5"
-            no-gutters
-          >
-            <v-card 
-              color="rgba(33, 33, 33, 0.8)" 
-              class="pa-2"
-              raised
-            >
-              <v-row align="center" justify="center">
-                <v-col sm="12" md="2" lg="3" :class="$vuetify.breakpoint.smAndDown ? 'd-flex justify-center' : ''">
-                  <v-img src="/logo_cp17_300x300.png" max-width="300" max-height="300"></v-img>
-                </v-col>
+          <v-card-text class="py-0">
+            <v-list>
+              <v-list-item>
+                <v-list-item-icon class="mr-5">
+                  <v-icon size="50" color="tertiary">mdi-chip</v-icon>
+                </v-list-item-icon>
 
-                <v-col sm="12" md="10" lg="9">
-                  <span class="display-1 font-weight-light font-italic text-uppercase">Commando Parachutiste 17</span>
-                  <br/>
-                  <span class="subtitle-1">Petite unité semi-milsim opérant avec du matériel français ou ressemblant sur Arma 3</span>
-                </v-col>
-              </v-row>
-            </v-card>
-          </v-row>
-        </v-container>  
-      </v-img>
-    </v-sheet>
-
-    <v-card 
-      max-width="95%" 
-      class="mx-auto mt-n12 pt-3 mb-5" 
-      raised
-      light
-    >
-      <v-sheet max-width="1000px" class="mx-auto">
-        <v-card-title class="font-weight-bold text-center display-2 justify-center">
-          Nous rencontrer
-        </v-card-title>
-
-        <v-card-text>
-          <v-container>
-            <v-row justify="center">
-              <v-col cols="md-6 sm-12" class="text-center">
-                <v-icon size="100">mdi-steam</v-icon>
-                <h2 class="title">Steam</h2>
-                <p>Vous pouvez contacter l'administrateur ou un des modérateurs du groupe Steam</p>
-                <a href="https://steamcommunity.com/groups/cp_17" target="_blank">Accéder au groupe steam</a>
-              </v-col>
-              <v-col cols="md-6 sm-12" class="text-center">
-                <v-icon size="100">mdi-ear-hearing</v-icon>
-                <h2 class="title">
-                  Teamspeak 
-                  <v-tooltip top>
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on">mdi-help</v-icon>
-                    </template>
-                    Adresse : cp17.nitrado.fr<br/>
-                    Mot de passe : CP1723Decembre2017
-                  </v-tooltip>
-                </h2>
-                <p>Vous pouvez passer sur notre serveur Teamspeak. Nous y sommes souvent en soirée.</p>
-                <a href="ts3server://cp17.nitrado.fr?password=CP1723Decembre2017">Se connecter au serveur Teamspeak</a>
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card-text>
-
-        <v-divider></v-divider>
-
-        <v-card-title class="font-weight-bold text-center display-2 justify-center">
-          Nous suivre
-        </v-card-title>
-
-        <v-card-text>
-          <p class="text-center">Vous pouvez nous suivre sur les réseaux sociaux. Nous y postons souvent des photos et vidéos.</p>
-          <v-sheet class="text-center">
-            <v-btn x-large text icon color="#38A1F3" href="https://twitter.com/CP17_A3" width="100" height="100" target="_blank">
-              <v-icon size="80">mdi-twitter</v-icon>
-            </v-btn>
-
-            <v-btn x-large text icon color="#4267b2" href="https://www.facebook.com/CP17.A3/" width="100" height="100" target="_blank">
-              <v-icon size="80">mdi-facebook</v-icon>
-            </v-btn>
-          </v-sheet>
-        </v-card-text>
-      </v-sheet>
-    </v-card>
-
-    <v-footer max-width="95%" class="mx-auto" color="transparent" padless>
-      <v-col
-        class="text-center"
-        cols="12"
-      >
-        {{ new Date().getFullYear() }} — Created by <a href="https://nealll.dev" target="_blank">Nealll</a>
+                <v-list-item-content>
+                  <v-list-item-subtitle>CPU</v-list-item-subtitle>
+                  <v-list-item-title class="display-1 font-weight-light"
+                    >{{ cpuUsage[cpuUsage.length - 1] }}%</v-list-item-title
+                  >
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card-text>
+          <apexchart
+            v-show="cpuUsage.length >= 2"
+            type="area"
+            :series="[
+              {
+                name: 'CPU',
+                data: cpuUsage
+              }
+            ]"
+            :options="{
+              chart: {
+                id: 'cpu-chart',
+                background: '#1E1E1E',
+                sparkline: {
+                  enabled: true
+                }
+              },
+              xaxis: {
+                categories: takeAt
+              },
+              yaxis: {
+                min: 0,
+                max: 100
+              },
+              theme: {
+                mode: 'dark',
+                monochrome: {
+                  enabled: true,
+                  color: '#FF6859',
+                  shadeTo: 'dark',
+                  shadeIntensity: 0.65
+                }
+              },
+              tooltip: {
+                y: [
+                  {
+                    formatter(v) {
+                      return `${v}%`
+                    }
+                  }
+                ]
+              }
+            }"
+            height="150px"
+          ></apexchart>
+        </v-card>
       </v-col>
-    </v-footer>
-  </div>
+
+      <v-col md="6" sm="12">
+        <v-card :disabled="memUsed.length === 0">
+          <v-progress-linear
+            :indeterminate="memUsed.length === 0"
+            :value="memUsed[memUsed.length - 1]"
+            color="quaternary"
+          ></v-progress-linear>
+
+          <v-card-text class="py-0">
+            <v-list>
+              <v-list-item>
+                <v-list-item-icon class="mr-5">
+                  <v-icon size="50" color="quaternary">mdi-memory</v-icon>
+                </v-list-item-icon>
+
+                <v-list-item-content>
+                  <v-list-item-subtitle>MEM</v-list-item-subtitle>
+                  <v-list-item-title class="display-1 font-weight-light"
+                    >{{ memUsed[memUsed.length - 1] }}%</v-list-item-title
+                  >
+                </v-list-item-content>
+              </v-list-item>
+            </v-list>
+          </v-card-text>
+          <apexchart
+            v-show="memUsed.length >= 2"
+            type="area"
+            :series="[
+              {
+                name: 'MEM',
+                data: memUsed
+              }
+            ]"
+            :options="{
+              chart: {
+                id: 'mem-chart',
+                background: '#1E1E1E',
+                sparkline: {
+                  enabled: true
+                }
+              },
+              xaxis: {
+                categories: takeAt
+              },
+              yaxis: {
+                min: 0,
+                max: 100
+              },
+              theme: {
+                mode: 'dark',
+                monochrome: {
+                  enabled: true,
+                  color: '#FFCF44',
+                  shadeTo: 'dark',
+                  shadeIntensity: 0.65
+                }
+              },
+              tooltip: {
+                y: [
+                  {
+                    formatter(v) {
+                      return `${v}%`
+                    }
+                  }
+                ]
+              }
+            }"
+            height="150px"
+          ></apexchart>
+        </v-card>
+      </v-col>
+    </v-row>
+
+    <v-row justify="center">
+      <v-col cols="12">
+        <v-card :loading="loading">
+          <v-card-title>
+            <v-icon left>mdi-post</v-icon>
+            {{ $t('index.logsTitle') }}
+
+            <v-spacer></v-spacer>
+
+            <v-switch
+              v-model="automaticRefresh"
+              :label="$t('index.automaticRefresh')"
+              inset
+              color="primary"
+              class="mr-2"
+            ></v-switch>
+
+            <v-btn
+              text
+              @click="refreshLogs()"
+              class="mr-2"
+              color="tertiary"
+              :disabled="loading || automaticRefresh || !$store.state.a3Server.isStarted"
+            >
+              <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
+            </v-btn>
+          </v-card-title>
+          <v-card-text>
+            <v-sheet
+              v-if="$store.state.a3Server.isStarted"
+              color="grey darken-4"
+              class="pa-2 scrollbar"
+              id="logsContainer"
+              height="500px"
+            >
+              <div v-for="(log, i) of serverLogs" :key="i" class="my-2">
+                {{ log }}
+              </div>
+            </v-sheet>
+
+            <v-alert v-else type="info" border="left" text>{{
+              $t('index.noLogs')
+            }}</v-alert>
+          </v-card-text>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script>
+const PathError = () => import('@/components/PathError')
+
 export default {
-  auth: false
+  layout: 'demeter',
+
+  components: {
+    PathError
+  },
+
+  data () {
+    return {
+      loading: false,
+      interval: null,
+      automaticRefresh: false
+    }
+  },
+
+  computed: {
+    cpuUsage() {
+      let values = []
+      this.$store.state.monitor.measures.forEach(element => {
+        values.push(element.cpu_usage)
+      })
+      return values
+    },
+
+    memUsed() {
+      let values = []
+      this.$store.state.monitor.measures.forEach(element => {
+        values.push(element.mem_used)
+      })
+      return values
+    },
+
+    takeAt() {
+      let values = []
+      this.$store.state.monitor.measures.forEach(element => {
+        values.push(this.$moment(element.take_at).format('LTS'))
+      })
+      return values
+    }
+  },
+
+  async created() {
+    if (this.$store.state.a3Server.isStarted) {
+      await this.refreshLogs()
+    }
+    this.automaticLogsRefresh()
+  },
+
+  beforeDestroy() {
+    clearInterval(this.interval)
+  },
+
+  methods: {
+    async refreshLogs() {
+      this.loading = true
+
+      const response = await this.$axios.$get('server/logs/current')
+      this.serverLogs = response.logs.split('\n')
+
+      const el = document.getElementById('logsContainer')
+      el.scrollTop = el.scrollHeight
+
+      this.loading = false
+    },
+
+    automaticLogsRefresh() {
+      this.interval = setInterval(async () => {
+        if (this.automaticRefresh && this.$store.state.a3Server.isStarted) {
+          await this.refreshLogs()
+        }
+      }, 3000)
+    }
+  }
 }
 </script>
-
-<style>
-.menu-link {
-  color: #ffffff !important;
-  text-decoration: none !important;
-}
-</style>

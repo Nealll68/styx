@@ -231,11 +231,11 @@ export default {
       navDrawer: null,
       a3ServerWs: null,
       items: [
-        { link: '/demeter', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
-        { link: '/demeter/profile', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
-        { link: '/demeter/mods', name: this.$t('menu.mods'), icon: 'mdi-toy-brick' },
-        { link: '/demeter/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
-        { link: '/demeter/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }
+        { link: '/', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
+        { link: '/profile', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
+        { link: '/mods', name: this.$t('menu.mods'), icon: 'mdi-toy-brick' },
+        { link: '/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
+        { link: '/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }
       ],
       privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')]
     }

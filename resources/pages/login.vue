@@ -14,8 +14,8 @@
       >
 				<v-card>
           <v-card-title class="d-flex flex-column">
-            <v-img src="/logo.png" max-height="100" max-width="100"></v-img>
-            <div class="font-weight-thin display-1">DEMETER</div>
+            <Logo/>
+            <div class="font-weight-thin display-1">STYX</div>
           </v-card-title>
 
 					<v-card-text>
@@ -62,6 +62,8 @@
 </template>
 
 <script>
+const Logo = () => import('@/components/Logo')
+
 export default {
   auth: 'guest',
 
@@ -76,6 +78,10 @@ export default {
         v => !!v || this.$t('rules.required')
       ]
     }
+  },
+
+  components: {
+    Logo
   },
 
   methods: {

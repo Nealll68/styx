@@ -1,5 +1,5 @@
 <template>
-  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100px" height="100px" viewBox="0 0 1300 1300">		
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" :width="width" :height="height" viewBox="0 0 1300 1300">		
     <g transform="matrix(1,0,0,1,650,650)">			
       <path class="path"
             d="M-32.6263,-103.513 L-31.5839,-43.0529 
@@ -26,6 +26,12 @@
     </g>	
   </svg>
 </template>
+
+<script>
+export default {
+  props: ['width', 'height']
+}
+</script>
 
 <style>
 .path {

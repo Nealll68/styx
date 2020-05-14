@@ -14,7 +14,7 @@
       >
 				<v-card>
           <v-card-title class="d-flex flex-column">
-            <Logo/>
+            <Logo width="150px" height="150px" />
             <div class="font-weight-thin display-1">STYX</div>
           </v-card-title>
 

@@ -7,7 +7,7 @@
     :mini-variant="$vuetify.breakpoint.md || $vuetify.breakpoint.lg"
   >
     <div class="d-flex justify-center my-5">
-      <v-img src="/logo.png" max-height="50" max-width="50"></v-img>
+      <Logo width="50px" height="50px" />
     </div>
 
     <v-list>      
@@ -216,12 +216,14 @@
 </template>
 
 <script>
+const Logo = () => import('@/components/Logo')
 const DownloadInfoBar = () => import('@/components/DownloadInfoBar')
 
 export default {
   name: 'app-bar',
 
   components: {
+    Logo,
     DownloadInfoBar
   },
 

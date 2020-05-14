@@ -106,7 +106,8 @@
     "modLabel": "Dossier ZIP contenant le mod",
     "selectFileError": "Veuillez sélectionner un fichier",
     "success": "Téléchargement réussi",
-    "fileExtensionError": "Le fichier doit être un {extension}"
+    "fileExtensionError": "Le fichier doit être un {extension}",
+    "canceled": "Téléchargement annulé"
   },
 
   "workshop": {
@@ -118,7 +119,8 @@
 
   "config": {
     "updated": "Configuration enregistrée",
-    "reseted": "Configuration réinitialisée"
+    "reseted": "Configuration réinitialisée",
+    "missionDialogSubheader": "Nom exacte des missions disponible à copier et insérer dans le champ 'template'"
   },
 
   "difficulty": {

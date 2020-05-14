@@ -11,9 +11,9 @@ export const mutations = {
         state.isStarted = false
 
         if (code === 'noProfile') {
-            this.$snackbar({
+            this.app.$snackbar({
                 type: 'error',
-                message: this.$t('errors.undefinedDefaultProfile')
+                message: this.app.i18n.t('errors.undefinedDefaultProfile')
             })
         }
     }

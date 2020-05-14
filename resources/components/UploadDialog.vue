@@ -76,7 +76,7 @@
             outlined
             color="error"
             small
-            @click="source.cancel()"
+            @click="cancelUpload"
           >
             <v-icon left>mdi-upload-off</v-icon>{{ $t('common.cancel') }}
           </v-btn>
@@ -125,7 +125,7 @@ export default {
     async upload () {
       if (!this.file) return this.$snackbar({
         type: 'info',
-        message: $t('upload.selectFileError')
+        message: this.$t('upload.selectFileError')
       })
 
       try {
@@ -135,7 +135,7 @@ export default {
         formData.append('file', this.file)
 
         await this.$axios.$post(this.isMission ? 'server/mission' : 'server/mod', formData, {
-          cancelToken: this.source,
+          cancelToken: this.source.token,
           headers: {
             'content-type': 'multipart/form-data'
           },
@@ -163,6 +163,17 @@ export default {
         }
       }
     },
+
+    cancelUpload () {
+      this.source.cancel()
+      this.uploadPercentage = 0
+      this.file = null
+
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('upload.canceled')
+      })        
+    }
   }
 }
 </script>

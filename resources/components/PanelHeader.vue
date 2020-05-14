@@ -3,6 +3,8 @@
   app
   sticky
 >
+  <slot></slot>
+  
   <template v-slot:actions>
     <v-btn
       :icon="$vuetify.breakpoint.xsOnly"

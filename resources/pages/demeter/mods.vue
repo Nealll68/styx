@@ -17,7 +17,7 @@
               outlined
               color="primary"
               class="float-right"
-              :disabled="$store.state.downloadInfo.type === 'updateServer'"
+              :disabled="$store.state.downloadInfo.type ? true : false"
             >
               <v-icon left>mdi-toy-brick-plus</v-icon>{{ $t('mods.add') }}
             </v-btn>
@@ -26,7 +26,10 @@
           <v-list nav>
             <v-subheader>Workshop</v-subheader>
 
-            <v-list-item @click="showModList = true">
+            <v-list-item 
+              :disabled="!$store.state.config.steamCmdPath"
+              @click="showModList = true"
+            >
               <v-list-item-icon>
                 <v-icon>mdi-steam</v-icon>
               </v-list-item-icon>
@@ -36,7 +39,10 @@
               </v-list-item-content>
             </v-list-item>
 
-            <v-list-item @click="detectWorkshopMods()">
+            <v-list-item 
+              :disabled="!$store.state.config.steamCmdPath"
+              @click="detectWorkshopMods()"
+            >
               <v-list-item-icon>
                 <v-icon>mdi-folder-search</v-icon>
               </v-list-item-icon>
@@ -151,7 +157,7 @@
                     text
                     icon
                     @click="downloadMod({ workshopId: item.workshop_id, title: item.name, fileSize: item.size, isUpdate: true })"
-                    :disabled="modsTableLoading"
+                    :disabled="modsTableLoading || $store.state.downloadInfo.type ? true : false"
                   >
                     <v-icon>mdi-update</v-icon>  
                   </v-btn>
@@ -306,8 +312,8 @@ export default {
         this.modsTableLoading = true
 
         const updatedModDetails = await this.$axios.$get(`server/workshop/file/${workshopId}`)
-        modName = updatedModDetails.response.publishedfiledetails[0].title
-        modSize = updatedModDetails.response.publishedfiledetails[0].file_size
+        modName = updatedModDetails.title
+        modSize = updatedModDetails.file_size
       }
 
       try {
@@ -328,6 +334,11 @@ export default {
               steamGuard: steamGuard
             })
           }
+        } else if (ex.response.data === 'E_STEAM_ACCOUNT_REQUIRED') {
+          this.$snackbar({
+            type: 'error',
+            message: this.$t('errors.steamAccountRequired')
+          })
         }
       }
 

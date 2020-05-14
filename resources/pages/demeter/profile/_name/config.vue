@@ -6,7 +6,50 @@
     :loadingUpdate="loadingUpdate"
     @reset="reset()"
     @save="update()"
-  ></panel-header>
+  >
+    <v-dialog 
+      v-model="dialog"
+      scrollable
+      max-width="500px"
+    >
+      <template v-slot:activator="{ on }">
+        <v-btn 
+          color="primary" 
+          v-on="on"
+        >
+          <v-icon left>mdi-target</v-icon>{{ $t('menu.missions') }}
+        </v-btn>
+      </template>
+
+      <v-card>
+        <v-card-title>{{ $t('menu.missions') }}</v-card-title>
+        
+        <v-card-text style="max-height: 500px;">
+          <v-list subheader>
+            <v-subheader>{{ $t('config.missionDialogSubheader') }}</v-subheader>            
+
+            <v-list-item 
+              v-for="mission in missions"
+              :key="mission.id"
+            >
+              <v-list-item-content>
+                <v-list-item-title>{{ mission.filename.substring(0, mission.filename.length - 4) }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+          </v-list>
+        </v-card-text>
+        
+        <v-card-actions>
+          <v-btn 
+            block
+            text
+            color="error"
+            @click="dialog = false"
+          >{{ $t('common.close') }}</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </panel-header>
 
   <v-card-text>
     <v-textarea
@@ -19,6 +62,21 @@
       autocapitalize="off"
     ></v-textarea>
   </v-card-text>
+
+  <v-fab-transition>
+    <v-btn
+      v-scroll="onScroll"
+      v-show="fab"
+      fab
+      fixed
+      bottom
+      right
+      color="primary"
+      @click="$vuetify.goTo(0)"
+    >
+      <v-icon>mdi-arrow-up</v-icon>
+    </v-btn>
+  </v-fab-transition>
 </v-card>
 </template>
 
@@ -30,7 +88,8 @@ export default {
 		return {
 			loadingUpdate: false,
       loadingReset: false,
-      config: null
+      dialog: false,
+      fab: false
 		}
   },
 
@@ -38,15 +97,23 @@ export default {
     PanelHeader
   },
   
-  async mounted () {
-    this.$emit('loading', true)
+  async asyncData ({ $axios, params }) {
+    const config = await $axios.$get(`server/config/${params.name}`)
+    const missions = await $axios.$get('server/mission')
 
-    this.config = await this.$axios.$get(`server/config/${this.$route.params.name}`)
-
-    this.$emit('loading', false)
+    return {
+      config,
+      missions
+    }
   },
 
 	methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 300
+    },
+
 		async update () {
       this.$emit('loading', true)
       this.loadingUpdate = true
@@ -85,7 +152,7 @@ export default {
 
       this.loadingReset = false
       this.$emit('loading', false)
-		}
+    }
 	}
 }
 </script>

@@ -45,9 +45,8 @@ module.exports = {
     { src: '~/plugins/vueApexCharts.client', ssr: false },
     { src: '~/plugins/steamGuard.client', ssr: false },
     { src: '~/plugins/confirm.client', ssr: false },
-    { src: '~/plugins/snackbar.client', ssr: false },
-    '~/plugins/formatBytesFilter',
-    '~/plugins/axios'    
+    '~/plugins/snackbar',
+    '~/plugins/formatBytesFilter'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -93,7 +92,6 @@ module.exports = {
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
-    customVariables: ['~/assets/variables.scss'],
     theme: {
       dark: true,
       themes: {

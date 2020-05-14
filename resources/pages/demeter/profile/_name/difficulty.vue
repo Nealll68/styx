@@ -26,6 +26,21 @@
         autocapitalize="off"
       ></v-textarea>
     </v-card-text>
+
+    <v-fab-transition>
+      <v-btn
+        v-scroll="onScroll"
+        v-show="fab"
+        fab
+        fixed
+        bottom
+        right
+        color="primary"
+        @click="$vuetify.goTo(0)"
+      >
+        <v-icon>mdi-arrow-up</v-icon>
+      </v-btn>
+    </v-fab-transition>
 </v-card>
 </template>
 
@@ -37,7 +52,7 @@ export default {
 		return {
 			loadingUpdate: false,
       loadingReset: false,
-      difficulty: null
+      fab: false
 		}
   },
   
@@ -45,15 +60,20 @@ export default {
     PanelHeader
   },
 
-	async mounted () {
-    this.$emit('loading', true)
-
-    this.difficulty = await this.$axios.$get(`server/difficulty/${this.$route.params.name}`)
-
-    this.$emit('loading', false)
+	async asyncData ({ $axios, params }) {
+    const difficulty = await $axios.$get(`server/difficulty/${params.name}`)
+    return {
+      difficulty
+    }
   },
 
 	methods: {
+    onScroll (e) {
+      if (typeof window === 'undefined') return
+      const top = window.pageYOffset || e.target.scrollTop || 0
+      this.fab = top > 300
+    },
+
 		async update () {
       this.$emit('loading', true)
       this.loadingUpdate = true

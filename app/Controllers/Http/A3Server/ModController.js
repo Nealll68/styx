@@ -66,8 +66,7 @@ class ModController {
                 const exist = await Mod.findBy('workshop_id', workshopId)
 
                 if (!exist) {
-                    const steamResponse = await SteamWebAPI.getFileDetails(workshopId)
-                    const workshopItemDetails = steamResponse.response.publishedfiledetails[0]
+                    const workshopItemDetails = await SteamWebAPI.getFileDetails(workshopId)
                                     
                     const formatItemName = /\s/.test(workshopItemDetails.title) ? `@${workshopItemDetails.title.replace(/[^a-zA-Z0-9 ]/g, '').split(' ').join('_')}` : `@${workshopItemDetails.title}`
                     await symlinkDir(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410', `${workshopId}`), path.join(config.a3server_path, formatItemName))

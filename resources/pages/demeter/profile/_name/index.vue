@@ -112,11 +112,8 @@ export default {
     this.mods = await this.$axios.$get('server/mod')
 
     this.mods.forEach(element => {
-      if (activatedMods.includes(element.name)) {
-        element.activated = true
-      } else if (activatedServerMods.includes(element.name)) {
-        element.server_mod = true
-      }
+      element.activated = activatedMods.includes(element.name)
+      element.server_mod = activatedServerMods.includes(element.name)
     })
 
     this.loading = false

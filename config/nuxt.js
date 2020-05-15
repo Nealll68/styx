@@ -8,7 +8,7 @@ module.exports = {
    ** Headers of the page
    */
   head: {
-    titleTemplate: '%s',
+    titleTemplate: '%s - Styx',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },

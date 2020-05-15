@@ -16,15 +16,20 @@
         dense
       >{{ $t('difficulty.information') }}</v-alert>
 
-      <v-textarea
-        v-model="difficulty"
-        filled
-        auto-grow
-        :disabled="loadingUpdate || loadingReset"
-        spellcheck="false"
-        autocorrect="off"
-        autocapitalize="off"
-      ></v-textarea>
+      <v-skeleton-loader
+        :loading="loading"
+        type="paragraph@2"
+      >
+        <v-textarea
+          v-model="difficulty"
+          filled
+          auto-grow
+          :disabled="loadingUpdate || loadingReset"
+          spellcheck="false"
+          autocorrect="off"
+          autocapitalize="off"
+        ></v-textarea>
+      </v-skeleton-loader>
     </v-card-text>
 
     <v-fab-transition>
@@ -56,9 +61,11 @@ export default {
 
 	data () {
 		return {
+      loading: true,
 			loadingUpdate: false,
       loadingReset: false,
-      fab: false
+      fab: false,
+      difficulty: null
 		}
   },
   
@@ -66,11 +73,9 @@ export default {
     PanelHeader
   },
 
-	async asyncData ({ $axios, params }) {
-    const difficulty = await $axios.$get(`server/difficulty/${params.name}`)
-    return {
-      difficulty
-    }
+	async mounted () {
+    this.difficulty = await this.$axios.$get(`server/difficulty/${this.$route.params.name}`)
+    this.loading = false
   },
 
 	methods: {

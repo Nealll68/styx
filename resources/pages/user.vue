@@ -77,6 +77,12 @@
 export default {
   layout: 'interface',
 
+  head () {
+    return {
+      title: this.$t('menu.myAccount')
+    }
+  },
+
   data () {
     return {
       loading: false,

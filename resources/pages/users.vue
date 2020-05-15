@@ -167,6 +167,12 @@ export default {
   layout: 'interface',
   middleware: 'privilege_1',
 
+  head () {
+    return {
+      title: this.$t('menu.users')
+    }
+  },
+
   data () {
     return {
       dialog: false,

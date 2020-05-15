@@ -64,6 +64,12 @@ const PathError = () => import('@/components/PathError')
 export default {
   layout: 'interface',
 
+  head () {
+    return {
+      title: this.$t('menu.logs')
+    }
+  },
+
   components: {
     PathError
   },

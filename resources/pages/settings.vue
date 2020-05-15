@@ -119,6 +119,12 @@ export default {
   layout: 'interface',
   middleware: 'privilege_1',
 
+  head () {
+    return {
+      title: this.$t('menu.settings')
+    }
+  },
+
   data() {
     return {
       loading: false,

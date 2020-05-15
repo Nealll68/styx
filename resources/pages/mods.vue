@@ -250,6 +250,12 @@ const WorkshopQuery = () => import('@/components/WorkshopQuery')
 export default {
   layout: 'interface',
 
+  head () {
+    return {
+      title: this.$t('menu.mods')
+    }
+  },
+
   components: {
     PathError,
     UploadDialog,

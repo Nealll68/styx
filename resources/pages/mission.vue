@@ -178,7 +178,13 @@ const UploadDialog = () => import('@/components/UploadDialog')
 const WorkshopQuery = () => import('@/components/WorkshopQuery')
 
 export default {
-  layout: 'interface',  
+  layout: 'interface',
+  
+  head () {
+    return {
+      title: this.$t('menu.missions')
+    }
+  },
 
   components: {
     PathError,

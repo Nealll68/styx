@@ -67,6 +67,12 @@ const Logo = () => import('@/components/Logo')
 export default {
   auth: 'guest',
 
+  head () {
+    return {
+      title: this.$t('login.signIn')
+    }
+  },
+
   data () {
     return {
       formIsValid: false,

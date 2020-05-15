@@ -1,50 +1,57 @@
 <template>
   <v-card>
-    <v-banner
-      app
-      sticky
-      single-line
-    >
-      <v-icon slot="icon">mdi-post</v-icon>
-      {{ logs.filename }}
+    <v-skeleton-loader
+      v-if="loading"
+      type="table-heading, paragraph@2"
+    ></v-skeleton-loader>
 
-      <template v-slot:actions>
-        <v-btn
-          color="primary"
-          text
-          @click="downloadLog(logs.profileName, logs.filename)"
-          :loading="downloadLoading"
-          :disable="deleteLoading"
-        >
-          <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
-        </v-btn>
-
-        <v-btn
-          color="error"
-          text
-          @click="deleteLog(logs.profileName, logs.filename)"
-          :loading="deleteLoading"
-          :disable="downloadLoading"
-        >
-          <v-icon left>mdi-delete-forever</v-icon>{{ $t('common.delete') }}
-        </v-btn>
-      </template>
-    </v-banner>
-
-    <v-card-text>
-      <v-sheet
-        color="grey darken-4" 
-        class="pa-2"
+    <template v-else>
+      <v-banner
+        app
+        sticky
+        single-line
       >
-        <div 
-          v-for="(log, i) of logs.logs"
-          :key="i"
-          class="my-2"
+        <v-icon slot="icon">mdi-post</v-icon>
+        {{ logs.filename }}
+
+        <template v-slot:actions>
+          <v-btn
+            color="primary"
+            text
+            @click="downloadLog(logs.profileName, logs.filename)"
+            :loading="downloadLoading"
+            :disable="deleteLoading || loading"
+          >
+            <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
+          </v-btn>
+
+          <v-btn
+            color="error"
+            text
+            @click="deleteLog(logs.profileName, logs.filename)"
+            :loading="deleteLoading"
+            :disable="downloadLoading || loading"
+          >
+            <v-icon left>mdi-delete-forever</v-icon>{{ $t('common.delete') }}
+          </v-btn>
+        </template>
+      </v-banner>
+
+      <v-card-text>      
+        <v-sheet
+          color="grey darken-4" 
+          class="pa-2"
         >
-          {{ log }}
-        </div>
-      </v-sheet>           
-    </v-card-text>
+          <div 
+            v-for="(log, i) of logs.logs"
+            :key="i"
+            class="my-2"
+          >
+            {{ log }}
+          </div>
+        </v-sheet>
+      </v-card-text>
+    </template>
 
     <v-fab-transition>
       <v-btn
@@ -65,28 +72,39 @@
 
 <script>
 export default {
+  head () {
+    return {
+      title: `${this.$route.params.log} - ${this.$route.params.profile} - ${this.$t('menu.logs')}`
+    }
+  },
+
   data: () => ({
+    loading: true,
     downloadLoading: false,
     deleteLoading: false,
-    fab: false
+    fab: false,
+    logs: null
   }),
 
-  async asyncData ({ $axios, params, error }) {
-    const profileName = params.profile
-    const filename = params.log
-    const response = await $axios.$get(`server/logs/${profileName}/${filename}`).catch (() => {
+  async mounted () {
+    const profileName = this.$route.params.profile
+    const filename = this.$route.params.log
+
+    console.log(filename)
+
+    const response = await this.$axios.$get(`server/logs/${profileName}/${filename}`).catch (() => {
       return false
     })
 
-    if (!response) return error ({ statusCode: 404, message: "Unable to find the log file" })
+    if (!response) return this.$error ({ statusCode: 404, message: "Unable to find the log file" })
 
-    return {
-      logs: {
-        profileName,
-        filename,
-        logs: response.split('\r\n')
-      }
+    this.logs = {
+      profileName,
+      filename,
+      logs: response.split('\r\n')
     }
+
+    this.loading = false
   },
 
   methods: {

@@ -46,6 +46,15 @@
                   </v-tooltip>
                 </template>
               </v-text-field>
+
+              <v-select
+                v-model="formData.locale"
+                :items="$store.state.i18n.locales"
+                item-text="name"
+                item-value="code"
+                filled
+                prepend-inner-icon="mdi-translate"
+              ></v-select>
             </v-form> 
           </v-card-text>
 
@@ -75,7 +84,8 @@ export default {
       showPassword: false,
       formData: {
         username: this.$auth.user.username,
-        password: ''
+        password: '',
+        locale: ''
       },
       formRules: {
         usernameRules: [
@@ -91,6 +101,10 @@ export default {
         ]
       }
     }
+  },
+
+  mounted () {
+    this.formData.locale = this.getCurrentLocaleCode()
   },
 
   methods: {
@@ -109,9 +123,26 @@ export default {
           type: 'success',
           message: this.$t('user.updated')
         })
+
+        if (this.formData.locale !== this.getCurrentLocaleCode()) {
+          this.switchLocale(this.formData.locale)
+        }
       }
 
       this.loading = false
+    },
+
+    switchLocale (code) {
+      this.$cookies.set("locale", code, {
+        path: "/"
+      })
+
+      window.location.reload(true)
+    },
+
+    getCurrentLocaleCode () {
+      const locale = this.$store.state.i18n.locales.find(el => el.code === this.$store.state.i18n.locale)
+      return locale.code
     }
   }
 }

@@ -375,11 +375,6 @@ export default {
       const length = this.$store.state.monitor.measures.length
       return this.$store.state.monitor.measures[length - 1]
     },
-
-    activatedLocale () {
-      const locale = this.$store.state.i18n.locales.find(el => el.code === this.$store.state.i18n.locale)
-      return locale.name
-    }
   },
 
   created () {
@@ -437,14 +432,6 @@ export default {
         type: 'info',
         message: this.$t('serverState.stopProgress')
       })
-    },
-
-    switchLocale (code) {
-      this.$cookies.set("locale", code, {
-        path: "/"
-      })
-
-      window.location.reload(true)
     },
 
     async updateServer (guard = null) {

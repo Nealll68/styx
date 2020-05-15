@@ -52,15 +52,20 @@
   </panel-header>
 
   <v-card-text>
-    <v-textarea
-      v-model="config"
-      filled
-      auto-grow
-      :disabled="loadingUpdate || loadingReset"
-      spellcheck="false"
-      autocorrect="off"
-      autocapitalize="off"
-    ></v-textarea>
+    <v-skeleton-loader
+      :loading="loading"
+      type="paragraph@2"
+    >
+      <v-textarea
+        v-model="config"
+        filled
+        auto-grow
+        :disabled="loadingUpdate || loadingReset"
+        spellcheck="false"
+        autocorrect="off"
+        autocapitalize="off"
+      ></v-textarea>
+    </v-skeleton-loader>
   </v-card-text>
 
   <v-fab-transition>
@@ -86,10 +91,13 @@ const PanelHeader = () => import('@/components/PanelHeader')
 export default {
 	data () {
 		return {
+      loading: true,
 			loadingUpdate: false,
       loadingReset: false,
       dialog: false,
-      fab: false
+      fab: false,
+      config: null,
+      missions: null,
 		}
   },
 
@@ -97,14 +105,10 @@ export default {
     PanelHeader
   },
   
-  async asyncData ({ $axios, params }) {
-    const config = await $axios.$get(`server/config/${params.name}`)
-    const missions = await $axios.$get('server/mission')
-
-    return {
-      config,
-      missions
-    }
+  async mounted () {
+    this.config = await this.$axios.$get(`server/config/${this.$route.params.name}`)
+    this.missions = await this.$axios.$get('server/mission')
+    this.loading = false
   },
 
 	methods: {

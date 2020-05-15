@@ -77,6 +77,12 @@
 
 <script>
 export default {
+  head () {
+    return {
+      title: `${this.$t('profiles.tabTitles.mods')} - ${this.$route.params.name}`
+    }
+  },
+
   data () {
     return {
       loading: false,

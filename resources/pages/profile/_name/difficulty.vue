@@ -48,6 +48,12 @@
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
+  head () {
+    return {
+      title: `${this.$t('profiles.tabTitles.difficulty')} - ${this.$route.params.name}`
+    }
+  },
+
 	data () {
 		return {
 			loadingUpdate: false,

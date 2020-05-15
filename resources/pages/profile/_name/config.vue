@@ -90,6 +90,12 @@
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
+  head () {
+    return {
+      title: `${this.$t('profiles.tabTitles.configuration')} - ${this.$route.params.name}`
+    }
+  },
+
 	data () {
 		return {
       loading: true,

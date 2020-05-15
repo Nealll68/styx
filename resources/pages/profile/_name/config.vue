@@ -16,6 +16,7 @@
         <v-btn 
           color="primary" 
           v-on="on"
+          :disabled="loading"
         >
           <v-icon left>mdi-target</v-icon>{{ $t('menu.missions') }}
         </v-btn>

@@ -4,6 +4,7 @@
     help-link="https://community.bistudio.com/wiki/server.cfg#Example_Configuration_File"
     :loadingReset="loadingReset"
     :loadingUpdate="loadingUpdate"
+    :disabled="$store.state.a3Server.isStarted"
     @reset="reset()"
     @save="update()"
   >
@@ -64,6 +65,13 @@
   </panel-header>
 
   <v-card-text>
+    <v-alert
+      v-if="$store.state.a3Server.isStarted"
+      type="warning"
+      border="left"
+      text
+    >{{ $t('errors.serverStarted') }}</v-alert>
+    
     <v-skeleton-loader
       :loading="loading"
       type="paragraph@2"

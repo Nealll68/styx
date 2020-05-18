@@ -7,6 +7,7 @@
   
   <template v-slot:actions>
     <v-btn
+      v-if="helpLink"
       :icon="$vuetify.breakpoint.xsOnly"
       color="tertiary"
       text

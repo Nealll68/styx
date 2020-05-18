@@ -45,7 +45,7 @@ module.exports = {
   /*
    ** Nuxt.js modules
    */
-  modules: ['@nuxtjs/axios', '@nuxtjs/auth', 'cookie-universal-nuxt'],
+  modules: ['@nuxtjs/axios', '@nuxtjs/auth', 'cookie-universal-nuxt', 'nuxt-clipboard2'],
 
   dotenv: {
     path: resolve(__dirname, '..')

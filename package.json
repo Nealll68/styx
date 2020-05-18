@@ -40,6 +40,7 @@
     "lodash": "^4.17.15",
     "mkdirp": "^1.0.3",
     "nuxt": "^2.11.0",
+    "nuxt-clipboard2": "^0.2.1",
     "rmraf": "^1.0.3",
     "sqlite3": "^4.1.1",
     "symlink-dir": "^3.1.1",

@@ -27,10 +27,11 @@
               <v-btn 
                 v-on="on"
                 :to="link.url"
+                :exact="link.url === '/'"
                 nuxt
                 text
                 class="mx-1"
-                exact-active-class="appbar-active-link"
+                active-class="appbar-active-link"
               >
                 <v-badge
                   :value="link.url === '/settings' && !$store.state.config.a3ServerPath"
@@ -58,7 +59,7 @@
                 nuxt
                 text
                 class="mx-1"
-                exact-active-class="appbar-active-link"
+                active-class="appbar-active-link"
               >
                 <v-icon>mdi-account-cog</v-icon>
               </v-btn>

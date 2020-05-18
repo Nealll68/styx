@@ -1,8 +1,8 @@
 <template>
   <v-card flat>
-    <v-toolbar 
-      flat 
-      short
+    <!--<v-banner
+      app
+      sticky
     >
       <v-chip 
         label
@@ -14,8 +14,7 @@
         class="mx-1 hidden-xs-only"
       >{{ $t('serverMod.serverModsActivated') }} : {{ mods.filter(e => e.server_mod).length }}</v-chip>
 
-      <v-spacer></v-spacer>
-
+      <template v-slot:actions>
       <v-btn 
         color="primary" 
         text 
@@ -24,7 +23,23 @@
       >
         <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
       </v-btn>
-    </v-toolbar>
+    </v-banner>-->
+    <panel-header
+      :loadingReset="loadingReset"
+      :loadingUpdate="loadingUpdate"
+      @reset="reset()"
+      @save="update()"
+    >
+      <v-chip 
+        label
+        class="mx-1 hidden-xs-only"
+      >{{ $t('serverMod.modsActivated') }} : {{ mods.filter(e => e.activated).length }}</v-chip>
+
+      <v-chip
+        label
+        class="mx-1 hidden-xs-only"
+      >{{ $t('serverMod.serverModsActivated') }} : {{ mods.filter(e => e.server_mod).length }}</v-chip>
+    </panel-header>
 
     <v-card-text>
       <v-text-field
@@ -76,6 +91,8 @@
 </template>
 
 <script>
+const PanelHeader = () => import('@/components/PanelHeader')
+
 export default {
   head () {
     return {
@@ -87,6 +104,7 @@ export default {
     return {
       loading: false,
       loadingUpdate: false,
+      loadingReset: false,
       mods: [],
       modsSearch: '',
       modsHeaders: [
@@ -96,6 +114,10 @@ export default {
       ],
       paramsId: null
     }
+  },
+
+  components: {
+    PanelHeader
   },
 
   async mounted () {
@@ -151,6 +173,29 @@ export default {
       })
 
       this.loadingUpdate = false
+      this.$emit('loading', false)
+    },
+
+    async reset () {
+      this.$emit('loading', true)
+      this.loadingReset = true
+
+      this.mods.forEach(element => {
+        element.activated = false
+        element.server_mod = false
+      })
+
+      await this.$axios.$put(`server/params/${this.paramsId}`, {
+        mods: '',
+        server_mod: ''
+      })
+
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('serverMod.reseted')
+      })
+
+      this.loadingReset = false
       this.$emit('loading', false)
     }
   }

@@ -1,12 +1,21 @@
 <template>
 <v-card flat>
-  <panel-header
-    help-link="https://community.bistudio.com/wiki/Arma_3_Startup_Parameters"
-    :loadingReset="loadingReset"
-    :loadingUpdate="loadingUpdate"
-    @reset="reset()"
-    @save="update()"
-  ></panel-header>
+  <v-banner
+    app
+    sticky
+  >    
+    <template v-slot:actions>
+      <v-btn
+        :icon="$vuetify.breakpoint.xsOnly"
+        color="tertiary"
+        text
+        href="https://community.bistudio.com/wiki/Arma_3_Startup_Parameters"
+        target="_blank"
+      >
+        <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-help-circle</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
+      </v-btn>
+    </template>
+  </v-banner>
 
   <v-card-text>
     <v-switch
@@ -16,6 +25,9 @@
       inset
       :hint="$t('params.autoInitHint')"
       persistent-hint
+      :disable="loading"
+      :readonly="loading"
+      @change="update"
     ></v-switch>
 
     <v-switch
@@ -25,6 +37,9 @@
       inset
       :hint="$t('params.loadMissionToMemoryHint')"
       persistent-hint
+      :disable="loading"
+      :readonly="loading"
+      @change="update"
     ></v-switch>
 
     <v-switch
@@ -34,6 +49,9 @@
       :label="$t('params.noLogsLabel')"
       :hint="$t('params.noLogsHint')"
       persistent-hint
+      :disable="loading"
+      :readonly="loading"
+      @change="update"
     ></v-switch>
 
     <v-switch
@@ -43,6 +61,9 @@
       :label="$t('params.hugePagesLabel')"
       :hint="$t('params.hugePagesHint')"
       persistent-hint
+      :disable="loading"
+      :readonly="loading"
+      @change="update"
     ></v-switch>
 
     <v-switch
@@ -52,6 +73,9 @@
       :label="$t('params.enableHTLabel')"
       :hint="$t('params.enableHTHint')"
       persistent-hint
+      :disable="loading"
+      :readonly="loading"
+      @change="update"
     ></v-switch>
 
     <v-switch
@@ -61,6 +85,9 @@
       :label="$t('params.filePatchingLabel')"
       :hint="$t('params.filePatchingHint')"
       persistent-hint
+      :disable="loading"
+      :readonly="loading"
+      @change="update"
     ></v-switch>
   </v-card-text>
 </v-card>
@@ -78,8 +105,7 @@ export default {
 
   data () {
     return {
-      loadingUpdate: false,
-      loadingReset: false
+      loading: false
     }
   },
 
@@ -97,7 +123,7 @@ export default {
   methods: {
     async update () {
       this.$emit('loading', true)
-      this.loadingUpdate = true
+      this.loading = true
 
       const response = await this.$axios.$put(
         `server/params/${this.params.id}`,
@@ -108,22 +134,7 @@ export default {
         message: this.$t('params.updated')
       })
 
-      this.loadingUpdate = false
-      this.$emit('loading', false)
-    },
-
-    async reset() {
-      this.$emit('loading', true)
-      this.loadingReset = true
-
-      this.params = await this.$axios.$delete(`server/params/${this.params.id}`)     
-
-      this.$snackbar({
-        type: 'success',
-        message: this.$t('params.reseted')
-      })
-
-      this.loadingReset = false
+      this.loading = false
       this.$emit('loading', false)
     }
   }

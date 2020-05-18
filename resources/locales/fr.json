@@ -66,7 +66,8 @@
     "internalServerError": "Erreur interne au serveur",
     "unauthorized": "Non autorisé",
     "other": "Une erreur s'est produite",
-    "undefinedDefaultProfile": "Spécifiez un profil par défaut pour démarrer le serveur"
+    "undefinedDefaultProfile": "Spécifiez un profil par défaut pour démarrer le serveur",
+    "serverStarted": "Pour enregistrer les modifications le serveur doit-être arrêté"
   },
 
   "rules": {

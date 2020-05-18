@@ -132,12 +132,13 @@
   "serverMod": {
     "modsActivated": "Mods activés",
     "serverModsActivated": "Server mods activés",
-    "updated": "Mods enregistré"
+    "updated": "Mods enregistrés",
+    "reseted": "Mods réinitialisés"
   },
 
   "params": {
     "updated": "Paramètres mis à jour",
-    "reseted": "Paramètres réinitialisé",
+    "reseted": "Paramètres réinitialisés",
     "autoInitLabel": "Initialisation automatique de la mission",
     "autoInitHint": "-autoInit : Initialise la mission comme le premier client le fait. Si activé, vérifier que la mission soit persistente sinon le serveur ne démarre pas",
     "loadMissionToMemoryLabel": "Charger la mission dans la mémoire",

@@ -132,7 +132,8 @@
   "serverMod": {
     "modsActivated": "Activated mods",
     "serverModsActivated": "Activated server mods",
-    "updated": "Mods saved"
+    "updated": "Mods saved",
+    "reseted": "Mods reseted"
   },
 
   "params": {

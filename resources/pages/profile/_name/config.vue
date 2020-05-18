@@ -26,7 +26,18 @@
         <v-card-title>{{ $t('menu.missions') }}</v-card-title>
         
         <v-card-text style="max-height: 500px;">
-          <v-list subheader>
+          <v-alert
+            v-if="missions && missions.length === 0"
+            type="info"
+            border="left"
+            dense
+            text
+          >{{ $t('mission.noMission') }}</v-alert>
+
+          <v-list 
+            v-else
+            subheader
+          >
             <v-subheader>{{ $t('config.missionDialogSubheader') }}</v-subheader>            
 
             <v-list-item 

@@ -22,7 +22,8 @@
       color="quaternary"
       text
       :loading="loadingReset"
-      @click="$emit('reset')"	
+      @click="$emit('reset')"
+      :disabled="disabled"	
     >
       <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-alert-circle</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.reset') }}			
     </v-btn>
@@ -33,6 +34,7 @@
       text
       :loading="loadingUpdate"
       @click="$emit('save')"
+      :disabled="disabled"
     >
       <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-content-save</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.save') }}
     </v-btn>
@@ -45,7 +47,8 @@ export default {
   props: [
     'helpLink',
     'loadingReset',
-    'loadingUpdate'
+    'loadingUpdate',
+    'disabled'
   ]
 }
 </script>

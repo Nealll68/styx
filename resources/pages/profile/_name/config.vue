@@ -158,7 +158,7 @@ export default {
       
       this.$snackbar({
         type: 'success',
-        message: this.$t('config.updated')
+        message: this.$t('common.updated')
       })
 			
       this.loadingUpdate = false	
@@ -180,7 +180,7 @@ export default {
         
         this.$snackbar({
           type: 'success',
-          message: this.$t('config.reseted')
+          message: this.$t('common.reseted')
         })
       }
 

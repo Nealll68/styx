@@ -87,7 +87,7 @@ class SteamCMD {
 
             this.steamcmd.on('close', async code => {
                 // Create symlink
-                const formatItemName = /\s/.test(workshopItemName) ? `@${workshopItemName.replace(/[^a-zA-Z0-9 ]/g, '').split(' ').join('_')}` : `@${workshopItemName}`
+                const formatItemName = /\s/.test(workshopItemName) ? `@${workshopItemName.replace(/[^a-zA-Z0-9 ]/g, '').split(' ').join('_')}`.toLowerCase() : `@${workshopItemName}`.toLowerCase()
                 await symlinkDir(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410', `${workshopItemID}`), path.join(config.a3server_path, formatItemName))
                 
                 const mod = await Mod.findBy('workshop_id', workshopItemID)               

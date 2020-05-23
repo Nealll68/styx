@@ -89,18 +89,6 @@
       <v-container class="app-container">
         <v-row>
           <v-col>
-            <v-chip 
-              small 
-              label 
-              outlined
-              class="mx-1 hidden-sm-and-down"
-            >
-              <v-icon 
-                small 
-                left
-              >mdi-account</v-icon> {{ $auth.user.username }} - {{ privileges[$auth.user.privilege] }}            
-            </v-chip>
-
             <v-progress-circular
               v-if="measure"
               :value="measure.cpu_usage"

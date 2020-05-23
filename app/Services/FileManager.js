@@ -20,7 +20,7 @@ const InvalidFileExtension = use('App/Exceptions/InvalidFileExtensionException')
 
 class FileManager {
 
-    static async write (type, profileName, data = null) {
+    async write (type, profileName, data = null) {
         try {
             const config = await Config.first()
 
@@ -39,7 +39,7 @@ class FileManager {
         }
     }
 
-    static async getFileContent (type, profileName) {
+    async getFileContent (type, profileName) {
         const config = await Config.first()
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -52,7 +52,7 @@ class FileManager {
         return await Drive.get(filePath, 'UTF-8')
     }
 
-    static async storeLocalMod (file) {
+    async storeLocalMod (file) {
         const config = await Config.first()
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -70,14 +70,14 @@ class FileManager {
         await Drive.delete(zipPath)
     }
 
-    static async getLocalMods () {
+    async getLocalMods () {
         const config = await Config.first()
         if (!config.a3server_path) throw A3FolderPathUndefined()
 
         return await fs.readdir(config.a3server_path, { withFileTypes: true })
     }
 
-    static async getWorkshopMods () {
+    async getWorkshopMods () {
         const config = await Config.first()
         if (!config.a3server_path) throw A3FolderPathUndefined()
         if (!config.steamcmd_path) throw SteamCMDPathUndefined()
@@ -85,7 +85,7 @@ class FileManager {
         return await fs.readdir(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410'), { withFileTypes: true })
     }
 
-    static async storeMission (file) {
+    async storeMission (file) {
         const config = await Config.first()
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -98,7 +98,7 @@ class FileManager {
         if (!file.moved()) throw file.error()
     }
 
-    static async storeWorkshopMission (fileUrl, filename) {
+    async storeWorkshopMission (fileUrl, filename) {
         const config = await Config.first()
 
         const response = await axios({
@@ -109,7 +109,7 @@ class FileManager {
         response.data.pipe(fs.createWriteStream(path.join(config.a3server_path, 'MPMissions', filename)))
     }
 
-    static async getMissions () {
+    async getMissions () {
         const config = await Config.first()
     
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -132,7 +132,7 @@ class FileManager {
         return missions
     }
 
-    static async logFiles () {
+    async logFiles () {
         const config = await Config.first()
         const profiles = await A3ServerProfile.all()
 
@@ -148,7 +148,7 @@ class FileManager {
         return returnData
     }
 
-    static async currentLog () {
+    async currentLog () {
         const config = await Config.first()
         const profile = await A3ServerProfile.findBy('isDefault', true)
         const profileFolder = path.join(config.a3server_path, 'styx', profile.name)
@@ -159,12 +159,12 @@ class FileManager {
         return await Drive.get(path.join(profileFolder, logFiles[logFiles.length - 1]), 'UTF-8')
     }
 
-    static async getLogs (profileName, filename) {
+    async getLogs (profileName, filename) {
         const config = await Config.first()
         return await Drive.get(path.join(config.a3server_path, 'styx', profileName, filename), 'UTF-8')
     }
 
-    static async deleteProfileFolder (profileName) {
+    async deleteProfileFolder (profileName) {
         try {
             const config = await Config.first()
 
@@ -176,12 +176,12 @@ class FileManager {
         }
     }
 
-    static async deleteLogs (profileName, filename) {
+    async deleteLogs (profileName, filename) {
         const config = await Config.first()
         await Drive.delete(path.join(config.a3server_path, 'styx', profileName, filename))
     }
 
-    static async deleteMod (workshopItemID, workshopItemName) {
+    async deleteMod (workshopItemID, workshopItemName) {
         try {
             const config = await Config.first()      
 
@@ -203,7 +203,7 @@ class FileManager {
         }
     }
 
-    static async deleteLocalMod (name) {
+    async deleteLocalMod (name) {
         try {
             const config = await Config.first()      
 
@@ -217,7 +217,7 @@ class FileManager {
         }
     }
 
-    static async deleteMission (filename) {
+    async deleteMission (filename) {
         const config = await Config.first()
         await Drive.delete(path.join(config.a3server_path, 'MPMissions', filename))
     }

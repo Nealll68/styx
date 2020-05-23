@@ -22,6 +22,12 @@
 export default {
   layout: 'interface',
 
+  head () {
+    return {
+      title: 'Error'
+    }
+  },
+
   props: {
     error: {
       type: Object,

@@ -22,48 +22,7 @@ body::-webkit-scrollbar-thumb {
   }
 
 .app-container {
-    max-width: 1200px !important;
-}
-
-.landing-container {
-    height: 100%;
-}
-
-.app-toast {
-    font-family: 'Roboto', Helvetica, Arial, sans-serif;    
-}
-
-.app-toast .mdi {    
-    font-weight: normal;
-    font-style: normal;
-    font-size: 24px;
-    line-height: 1;
-}
-
-.app-toast .toasted .action {
-    font-size: .9rem !important;
-    letter-spacing: .08em !important;
-    color: #ffffff !important;
-}
-
-.app-toast .toasted .action:hover {
-    text-decoration: none !important;
-}
-
-.app-error-toast .mdi {
-    color:#ff5252;
-}
-
-.app-success-toast .mdi {
-    color: #4CAF50;
-}
-
-.app-info-toast .mdi {
-    color:#2196F3;
-}
-
-.app-warning-toast .mdi {
-    color:#FB8C00;
+    max-width: 1440px !important;
 }
 
 .scrollbar {

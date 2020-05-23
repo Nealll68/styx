@@ -90,8 +90,6 @@ export default {
     const profileName = this.$route.params.profile
     const filename = this.$route.params.log
 
-    console.log(filename)
-
     const response = await this.$axios.$get(`server/logs/${profileName}/${filename}`).catch (() => {
       return false
     })

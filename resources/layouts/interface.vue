@@ -28,12 +28,6 @@ export default {
     }
   },
 
-  head () {
-    return {
-      title: 'Styx'
-    }
-  },
-
   async mounted () {
       const config = await this.$axios.$get('config')
       this.$store.commit('config/set', config)

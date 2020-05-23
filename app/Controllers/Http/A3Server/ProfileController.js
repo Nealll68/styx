@@ -55,8 +55,8 @@ class ProfileController {
             const serverProfile = await A3ServerProfile.create(profileData)
             await A3ServerParam.create({ profile_id: serverProfile.id })
 
-            await FileManager.write('config', profileData.name, null, true)
-            await FileManager.write('difficulty', profileData.name, null, true)
+            await FileManager.write('config', profileData.name)
+            await FileManager.write('difficulty', profileData.name)
 
             await serverProfile.reload()
             return serverProfile

@@ -17,7 +17,7 @@ class DifficultyController {
     }
 
     async reset ({ params, response }) {
-        await FileManager.write('difficulty', params.name, null, true)
+        await FileManager.write('difficulty', params.name)
         const difficulty = await FileManager.getFileContent('difficulty', params.name)
         
         return response.ok(difficulty)

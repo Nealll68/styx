@@ -18,7 +18,7 @@ class ConfigController {
 
 
     async reset ({ params, response }) {
-        await FileManager.write('config', params.name, null, true)
+        await FileManager.write('config', params.name)
         const config = await FileManager.getFileContent('config', params.name)
         
         return response.ok(config)       

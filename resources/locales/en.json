@@ -128,7 +128,7 @@
     "information": "To use a custom difficulty, indicate 'Custom' in the server configuration file."
   },
 
-  "perfomance": {
+  "performance": {
     "information": "To use a custom performance file, activate the -cfg parameter in the 'Parameters' tabs."
   },
 

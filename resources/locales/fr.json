@@ -128,7 +128,7 @@
     "information": "Pour utiliser une difficulté personnalisée indiquez 'Custom' dans le fichier de configuration du serveur."
   },
 
-  "perfomance": {
+  "performance": {
     "information": "Pour utiliser un fichier de perfomance personnalisé, activer le paramètre -cfg dans l'onglet 'Paramètres'."
   },
 

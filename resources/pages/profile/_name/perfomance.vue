@@ -22,7 +22,7 @@
         text 
         type="info" 
         dense
-      >{{ $t('peformance.information') }}</v-alert>
+      >{{ $t('performance.information') }}</v-alert>
 
       <v-skeleton-loader
         :loading="loading"

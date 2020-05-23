@@ -1,7 +1,5 @@
 <template>
-<div>
-  <download-info-bar />
-  
+<div>  
   <v-app-bar
     v-if="$vuetify.breakpoint.mdAndUp"
     app
@@ -338,14 +336,12 @@
 
 <script>
 const Logo = () => import('@/components/Logo')
-const DownloadInfoBar = () => import('@/components/DownloadInfoBar')
 
 export default {
   name: 'app-bar',
 
   components: {
-    Logo,
-    DownloadInfoBar
+    Logo
   },
 
   data () {

@@ -7,15 +7,19 @@
         <nuxt />
       </v-slide-y-transition>
     </v-content>
+
+    <download-info-bar />
   </v-app>
 </template>
 
 <script>
 const AppBar = () => import('@/components/AppBar')
+const DownloadInfoBar = () => import('@/components/DownloadInfoBar')
 
 export default {  
   components: {
-    AppBar
+    AppBar,
+    DownloadInfoBar
   },
 
   data () {

@@ -144,9 +144,9 @@
               <v-tab
                 exact
                 nuxt
-                :to="`/profile/${$route.params.name}/perfomance`"
+                :to="`/profile/${$route.params.name}/performance`"
                 :disabled="!$route.params.name"
-              >{{ $t('profiles.tabTitles.perfomance') }}</v-tab>
+              >{{ $t('profiles.tabTitles.performance') }}</v-tab>
             </v-tabs>
           </template>
         </v-toolbar> 

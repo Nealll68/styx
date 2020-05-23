@@ -154,7 +154,7 @@
     "enableHTHint": "-enableHT : Enables the use of all logical CPU cores. If your CPU does not support Hyper-Threading or similar technology, this parameter is ignored",
     "filePatchingLabel": "Authorize file patching",
     "filePatchingHint": "-filePatching : Allow the game to load unpacked data",
-    "customCfgLabel": "Use custom perfomance file",
+    "customCfgLabel": "Use custom performance file",
     "customCfgHint": "-cfg : Use the basic.cfg file edited in the 'Performance' tab"
   },
 
@@ -179,7 +179,7 @@
       "parameters": "Parameters",
       "configuration": "Configuration",
       "difficulty": "Difficulty",
-      "perfomance": "Perfomance"
+      "performance": "Performance"
     }
   },
 

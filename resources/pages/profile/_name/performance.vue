@@ -29,7 +29,7 @@
         type="paragraph@2"
       >
         <v-textarea
-          v-model="perfomance"
+          v-model="performance"
           filled
           auto-grow
           :disabled="loadingUpdate || loadingReset"
@@ -63,7 +63,7 @@ const PanelHeader = () => import('@/components/PanelHeader')
 export default {
   head () {
     return {
-      title: `${this.$t('profiles.tabTitles.perfomance')} - ${this.$route.params.name}`
+      title: `${this.$t('profiles.tabTitles.performance')} - ${this.$route.params.name}`
     }
   },
 
@@ -73,7 +73,7 @@ export default {
 			loadingUpdate: false,
       loadingReset: false,
       fab: false,
-      perfomance: null
+      performance: null
 		}
   },
   
@@ -82,7 +82,7 @@ export default {
   },
 
 	async mounted () {
-    this.perfomance = await this.$axios.$get(`server/basic/${this.$route.params.name}`)
+    this.performance = await this.$axios.$get(`server/basic/${this.$route.params.name}`)
     this.loading = false
   },
 
@@ -98,7 +98,7 @@ export default {
       this.loadingUpdate = true
       
       await this.$axios.$put(`server/basic/${this.$route.params.name}`, {
-        content: this.perfomance
+        content: this.performance
       })
       
       this.$snackbar({

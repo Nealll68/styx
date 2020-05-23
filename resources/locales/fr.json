@@ -129,7 +129,7 @@
   },
 
   "performance": {
-    "information": "Pour utiliser un fichier de perfomance personnalisé, activer le paramètre -cfg dans l'onglet 'Paramètres'."
+    "information": "Pour utiliser un fichier de performance personnalisé, activer le paramètre -cfg dans l'onglet 'Paramètres'."
   },
 
   "serverMod": {
@@ -154,8 +154,8 @@
     "enableHTHint": "-enableHT : Active l'utilisation de tous les cœurs logiques du CPU. Si le processeur n'est pas compatible, le paramètre est ignoré",
     "filePatchingLabel": "Autoriser le file patching",
     "filePatchingHint": "-filePatching : Autorise le jeu à charger les données décompressées",
-    "customCfgLabel": "Utiliser un fichier de perfomance personalisé",
-    "customCfgHint": "-cfg : Utilise le fichier basic.cfg édité dans l'onglet 'Perfomance'"
+    "customCfgLabel": "Utiliser un fichier de performance personalisé",
+    "customCfgHint": "-cfg : Utilise le fichier basic.cfg édité dans l'onglet 'Performance'"
   },
 
   "index": {
@@ -179,7 +179,7 @@
       "parameters": "Paramètres",
       "configuration": "Configuration",
       "difficulty": "Difficulté",
-      "perfomance": "Perfomance"
+      "performance": "Performance"
     }
   },
 

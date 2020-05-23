@@ -19,7 +19,7 @@ class A3ServerParamsSchema extends Schema {
       table.boolean('auto_init')
       table.boolean('load_mission_to_memory')
 
-      // Perfomance 
+      // Performance 
       table.boolean('no_logs')
       table.boolean('enable_ht')
       table.boolean('huge_pages')

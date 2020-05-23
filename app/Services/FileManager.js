@@ -20,7 +20,7 @@ const InvalidFileExtension = use('App/Exceptions/InvalidFileExtensionException')
 
 class FileManager {
 
-    async write (type, profileName, data, reset = false) {
+    static async write (type, profileName, data = null) {
         try {
             const config = await Config.first()
 
@@ -31,7 +31,7 @@ class FileManager {
                 filePath = path.join(config.a3server_path, 'styx', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
             }
 
-            if (reset) data = await Drive.get(Helpers.appRoot(`app/Services/serverFilesTemplates/server${_.upperFirst(type)}.template`), 'UTF-8')
+            if (!data) data = await Drive.get(Helpers.appRoot(`app/Services/serverFilesTemplates/server${_.upperFirst(type)}.template`), 'UTF-8')
 
             await Drive.put(filePath, data)
         } catch (ex) {
@@ -39,7 +39,7 @@ class FileManager {
         }
     }
 
-    async getFileContent (type, profileName) {
+    static async getFileContent (type, profileName) {
         const config = await Config.first()
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -52,7 +52,7 @@ class FileManager {
         return await Drive.get(filePath, 'UTF-8')
     }
 
-    async storeLocalMod (file) {
+    static async storeLocalMod (file) {
         const config = await Config.first()
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -70,14 +70,14 @@ class FileManager {
         await Drive.delete(zipPath)
     }
 
-    async getLocalMods () {
+    static async getLocalMods () {
         const config = await Config.first()
         if (!config.a3server_path) throw A3FolderPathUndefined()
 
         return await fs.readdir(config.a3server_path, { withFileTypes: true })
     }
 
-    async getWorkshopMods () {
+    static async getWorkshopMods () {
         const config = await Config.first()
         if (!config.a3server_path) throw A3FolderPathUndefined()
         if (!config.steamcmd_path) throw SteamCMDPathUndefined()
@@ -85,7 +85,7 @@ class FileManager {
         return await fs.readdir(path.join(config.steamcmd_path, 'steamapps', 'workshop', 'content', '107410'), { withFileTypes: true })
     }
 
-    async storeMission (file) {
+    static async storeMission (file) {
         const config = await Config.first()
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -98,7 +98,7 @@ class FileManager {
         if (!file.moved()) throw file.error()
     }
 
-    async storeWorkshopMission (fileUrl, filename) {
+    static async storeWorkshopMission (fileUrl, filename) {
         const config = await Config.first()
 
         const response = await axios({
@@ -109,7 +109,7 @@ class FileManager {
         response.data.pipe(fs.createWriteStream(path.join(config.a3server_path, 'MPMissions', filename)))
     }
 
-    async getMissions () {
+    static async getMissions () {
         const config = await Config.first()
     
         if (!config.a3server_path) throw new A3FolderPathUndefined()
@@ -132,7 +132,7 @@ class FileManager {
         return missions
     }
 
-    async logFiles () {
+    static async logFiles () {
         const config = await Config.first()
         const profiles = await A3ServerProfile.all()
 
@@ -148,7 +148,7 @@ class FileManager {
         return returnData
     }
 
-    async currentLog () {
+    static async currentLog () {
         const config = await Config.first()
         const profile = await A3ServerProfile.findBy('isDefault', true)
         const profileFolder = path.join(config.a3server_path, 'styx', profile.name)
@@ -159,12 +159,12 @@ class FileManager {
         return await Drive.get(path.join(profileFolder, logFiles[logFiles.length - 1]), 'UTF-8')
     }
 
-    async getLogs (profileName, filename) {
+    static async getLogs (profileName, filename) {
         const config = await Config.first()
         return await Drive.get(path.join(config.a3server_path, 'styx', profileName, filename), 'UTF-8')
     }
 
-    async deleteProfileFolder (profileName) {
+    static async deleteProfileFolder (profileName) {
         try {
             const config = await Config.first()
 
@@ -176,12 +176,12 @@ class FileManager {
         }
     }
 
-    async deleteLogs (profileName, filename) {
+    static async deleteLogs (profileName, filename) {
         const config = await Config.first()
         await Drive.delete(path.join(config.a3server_path, 'styx', profileName, filename))
     }
 
-    async deleteMod (workshopItemID, workshopItemName) {
+    static async deleteMod (workshopItemID, workshopItemName) {
         try {
             const config = await Config.first()      
 
@@ -203,7 +203,7 @@ class FileManager {
         }
     }
 
-    async deleteLocalMod (name) {
+    static async deleteLocalMod (name) {
         try {
             const config = await Config.first()      
 
@@ -217,7 +217,7 @@ class FileManager {
         }
     }
 
-    async deleteMission (filename) {
+    static async deleteMission (filename) {
         const config = await Config.first()
         await Drive.delete(path.join(config.a3server_path, 'MPMissions', filename))
     }

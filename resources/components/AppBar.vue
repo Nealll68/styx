@@ -8,7 +8,7 @@
     elevate-on-scroll
     fixed
   >
-    <v-container fluid>
+    <v-container class="app-container">
       <v-row align="center">
         <v-col md="4">
           <Logo width="50px" height="50px" />
@@ -85,92 +85,97 @@
       </v-row>
     </v-container>
 
-    <template v-slot:extension> 
-      <v-chip 
-        small 
-        label 
-        outlined
-        class="mx-1 hidden-sm-and-down"
-      >
-        <v-icon 
-          small 
-          left
-        >mdi-account</v-icon> {{ $auth.user.username }} - {{ privileges[$auth.user.privilege] }}            
-      </v-chip>
+    <template v-slot:extension>
+      <v-container class="app-container">
+        <v-row>
+          <v-col>
+            <v-chip 
+              small 
+              label 
+              outlined
+              class="mx-1 hidden-sm-and-down"
+            >
+              <v-icon 
+                small 
+                left
+              >mdi-account</v-icon> {{ $auth.user.username }} - {{ privileges[$auth.user.privilege] }}            
+            </v-chip>
 
-      <v-progress-circular
-        v-if="measure"
-        :value="measure.cpu_usage"
-        color="tertiary"
-        class="mx-2 hidden-xs-only"
-      >
-        <v-icon 
-          small
-          color="tertiary"
-        >mdi-chip</v-icon>
-      </v-progress-circular>
+            <v-progress-circular
+              v-if="measure"
+              :value="measure.cpu_usage"
+              color="tertiary"
+              class="mx-2 hidden-xs-only"
+            >
+              <v-icon 
+                small
+                color="tertiary"
+              >mdi-chip</v-icon>
+            </v-progress-circular>
 
-      <v-progress-circular
-        v-if="measure"
-        :value="measure.mem_used"
-        color="quaternary"
-        class="mx-2 hidden-xs-only"
-      >
-        <v-icon 
-          small
-          color="quaternary"
-        >mdi-memory</v-icon>
-      </v-progress-circular>
+            <v-progress-circular
+              v-if="measure"
+              :value="measure.mem_used"
+              color="quaternary"
+              class="mx-2 hidden-xs-only"
+            >
+              <v-icon 
+                small
+                color="quaternary"
+              >mdi-memory</v-icon>
+            </v-progress-circular>
+          </v-col>
+          <v-col class="d-flex justify-end">
+            <v-btn
+              :icon="$vuetify.breakpoint.smAndDown" 
+              text 
+              color="success"
+              @click="startA3Server()" 
+              :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
+            >
+              <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-play</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
+            </v-btn>
 
-      <v-spacer></v-spacer>
+            <v-btn
+              :icon="$vuetify.breakpoint.smAndDown" 
+              text 
+              color="warning"
+              @click="restartA3Server()" 
+              :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
+            >
+              <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-restart</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
+            </v-btn>
 
-      <v-btn
-        :icon="$vuetify.breakpoint.smAndDown" 
-        text 
-        color="success"
-        @click="startA3Server()" 
-        :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
-      >
-        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-play</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
-      </v-btn>
-
-      <v-btn
-        :icon="$vuetify.breakpoint.smAndDown" 
-        text 
-        color="warning"
-        @click="restartA3Server()" 
-        :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
-      >
-        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-restart</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
-      </v-btn>
-
-      <v-btn
-        :icon="$vuetify.breakpoint.smAndDown" 
-        text 
-        color="error"
-        @click="stopA3Server()" 
-        :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
-      >
-        <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
-      </v-btn>
-      
-      <v-tooltip 
-        v-if="$auth.user.privilege === 1 && $store.state.config.steamCmdPath"
-        bottom
-      >
-        <template v-slot:activator="{ on }">
-          <v-btn
-            icon
-            :loading="loadingUpdate"
-            v-on="on"
-            @click="updateServer()"
-            :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
-          >
-            <v-icon>mdi-update</v-icon>
-          </v-btn>
-        </template>
-        {{ $t('menu.updateServer') }}
-      </v-tooltip>
+            <v-btn
+              :icon="$vuetify.breakpoint.smAndDown" 
+              text 
+              color="error"
+              @click="stopA3Server()" 
+              :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
+            >
+              <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
+            </v-btn>
+            
+            <v-tooltip 
+              v-if="$auth.user.privilege === 1 && $store.state.config.steamCmdPath"
+              bottom
+            >
+              <template v-slot:activator="{ on }">
+                <v-btn
+                  icon
+                  :loading="loadingUpdate"
+                  v-on="on"
+                  @click="updateServer()"
+                  :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
+                >
+                  <v-icon>mdi-update</v-icon>
+                </v-btn>
+              </template>
+              {{ $t('menu.updateServer') }}
+            </v-tooltip>
+          </v-col>
+        </v-row>
+      </v-container>
     </template> 
   </v-app-bar>
 

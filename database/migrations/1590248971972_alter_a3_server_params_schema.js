@@ -7,7 +7,7 @@ class AlterA3SeverParamsSchema extends Schema {
   up () {
     this.table('a3_server_params', (table) => {
       // alter table
-      table.boolean('customCfg')
+      table.boolean('custom_cfg')
     })
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>
+  <v-container class="app-container">
     <v-card>
       <v-toolbar flat>
         <v-toolbar-title>

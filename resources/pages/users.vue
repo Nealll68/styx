@@ -1,5 +1,5 @@
 <template>
-  <v-container fluid>   
+  <v-container class="app-container">   
     <v-alert
       type="warning"
       prominent

@@ -1,6 +1,6 @@
 <template>
 <div>
-  <v-container fluid>
+  <v-container class="app-container">
     <path-error v-if="!$store.state.config.a3ServerPath"></path-error>
 
     <v-row

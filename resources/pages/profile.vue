@@ -140,6 +140,13 @@
                 :to="`/profile/${$route.params.name}/difficulty`"
                 :disabled="!$route.params.name"
               >{{ $t('profiles.tabTitles.difficulty') }}</v-tab>
+
+              <v-tab
+                exact
+                nuxt
+                :to="`/profile/${$route.params.name}/perfomance`"
+                :disabled="!$route.params.name"
+              >{{ $t('profiles.tabTitles.perfomance') }}</v-tab>
             </v-tabs>
           </template>
         </v-toolbar> 

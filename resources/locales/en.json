@@ -23,7 +23,9 @@
     "confirmReset": "Are you sure you want to reset to the default values?",
     "rowsPerPage": "Rows per page",
     "of": "of",
-    "all": "All"
+    "all": "All",
+    "fileSaved": "File saved",
+    "fileReseted": "File reseted"
   },
   
   "menu": {
@@ -119,15 +121,15 @@
   },
 
   "config": {
-    "updated": "Configuration saved",
-    "reseted": "Configuration reseted",
     "missionDialogSubheader": "Exact name of the missions available to copy and insert in the 'template' field"
   },
 
   "difficulty": {
-    "information": "To use a custom difficulty, indicate 'Custom' in the server configuration file.",
-    "updated": "Difficulty saved",
-    "reseted": "Difficulty reseted"
+    "information": "To use a custom difficulty, indicate 'Custom' in the server configuration file."
+  },
+
+  "perfomance": {
+    "information": "To use a custom performance file, activate the -cfg parameter in the 'Parameters' tabs."
   },
 
   "serverMod": {

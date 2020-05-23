@@ -23,7 +23,9 @@
     "confirmReset": "Etes-vous sûr de vouloir réinitialiser aux valeurs par défaut ?",
     "rowsPerPage": "Lignes par page",
     "of": "de",
-    "all": "Tout"
+    "all": "Tout",
+    "fileSaved": "Fichier enregistré",
+    "fileReseted": "Fichier réinitialisé"
   },
   
   "menu": {
@@ -119,15 +121,15 @@
   },
 
   "config": {
-    "updated": "Configuration enregistrée",
-    "reseted": "Configuration réinitialisée",
     "missionDialogSubheader": "Nom exacte des missions disponible à copier et insérer dans le champ 'template'"
   },
 
   "difficulty": {
-    "information": "Pour utiliser une difficulté personnalisée indiquez 'Custom' dans le fichier de configuration du serveur.",
-    "updated": "Difficulté enregistrée",
-    "reseted": "Difficulté réinitialisée"    
+    "information": "Pour utiliser une difficulté personnalisée indiquez 'Custom' dans le fichier de configuration du serveur."
+  },
+
+  "perfomance": {
+    "information": "Pour utiliser un fichier de perfomance personnalisé, activer le paramètre -cfg dans l'onglet 'Paramètres'."
   },
 
   "serverMod": {

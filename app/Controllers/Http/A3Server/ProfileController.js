@@ -57,6 +57,7 @@ class ProfileController {
 
             await FileManager.write('config', profileData.name)
             await FileManager.write('difficulty', profileData.name)
+            await FileManager.write('basic', profileData.name)
 
             await serverProfile.reload()
             return serverProfile

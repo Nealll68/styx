@@ -8,8 +8,6 @@ const Ws = use('Ws')
 const Config = use('App/Models/Config')
 const A3ServerProfile = use('App/Models/A3Server/Profile')
 
-const FileManager = use('App/Services/FileManager')
-
 class A3Server {
 
     constructor () {

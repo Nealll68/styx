@@ -151,7 +151,9 @@
     "enableHTLabel": "Activer l'HyperThreading",
     "enableHTHint": "-enableHT : Active l'utilisation de tous les cœurs logiques du CPU. Si le processeur n'est pas compatible, le paramètre est ignoré",
     "filePatchingLabel": "Autoriser le file patching",
-    "filePatchingHint": "-filePatching : Autorise le jeu à charger les données décompressées"
+    "filePatchingHint": "-filePatching : Autorise le jeu à charger les données décompressées",
+    "customCfgLabel": "Utiliser un fichier de perfomance personalisé",
+    "customCfgHint": "-cfg : Utilise le fichier basic.cfg édité dans l'onglet 'Perfomance'"
   },
 
   "index": {
@@ -174,7 +176,8 @@
       "mods": "Mods",
       "parameters": "Paramètres",
       "configuration": "Configuration",
-      "difficulty": "Difficulté"
+      "difficulty": "Difficulté",
+      "perfomance": "Perfomance"
     }
   },
 

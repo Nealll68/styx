@@ -82,6 +82,7 @@ class A3Server {
 
         if (params.mods) paramsArray.push(`-mod="${params.mods}"`)
         if (params.server_mod) paramsArray.push(`-serverMod="${params.server_mod}"`)
+        if (params.custom_cfg) paramsArray.push(`-cfg="${path.join(profileFolder, 'basic.cfg')}"`)
         if (params.auto_init) paramsArray.push('-autoInit')
         if (params.load_mission_to_memory) paramsArray.push('-loadMissionToMemory')
         if (params.no_logs) paramsArray.push('-noLogs')

@@ -89,6 +89,18 @@
       :readonly="loading"
       @change="update"
     ></v-switch>
+
+    <v-switch
+      v-model="params.custom_cfg"
+      color="primary"
+      inset
+      :label="$t('params.customCfgLabel')"
+      :hint="$t('params.customCfgHint')"
+      persistent-hint
+      :disable="loading"
+      :readonly="loading"
+      @change="update"
+    ></v-switch>
   </v-card-text>
 </v-card>
 </template>

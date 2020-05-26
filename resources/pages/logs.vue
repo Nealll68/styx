@@ -13,7 +13,7 @@
               :disable="loading"
               @click="deleteAllLogs()"
             >
-              <v-icon left>mdi-delete-sweep</v-icon> {{ $t('logs.deleteAll') }}
+              <v-icon left>{{ icons.mdiDeleteSweep }}</v-icon> {{ $t('logs.deleteAll') }}
             </v-btn>
           </v-card-text>
 
@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { mdiDeleteSweep } from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 
 export default {
@@ -74,11 +75,12 @@ export default {
     PathError
   },
 
-  data () {
-    return {
-      loading: false
+  data: () => ({
+    loading: false,
+    icons: {
+      mdiDeleteSweep
     }
-  },
+  }),
 
   async asyncData ({ $axios }) {
     const logs = await $axios.$get('server/logs')

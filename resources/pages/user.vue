@@ -16,7 +16,7 @@
                 :rules="formRules.usernameRules" 
                 :label="$t('common.username')" 
                 name="username" 
-                prepend-inner-icon="mdi-account" 
+                :prepend-inner-icon="icons.mdiAccount" 
                 filled
               ></v-text-field>
 
@@ -25,16 +25,16 @@
                 :rules="formData.password !== '' ? formRules.passwordRules : []" 
                 :label="$t('common.password')" 
                 name="password" 
-                prepend-inner-icon="mdi-lock" 
+                :prepend-inner-icon="icons.mdiLock" 
                 :type="showPassword ? 'text' : 'password'" 
-                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" 
+                :append-icon="showPassword ? icons.mdiEye : icons.mdiEyeOff" 
                 @click:append="showPassword = !showPassword" 
                 filled
               >
                 <template v-slot:append-outer>
                   <v-tooltip top>
                     <template v-slot:activator="{ on }">
-                      <v-icon v-on="on">mdi-help</v-icon>
+                      <v-icon v-on="on">{{icons.mdiHelp}}</v-icon>
                     </template>
                     <ul>
                       <li>{{ $t('rules.password.minLength') }}</li>
@@ -53,7 +53,7 @@
                 item-text="name"
                 item-value="code"
                 filled
-                prepend-inner-icon="mdi-translate"
+                :prepend-inner-icon="icons.mdiTranslate"
               ></v-select>
             </v-form> 
           </v-card-text>
@@ -74,6 +74,15 @@
 </template>
 
 <script>
+import {
+  mdiAccount,
+  mdiLock,
+  mdiEye,
+  mdiEyeOff,
+  mdiHelp,
+  mdiTranslate
+} from '@mdi/js'
+
 export default {
   layout: 'interface',
 
@@ -105,6 +114,14 @@ export default {
           v => /^(?=.*[0-9])/.test(v) || this.$t('rules.password.numericRequired'),
           v => /(?=.*?[#?!@$%^&*-])/.test(v) || this.$t('rules.password.specialRequired')
         ]
+      },
+      icons: {
+        mdiAccount,
+        mdiLock,
+        mdiEye,
+        mdiEyeOff,
+        mdiHelp,
+        mdiTranslate
       }
     }
   },

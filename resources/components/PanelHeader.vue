@@ -14,7 +14,7 @@
       :href="helpLink"
       target="_blank"
     >
-      <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-help-circle</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
+      <v-icon :left="$vuetify.breakpoint.smAndUp">{{ icons.mdiHelpCircle }}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
     </v-btn>
 
     <v-btn
@@ -25,7 +25,7 @@
       @click="$emit('reset')"
       :disabled="disabled"	
     >
-      <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-alert-circle</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.reset') }}			
+      <v-icon :left="$vuetify.breakpoint.smAndUp">{{ icons.mdiAlertCircle }}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.reset') }}			
     </v-btn>
 
     <v-btn
@@ -36,19 +36,33 @@
       @click="$emit('save')"
       :disabled="disabled"
     >
-      <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-content-save</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.save') }}
+      <v-icon :left="$vuetify.breakpoint.smAndUp">{{ icons.mdiContentSave }}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.save') }}
     </v-btn>
   </template>
 </v-banner>
 </template>
 
 <script>
+import {
+  mdiHelpCircle,
+  mdiAlertCircle,
+  mdiContentSave
+} from '@mdi/js'
+
 export default {
   props: [
     'helpLink',
     'loadingReset',
     'loadingUpdate',
     'disabled'
-  ]
+  ],
+
+  data: () => ({
+    icons: {
+      mdiHelpCircle,
+      mdiAlertCircle,
+      mdiContentSave
+    }
+  })
 }
 </script>

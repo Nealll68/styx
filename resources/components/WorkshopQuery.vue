@@ -10,7 +10,7 @@
                   v-model="workshopId"
                   filled
                   :label="$t('workshop.idWorkshop')"
-                  prepend-inner-icon="mdi-plus-box"
+                  :prepend-inner-icon="icons.mdiPlusBox"
                 ></v-text-field>
               </v-col>
 
@@ -19,7 +19,7 @@
                   v-model="collectionId"
                   filled
                   :label="$t('workshop.idCollection')"
-                  prepend-inner-icon="mdi-plus-box-multiple"
+                  :prepend-inner-icon="icons.mdiPlusBoxMultiple"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -86,7 +86,7 @@
                     "
                     :disabled="$store.state.downloadInfo.type ? true : false"
                   >
-                    <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
+                    <v-icon left>{{ icons.mdiDownload }}</v-icon>{{ $t('common.download') }}
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
@@ -101,19 +101,27 @@
 </template>
 
 <script>
+import {
+  mdiPlusBox,
+  mdiPlusBoxMultiple,
+  mdiDownload
+} from '@mdi/js'
 import debounce from 'debounce'
 
 export default {
   props: ['show'],
 
-  data() {
-    return {
-      getDetailsLoading: false,
-      workshopId: null,
-      collectionId: null,
-      modsDetails: []
+  data: () => ({
+    getDetailsLoading: false,
+    workshopId: null,
+    collectionId: null,
+    modsDetails: [],
+    icons: {
+      mdiPlusBox,
+      mdiPlusBoxMultiple,
+      mdiDownload
     }
-  },
+  }),
 
   watch: {
     workshopId() {

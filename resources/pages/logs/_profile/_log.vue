@@ -11,7 +11,7 @@
         sticky
         single-line
       >
-        <v-icon slot="icon">mdi-post</v-icon>
+        <v-icon slot="icon">{{icons.mdiPost}}</v-icon>
         {{ logs.filename }}
 
         <template v-slot:actions>
@@ -22,7 +22,7 @@
             :loading="downloadLoading"
             :disable="deleteLoading || loading"
           >
-            <v-icon left>mdi-download</v-icon>{{ $t('common.download') }}
+            <v-icon left>{{icons.mdiDownload}}</v-icon>{{ $t('common.download') }}
           </v-btn>
 
           <v-btn
@@ -32,7 +32,7 @@
             :loading="deleteLoading"
             :disable="downloadLoading || loading"
           >
-            <v-icon left>mdi-delete-forever</v-icon>{{ $t('common.delete') }}
+            <v-icon left>{{icons.mdiDeleteForever}}</v-icon>{{ $t('common.delete') }}
           </v-btn>
         </template>
       </v-banner>
@@ -64,13 +64,20 @@
         color="primary"
         @click="$vuetify.goTo(0)"
       >
-        <v-icon>mdi-arrow-up</v-icon>
+        <v-icon>{{icons.mdiArrowUp}}</v-icon>
       </v-btn>
     </v-fab-transition>
   </v-card>
 </template>
 
 <script>
+import {
+  mdiPost,
+  mdiDownload,
+  mdiDeleteForever,
+  mdiArrowUp
+} from '@mdi/js'
+
 export default {
   head () {
     return {
@@ -83,7 +90,13 @@ export default {
     downloadLoading: false,
     deleteLoading: false,
     fab: false,
-    logs: null
+    logs: null,
+    icons: {
+      mdiPost,
+      mdiDownload,
+      mdiDeleteForever,
+      mdiArrowUp
+    }
   }),
 
   async mounted () {

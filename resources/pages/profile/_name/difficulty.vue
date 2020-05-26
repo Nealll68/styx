@@ -51,13 +51,14 @@
         color="primary"
         @click="$vuetify.goTo(0)"
       >
-        <v-icon>mdi-arrow-up</v-icon>
+        <v-icon>{{icons.mdiArrowUp}}</v-icon>
       </v-btn>
     </v-fab-transition>
 </v-card>
 </template>
 
 <script>
+import { mdiArrowUp } from '@mdi/js'
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -67,15 +68,16 @@ export default {
     }
   },
 
-	data () {
-		return {
-      loading: true,
-			loadingUpdate: false,
-      loadingReset: false,
-      fab: false,
-      difficulty: null
-		}
-  },
+	data: () => ({
+    loading: true,
+    loadingUpdate: false,
+    loadingReset: false,
+    fab: false,
+    difficulty: null,
+    icons: {
+      mdiArrowUp
+    }
+  }),
   
   components: {
     PanelHeader

@@ -19,14 +19,14 @@
               class="float-right"
               :disabled="$store.state.downloadInfo.type === 'updateServer'"
             >
-              <v-icon left>mdi-plus-box</v-icon>{{ $t('mission.add') }}
+              <v-icon left>{{icons.mdiPlusBox}}</v-icon>{{ $t('mission.add') }}
             </v-btn>
           </template>
 
           <v-list nav>
             <v-list-item @click="showWorkshopQuery = true">
               <v-list-item-icon>
-                <v-icon>mdi-steam</v-icon>
+                <v-icon>{{icons.mdiSteam}}</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -36,7 +36,7 @@
 
             <v-list-item @click="showUploadDialog = true">
               <v-list-item-icon>
-                <v-icon>mdi-upload</v-icon>
+                <v-icon>{{icons.mdiUpload}}</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -46,7 +46,7 @@
 
             <v-list-item @click="detectExistingMission()">
               <v-list-item-icon>
-                <v-icon>mdi-file-search</v-icon>
+                <v-icon>{{icons.mdiFileSearch}}</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -75,12 +75,12 @@
               class="mr-2"
               color="tertiary"
             >
-              <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
+              <v-icon left>{{icons.mdiRefresh}}</v-icon> {{ $t('common.refresh') }}
             </v-btn>
 
             <v-text-field
               v-model="missionSearch"
-              append-icon="mdi-magnify"
+              :append-icon="icons.mdiMagnify"
               :label="$t('mission.search')"
               single-line
               hide-details
@@ -135,7 +135,7 @@
                     target="_blank"
                     :disabled="tableLoading"
                   >
-                    <v-icon>mdi-steam</v-icon>  
+                    <v-icon>{{icons.mdiSteam}}</v-icon>  
                   </v-btn>
 
                   <v-btn                    
@@ -145,7 +145,7 @@
                     @click="updateMission(item.workshop_id)"
                     :disabled="tableLoading || $store.state.downloadInfo.type ? true : false"
                   >
-                    <v-icon>mdi-update</v-icon>  
+                    <v-icon>{{icons.mdiUpdate}}</v-icon>  
                   </v-btn>
 
                 <v-btn
@@ -156,7 +156,7 @@
                   @click="deleteMission(item)"
                   :disabled="tableLoading"
                 >
-                  <v-icon>mdi-delete</v-icon>  
+                  <v-icon>{{ icons.mdiDelete }}</v-icon>  
                 </v-btn>         
               </template>
             </v-data-table>
@@ -173,6 +173,17 @@
 </template>
 
 <script>
+import {
+  mdiPlusBox,
+  mdiPlusBoxMultiple,
+  mdiSteam,
+  mdiUpload,
+  mdiFileSearch,
+  mdiRefresh,
+  mdiMagnify,
+  mdiUpdate,
+  mdiDelete
+} from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
 const WorkshopQuery = () => import('@/components/WorkshopQuery')
@@ -208,7 +219,18 @@ export default {
         { text: this.$t('common.lastUpdate'), value: 'updated_at' },
         { text: '', value: 'action', sortable: false }
       ],
-      showDeleteInfo: false
+      showDeleteInfo: false,
+      icons: {
+        mdiPlusBox,
+        mdiPlusBoxMultiple,
+        mdiSteam,
+        mdiUpload,
+        mdiFileSearch,
+        mdiRefresh,
+        mdiMagnify,
+        mdiUpdate,
+        mdiDelete
+      }
     }
   },
 

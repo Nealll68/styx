@@ -1,29 +1,5 @@
 <template>
   <v-card flat>
-    <!--<v-banner
-      app
-      sticky
-    >
-      <v-chip 
-        label
-        class="mx-1 hidden-xs-only"
-      >{{ $t('serverMod.modsActivated') }} : {{ mods.filter(e => e.activated).length }}</v-chip>
-
-      <v-chip
-        label
-        class="mx-1 hidden-xs-only"
-      >{{ $t('serverMod.serverModsActivated') }} : {{ mods.filter(e => e.server_mod).length }}</v-chip>
-
-      <template v-slot:actions>
-      <v-btn 
-        color="primary" 
-        text 
-        :loading="loadingUpdate" 
-        @click="save()"
-      >
-        <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
-      </v-btn>
-    </v-banner>-->
     <panel-header
       :loadingReset="loadingReset"
       :loadingUpdate="loadingUpdate"
@@ -44,7 +20,7 @@
     <v-card-text>
       <v-text-field
         v-model="modsSearch"
-        append-icon="mdi-toy-brick-search"
+        :append-icon="icons.mdiToyBrickSearch"
         :label="$t('mods.search')"
         single-line
         hide-details
@@ -91,6 +67,7 @@
 </template>
 
 <script>
+import { mdiToyBrickSearch } from '@mdi/js'
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -112,7 +89,10 @@ export default {
         { text: '-mod', value: 'activated' },
         { text: '-serverMod', value: 'server_mod' }
       ],
-      paramsId: null
+      paramsId: null,
+      icons: {
+        mdiToyBrickSearch
+      }
     }
   },
 

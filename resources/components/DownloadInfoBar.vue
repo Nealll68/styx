@@ -17,7 +17,7 @@
       <v-container class="app-container">
         <v-row>
           <v-col class="text-truncate">
-            <v-icon>mdi-download</v-icon>
+            <v-icon>{{ icons.mdiDownload }}</v-icon>
             {{ $store.state.downloadInfo.title }}
           </v-col>
 
@@ -34,7 +34,7 @@
               <v-icon 
                 :left="$vuetify.breakpoint.mdAndUp"
                 color="error"
-              >mdi-download-off</v-icon>
+              >{{ icons.mdiDownloadOff }}</v-icon>
               {{ $vuetify.breakpoint.smAndDown ? '' : $t('common.cancel') }}
             </v-btn>
           </v-col>
@@ -42,59 +42,22 @@
       </v-container>
     </v-card>
   </v-footer>
-  <!--<div>
-    <v-system-bar
-      v-if="$store.state.downloadInfo.type"
-      app
-      fixed
-      window
-      color="grey darken-4"
-    >
-      <v-container fluid>
-        <v-row 
-          align="center" 
-          justify="center"
-          column
-        >
-          <v-col class="text-truncate">
-            <v-icon>mdi-download</v-icon>
-            {{ $store.state.downloadInfo.title }}
-          </v-col>
-
-          <v-col>
-            <v-progress-linear indeterminate></v-progress-linear>
-          </v-col>
-
-          <v-col>
-            <v-btn
-              :icon="$vuetify.breakpoint.smAndDown"
-              text
-              color="error"
-              class="float-right"
-              @click="cancel()"
-              :loading="loadingCancel"
-              :disabled="$store.state.downloadInfo.type === 'downloadMission'"
-            >
-              <v-icon 
-                :left="$vuetify.breakpoint.mdAndUp"
-                color="error"
-              >mdi-download-off</v-icon>
-              {{ $vuetify.breakpoint.smAndDown ? '' : $t('common.cancel') }}
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-container>
-    </v-system-bar>
-  </div>-->
 </template>
 
 <script>
+import {
+  mdiDownload,
+  mdiDownloadOff
+} from '@mdi/js'
+
 export default {
-  data() {
-    return {
-      loadingCancel: false
+  data: () => ({
+    loadingCancel: false,
+    icons: {
+      mdiDownload,
+      mdiDownloadOff
     }
-  },
+  }),
 
   methods: {
     async cancel() {

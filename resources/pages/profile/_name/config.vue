@@ -19,7 +19,7 @@
           v-on="on"
           :disabled="loading"
         >
-          <v-icon left>mdi-target</v-icon>{{ $t('menu.missions') }}
+          <v-icon left>{{icons.mdiTarget}}</v-icon>{{ $t('menu.missions') }}
         </v-btn>
       </template>
 
@@ -99,13 +99,18 @@
       color="primary"
       @click="$vuetify.goTo(0)"
     >
-      <v-icon>mdi-arrow-up</v-icon>
+      <v-icon>{{icons.mdiArrowUp}}</v-icon>
     </v-btn>
   </v-fab-transition>
 </v-card>
 </template>
 
 <script>
+import {
+  mdiTarget,
+  mdiArrowUp
+} from '@mdi/js'
+
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -115,17 +120,19 @@ export default {
     }
   },
 
-	data () {
-		return {
-      loading: true,
-			loadingUpdate: false,
-      loadingReset: false,
-      dialog: false,
-      fab: false,
-      config: null,
-      missions: null,
-		}
-  },
+	data: () => ({
+    loading: true,
+    loadingUpdate: false,
+    loadingReset: false,
+    dialog: false,
+    fab: false,
+    config: null,
+    missions: null,
+    icons: {
+      mdiTarget,
+      mdiArrowUp
+    }
+  }),
 
   components: {
     PanelHeader

@@ -78,7 +78,7 @@
             small
             @click="cancelUpload"
           >
-            <v-icon left>mdi-upload-off</v-icon>{{ $t('common.cancel') }}
+            <v-icon left>{{ mdiUploadOff }}</v-icon>{{ $t('common.cancel') }}
           </v-btn>
         </v-sheet>
       </v-card-text>
@@ -104,6 +104,8 @@
 </template>
 
 <script>
+import { mdiUploadOff } from '@mdi/js'
+
 export default {
   props: {
     show: Boolean, 
@@ -113,13 +115,12 @@ export default {
     }
   },
 
-  data () {
-    return {
-      file: null,
-      uploadPercentage: 0,
-      source: null
-    }
-  },
+  data: () => ({
+    file: null,
+    uploadPercentage: 0,
+    source: null,
+    mdiUploadOff
+  }),
 
   methods: {
     async upload () {

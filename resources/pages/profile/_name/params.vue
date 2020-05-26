@@ -12,7 +12,7 @@
         href="https://community.bistudio.com/wiki/Arma_3_Startup_Parameters"
         target="_blank"
       >
-        <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-help-circle</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
+        <v-icon :left="$vuetify.breakpoint.smAndUp">{{icons.mdiHelpCircle}}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
       </v-btn>
     </template>
   </v-banner>
@@ -106,6 +106,7 @@
 </template>
 
 <script>
+import { mdiHelpCircle } from '@mdi/js'
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -115,11 +116,12 @@ export default {
     }
   },
 
-  data () {
-    return {
-      loading: false
+  data: () => ({
+    loading: false,
+    icons: {
+      mdiHelpCircle
     }
-  },
+  }),
 
   components: {
     PanelHeader

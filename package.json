@@ -48,6 +48,7 @@
     "vue-i18n": "^8.15.5"
   },
   "devDependencies": {
+    "@mdi/js": "^5.3.45",
     "@nuxtjs/moment": "^1.6.0",
     "@nuxtjs/vuetify": "^1.11.0",
     "nodemon": "^2.0.2"

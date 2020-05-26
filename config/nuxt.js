@@ -36,7 +36,8 @@ module.exports = {
     { src: '~/plugins/steamGuard.client', ssr: false },
     { src: '~/plugins/confirm.client', ssr: false },
     '~/plugins/snackbar',
-    '~/plugins/formatBytesFilter'
+    '~/plugins/formatBytesFilter',
+    '~/plugins/vuetifyIcons'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -94,6 +95,10 @@ module.exports = {
           senary: '#72DEFF'
         }
       }
+    },
+
+    defaultAssets: {
+      icons: false
     }
   },
   /*

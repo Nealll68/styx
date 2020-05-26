@@ -33,7 +33,7 @@
               >
                 <v-badge
                   :value="link.url === '/settings' && !$store.state.config.a3ServerPath"
-                  icon="mdi-exclamation"
+                  :icon="icons.mdiExclamation"
                   color="error"
                   overlap
                 >
@@ -59,7 +59,7 @@
                 class="mx-1"
                 active-class="appbar-active-link"
               >
-                <v-icon>mdi-account-cog</v-icon>
+                <v-icon>{{ icons.mdiAccountCog }}</v-icon>
               </v-btn>
             </template>
             <span>{{ $t('menu.myAccount') }}</span>
@@ -74,7 +74,7 @@
                 class="mx-1"
                 exact-active-class="appbar-active-link"
               >
-                <v-icon>mdi-logout</v-icon>
+                <v-icon>{{ icons.mdiLogout }}</v-icon>
               </v-btn>
             </template>
             <span>{{ $t('menu.logout') }}</span>
@@ -96,7 +96,7 @@
               <v-icon 
                 small
                 color="tertiary"
-              >mdi-chip</v-icon>
+              >{{ icons.mdiChip }}</v-icon>
             </v-progress-circular>
 
             <v-progress-circular
@@ -108,7 +108,7 @@
               <v-icon 
                 small
                 color="quaternary"
-              >mdi-memory</v-icon>
+              >{{ icons.mdiMemory }}</v-icon>
             </v-progress-circular>
           </v-col>
           <v-col class="d-flex justify-end">
@@ -119,7 +119,7 @@
               @click="startA3Server()" 
               :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
             >
-              <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-play</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
+              <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiPlay }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
             </v-btn>
 
             <v-btn
@@ -129,7 +129,7 @@
               @click="restartA3Server()" 
               :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
             >
-              <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-restart</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
+              <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiRestart }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
             </v-btn>
 
             <v-btn
@@ -139,7 +139,7 @@
               @click="stopA3Server()" 
               :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
             >
-              <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
+              <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiStop }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
             </v-btn>
             
             <v-tooltip 
@@ -154,7 +154,7 @@
                   @click="updateServer()"
                   :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
                 >
-                  <v-icon>mdi-update</v-icon>
+                  <v-icon>{{ icons.mdiUpdate }}</v-icon>
                 </v-btn>
               </template>
               {{ $t('menu.updateServer') }}
@@ -176,7 +176,7 @@
       @click.stop="navDrawer = !navDrawer"
       class="hidden-md-and-up"
     >
-      <v-icon>mdi-menu</v-icon>
+      <v-icon>{{ icons.mdiMenu }}</v-icon>
     </v-btn>
 
     <Logo width="50px" height="50px" />
@@ -190,7 +190,7 @@
       <v-icon 
         small 
         left
-      >mdi-account</v-icon> {{ $auth.user.username }} - {{ privileges[$auth.user.privilege] }}            
+      >{{ icons.mdiAccount }}</v-icon> {{ $auth.user.username }} - {{ privileges[$auth.user.privilege] }}            
     </v-chip>
 
     <v-progress-circular
@@ -202,7 +202,7 @@
       <v-icon 
         small
         color="tertiary"
-      >mdi-chip</v-icon>
+      >{{ icons.mdiChip }}</v-icon>
     </v-progress-circular>
 
     <v-progress-circular
@@ -214,7 +214,7 @@
       <v-icon 
         small
         color="quaternary"
-      >mdi-memory</v-icon>
+      >{{ icons.mdiMemory }}</v-icon>
     </v-progress-circular>
 
     <v-spacer></v-spacer>
@@ -226,7 +226,7 @@
       @click="startA3Server()" 
       :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-play</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
+      <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiPlay }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
     </v-btn>
 
     <v-btn
@@ -236,7 +236,7 @@
       @click="restartA3Server()" 
       :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-restart</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
+      <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiRestart }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
     </v-btn>
 
     <v-btn
@@ -246,7 +246,7 @@
       @click="stopA3Server()" 
       :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
     >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
+      <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiStop }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
     </v-btn>
     
     <v-tooltip 
@@ -261,7 +261,7 @@
           @click="updateServer()"
           :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
         >
-          <v-icon>mdi-update</v-icon>
+          <v-icon>{{ icons.mdiUpdate }}</v-icon>
         </v-btn>
       </template>
       {{ $t('menu.updateServer') }}
@@ -285,7 +285,7 @@
         <v-list-item-icon>
           <v-badge
             :value="link.url === '/settings' && !$store.state.config.a3ServerPath"
-            icon="mdi-exclamation"
+            :icon="icons.mdiExclamation"
             color="error"
             overlap
           >
@@ -308,7 +308,7 @@
           color="primary"
         >
           <v-list-item-icon>
-            <v-icon>mdi-account-cog</v-icon>
+            <v-icon>{{ icons.mdiAccountCog }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -321,7 +321,7 @@
           color="error"
         >
           <v-list-item-icon>
-            <v-icon>mdi-logout</v-icon>
+            <v-icon>{{ icons.mdiLogout }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
@@ -335,6 +335,26 @@
 </template>
 
 <script>
+import { 
+  mdiAccountCog, 
+  mdiExclamation,
+  mdiLogout,
+  mdiChip,
+  mdiMemory,
+  mdiPlay,
+  mdiRestart,
+  mdiStop,
+  mdiUpdate,
+  mdiMenu,
+  mdiAccount,
+  mdiViewDashboard,
+  mdiFolderCog,
+  mdiToyBrick,
+  mdiTarget,
+  mdiPost,
+  mdiAccountGroup,
+  mdiCogs
+} from '@mdi/js'
 const Logo = () => import('@/components/Logo')
 
 export default {
@@ -350,13 +370,26 @@ export default {
       navDrawer: null,
       a3ServerWs: null,
       links: [
-        { url: '/', name: this.$t('menu.index'), icon: 'mdi-view-dashboard' },
-        { url: '/profile', name: this.$t('menu.profiles'), icon: 'mdi-folder-cog' },
-        { url: '/mods', name: this.$t('menu.mods'), icon: 'mdi-toy-brick' },
-        { url: '/mission', name: this.$t('menu.missions'), icon: 'mdi-target' },        
-        { url: '/logs', name: this.$t('menu.logs'), icon: 'mdi-post' }
+        { url: '/', name: this.$t('menu.index'), icon:  mdiViewDashboard },
+        { url: '/profile', name: this.$t('menu.profiles'), icon: mdiFolderCog },
+        { url: '/mods', name: this.$t('menu.mods'), icon: mdiToyBrick },
+        { url: '/mission', name: this.$t('menu.missions'), icon: mdiTarget },        
+        { url: '/logs', name: this.$t('menu.logs'), icon: mdiPost }
       ],
-      privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')]
+      privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')],
+      icons: {
+        mdiAccountCog,
+        mdiExclamation,
+        mdiLogout,
+        mdiChip,
+        mdiMemory,
+        mdiPlay,
+        mdiRestart,
+        mdiStop,
+        mdiUpdate,
+        mdiMenu,
+        mdiAccount
+      }
     }
   },
 
@@ -369,8 +402,8 @@ export default {
 
   created () {
     if (this.$auth.user.privilege === 1) {
-      this.links.push({ url: '/users', name: this.$t('menu.users'), icon: 'mdi-account-group' })
-      this.links.push({ url: '/settings', name: this.$t('menu.settings'), icon: 'mdi-cogs' })    
+      this.links.push({ url: '/users', name: this.$t('menu.users'), icon: mdiAccountGroup })
+      this.links.push({ url: '/settings', name: this.$t('menu.settings'), icon: mdiCogs })    
     }
   },
 

@@ -6,10 +6,10 @@
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
-  <a href="https://github.com/Nealll68/styx/blob/master/LICENCE" target="_blank">
+  <a href="https://github.com/Nealll68/styx/blob/master/LICENCE" target="_blank" rel="noopener noreferrer">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
-  <a href="https://twitter.com/Nealll68" target="_blank">
+  <a href="https://twitter.com/Nealll68" target="_blank" rel="noopener noreferrer">
     <img alt="Twitter: Nealll68" src="https://img.shields.io/twitter/follow/Nealll68.svg?style=social" />
   </a>
 </p>

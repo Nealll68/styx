@@ -133,6 +133,7 @@
                     icon
                     :href="`https://steamcommunity.com/workshop/filedetails/?id=${item.workshop_id}`"
                     target="_blank"
+                    rel="noopener noreferrer"
                     :disabled="tableLoading"
                   >
                     <v-icon>{{icons.mdiSteam}}</v-icon>  

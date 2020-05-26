@@ -147,6 +147,7 @@
                     icon
                     :href="`https://steamcommunity.com/workshop/filedetails/?id=${item.workshop_id}`"
                     target="_blank"
+                    rel="noopener noreferrer"
                     :disabled="modsTableLoading"
                   >
                     <v-icon>{{icons.mdiSteam}}</v-icon>  

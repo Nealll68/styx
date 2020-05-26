@@ -13,6 +13,7 @@
       text
       :href="helpLink"
       target="_blank"
+      rel="noopener noreferrer"
     >
       <v-icon :left="$vuetify.breakpoint.smAndUp">{{ icons.mdiHelpCircle }}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
     </v-btn>

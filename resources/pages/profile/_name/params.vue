@@ -11,6 +11,7 @@
         text
         href="https://community.bistudio.com/wiki/Arma_3_Startup_Parameters"
         target="_blank"
+        rel="noopener noreferrer"
       >
         <v-icon :left="$vuetify.breakpoint.smAndUp">{{icons.mdiHelpCircle}}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
       </v-btn>

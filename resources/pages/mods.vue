@@ -273,37 +273,39 @@ export default {
     WorkshopQuery
   },
 
-  data: () => ({
-    getDetailsLoading: false,
-    modBtnMenu: false,
-    showModList: false,
-    showModUpload: false,  
-    showLocalModList: false,
-    workshopFileMenu: false,
-    workshopCollectionMenu: false,
-    localMods: [],
-    modsTableLoading: false,
-    modsSearch: '',
-    modsHeaders: [
-      { text: this.$t('common.name'), value: 'name' },
-      { text: this.$t('common.size'), value: 'size' },
-      { text: this.$t('common.source'), value: 'source' },
-      { text: 'Workshop ID', value: 'workshop_id' },
-      { text: this.$t('common.lastUpdate'), value: 'server_updated_at' },
-      { text: '', value: 'action', sortable: false }
-    ],
-    icons: {
-      mdiToyBrickPlus,
-      mdiSteam,
-      mdiFolderSearch,
-      mdiUpload,
-      mdiPlusBox,
-      mdiRefresh,
-      mdiToyBrickSearch,
-      mdiUpdate,
-      mdiDelete
+  data () {
+    return {
+      getDetailsLoading: false,
+      modBtnMenu: false,
+      showModList: false,
+      showModUpload: false,  
+      showLocalModList: false,
+      workshopFileMenu: false,
+      workshopCollectionMenu: false,
+      localMods: [],
+      modsTableLoading: false,
+      modsSearch: '',
+      modsHeaders: [
+        { text: this.$t('common.name'), value: 'name' },
+        { text: this.$t('common.size'), value: 'size' },
+        { text: this.$t('common.source'), value: 'source' },
+        { text: 'Workshop ID', value: 'workshop_id' },
+        { text: this.$t('common.lastUpdate'), value: 'server_updated_at' },
+        { text: '', value: 'action', sortable: false }
+      ],
+      icons: {
+        mdiToyBrickPlus,
+        mdiSteam,
+        mdiFolderSearch,
+        mdiUpload,
+        mdiPlusBox,
+        mdiRefresh,
+        mdiToyBrickSearch,
+        mdiUpdate,
+        mdiDelete
+      }
     }
-  }),
+  },
 
   async asyncData ({ $axios }) {
     const mods = await $axios.$get('server/mod')

@@ -105,7 +105,7 @@ export default {
       
       this.$snackbar({
         type: 'success',
-        message: this.$t('common.updated')
+        message: this.$t('common.fileSaved')
       })
 			
       this.loadingUpdate = false
@@ -126,7 +126,7 @@ export default {
         this.difficulty = await this.$axios.$delete(`server/difficulty/${this.$route.params.name}`)  
         this.$snackbar({
           type: 'success',
-          message: this.$t('common.reseted')
+          message: this.$t('common.fileReseted')
         })
       }
 

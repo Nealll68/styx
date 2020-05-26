@@ -165,7 +165,7 @@ export default {
       
       this.$snackbar({
         type: 'success',
-        message: this.$t('common.updated')
+        message: this.$t('common.fileSaved')
       })
 			
       this.loadingUpdate = false	
@@ -187,7 +187,7 @@ export default {
         
         this.$snackbar({
           type: 'success',
-          message: this.$t('common.reseted')
+          message: this.$t('common.fileReseted')
         })
       }
 

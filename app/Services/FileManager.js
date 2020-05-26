@@ -26,7 +26,7 @@ class FileManager {
 
             if (!config.a3server_path) throw new A3FolderPathUndefined()
 
-            let filePath = path.join(config.a3server_path, 'styx', profileName, `${type}.cfg`)
+            let filePath = path.join(config.a3server_path, 'styx', profileName, `${type === 'config' ? 'server' : type}.cfg`)
             if (type === 'difficulty') {
                 filePath = path.join(config.a3server_path, 'styx', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
             }
@@ -44,7 +44,7 @@ class FileManager {
 
         if (!config.a3server_path) throw new A3FolderPathUndefined()
 
-        let filePath = path.join(config.a3server_path, 'styx', profileName, `${type}.cfg`)
+        let filePath = path.join(config.a3server_path, 'styx', profileName, `${type === 'config' ? 'server' : type}.cfg`)
         if (type === 'difficulty') {
             filePath = path.join(config.a3server_path, 'styx', profileName, 'Users', profileName, `${profileName}.Arma3Profile`)
         }

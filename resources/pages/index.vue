@@ -27,51 +27,54 @@
               </v-list-item>
             </v-list>
           </v-card-text>
-          <apexchart
-            v-show="cpuUsage.length >= 2"
-            type="area"
-            :series="[
-              {
-                name: 'CPU',
-                data: cpuUsage
-              }
-            ]"
-            :options="{
-              chart: {
-                id: 'cpu-chart',
-                background: '#1E1E1E',
-                sparkline: {
-                  enabled: true
+
+          <client-only>
+            <apexchart
+              v-show="cpuUsage.length >= 2"
+              type="area"
+              :series="[
+                {
+                  name: 'CPU',
+                  data: cpuUsage
                 }
-              },
-              xaxis: {
-                categories: takeAt
-              },
-              yaxis: {
-                min: 0,
-                max: 100
-              },
-              theme: {
-                mode: 'dark',
-                monochrome: {
-                  enabled: true,
-                  color: '#FF6859',
-                  shadeTo: 'dark',
-                  shadeIntensity: 0.65
-                }
-              },
-              tooltip: {
-                y: [
-                  {
-                    formatter(v) {
-                      return `${v}%`
-                    }
+              ]"
+              :options="{
+                chart: {
+                  id: 'cpu-chart',
+                  background: '#1E1E1E',
+                  sparkline: {
+                    enabled: true
                   }
-                ]
-              }
-            }"
-            height="150px"
-          ></apexchart>
+                },
+                xaxis: {
+                  categories: takeAt
+                },
+                yaxis: {
+                  min: 0,
+                  max: 100
+                },
+                theme: {
+                  mode: 'dark',
+                  monochrome: {
+                    enabled: true,
+                    color: '#FF6859',
+                    shadeTo: 'dark',
+                    shadeIntensity: 0.65
+                  }
+                },
+                tooltip: {
+                  y: [
+                    {
+                      formatter(v) {
+                        return `${v}%`
+                      }
+                    }
+                  ]
+                }
+              }"
+              height="150px"
+            ></apexchart>
+          </client-only>
         </v-card>
       </v-col>
 
@@ -99,51 +102,54 @@
               </v-list-item>
             </v-list>
           </v-card-text>
-          <apexchart
-            v-show="memUsed.length >= 2"
-            type="area"
-            :series="[
-              {
-                name: 'MEM',
-                data: memUsed
-              }
-            ]"
-            :options="{
-              chart: {
-                id: 'mem-chart',
-                background: '#1E1E1E',
-                sparkline: {
-                  enabled: true
+
+          <client-only>
+            <apexchart
+              v-show="memUsed.length >= 2"
+              type="area"
+              :series="[
+                {
+                  name: 'MEM',
+                  data: memUsed
                 }
-              },
-              xaxis: {
-                categories: takeAt
-              },
-              yaxis: {
-                min: 0,
-                max: 100
-              },
-              theme: {
-                mode: 'dark',
-                monochrome: {
-                  enabled: true,
-                  color: '#FFCF44',
-                  shadeTo: 'dark',
-                  shadeIntensity: 0.65
-                }
-              },
-              tooltip: {
-                y: [
-                  {
-                    formatter(v) {
-                      return `${v}%`
-                    }
+              ]"
+              :options="{
+                chart: {
+                  id: 'mem-chart',
+                  background: '#1E1E1E',
+                  sparkline: {
+                    enabled: true
                   }
-                ]
-              }
-            }"
-            height="150px"
-          ></apexchart>
+                },
+                xaxis: {
+                  categories: takeAt
+                },
+                yaxis: {
+                  min: 0,
+                  max: 100
+                },
+                theme: {
+                  mode: 'dark',
+                  monochrome: {
+                    enabled: true,
+                    color: '#FFCF44',
+                    shadeTo: 'dark',
+                    shadeIntensity: 0.65
+                  }
+                },
+                tooltip: {
+                  y: [
+                    {
+                      formatter(v) {
+                        return `${v}%`
+                      }
+                    }
+                  ]
+                }
+              }"
+              height="150px"
+            ></apexchart>
+          </client-only>
         </v-card>
       </v-col>
     </v-row>

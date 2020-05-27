@@ -1,18 +1,29 @@
 <template>
 <div>  
   <v-app-bar
-    v-if="$vuetify.breakpoint.mdAndUp"
     app
     elevate-on-scroll
     fixed
   >
-    <v-container class="app-container">
+    <v-container class="app-container px-0">
       <v-row align="center">
-        <v-col md="4">
-          <Logo width="50px" height="50px" />
+        <v-col 
+          md="4"
+          sm="6"
+        >
+          <v-btn
+            icon
+            @click.stop="navDrawer = !navDrawer"
+            class="hidden-md-and-up"
+          >
+            <v-icon>{{ icons.mdiMenu }}</v-icon>
+          </v-btn>
+
+          <Logo v-show="$vuetify.breakpoint.mdAndUp" width="50px" height="50px" />
         </v-col>
 
-        <v-col 
+        <v-col
+          v-if="$vuetify.breakpoint.mdAndUp"
           md="4" 
           class="d-flex justify-center"
         >
@@ -47,6 +58,7 @@
 
         <v-col 
           md="4"
+          sm="6"
           class="d-flex justify-end"
         >
           <v-tooltip bottom>
@@ -84,8 +96,8 @@
     </v-container>
 
     <template v-slot:extension>
-      <v-container class="app-container">
-        <v-row>
+      <v-container class="app-container px-0">
+        <v-row align-center>
           <v-col>
             <v-progress-circular
               v-if="measure"
@@ -165,115 +177,15 @@
     </template> 
   </v-app-bar>
 
-  <v-app-bar
-    v-else
-    app
-    elevate-on-scroll
-    fixed
-  >
-    <v-btn
-      icon
-      @click.stop="navDrawer = !navDrawer"
-      class="hidden-md-and-up"
-    >
-      <v-icon>{{ icons.mdiMenu }}</v-icon>
-    </v-btn>
-
-    <Logo width="50px" height="50px" />
-
-    <v-chip 
-      small 
-      label 
-      outlined
-      class="mx-1 hidden-sm-and-down"
-    >
-      <v-icon 
-        small 
-        left
-      >{{ icons.mdiAccount }}</v-icon> {{ $auth.user.username }} - {{ privileges[$auth.user.privilege] }}            
-    </v-chip>
-
-    <v-progress-circular
-      v-if="measure"
-      :value="measure.cpu_usage"
-      color="tertiary"
-      class="mx-2 hidden-xs-only"
-    >
-      <v-icon 
-        small
-        color="tertiary"
-      >{{ icons.mdiChip }}</v-icon>
-    </v-progress-circular>
-
-    <v-progress-circular
-      v-if="measure"
-      :value="measure.mem_used"
-      color="quaternary"
-      class="mx-2 hidden-xs-only"
-    >
-      <v-icon 
-        small
-        color="quaternary"
-      >{{ icons.mdiMemory }}</v-icon>
-    </v-progress-circular>
-
-    <v-spacer></v-spacer>
-
-    <v-btn
-      :icon="$vuetify.breakpoint.smAndDown" 
-      text 
-      color="success"
-      @click="startA3Server()" 
-      :disabled="$store.state.downloadInfo.type === 'updateServer' || $store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
-    >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiPlay }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.start') }}
-    </v-btn>
-
-    <v-btn
-      :icon="$vuetify.breakpoint.smAndDown" 
-      text 
-      color="warning"
-      @click="restartA3Server()" 
-      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
-    >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiRestart }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.restart') }}
-    </v-btn>
-
-    <v-btn
-      :icon="$vuetify.breakpoint.smAndDown" 
-      text 
-      color="error"
-      @click="stopA3Server()" 
-      :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.a3Server.isStarted || !$store.state.config.a3ServerPath"
-    >
-      <v-icon :left="$vuetify.breakpoint.mdAndUp">{{ icons.mdiStop }}</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
-    </v-btn>
-    
-    <v-tooltip 
-      v-if="$auth.user.privilege === 1 && $store.state.config.steamCmdPath"
-      bottom
-    >
-      <template v-slot:activator="{ on }">
-        <v-btn
-          icon
-          :loading="loadingUpdate"
-          v-on="on"
-          @click="updateServer()"
-          :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
-        >
-          <v-icon>{{ icons.mdiUpdate }}</v-icon>
-        </v-btn>
-      </template>
-      {{ $t('menu.updateServer') }}
-    </v-tooltip>
-  </v-app-bar>
-
   <v-navigation-drawer
-    v-if="$vuetify.breakpoint.smAndDown"
     v-model="navDrawer" 
     app
   >
-    <v-list>      
+    <div class="d-flex justify-center my-5">
+      <Logo width="50px" height="50px" />
+    </div>
+
+    <v-list nav>      
       <v-list-item 
         v-for="link in links" 
         :key="link.url"
@@ -298,38 +210,6 @@
         </v-list-item-content>
       </v-list-item>
     </v-list>
-
-    <template v-slot:append>
-      <v-list>
-        <v-list-item
-          nuxt
-          to="/user"
-          exact
-          color="primary"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ icons.mdiAccountCog }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ $t('menu.myAccount') }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item
-          @click="logout()"
-          color="error"
-        >
-          <v-list-item-icon>
-            <v-icon>{{ icons.mdiLogout }}</v-icon>
-          </v-list-item-icon>
-
-          <v-list-item-content>
-            <v-list-item-title>{{ $t('menu.logout') }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </template>
   </v-navigation-drawer>
 </div>
 </template>

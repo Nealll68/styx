@@ -1,5 +1,41 @@
 <template>
-<div>  
+<div>
+  <v-navigation-drawer    
+    v-model="navDrawer" 
+    app
+    floating
+  >
+    <div class="d-flex justify-center my-5">
+      <Logo width="50px" height="50px" />
+    </div>
+
+    <v-list nav>      
+      <v-list-item 
+        v-for="link in links" 
+        :key="link.url"
+        nuxt
+        :to="link.url"
+        :exact="link.url === '/'"
+        color="primary"
+      >
+        <v-list-item-icon>
+          <v-badge
+            :value="link.url === '/settings' && !$store.state.config.a3ServerPath"
+            :icon="icons.mdiExclamation"
+            color="error"
+            overlap
+          >
+            <v-icon>{{ link.icon }}</v-icon>
+          </v-badge>          
+        </v-list-item-icon>
+
+        <v-list-item-content>
+          <v-list-item-title>{{ link.name }}</v-list-item-title>
+        </v-list-item-content>
+      </v-list-item>
+    </v-list>
+  </v-navigation-drawer>
+
   <v-app-bar
     app
     elevate-on-scroll
@@ -23,7 +59,7 @@
         </v-col>
 
         <v-col
-          v-if="$vuetify.breakpoint.mdAndUp"
+          v-show="$vuetify.breakpoint.mdAndUp"
           md="4" 
           class="d-flex justify-center"
         >
@@ -176,41 +212,6 @@
       </v-container>
     </template> 
   </v-app-bar>
-
-  <v-navigation-drawer
-    v-model="navDrawer" 
-    app
-  >
-    <div class="d-flex justify-center my-5">
-      <Logo width="50px" height="50px" />
-    </div>
-
-    <v-list nav>      
-      <v-list-item 
-        v-for="link in links" 
-        :key="link.url"
-        nuxt
-        :to="link.url"
-        :exact="link.url === '/'"
-        color="primary"
-      >
-        <v-list-item-icon>
-          <v-badge
-            :value="link.url === '/settings' && !$store.state.config.a3ServerPath"
-            :icon="icons.mdiExclamation"
-            color="error"
-            overlap
-          >
-            <v-icon>{{ link.icon }}</v-icon>
-          </v-badge>          
-        </v-list-item-icon>
-
-        <v-list-item-content>
-          <v-list-item-title>{{ link.name }}</v-list-item-title>
-        </v-list-item-content>
-      </v-list-item>
-    </v-list>
-  </v-navigation-drawer>
 </div>
 </template>
 
@@ -247,7 +248,7 @@ export default {
   data () {
     return {
       loadingUpdate: false,
-      navDrawer: null,
+      navDrawer: false,
       a3ServerWs: null,
       links: [
         { url: '/', name: this.$t('menu.index'), icon:  mdiViewDashboard },

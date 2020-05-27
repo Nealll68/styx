@@ -61,7 +61,7 @@
         <v-col
           v-show="$vuetify.breakpoint.mdAndUp"
           md="4" 
-          class="d-flex justify-center"
+          :class="$vuetify.breakpoint.mdAndUp ? 'd-flex justify-center' : ''"
         >
            <v-tooltip 
             v-for="link in links"

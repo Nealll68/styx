@@ -133,7 +133,7 @@
 
     <template v-slot:extension>
       <v-container class="app-container px-0">
-        <v-row align-center>
+        <v-row align="center">
           <v-col>
             <v-progress-circular
               v-if="measure"

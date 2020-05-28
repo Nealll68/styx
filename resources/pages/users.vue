@@ -10,8 +10,7 @@
 
     <v-row justify="center">
       <v-col cols="md-12">
-        <v-btn 
-          v-if="$auth.user.privilege === 1"
+        <v-btn
           outlined
           color="primary" 
           class="float-right" 
@@ -61,16 +60,36 @@
                 </template>
 
                 <template v-slot:item.action="{ item }">
-                  <v-btn
-                    v-if="$auth.user.privilege > item.privilege || $auth.user.privilege === 1" 
-                    text 
-                    icon
-                  >
-                    <v-icon @click="editUser(item)">{{icons.mdiAccountEdit}}</v-icon>  
-                  </v-btn>
+                  <v-menu :close-on-content-click="false">
+                    <template v-slot:activator="{ on }">
+                      <v-btn
+                        text 
+                        icon
+                        v-on="on"
+                      >
+                        <v-icon>{{icons.mdiShieldAccount}}</v-icon>  
+                      </v-btn>
+                    </template>
+
+                    <v-card>
+                      <v-card-text>
+                        <v-radio-group v-model="item.privilege" mandatory>
+                          <v-radio :label="privileges[0]" :value="0"></v-radio>
+                          <v-radio :label="privileges[1]" :value="1"></v-radio>
+                        </v-radio-group>
+                        
+                        <v-btn
+                          block
+                          depressed
+                          color="primary"
+                          @click="editPrivilege(item)"
+                          :disabled="usersTableLoading"
+                        >{{ $t('common.save') }}</v-btn>
+                      </v-card-text>
+                    </v-card>
+                  </v-menu>
                   
                   <v-btn
-                    v-if="$auth.user.privilege > item.privilege || $auth.user.privilege === 1"
                     text
                     icon
                     color="error"
@@ -91,73 +110,73 @@
       max-width="600px"
     >      
       <v-card>
-          <v-card-text class="pt-5 pb-0">
-            <v-form 
-              v-model="formIsValid" 
-              ref="form"
+        <v-card-text class="pt-5 pb-0">
+          <v-form 
+            v-model="formIsValid" 
+            ref="form"
+          >
+            <v-text-field
+              v-model="formData.username"
+              :rules="formRules.usernameRules"
+              :label="$t('common.username')"
+              name="username"
+              :prepend-inner-icon="icons.mdiAccount"
+              filled
+            ></v-text-field>
+
+            <v-text-field
+              v-model="formData.password"
+              :rules="formRules.passwordRules"
+              :label="$t('common.password')"
+              name="password"
+              :prepend-inner-icon="icons.mdiLock"
+              :type="showPassword ? 'text' : 'password'"
+              :append-icon="showPassword ? icons.mdiEye : icons.mdiEyeOff" 
+              @click:append="showPassword = !showPassword"
+              filled
             >
-              <v-text-field
-                v-model="formData.username"
-                :rules="formRules.usernameRules"
-                :label="$t('common.username')"
-                name="username"
-                :prepend-inner-icon="icons.mdiAccount"
-                filled
-              ></v-text-field>
+              <template v-slot:append-outer>
+                <v-tooltip top>
+                  <template v-slot:activator="{ on }">
+                    <v-icon v-on="on">{{icons.mdiHelp}}</v-icon>
+                  </template>
+                  <ul>
+                    <li>{{ $t('rules.password.minLength') }}</li>
+                    <li>{{ $t('rules.password.lowercaseRequired') }}</li>
+                    <li>{{ $t('rules.password.uppercaseRequired') }}</li>
+                    <li>{{ $t('rules.password.numericRequired') }}</li>
+                    <li>{{ $t('rules.password.specialRequired') }}</li>
+                  </ul>
+                </v-tooltip>
+              </template>
+            </v-text-field>
+          
+            <v-select 
+              v-model="formData.privilege" 
+              :label="$t('common.privilege')" 
+              :items="privileges"
+              :rules="formRules.privilegeRules"
+              filled
+            ></v-select>
+          </v-form>          
+        </v-card-text>
 
-              <v-text-field
-                v-model="formData.password"
-                :rules="formRules.passwordRules"
-                :label="$t('common.password')"
-                name="password"
-                :prepend-inner-icon="icons.mdiLock"
-                :type="showPassword ? 'text' : 'password'"
-                :append-icon="showPassword ? icons.mdiEye : icons.mdiEyeOff" 
-                @click:append="showPassword = !showPassword"
-                filled
-              >
-                <template v-slot:append-outer>
-                  <v-tooltip top>
-                    <template v-slot:activator="{ on }">
-                      <v-icon v-on="on">{{icons.mdiHelp}}</v-icon>
-                    </template>
-                    <ul>
-                      <li>{{ $t('rules.password.minLength') }}</li>
-                      <li>{{ $t('rules.password.lowercaseRequired') }}</li>
-                      <li>{{ $t('rules.password.uppercaseRequired') }}</li>
-                      <li>{{ $t('rules.password.numericRequired') }}</li>
-                      <li>{{ $t('rules.password.specialRequired') }}</li>
-                    </ul>
-                  </v-tooltip>
-                </template>
-              </v-text-field>
-            
-              <v-select 
-                v-model="formData.privilege" 
-                :label="$t('common.privilege')" 
-                :items="privileges"
-                :rules="formRules.privilegeRules"
-                filled
-              ></v-select>
-            </v-form>          
-          </v-card-text>
+        <v-card-actions class="pt-0">
+          <v-spacer></v-spacer>
+          <v-btn 
+            text
+            @click="dialog = false; $refs.form.reset()"
+          >{{ $t('common.cancel') }}</v-btn>
 
-          <v-card-actions class="pt-0">
-            <v-spacer></v-spacer>
-            <v-btn 
-              text
-              @click="dialog = false; $refs.form.reset()"
-            >{{ $t('common.cancel') }}</v-btn>
-
-            <v-btn
-              depressed
-              color="primary"
-              @click="saveUser()"
-              :disabled="!formIsValid"
-              :loading="dialogLoading"
-            >{{ $t('common.save') }}</v-btn>
-          </v-card-actions>
-        </v-card>
+          <v-btn
+            depressed
+            color="primary"
+            @click="saveUser()"
+            :disabled="!formIsValid"
+            :loading="dialogLoading"
+          >{{ $t('common.save') }}</v-btn>
+        </v-card-actions>
+      </v-card>
     </v-dialog>
   </v-container>
 </template>
@@ -166,7 +185,7 @@
 import {
   mdiAccountPlus,
   mdiAccountSearch,
-  mdiAccountEdit,
+  mdiShieldAccount,
   mdiAccountRemove,
   mdiAccount,
   mdiLock,
@@ -195,7 +214,6 @@ export default {
         privilege: 0,
         password: ''
       },
-      editFormDataIndex: -1,
       formRules: {
         usernameRules: [
           v => !!v || this.$t('rules.usernameRequired')
@@ -224,7 +242,7 @@ export default {
       icons: {
         mdiAccountPlus,
         mdiAccountSearch,
-        mdiAccountEdit,
+        mdiShieldAccount,
         mdiAccountRemove,
         mdiAccount,
         mdiLock,
@@ -245,31 +263,18 @@ export default {
       this.dialogLoading = true
 
       if (this.$refs.form.validate()) {
-        if (this.editFormDataIndex > -1) {
-          const editedUser = await this.$axios.$put(`user/${this.formData.id}`, this.formData)
-
-          Object.assign(this.users[this.editFormDataIndex], editedUser)
-
-          this.editFormDataIndex = -1
-
-          this.$snackbar({
-            type: 'success',
-            message: this.$t('users.updated')
-          })
-        } else {
-          const newUser = await this.$axios.$post('user', {
-            username: this.formData.username,
-            password: this.formData.password,
-            privilege: this.privileges.indexOf(this.formData.privilege)
-          })
-          
-          this.users.push(newUser)        
-          
-          this.$snackbar({
-            type: 'success',
-            message: this.$t('users.created')
-          })
-        }
+        const newUser = await this.$axios.$post('user', {
+          username: this.formData.username,
+          password: this.formData.password,
+          privilege: this.privileges.indexOf(this.formData.privilege)
+        })
+        
+        this.users.push(newUser)        
+        
+        this.$snackbar({
+          type: 'success',
+          message: this.$t('users.created')
+        })
 
         this.$refs.form.reset()
         this.dialog = false
@@ -309,13 +314,16 @@ export default {
       }
     },   
 
-    editUser (user) {
-      this.editFormDataIndex = this.users.indexOf(user)
-      this.formData = {
-        username: user.username,
-        privilege: this.privileges[user.privilege]
-      }
-      this.dialog = true
+    async editPrivilege (user) {
+      this.usersTableLoading = true
+      
+      await this.$axios.$put(`user/${user.id}`, user)
+      this.$snackbar({
+        type: 'success',
+        message: this.$t('users.updated')
+      })
+
+      this.usersTableLoading = false
     }
   }
 }

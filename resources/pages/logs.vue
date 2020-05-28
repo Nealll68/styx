@@ -194,8 +194,8 @@ export default {
       },
       logsSearch: null,
       headers: [
-        { text: 'File', value: 'name' },
-        { text: this.$t('menu.profile'), value: 'profileName' },
+        { text: this.$t('logs.file'), value: 'name' },
+        { text: this.$tc('menu.profile', 1), value: 'profileName' },
         { text: this.$t('common.createdAt'), value: 'createdAt' },
         { text: '', value: 'action', sortable: false }
       ],
@@ -264,7 +264,7 @@ export default {
         this.refreshLogs()
         this.$snackbar({
           type: 'success', 
-          message:this.$tc('common.fileDeleted', 0)
+          message:this.$tc('common.fileDeleted', 1)
         })
       }      
       this.loading = false

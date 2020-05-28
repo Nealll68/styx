@@ -33,7 +33,7 @@
   
   "menu": {
     "index": "Accueil",
-    "profiles": "Profils",
+    "profile": "Profil | Profils",
     "mods": "Mods",
     "missions": "Missions",
     "logs": "Logs",
@@ -181,6 +181,7 @@
   },
 
   "logs": {
+    "file": "Fichier",
     "deleteSelected": "Supprimé les fichiers sélectionnés",
     "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer ce fichier de logs ?",
     "confirmAllDelete": "Etes-vous sûr de vouloir définitivement supprimer les fichiers de logs sélectionnés ?"

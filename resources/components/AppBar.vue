@@ -252,7 +252,7 @@ export default {
       a3ServerWs: null,
       links: [
         { url: '/', name: this.$t('menu.index'), icon:  mdiViewDashboard },
-        { url: '/profile', name: this.$t('menu.profiles'), icon: mdiFolderCog },
+        { url: '/profile', name: this.$tc('menu.profile', 2), icon: mdiFolderCog },
         { url: '/mods', name: this.$t('menu.mods'), icon: mdiToyBrick },
         { url: '/mission', name: this.$t('menu.missions'), icon: mdiTarget },        
         { url: '/logs', name: this.$t('menu.logs'), icon: mdiPost }

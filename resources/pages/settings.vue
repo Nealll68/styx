@@ -51,12 +51,11 @@
                   :rules="requiredRule"
                 ></v-text-field>
 
-                <v-switch
+                <v-checkbox
                   v-model="config.x64"
                   color="primary"
-                  inset
                   :label="$t('settings.64bit')"
-                ></v-switch>
+                ></v-checkbox>
               </v-form>
             </v-card-text>
           </v-card>

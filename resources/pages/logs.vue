@@ -24,7 +24,7 @@
         <v-text-field
           v-model="logsSearch"
           :append-icon="icons.mdiMagnify"
-          :label="$t('mission.search')"
+          :label="$t('common.search')"
           single-line
           hide-details
           filled
@@ -41,7 +41,7 @@
           color="error"
           @click="deleteSelected"
         >
-          <v-icon>{{ icons.mdiDeleteSweep }}</v-icon> {{ $t('logs.deleteAll') }}
+          <v-icon>{{ icons.mdiDeleteSweep }}</v-icon> {{ $t('logs.deleteSelected') }}
         </v-btn>
 
         <v-skeleton-loader
@@ -58,7 +58,7 @@
           :items-per-page="10"             
           sort-by="createdAt"
           sort-desc
-          :no-data-text="$t('mission.noMission')"
+          :no-data-text="$t('common.noData')"
           :no-results-text="$t('common.noResult')"
           :search="logsSearch"
           :footer-props="{
@@ -177,31 +177,33 @@ export default {
     PathError
   },
 
-  data: () => ({
-    loading: false,
-    loadingLogs: true,
-    loadingContent: false,
-    logViewer: false,
-    icons: {
-      mdiDeleteSweep,
-      mdiMagnify,
-      mdiRefresh,
-      mdiDownload,
-      mdiEye,
-      mdiDeleteForever,
-      mdiClose
-    },
-    logsSearch: null,
-    headers: [
-      { text: 'File', value: 'name' },
-      { text: 'Profile', value: 'profileName' },
-      { text: 'Created at', value: 'createdAt' },
-      { text: '', value: 'action', sortable: false }
-    ],
-    logs: [],
-    logsContent: { filename: '', logs: '' },
-    selected: []
-  }),
+  data () {
+    return {
+      loading: false,
+      loadingLogs: true,
+      loadingContent: false,
+      logViewer: false,
+      icons: {
+        mdiDeleteSweep,
+        mdiMagnify,
+        mdiRefresh,
+        mdiDownload,
+        mdiEye,
+        mdiDeleteForever,
+        mdiClose
+      },
+      logsSearch: null,
+      headers: [
+        { text: 'File', value: 'name' },
+        { text: this.$t('menu.profile'), value: 'profileName' },
+        { text: this.$t('common.createdAt'), value: 'createdAt' },
+        { text: '', value: 'action', sortable: false }
+      ],
+      logs: [],
+      logsContent: { filename: '', logs: '' },
+      selected: []
+    }
+  },
 
   async mounted () {
     this.logs = await this.$axios.$get('server/logs')
@@ -260,6 +262,10 @@ export default {
       if (confirm) {
         await this.$axios.$delete(`server/logs/${profileName}/${filename}`)
         this.refreshLogs()
+        this.$snackbar({
+          type: 'success', 
+          message:this.$tc('common.fileDeleted', 0)
+        })
       }      
       this.loading = false
     },
@@ -267,7 +273,7 @@ export default {
     async deleteSelected () {
       const confirm = await this.$confirm({ 
         title: this.$t('common.deletion'),
-        message: this.$t('logs.confirmAllDelete'),
+        message: this.$t('logs.confirmDeleteSelected'),
         type: 'error'
       })
 
@@ -279,6 +285,11 @@ export default {
         }
 
         this.refreshLogs()
+        this.$snackbar({
+          type: 'success', 
+          message:this.$tc('common.fileDeleted', this.selected.length)
+        })
+        this.selected = []
         this.loading = false
       }
     }

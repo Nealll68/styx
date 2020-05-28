@@ -33,13 +33,13 @@
             border="left"
             dense
             text
-          >{{ $t('mission.noMission') }}</v-alert>
+          >{{ $t('common.noData') }}</v-alert>
 
           <v-list 
             v-else
             subheader
           >
-            <v-subheader>{{ $t('config.missionDialogSubheader') }}</v-subheader>            
+            <v-subheader>{{ $t('information.missionDialogSubheader') }}</v-subheader>            
 
             <v-list-item 
               v-for="mission in missions"

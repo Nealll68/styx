@@ -31,7 +31,7 @@
             <v-text-field
               v-model="usersTableSearch"
               :append-icon="icons.mdiAccountSearch"
-              :label="$t('users.search')"
+              :label="$t('common.search')"
               single-line
               hide-details
               filled
@@ -47,7 +47,7 @@
                 :headers="usersTableHeaders"
                 disable-pagination 
                 hide-default-footer
-                :no-data-text="$t('users.noUser')"
+                :no-data-text="$t('common.noData')"
                 :no-results-text="$t('common.noResult')"
                 :search="usersTableSearch"
                 :loading="usersTableLoading"
@@ -217,7 +217,7 @@ export default {
       usersTableHeaders: [
         { text: this.$t('common.username'), value: 'username' },
         { text: this.$t('common.privilege'), value: 'privilege' },
-        { text: this.$t('users.createdAt'), value: 'created_at' },
+        { text: this.$t('common.createdAt'), value: 'created_at' },
         { text: '', value: 'action', sortable: false }
       ],
       privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')],

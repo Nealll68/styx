@@ -22,7 +22,7 @@
         text 
         type="info" 
         dense
-      >{{ $t('difficulty.information') }}</v-alert>
+      >{{ $t('information.customDifficulty') }}</v-alert>
 
       <v-skeleton-loader
         :loading="loading"

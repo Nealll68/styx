@@ -159,7 +159,7 @@
         <v-card :loading="loading">
           <v-card-title>
             <v-icon left>{{ icons.mdiPost }}</v-icon>
-            {{ $t('index.logsTitle') }}
+            {{ $t('menu.logs') }}
 
             <v-spacer></v-spacer>
 

@@ -71,7 +71,7 @@
 
             <v-btn
               text
-              @click="refershMissionList()"
+              @click="refreshMissionList()"
               class="mr-2"
               color="tertiary"
             >
@@ -81,7 +81,7 @@
             <v-text-field
               v-model="missionSearch"
               :append-icon="icons.mdiMagnify"
-              :label="$t('mission.search')"
+              :label="$t('common.search')"
               single-line
               hide-details
               filled
@@ -107,7 +107,7 @@
               :items-per-page="10"             
               sort-by="updated_at"
 		          sort-desc
-              :no-data-text="$t('mission.noMission')"
+              :no-data-text="$t('common.noData')"
               :no-results-text="$t('common.noResult')"
               :search="missionSearch"
               :loading="tableLoading"
@@ -244,7 +244,7 @@ export default {
   },
 
   methods: {
-    async refershMissionList () {
+    async refreshMissionList () {
       this.tableLoading = true
 
       this.missions = await this.$axios.$get('server/mission')
@@ -258,7 +258,7 @@ export default {
         message: this.$t('mission.workshopDownloadError')
       })
       await this.$axios.$post('server/mission/workshop', payload)
-      await this.refershMissionList()
+      await this.refreshMissionList()
     },
 
     async updateMission (workshopId) {
@@ -273,10 +273,10 @@ export default {
 
       if (!payload.fileUrl) return this.$snackbar({
         type: 'error',
-        message: this.$t('mission.workshopDownloadError')
+        message: this.$t('workshop.missionDownloadError')
       })
       await this.$axios.$post('server/mission/workshop', payload)
-      await this.refershMissionList()
+      await this.refreshMissionList()
     },
 
     async deleteMission (mission) {
@@ -293,7 +293,7 @@ export default {
       this.tableLoading = true
 
       await this.$axios.$get(`server/mission/detect`)
-      await this.refershMissionList()
+      await this.refreshMissionList()
 
       this.tableLoading = false
     }

@@ -8,6 +8,8 @@
     "delete": "Delete",
     "download": "Download",
     "noResult": "No result",
+    "noData": "No data",
+    "createdAt": "Created at",
     "fromWorkshop": "From the workshop",
     "add": "Add",
     "name": "Name",
@@ -25,7 +27,9 @@
     "of": "of",
     "all": "All",
     "fileSaved": "File saved",
-    "fileReseted": "File reseted"
+    "fileReseted": "File reseted",
+    "fileDeleted": "File deleted | {count} files deleted",
+    "search": "Search"
   },
   
   "menu": {
@@ -101,7 +105,7 @@
     "updateLocalModInfo": "If you want to update a local mod, delete it first.",
     "updateMission": "To update a mission, you just have to redownload it on the server.",
     "importantPoints": "Important points",
-    "modNaming": "The mod folder must be correctly named (with an '@' in front of the name and without spaces)",
+    "modNaming": "The mod folder must be correctly named (with an '@' in front of the name, name in lowercase (important for linux) and without spaces)",
     "modZip": "The mod folder must be put in a .zip",
     "missionNaming": "The mission must be correctly named (without spaces and a valid map name)",
     "missionExtension": "The mission must be a .pbo file",
@@ -117,19 +121,14 @@
     "idWorkshop": "Workshop item ID",
     "idCollection": "Workshop collection ID",
     "publishedAt": "Published on:",
-    "idError": "Error: check workshop ID"
+    "idError": "Error: check workshop ID",
+    "missionDownloadError": "Unable to download this mission from the workshop"
   },
 
-  "config": {
-    "missionDialogSubheader": "Exact name of the missions available to copy and insert in the 'template' field"
-  },
-
-  "difficulty": {
-    "information": "To use a custom difficulty, indicate 'Custom' in the server configuration file."
-  },
-
-  "performance": {
-    "information": "To use a custom performance file, activate the -cfg parameter in the 'Parameters' tabs."
+  "information": {
+    "missionDialogSubheader": "Exact name of the missions available to copy and insert in the 'template' field",
+    "customDifficulty": "To use a custom difficulty, indicate 'Custom' in the server configuration file.",
+    "customPerformance": "To use a custom performance file, activate the -cfg parameter in the 'Parameters' tabs."
   },
 
   "serverMod": {
@@ -159,7 +158,6 @@
   },
 
   "index": {
-    "logsTitle": "Logs",
     "noLogs": "The logs are only displayed if the server is started",
     "automaticRefresh": "Automatic refresh"
   },
@@ -184,10 +182,9 @@
   },
 
   "logs": {
-    "deleteAll": "Delete all",
-    "filterInfo": "The logs are classified by profiles. Click on a profile to view its logs.",
+    "deleteSelected": "Delete selected",
     "confirmDeletion": "Are you sure you want to permanently delete this log file?",
-    "confirmAllDelete": "Are you sure you want to permanently delete all log files?"
+    "confirmDeleteSelected": "Are you sure you want to permanently delete selected log files?"
   },
 
   "mission": {
@@ -195,10 +192,7 @@
     "add": "Add a mission",    
     "upload": "Upload a mission",
     "detectMission": "Detect existing missions",
-    "search": "Find a mission",
     "afterDeleteMessage": "Make sure that the mission which has just been deleted is not activated in any profile, otherwise the server will not start.",
-    "noMission": "No mission added",
-    "workshopDownloadError": "Unable to download this mission from the workshop",
     "map": "Map"
   },
 
@@ -209,8 +203,6 @@
     "detect": "Detect existing mods",
     "upload": "Upload a mod",
     "local": "Local",
-    "search": "Find a mod",
-    "noMods": "No mod added",
     "alreadyAdded": "Already added",
     "noLocalMod": "No mod found in the Arma 3 folder",
     "importSuccess": "Mods that could be detected have been imported",
@@ -239,9 +231,6 @@
   "users": {
     "adminUserAlert": "It is strongly advised not to leave the default account (admin) activated",
     "add": "Create user",
-    "search": "Find a user",
-    "noUser": "No user added",
-    "createdAt": "Created date",
     "created": "User created",
     "updated": "User updated",
     "deleted": "User deleted",

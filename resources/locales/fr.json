@@ -8,6 +8,8 @@
     "delete": "Supprimer",
     "download": "Télécharger",
     "noResult": "Aucun résultat",
+    "noData": "Aucune donnée",
+    "createdAt": "Crée le",
     "fromWorkshop": "Depuis le Workshop",
     "add": "Ajouter",
     "name": "Nom",
@@ -25,7 +27,8 @@
     "of": "de",
     "all": "Tout",
     "fileSaved": "Fichier enregistré",
-    "fileReseted": "Fichier réinitialisé"
+    "fileReseted": "Fichier réinitialisé",
+    "fileDeleted": "Fichier supprimé | {count} fichiers supprimés"
   },
   
   "menu": {
@@ -101,7 +104,7 @@
     "updateLocalModInfo": "Si vous voulez mettre à jour un mod local, supprimez-le avant.",
     "updateMission": "Pour mettre à jour une mission il suffitt de la retélécharger sur le serveur.",
     "importantPoints": "Points importants",
-    "modNaming": "Le dossier du mod doit être correctement nommé (avec un '@' devant le nom et sans espace)",
+    "modNaming": "Le dossier du mod doit être correctement nommé (avec un '@' devant le nom, le nom en minuscule (important pour linux) et sans espace)",
     "modZip": "Le dossier du mod doit être mis dans un .zip",
     "missionNaming": "La mission doit être correctement nommée (sans espace et un nom de map valide)",
     "missionExtension": "La mission doit être un fichier .pbo",
@@ -117,19 +120,14 @@
     "idWorkshop": "ID de l'objet workshop",
     "idCollection": "ID de la collection workshop",
     "publishedAt": "Publié le :",
-    "idError": "Erreur : vérifier l'ID workshop"
+    "idError": "Erreur : vérifier l'ID workshop",
+    "missionDownloadError": "Impossible de télécharger cette mission depuis le workshop"
   },
 
-  "config": {
-    "missionDialogSubheader": "Nom exacte des missions disponible à copier et insérer dans le champ 'template'"
-  },
-
-  "difficulty": {
-    "information": "Pour utiliser une difficulté personnalisée indiquez 'Custom' dans le fichier de configuration du serveur."
-  },
-
-  "performance": {
-    "information": "Pour utiliser un fichier de performance personnalisé, activer le paramètre -cfg dans l'onglet 'Paramètres'."
+  "information": {
+    "missionDialogSubheader": "Nom exacte des missions disponible à copier et insérer dans le champ 'template'",
+    "customDifficulty": "Pour utiliser une difficulté personnalisée indiquez 'Custom' dans le fichier de configuration du serveur.",
+    "customPerformance": "Pour utiliser un fichier de performance personnalisé, activer le paramètre -cfg dans l'onglet 'Paramètres'."
   },
 
   "serverMod": {
@@ -159,7 +157,6 @@
   },
 
   "index": {
-    "logsTitle": "Logs",
     "noLogs": "Les logs ne s'affichent que si le serveur est démarré.",
     "automaticRefresh": "Actualisation automatique"
   },
@@ -184,10 +181,9 @@
   },
 
   "logs": {
-    "deleteAll": "Tout supprimer",
-    "filterInfo": "Les logs sont classés par profils. Cliquez sur un profil pour afficher les logs lui concernant.",
+    "deleteSelected": "Supprimé les fichiers sélectionnés",
     "confirmDeletion": "Etes-vous sûr de vouloir définitivement supprimer ce fichier de logs ?",
-    "confirmAllDelete": "Etes-vous sûr de vouloir définitivement supprimer tous les fichiers de logs ?"
+    "confirmAllDelete": "Etes-vous sûr de vouloir définitivement supprimer les fichiers de logs sélectionnés ?"
   },
 
   "mission": {
@@ -195,10 +191,8 @@
     "add": "Ajouter une mission",    
     "upload": "Télécharger une mission",
     "detectMission": "Détecter les missions existantes",
-    "search": "Rechercher une mission",
     "afterDeleteMessage": "Assurez-vous que la mission qui vient d'être supprimée n'est activée dans aucun profil sinon le serveur ne démarrera pas.",
     "noMission": "Aucune mission ajoutée",
-    "workshopDownloadError": "Impossible de télécharger cette mission depuis le workshop",
     "map": "Carte"
   },
 
@@ -209,8 +203,6 @@
     "detect": "Détecter les mods existants",
     "upload": "Télécharger un mod",
     "local": "Local",
-    "search": "Rechercher un mod",
-    "noMods": "Aucun mod ajouté",
     "alreadyAdded": "Déjà ajouté",
     "noLocalMod": "Aucun mod trouvé dans le dossier Arma 3",
     "importSuccess": "Les mods qui ont pu être détectés ont été importés",
@@ -239,9 +231,6 @@
   "users": {
     "adminUserAlert": "Il est vivement déconseillé de laisser le compte par défaut (admin) activé",
     "add": "Créer un utilisateur",
-    "search": "Rechecher un utilisateur",
-    "noUser": "Aucun utilisateur créé",
-    "createdAt": "Créé le",
     "created": "Utilisateur créé",
     "updated": "Utilisateur mis à jour",
     "deleted": "Utilisateur supprimé",

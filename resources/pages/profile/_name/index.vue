@@ -21,7 +21,7 @@
       <v-text-field
         v-model="modsSearch"
         :append-icon="icons.mdiToyBrickSearch"
-        :label="$t('mods.search')"
+        :label="$t('common.search')"
         single-line
         hide-details
         filled
@@ -37,7 +37,7 @@
         sort-by="activated"
         sort-desc
         hide-default-footer
-        :no-data-text="$t('mods.noMods')"
+        :no-data-text="$t('common.noData')"
         :no-results-text="$t('common.noResult')"
         :search="modsSearch"
         :loading="loading"

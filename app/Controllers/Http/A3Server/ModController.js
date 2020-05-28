@@ -10,7 +10,7 @@ const Mod = use('App/Models/A3Server/Mod')
 const Config = use('App/Models/Config')
 
 const SteamWebAPI = use('App/Services/SteamWebAPI')
-const FileManager = use('App/Services/FileManager')
+const ModService = use('App/Services/Mod')
 
 class ModController {
 
@@ -19,7 +19,7 @@ class ModController {
     }
 
     async indexLocal ({ response }) {
-        const modFolders = await FileManager.getLocalMods()
+        const modFolders = await ModService.getLocal()
         
         return response.ok({
             modFolders: modFolders.filter(dirent => dirent.isDirectory() && dirent.name.substring(0, 1) === '@').map(dirent => dirent.name)
@@ -48,7 +48,7 @@ class ModController {
         const modFile = request.file('file')
 
         try {
-            await FileManager.storeLocalMod(modFile)
+            await ModService.storeLocal(modFile)
             return response.ok()
         } catch (ex) {
             return response.status(ex.status).send(ex.code)
@@ -59,7 +59,7 @@ class ModController {
         try {
             const config = await Config.first()
 
-            const modFolders = await FileManager.getWorkshopMods()
+            const modFolders = await ModService.getWorkshop()
             const workshopIds = modFolders.filter(dirent => dirent.isDirectory()).map(dirent => dirent.name)
 
             for (const workshopId of workshopIds) {
@@ -91,7 +91,7 @@ class ModController {
             const mod = await Mod.find(params.id)
             await mod.delete()
     
-            await FileManager.deleteMod(mod.workshop_id, mod.name)
+            await ModService.delete(mod.workshop_id, mod.name)
     
             return response.ok()
         } catch (ex) {
@@ -104,7 +104,7 @@ class ModController {
             const mod = await Mod.find(params.id)
             await mod.delete()
 
-            await FileManager.deleteLocalMod(mod.name)
+            await ModService.deleteLocal(mod.name)
 
             return response.ok()
         } catch (ex) {

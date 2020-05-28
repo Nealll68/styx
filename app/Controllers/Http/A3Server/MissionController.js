@@ -3,7 +3,7 @@
 const Ws = use('Ws')
 
 const Mission = use('App/Models/A3Server/Mission')
-const FileManager = use('App/Services/FileManager')
+const MissionService = use('App/Services/Mission')
 
 class MissionController {
     async index () {
@@ -14,7 +14,7 @@ class MissionController {
         const mission_file = request.file('file')
 
         try {
-            await FileManager.storeMission(mission_file)
+            await MissionService.store(mission_file)
 
             const missionSplit = mission_file.fileName.split('.')
 
@@ -55,7 +55,7 @@ class MissionController {
                             missionName: title
                         })
 
-        await FileManager.storeWorkshopMission(fileUrl, filename)
+        await MissionService.storeWorkshop(fileUrl, filename)
 
         const mission = await Mission.findBy('filename', filename)
         if (mission) {
@@ -86,7 +86,7 @@ class MissionController {
 
     async detect ({ response }) {
         try {
-            for (const mission of await FileManager.getMissions()) {
+            for (const mission of await MissionService.get()) {
                 const exist = await Mission.findBy('filename', mission.filename)
                 
                 if (!exist) {
@@ -108,7 +108,7 @@ class MissionController {
     async destroy ({ params, response }) {
         const mission = await Mission.find(params.id)
 
-        await FileManager.deleteMission(mission.filename)
+        await MissionService.delete(mission.filename)
         await mission.delete()
 
         return response.ok()

@@ -1,3 +1,5 @@
+'use strict'
+
 const Drive = use('Drive')
 const Helpers = use('Helpers')
 const path = require('path')

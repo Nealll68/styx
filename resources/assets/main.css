@@ -47,3 +47,7 @@ body::-webkit-scrollbar-thumb {
 .appbar-active-link {
     color: #1eb980 !important;
 }
+
+.theme--dark.v-data-table tbody tr:hover:not(.v-data-table__expanded__content):not(.v-data-table__empty-wrapper) {
+	background-color: #333333 !important;
+}

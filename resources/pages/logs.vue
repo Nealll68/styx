@@ -2,64 +2,166 @@
   <v-container class="app-container">
     <path-error v-if="!$store.state.config.a3ServerPath"></path-error>
 
-    <v-row v-else>
-      <v-col md="12" lg="3">
-        <v-card :loading="loading">
-          <v-card-text>
+    <v-card 
+      v-else
+      :loading="loading"
+    >
+      <v-card-title class="headline">
+        <h3>{{ $t('menu.logs') }}</h3>
+
+        <v-spacer></v-spacer>
+
+        <v-btn
+          text
+          @click="refreshLogs()"
+          class="mr-2"
+          color="tertiary"
+          :disabled="loading"
+        >
+          <v-icon left>{{icons.mdiRefresh}}</v-icon> {{ $t('common.refresh') }}
+        </v-btn>
+
+        <v-text-field
+          v-model="logsSearch"
+          :append-icon="icons.mdiMagnify"
+          :label="$t('mission.search')"
+          single-line
+          hide-details
+          filled
+          dense
+        ></v-text-field>            
+      </v-card-title>
+
+      <v-divider></v-divider>
+
+      <v-card-text>
+        <v-btn
+          v-show="selected.length > 0"
+          outlined
+          color="error"
+          @click="deleteSelected"
+        >
+          <v-icon>{{ icons.mdiDeleteSweep }}</v-icon> {{ $t('logs.deleteAll') }}
+        </v-btn>
+
+        <v-skeleton-loader
+          v-if="loadingLogs"
+          type="table-tbody"
+        ></v-skeleton-loader>
+
+        <v-data-table
+          v-else
+          v-model="selected"
+          :items="logs" 
+          item-key="name"
+          :headers="headers" 
+          :items-per-page="10"             
+          sort-by="createdAt"
+          sort-desc
+          :no-data-text="$t('mission.noMission')"
+          :no-results-text="$t('common.noResult')"
+          :search="logsSearch"
+          :footer-props="{
+            itemsPerPageText: $t('common.rowsPerPage'),
+            itemsPerPageAllText: $t('common.all'),
+            pageText: `{0}-{1} ${$t('common.of')} {2}`
+          }"
+          show-select
+        >
+          <template v-slot:item.createdAt="{ item }">
+            {{ $moment(item.createdAt, 'YYYY-MM-DD_hh-mm-ss').format('lll') }}
+          </template>
+
+          <template v-slot:item.action="{ item }">
             <v-btn
               text
-              color="error"
-              block
-              :disable="loading"
-              @click="deleteAllLogs()"
+              icon
+              @click="showLog(item.profileName, item.name)"
             >
-              <v-icon left>{{ icons.mdiDeleteSweep }}</v-icon> {{ $t('logs.deleteAll') }}
+              <v-icon>{{ icons.mdiEye }}</v-icon>  
             </v-btn>
-          </v-card-text>
 
-          <v-divider></v-divider>
-       
-          <v-list 
-            max-height="500px" 
-            class="scrollbar"
-          >
-            <v-subheader>{{ $t('menu.profiles') }}</v-subheader>
-
-            <v-list-group 
-              v-for="item of logFiles"
-              :key="item.profile_name"
-              v-model="item.active"
+            <v-btn
+              text
+              icon
+              color="primary"
+              :disabled="loading"
+              @click="downloadLog(item.profileName, item.name)"
             >
-              <template v-slot:activator>
-                <v-list-item-content>
-                  <v-list-item-title v-text="item.profile_name"></v-list-item-title>
-                </v-list-item-content>
-              </template>
+              <v-icon>{{ icons.mdiDownload }}</v-icon>  
+            </v-btn>
 
-              <v-list-item 
-                v-for="logFile in item.files" 
-                :key="logFile"
-                nuxt
-                :to="`/logs/${item.profile_name}/${logFile}`"
-              >
-                <v-list-item-content>
-                  <v-list-item-title>{{ logFile.substring(16, 35) }}</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
-            </v-list-group>
-          </v-list>
-        </v-card> 
-      </v-col>
+            <v-btn
+              text
+              icon
+              color="error"
+              :disabled="loading"
+              @click="deleteLog(item.profileName, item.name)"
+            >
+              <v-icon>{{ icons.mdiDeleteForever }}</v-icon>  
+            </v-btn>
+          </template>
+        </v-data-table>
+      </v-card-text>
+    </v-card>
 
-      <v-col md="12" lg="9">
-        <nuxt-child @refresh="refresh" />
-      </v-col>
-    </v-row>
+    <v-dialog
+      v-model="logViewer"
+      fullscreen
+      hide-overlay
+      transition="dialog-bottom-transition"
+    >
+      <v-card>
+        <v-app-bar
+          fixed
+          elevate-on-scroll
+          dense
+        >
+          <v-btn
+            text
+            icon
+            @click="logViewer = !logViewer"
+          >
+            <v-icon>{{ icons.mdiClose }}</v-icon>
+          </v-btn>
+          <v-toolbar-title>{{ logsContent.filename }}</v-toolbar-title>
+        </v-app-bar>
+
+        <v-card-text class="pt-12">
+          <v-skeleton-loader
+            v-if="loadingContent"
+            type="paragraph@2"
+          ></v-skeleton-loader>
+
+          <v-sheet
+            v-else
+            color="grey darken-4" 
+            class="pa-2 mt-4"
+          >
+            <div 
+              v-for="(log, i) of logsContent.logs"
+              :key="i"
+              class="my-2"
+            >
+              {{ log }}
+            </div>
+          </v-sheet>
+        </v-card-text>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 
 <script>
-import { mdiDeleteSweep } from '@mdi/js'
+import { 
+  mdiDeleteSweep,
+  mdiMagnify,
+  mdiRefresh,
+  mdiDownload,
+  mdiEye,
+  mdiDeleteForever,
+  mdiClose
+} from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 
 export default {
@@ -77,27 +179,92 @@ export default {
 
   data: () => ({
     loading: false,
+    loadingLogs: true,
+    loadingContent: false,
+    logViewer: false,
     icons: {
-      mdiDeleteSweep
-    }
+      mdiDeleteSweep,
+      mdiMagnify,
+      mdiRefresh,
+      mdiDownload,
+      mdiEye,
+      mdiDeleteForever,
+      mdiClose
+    },
+    logsSearch: null,
+    headers: [
+      { text: 'File', value: 'name' },
+      { text: 'Profile', value: 'profileName' },
+      { text: 'Created at', value: 'createdAt' },
+      { text: '', value: 'action', sortable: false }
+    ],
+    logs: [],
+    logsContent: { filename: '', logs: '' },
+    selected: []
   }),
 
-  async asyncData ({ $axios }) {
-    const logs = await $axios.$get('server/logs')
-
-    return {
-      logFiles: logs
-    }
+  async mounted () {
+    this.logs = await this.$axios.$get('server/logs')
+    this.loadingLogs = false
   },
 
   methods: { 
-    async refresh () {
+    async refreshLogs () {
       this.loading = true
-      this.logFiles = await this.$axios.$get('server/logs')
+      this.logs = await this.$axios.$get('server/logs')
       this.loading = false
     },
 
-    async deleteAllLogs () {
+    async showLog (profileName, filename) {
+      this.loadingContent = true
+      this.logViewer = true
+
+      const response = await this.$axios.$get(`server/logs/${profileName}/${filename}`)
+
+      this.logsContent = {
+        filename,
+        logs: response.split('\r\n')
+      }
+
+      this.loadingContent = false
+    },
+
+    async downloadLog (profileName, filename) {
+      this.loading = true
+
+      const response = await this.$axios({
+        url: `server/logs/download/${profileName}/${filename}`,
+        method: 'GET',
+        responseType: 'blob'
+      })
+
+      const url = window.URL.createObjectURL(new Blob([response.data]))
+      const link = document.createElement('a')
+      link.href = url
+      link.setAttribute('download', filename)
+      document.body.appendChild(link)
+      link.click()
+
+      this.loading = false
+    },
+
+    async deleteLog (profileName, filename) {
+      this.loading = true
+
+      const confirm = await this.$confirm({ 
+        title: this.$t('common.deletion'),
+        message: this.$t('logs.confirmDeletion'),
+        type: 'error'
+      })
+
+      if (confirm) {
+        await this.$axios.$delete(`server/logs/${profileName}/${filename}`)
+        this.refreshLogs()
+      }      
+      this.loading = false
+    },
+
+    async deleteSelected () {
       const confirm = await this.$confirm({ 
         title: this.$t('common.deletion'),
         message: this.$t('logs.confirmAllDelete'),
@@ -107,15 +274,11 @@ export default {
       if (confirm) {
         this.loading = true
 
-        for (const profile of this.logFiles) {
-          for (const filename of profile.files) {
-            await this.$axios.$delete(`server/logs/${profile.profile_name}/${filename}`)
-          }
-
-          profile.files = []
+        for (const log of this.selected) {
+          await this.$axios.$delete(`server/logs/${log.profileName}/${log.name}`)          
         }
-        
-        this.logs = null
+
+        this.refreshLogs()
         this.loading = false
       }
     }

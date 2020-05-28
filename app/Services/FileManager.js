@@ -11,7 +11,6 @@ const rimraf = Helpers.promisify(require('rimraf'))
 const fs = Helpers.promisify(require('fs'))
 
 const Config = use('App/Models/Config')
-const A3ServerProfile = use('App/Models/A3Server/Profile')
 
 const A3FolderPathUndefined = use('App/Exceptions/A3FolderPathUndefinedException')
 const SteamCMDPathUndefined = use('App/Exceptions/SteamCMDPathUndefinedException')
@@ -130,55 +129,6 @@ class FileManager {
         }
 
         return missions
-    }
-
-    async logFiles () {
-        const config = await Config.first()
-        const profiles = await A3ServerProfile.all()
-
-        let returnData = []
-        for (const profile of profiles.toJSON()) {
-            const files = await fs.readdir(path.join(config.a3server_path, 'styx', profile.name))
-            returnData.push({
-                profile_name: profile.name,
-                files: files.filter(file => file.endsWith('.rpt')).reverse()
-            })
-        }
-
-        return returnData
-    }
-
-    async currentLog () {
-        const config = await Config.first()
-        const profile = await A3ServerProfile.findBy('isDefault', true)
-        const profileFolder = path.join(config.a3server_path, 'styx', profile.name)
-
-        const files = await fs.readdir(profileFolder)
-        const logFiles = files.filter(file => file.endsWith('.rpt'))
-
-        return await Drive.get(path.join(profileFolder, logFiles[logFiles.length - 1]), 'UTF-8')
-    }
-
-    async getLogs (profileName, filename) {
-        const config = await Config.first()
-        return await Drive.get(path.join(config.a3server_path, 'styx', profileName, filename), 'UTF-8')
-    }
-
-    async deleteProfileFolder (profileName) {
-        try {
-            const config = await Config.first()
-
-            if (!config.a3server_path) throw new A3FolderPathUndefined()
-
-            await rimraf(path.join(config.a3server_path, 'styx', profileName))
-        } catch (ex) {
-            throw ex
-        }
-    }
-
-    async deleteLogs (profileName, filename) {
-        const config = await Config.first()
-        await Drive.delete(path.join(config.a3server_path, 'styx', profileName, filename))
     }
 
     async deleteMod (workshopItemID, workshopItemName) {

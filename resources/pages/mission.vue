@@ -58,7 +58,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-card>    
+        <v-card :loading="loading">    
           <v-card-title class="headline">
             <h3>{{ $t('mission.title') }}</h3>
 
@@ -101,6 +101,11 @@
               dismissible
             >{{ $t('mission.afterDeleteMessage') }}</v-alert>
 
+            <v-skeleton-loader
+              v-if="loadingMissions"
+              type="table-tbody"
+            ></v-skeleton-loader>
+
             <v-data-table
               :items="missions" 
               :headers="missionHeaders" 
@@ -110,7 +115,6 @@
               :no-data-text="$t('common.noData')"
               :no-results-text="$t('common.noResult')"
               :search="missionSearch"
-              :loading="tableLoading"
               :footer-props="{
                 itemsPerPageText: $t('common.rowsPerPage'),
                 itemsPerPageAllText: $t('common.all'),
@@ -134,7 +138,7 @@
                     :href="`https://steamcommunity.com/workshop/filedetails/?id=${item.workshop_id}`"
                     target="_blank"
                     rel="noopener noreferrer"
-                    :disabled="tableLoading"
+                    :disabled="loading"
                   >
                     <v-icon>{{icons.mdiSteam}}</v-icon>  
                   </v-btn>
@@ -144,7 +148,7 @@
                     text
                     icon
                     @click="updateMission(item.workshop_id)"
-                    :disabled="tableLoading || $store.state.downloadInfo.type ? true : false"
+                    :disabled="loading || $store.state.downloadInfo.type ? true : false"
                   >
                     <v-icon>{{icons.mdiUpdate}}</v-icon>  
                   </v-btn>
@@ -155,7 +159,7 @@
                   icon
                   color="error"
                   @click="deleteMission(item)"
-                  :disabled="tableLoading"
+                  :disabled="loading"
                 >
                   <v-icon>{{ icons.mdiDelete }}</v-icon>  
                 </v-btn>         
@@ -169,7 +173,7 @@
 
   <workshop-query :show="showWorkshopQuery" @download-info="downloadMission($event)" @close="showWorkshopQuery = false"></workshop-query>
 
-  <upload-dialog :show="showUploadDialog" @file-uploaded="refershMissionList()" @close="showUploadDialog = false" isMission></upload-dialog>
+  <upload-dialog :show="showUploadDialog" @file-uploaded="refreshMissionList()" @close="showUploadDialog = false" isMission></upload-dialog>
 </div>
 </template>
 
@@ -208,7 +212,9 @@ export default {
     return {
       showUploadDialog: false,
       showWorkshopQuery: false,
-      tableLoading: false,
+      loading: false,
+      loadingMissions: true,
+      missions: [],
       menu: false,
       missionSearch: '',
       missionHeaders: [
@@ -235,21 +241,18 @@ export default {
     }
   },
 
-  async asyncData ({ $axios }) {
-    const missions = await $axios.$get('server/mission')
-
-    return {
-      missions
-    }
+  async mounted () {
+    this.missions = await this.$axios.$get('server/mission')
+    this.loadingMissions = false
   },
 
   methods: {
     async refreshMissionList () {
-      this.tableLoading = true
+      this.loading = true
 
       this.missions = await this.$axios.$get('server/mission')
 
-      this.tableLoading = false
+      this.loading = false
     },
 
     async downloadMission (payload) {
@@ -280,22 +283,22 @@ export default {
     },
 
     async deleteMission (mission) {
-      this.tableLoading = true
+      this.loading = true
 
       await this.$axios.$delete(`server/mission/${mission.id}`)
       this.missions.splice(this.missions.indexOf(mission), 1)
 
       this.showDeleteInfo = true
-      this.tableLoading = false
+      this.loading = false
     },
 
     async detectExistingMission () {
-      this.tableLoading = true
+      this.loading = true
 
       await this.$axios.$get(`server/mission/detect`)
       await this.refreshMissionList()
 
-      this.tableLoading = false
+      this.loading = false
     }
   }
 }

@@ -22,7 +22,7 @@
             </template>
 
             <v-list nav>
-              <v-subheader>{{ $t('menu.profiles') }}</v-subheader>
+              <v-subheader>{{ $tc('menu.profile', 1) }}</v-subheader>
               <v-list-item 
                 v-for="profile in profiles" 
                 :key="profile.id"
@@ -181,7 +181,7 @@ export default {
 
   head () {
     return {
-      title: this.$t('menu.profiles')
+      title: this.$tc('menu.profile', 1)
     }
   },
 

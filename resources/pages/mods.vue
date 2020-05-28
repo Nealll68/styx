@@ -78,7 +78,7 @@
       </v-col>
 
       <v-col cols="12">
-        <v-card>    
+        <v-card :loading="loading">    
           <v-card-title class="headline">
             <h3>{{ $t('mods.title') }}</h3>
 
@@ -112,69 +112,74 @@
           <v-divider></v-divider>
 
           <v-card-text>
-              <v-data-table
-                :items="mods" 
-                :headers="modsHeaders"
-                :items-per-page="10"
-                sort-by="name"
-                :no-data-text="$t('common.noData')"
-                :no-results-text="$t('common.noResult')"
-                :search="modsSearch"
-                :loading="modsTableLoading"
-                :footer-props="{
-                  itemsPerPageText: $t('common.rowsPerPage'),
-                  itemsPerPageAllText: $t('common.all'),
-                  pageText: `{0}-{1} ${$t('common.of')} {2}`
-                }"
-              >           
+            <v-skeleton-loader
+              v-if="modsLoading"
+              type="table-tbody"
+            ></v-skeleton-loader>
 
-                <template v-slot:item.created_at="{ item }">
-                  {{ $moment(item.created_at).format('ll') }}
-                </template>
+            <v-data-table
+              v-else
+              :items="mods" 
+              :headers="modsHeaders"
+              :items-per-page="10"
+              sort-by="name"
+              :no-data-text="$t('common.noData')"
+              :no-results-text="$t('common.noResult')"
+              :search="modsSearch"
+              :footer-props="{
+                itemsPerPageText: $t('common.rowsPerPage'),
+                itemsPerPageAllText: $t('common.all'),
+                pageText: `{0}-{1} ${$t('common.of')} {2}`
+              }"
+            >           
 
-                <template v-slot:item.server_updated_at="{ item }">
-                  {{ $moment(item.server_updated_at).format('lll') }}
-                </template>
+              <template v-slot:item.created_at="{ item }">
+                {{ $moment(item.created_at).format('ll') }}
+              </template>
 
-                <template v-slot:item.size="{ item }">
-                  {{ item.size | formatBytes }}
-                </template>
+              <template v-slot:item.server_updated_at="{ item }">
+                {{ $moment(item.server_updated_at).format('lll') }}
+              </template>
 
-                <template v-slot:item.action="{ item }">
-                  <v-btn
-                    v-if="item.source === 'Workshop'" 
-                    text
-                    icon
-                    :href="`https://steamcommunity.com/workshop/filedetails/?id=${item.workshop_id}`"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    :disabled="modsTableLoading"
-                  >
-                    <v-icon>{{icons.mdiSteam}}</v-icon>  
-                  </v-btn>
+              <template v-slot:item.size="{ item }">
+                {{ item.size | formatBytes }}
+              </template>
 
-                  <v-btn                    
-                    v-if="$auth.user.privilege === 1 && item.source === 'Workshop'"
-                    text
-                    icon
-                    @click="downloadMod({ workshopId: item.workshop_id, title: item.name, fileSize: item.size, isUpdate: true })"
-                    :disabled="modsTableLoading || $store.state.downloadInfo.type ? true : false"
-                  >
-                    <v-icon>{{icons.mdiUpdate}}</v-icon>  
-                  </v-btn>
+              <template v-slot:item.action="{ item }">
+                <v-btn
+                  v-if="item.source === 'Workshop'" 
+                  text
+                  icon
+                  :href="`https://steamcommunity.com/workshop/filedetails/?id=${item.workshop_id}`"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  :disabled="loading"
+                >
+                  <v-icon>{{icons.mdiSteam}}</v-icon>  
+                </v-btn>
 
-                  <v-btn
-                    v-if="$auth.user.privilege === 1"
-                    text
-                    icon
-                    color="error"
-                    @click="deleteMod(item)"
-                    :disabled="modsTableLoading"
-                  >
-                    <v-icon>{{icons.mdiDelete}}</v-icon>  
-                  </v-btn>         
-                </template>                
-              </v-data-table>
+                <v-btn                    
+                  v-if="$auth.user.privilege === 1 && item.source === 'Workshop'"
+                  text
+                  icon
+                  @click="downloadMod({ workshopId: item.workshop_id, title: item.name, fileSize: item.size, isUpdate: true })"
+                  :disabled="loading || $store.state.downloadInfo.type ? true : false"
+                >
+                  <v-icon>{{icons.mdiUpdate}}</v-icon>  
+                </v-btn>
+
+                <v-btn
+                  v-if="$auth.user.privilege === 1"
+                  text
+                  icon
+                  color="error"
+                  @click="deleteMod(item)"
+                  :disabled="modsTableLoading"
+                >
+                  <v-icon>{{icons.mdiDelete}}</v-icon>  
+                </v-btn>         
+              </template>                
+            </v-data-table>
           </v-card-text>
         </v-card>
       </v-col>
@@ -276,6 +281,7 @@ export default {
 
   data () {
     return {
+      mods: [],
       getDetailsLoading: false,
       modBtnMenu: false,
       showModList: false,
@@ -284,7 +290,8 @@ export default {
       workshopFileMenu: false,
       workshopCollectionMenu: false,
       localMods: [],
-      modsTableLoading: false,
+      modsLoading: true,
+      loading: false,
       modsSearch: '',
       modsHeaders: [
         { text: this.$t('common.name'), value: 'name' },
@@ -308,21 +315,18 @@ export default {
     }
   },
 
-  async asyncData ({ $axios }) {
-    const mods = await $axios.$get('server/mod')
-
-    return {
-      mods
-    }
+  async mounted () {
+    this.mods = await this.$axios.$get('server/mod')
+    this.modsLoading = false
   },
 
   methods: {
     async refreshModsList () {
-      this.modsTableLoading = true
+      this.loading = true
 
       this.mods = await this.$axios.$get('server/mod')
 
-      this.modsTableLoading = false
+      this.loading = false
     },
 
     async showLocalMods () {
@@ -338,7 +342,7 @@ export default {
       let modSize = fileSize
       
       if (isUpdate) {
-        this.modsTableLoading = true
+        this.loading = true
 
         const updatedModDetails = await this.$axios.$get(`server/workshop/file/${workshopId}`)
         modName = updatedModDetails.title
@@ -371,11 +375,11 @@ export default {
         }
       }
 
-      if (isUpdate) this.modsTableLoading = false
+      if (isUpdate) this.loading = false
     },
 
     async detectWorkshopMods () {
-      this.modsTableLoading = true
+      this.loading = true
 
       await this.$axios.$get('server/mod/detect')
       await this.refreshModsList()
@@ -384,7 +388,7 @@ export default {
         type: 'success',
         message: this.$t('mods.importSuccess')
       })
-      this.modsTableLoading = false
+      this.loading = false
     },
 
     async addLocalMod (name) {
@@ -397,7 +401,7 @@ export default {
     },
 
     async deleteMod (mod) {
-      this.modsTableLoading = true
+      this.loading = true
 
       try {  
         if (mod.source === 'Workshop') {
@@ -416,7 +420,7 @@ export default {
         }
       }
 
-      this.modsTableLoading = false
+      this.loading = false
     }
   }
 }

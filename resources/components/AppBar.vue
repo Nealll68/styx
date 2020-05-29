@@ -110,7 +110,7 @@
                 <v-icon>{{ icons.mdiAccountCog }}</v-icon>
               </v-btn>
             </template>
-            <span>{{ $t('menu.myAccount') }}</span>
+            <span>{{ $auth.user.username }}</span>
           </v-tooltip>
 
           <v-tooltip bottom>

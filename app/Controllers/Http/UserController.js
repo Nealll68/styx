@@ -53,15 +53,14 @@ class UserController {
 	 * @param {Request} ctx.request
 	 */
 	async update ({ params, request }) {
-		const { username, password, privilege } = request.all()
-
+    const { username, password, privilege} = request.all()
+    
 		const user = await User.find(params.id)
-
-		user.merge({ username, privilege })
-		
-		if (password) {
-			user.merge({ password })
-		}
+		user.merge({
+      username,
+      password,
+      privilege
+    })
 
 		await user.save()
 		return user

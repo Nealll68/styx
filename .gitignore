@@ -91,3 +91,5 @@ sw.*
 
 # Database file
 database/*.sqlite
+
+tmp/

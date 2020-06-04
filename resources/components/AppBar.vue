@@ -139,7 +139,7 @@
               v-if="measure"
               :value="measure.cpu_usage"
               color="tertiary"
-              class="mx-2 hidden-xs-only"
+              class="hidden-xs-only"
             >
               <v-icon 
                 small
@@ -151,7 +151,7 @@
               v-if="measure"
               :value="measure.mem_used"
               color="quaternary"
-              class="mx-2 hidden-xs-only"
+              class="ml-1 hidden-xs-only"
             >
               <v-icon 
                 small

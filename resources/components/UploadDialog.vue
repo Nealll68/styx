@@ -89,14 +89,14 @@
         <v-btn
           text
           @click="$emit('close')"
-          :disabled="uploadPercentage > 0"
+          :disabled="uploadPercentage > 0 && uploadPercentage < 100"
         >{{ $t('common.close') }}</v-btn>
 
         <v-btn
           depressed
           color="primary"
           @click="upload()"
-          :disabled="uploadPercentage > 0 || !file"
+          :disabled="(uploadPercentage > 0 && uploadPercentage < 100) || !file"
         >{{ $t('common.continue') }}</v-btn>
       </v-card-actions>
     </v-card>

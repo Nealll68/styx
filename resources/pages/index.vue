@@ -6,7 +6,8 @@
       <v-col md="6" sm="12">
         <v-card :disabled="cpuUsage.length === 0">
           <v-progress-linear
-            :indeterminate="cpuUsage.length === 0"
+            v-show="cpuUsage.length === 0"
+            indeterminate
             color="tertiary"
           ></v-progress-linear>
 
@@ -80,7 +81,8 @@
       <v-col md="6" sm="12">
         <v-card :disabled="memUsed.length === 0">
           <v-progress-linear
-            :indeterminate="memUsed.length === 0"
+            v-show="memUsed.length === 0"
+            indeterminate
             color="quaternary"
           ></v-progress-linear>
 

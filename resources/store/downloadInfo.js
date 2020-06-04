@@ -8,18 +8,11 @@ export const mutations = {
     state.type = value.type
 
     switch (value.type) {
-      case 'updateServer':
-        state.title = this.app.i18n.t('download.updateServer')
-        break
       case 'downloadMod':
-        state.title = this.app.i18n.t('download.downloadMod', {
-          modName: value.modName
-        })
+        state.title = value.modName
         break
       case 'downloadMission':
-        state.title = this.app.i18n.t('download.downloadMission', {
-          missionName: value.missionName
-        })
+        state.title = value.missionName
         break
     }
   },

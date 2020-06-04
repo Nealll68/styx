@@ -16,7 +16,7 @@ class ConfigController {
     const data = request.all()
 
     try {
-      if (data.steamcmd_path && !fs.existsSync(path.join(data.steamcmd_path, 'steamcmd.exe'))) {
+      if (data.steamcmd_path && !fs.existsSync(path.join(data.steamcmd_path, process.platform === 'win32' ? 'steamcmd.exe' : 'steamcmd.sh'))) {
         throw new SteamCMDFolderUnavailablePath()
       }
 

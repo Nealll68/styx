@@ -4,7 +4,7 @@ const axios = require('axios')
 const qs = require('querystring')
 
 class SteamWebAPI {
-    async getFileDetails (workshopID) {
+    static async getFileDetails (workshopID) {
         try {
             const response = await axios.post('https://api.steampowered.com/ISteamRemoteStorage/GetPublishedFileDetails/v1', qs.stringify({
                 'itemcount': 1,
@@ -22,7 +22,7 @@ class SteamWebAPI {
         }
     }
 
-    async getCollectionDetails (collectionID) {
+    static async getCollectionDetails (collectionID) {
         try {
             const collectionDetails = await axios.post('https://api.steampowered.com/ISteamRemoteStorage/GetCollectionDetails/v1', qs.stringify({
                 'collectioncount': 1,
@@ -57,4 +57,4 @@ class SteamWebAPI {
     }
 }
 
-module.exports = new SteamWebAPI()
+module.exports = SteamWebAPI

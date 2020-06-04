@@ -4,7 +4,7 @@ const Drive = use('Drive')
 const Helpers = use('Helpers')
 
 const path = require('path')
-const anzip = require('anzip')
+const unzipper = require('unzipper')
 const rimraf = Helpers.promisify(require('rimraf'))
 const fs = Helpers.promisify(require('fs'))
 
@@ -23,16 +23,17 @@ class ModService {
     if (!config.a3server_path) throw new A3FolderPathUndefined()
     if (file.extname !== 'zip') throw new InvalidFileExtension()
 
-    await file.move(config.a3server_path, {
-        overwrite: true
-    })
+    await file.move(Helpers.tmpPath(), { overwrite: true })
 
     if (!file.moved()) throw file.error()
 
-    const zipPath = path.join(config.a3server_path, file.fileName)
+    const zipPath = Helpers.tmpPath(file.fileName)
 
-    await anzip(zipPath, { outputPath : config.a3server_path })
-    await Drive.delete(zipPath)
+    fs.createReadStream(zipPath)
+      .pipe(unzipper.Extract({ path: config.a3server_path }))
+      .on('close', async () => {
+        await Drive.delete(zipPath)
+      })
   }
 
   static async getLocal () {

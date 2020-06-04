@@ -2,6 +2,7 @@
 
 const Drive = use('Drive')
 const Helpers = use('Helpers')
+const Ws = use('Ws')
 
 const path = require('path')
 const unzipper = require('unzipper')
@@ -23,9 +24,16 @@ class ModService {
     if (!config.a3server_path) throw new A3FolderPathUndefined()
     if (file.extname !== 'zip') throw new InvalidFileExtension()
 
+    this.sendWS('start', {
+      type: 'zipExtract'
+    })
+
     await file.move(Helpers.tmpPath(), { overwrite: true })
 
-    if (!file.moved()) throw file.error()
+    if (!file.moved()) {
+      this.sendWS('stop', null)
+      throw file.error()
+    }
 
     const zipPath = Helpers.tmpPath(file.fileName)
 
@@ -33,6 +41,7 @@ class ModService {
       .pipe(unzipper.Extract({ path: config.a3server_path }))
       .on('close', async () => {
         await Drive.delete(zipPath)
+        this.sendWS('stop', null)
       })
   }
 
@@ -84,6 +93,13 @@ class ModService {
       await rimraf(path.join(config.a3server_path, name))
     } catch (ex) {
       throw ex
+    }
+  }
+
+  static sendWS (event, data) {
+    const downloadWS = Ws.getChannel('download-info').topic('download-info')
+    if (downloadWS) {
+      downloadWS.broadcast(event, data)
     }
   }
 

@@ -17,8 +17,8 @@
       <v-container class="app-container">
         <v-row>
           <v-col class="text-truncate">
-            <v-icon>{{ icons.mdiDownload }}</v-icon>
-            {{ $store.state.downloadInfo.title }}
+            <v-icon>{{ icon }}</v-icon>
+            {{ title }}
           </v-col>
 
           <v-col class="d-flex justify-end">
@@ -29,7 +29,7 @@
               class="float-right"
               @click="cancel()"
               :loading="loadingCancel"
-              :disabled="$store.state.downloadInfo.type === 'downloadMission'"
+              :disabled="$store.state.downloadInfo.type === 'downloadMission' || $store.state.downloadInfo.type === 'zipExtract'"
             >
               <v-icon 
                 :left="$vuetify.breakpoint.mdAndUp"
@@ -47,7 +47,8 @@
 <script>
 import {
   mdiDownload,
-  mdiDownloadOff
+  mdiDownloadOff,
+  mdiFolderZip
 } from '@mdi/js'
 
 export default {
@@ -55,9 +56,26 @@ export default {
     loadingCancel: false,
     icons: {
       mdiDownload,
-      mdiDownloadOff
+      mdiDownloadOff,
+      mdiFolderZip
     }
   }),
+
+  computed: {
+    title () {
+      if (this.$store.state.downloadInfo.type === 'downloadMission' || this.$store.state.downloadInfo.type === 'zipExtract') {
+        return this.$t(`download.${this.$store.state.downloadInfo.type}`)
+      } else {
+        return this.$t(`download.${this.$store.state.downloadInfo.type}`, {
+          name: this.$store.state.downloadInfo.title
+        })
+      }
+    },
+
+    icon () {
+      return this.$store.state.downloadInfo.type === 'zipExtract' ? this.icons.mdiDownload : this.icons.mdiFolderZip
+    }
+  },
 
   methods: {
     async cancel() {

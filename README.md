@@ -26,7 +26,7 @@
 * Multiple profiles support (easy switch between profile)
 * Manage mods with a beautiful interface (no more -mod=)
 * Change startup params, edit configuration file, difficulty and more with ease
-* Create different account with different permission
+* Create different account with different permission for your teammates 
 
 ## Author
 

@@ -75,10 +75,11 @@ class A3Server {
 
         let paramsArray = [
             `-port=${config.port}`,
-            `-profiles="${profileFolder}"`,
             `-name=${profileName}`,
             `-config="${path.join(profileFolder, 'server.cfg')}"`
         ]
+
+        if (process.platform === 'win32') paramsArray.push(`-profiles="${profileFolder}"`)
 
         if (params.mods) paramsArray.push(`-mod="${params.mods}"`)
         if (params.server_mod) paramsArray.push(`-serverMod="${params.server_mod}"`)

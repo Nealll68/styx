@@ -18,6 +18,7 @@ const SteamGuardRequired = use('App/Exceptions/SteamGuardRequiredException')
 
 class SteamCMD {
     constructor () {
+        this.steamExecutable = process.platform === 'win32' ? 'steamcmd.exe' : 'steamcmd.sh'
         this.steamcmd = null
         this.type = null
     }
@@ -38,7 +39,7 @@ class SteamCMD {
 
             A3Server.stop()
 
-            this.steamcmd = spawn(path.join(config.steamcmd_path, 'steamcmd.exe'), [
+            this.steamcmd = spawn(path.join(config.steamcmd_path, this.steamExecutable), [
                 steamGuard ? `+login ${config.steam_account} ${config.steam_password} ${steamGuard}` : `+login ${config.steam_account} ${config.steam_password}`,
                 `+force_install_dir ${config.a3server_path}`,
                 '+app_update "233780 -beta" validate',
@@ -73,7 +74,7 @@ class SteamCMD {
                 throw new SteamGuardRequired()
             }            
 
-            this.steamcmd = spawn(path.join(config.steamcmd_path, 'steamcmd.exe'), [
+            this.steamcmd = spawn(path.join(config.steamcmd_path, this.steamExecutable), [
                 steamGuard ? `+login ${config.steam_account} ${config.steam_password} ${steamGuard}` : `+login ${config.steam_account} ${config.steam_password}`,
                 `+workshop_download_item 107410 ${workshopItemID} validate`,
                 '+quit'

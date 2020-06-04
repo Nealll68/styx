@@ -91,11 +91,12 @@
 
   "download": {
     "updateServer": "Mise à jour du serveur en cours...",
-    "downloadMod": "Téléchargement du mod {modName}",
-    "downloadMission": "Téléchargement de la mission {missionName}",
+    "downloadMod": "Téléchargement du mod {name}",
+    "downloadMission": "Téléchargement de la mission {name}",
     "serverUpdated": "Serveur mis à jour",
     "modDownloaded": "Mod téléchargé",
     "missionDownloaded": "Mission téléchargée",
+    "zipExtract": "Extraction du ZIP...",
     "steamGuardCodeError": "Echec de connexion avec le code Steam Guard",
     "diskSpaceError": "Echec : pas assez d'espace ou le compte spécifié ne possède pas Arma 3"
   },

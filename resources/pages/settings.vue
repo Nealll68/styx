@@ -55,6 +55,8 @@
                   v-model="config.x64"
                   color="primary"
                   :label="$t('settings.64bit')"
+                  :hint="$t('settings.64bitHint')"
+                  persistent-hint
                 ></v-checkbox>
               </v-form>
             </v-card-text>

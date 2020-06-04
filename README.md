@@ -1,8 +1,4 @@
-<p align="center">
-  <img alt="Logo" src="https://raw.githubusercontent.com/Nealll68/styx/master/resources/static/logo.png">
-</p>
-
-<h1 align="center">Welcome to Styx</h1>
+<h1 align="center">Styx</h1>
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
@@ -20,8 +16,17 @@
 
 ## Notes
 
-* Do not actually support Arma 3 Linux server
 * Can manage only one instance of server (maybe i will work on multiple instance support)
+
+## Features
+
+* Work on windows & linux
+* Full Steam Workshop support (Steam Guard, addon & mission download)
+* Update game
+* Multiple profiles support (easy switch between profile)
+* Manage mods with a beautiful interface (no more -mod=)
+* Change startup params, edit configuration file, difficulty and more with ease
+* Create different account with different permission
 
 ## Author
 

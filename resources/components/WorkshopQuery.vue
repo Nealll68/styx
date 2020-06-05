@@ -4,8 +4,11 @@
       <v-container class="app-container">
         <v-card color="transparent" flat>
           <v-card-title class="pb-0">
-            <v-row>
-              <v-col>
+            <v-row :no-gutters="$vuetify.breakpoint.smAndDown">
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   v-model="workshopId"
                   filled
@@ -14,7 +17,10 @@
                 ></v-text-field>
               </v-col>
 
-              <v-col>
+              <v-col
+                cols="12"
+                md="6"
+              >
                 <v-text-field
                   v-model="collectionId"
                   filled

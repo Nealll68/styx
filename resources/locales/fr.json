@@ -118,8 +118,8 @@
   },
 
   "workshop": {
-    "idWorkshop": "ID de l'objet workshop",
-    "idCollection": "ID de la collection workshop",
+    "idWorkshop": "URL ou ID de l'objet workshop",
+    "idCollection": "URL ou ID de la collection workshop",
     "publishedAt": "Publié le :",
     "idError": "Erreur : vérifier l'ID workshop",
     "missionDownloadError": "Impossible de télécharger cette mission depuis le workshop"

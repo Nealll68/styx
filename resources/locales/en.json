@@ -119,8 +119,8 @@
   },
 
   "workshop": {
-    "idWorkshop": "Workshop item ID",
-    "idCollection": "Workshop collection ID",
+    "idWorkshop": "Workshop item URL or ID",
+    "idCollection": "Workshop collection URL or ID",
     "publishedAt": "Published on:",
     "idError": "Error: check workshop ID",
     "missionDownloadError": "Unable to download this mission from the workshop"

@@ -52,7 +52,12 @@
                 :loading="usersTableLoading"
               >
                 <template v-slot:item.privilege="{ item }">
-                  {{ privileges[item.privilege] }}
+                  <v-chip
+                    small
+                    outlined
+                    :color="item.privilege === 1 ? 'tertiary' : 'quaternary'"
+                  >{{ privileges[item.privilege] }}
+                  </v-chip>
                 </template>
 
                 <template v-slot:item.created_at="{ item }">

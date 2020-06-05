@@ -26,12 +26,12 @@
     "@adonisjs/validator": "^5.0.6",
     "@adonisjs/websocket": "^1.0.12",
     "@adonisjs/websocket-client": "^1.0.9",
-    "@nuxtjs/auth": "^4.8.5",
-    "@nuxtjs/axios": "^5.9.5",
+    "@nuxtjs/auth": "^4.9.1",
+    "@nuxtjs/axios": "^5.11.0",
     "@nuxtjs/dotenv": "^1.4.0",
-    "apexcharts": "^3.15.6",
+    "apexcharts": "^3.19.2",
     "axios": "^0.19.2",
-    "cookie-universal-nuxt": "^2.1.3",
+    "cookie-universal-nuxt": "^2.1.4",
     "cross-env": "^7.0.0",
     "debounce": "^1.2.0",
     "get-folder-size": "^2.0.1",
@@ -40,17 +40,17 @@
     "mkdirp": "^1.0.3",
     "nuxt": "^2.11.0",
     "rmraf": "^1.0.3",
-    "sqlite3": "^4.1.1",
-    "symlink-dir": "^3.1.1",
-    "systeminformation": "^4.22.3",
+    "sqlite3": "^4.2.0",
+    "symlink-dir": "^4.1.0",
+    "systeminformation": "^4.26.6",
     "unzipper": "^0.10.11",
     "vue-apexcharts": "^1.5.2",
-    "vue-i18n": "^8.15.5"
+    "vue-i18n": "^8.18.1"
   },
   "devDependencies": {
     "@mdi/js": "^5.3.45",
-    "@nuxtjs/moment": "^1.6.0",
-    "@nuxtjs/vuetify": "^1.11.0",
-    "nodemon": "^2.0.2"
+    "@nuxtjs/moment": "^1.6.1",
+    "@nuxtjs/vuetify": "^1.11.2",
+    "nodemon": "^2.0.4"
   }
 }

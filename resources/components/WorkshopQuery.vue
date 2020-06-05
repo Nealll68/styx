@@ -140,6 +140,14 @@ export default {
   },
 
   methods: {
+    extractIdFromUrl (url) {
+      if (url.search('https://steamcommunity.com/sharedfiles/filedetails') !== -1) {
+        return url.substring(url.search('id=') + 3, url.length)
+      }
+
+      return url
+    },
+
     downloadInfo(workshopId, title, fileSize, fileUrl, filename) {
       this.$emit('download-info', {
         workshopId,
@@ -158,9 +166,7 @@ export default {
           this.collectionId = null
           this.modsDetails = []
 
-          const response = await this.$axios.$get(
-            `server/workshop/file/${this.workshopId}`
-          )
+          const response = await this.$axios.$get(`server/workshop/file/${this.extractIdFromUrl(this.workshopId)}`)
           this.modsDetails.push(response)
         } catch (ex) {
           this.$snackbar({
@@ -181,7 +187,7 @@ export default {
           this.workshopId = null
           this.modsDetails = []
 
-          const response = await this.$axios.$get(`server/workshop/collection/${this.collectionId}`)
+          const response = await this.$axios.$get(`server/workshop/collection/${this.extractIdFromUrl(this.collectionId)}`)
           this.modsDetails = response
         } catch (ex) {
           this.$snackbar({

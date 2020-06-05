@@ -64,7 +64,7 @@
                     }}</v-list-item-subtitle
                   >
                   <v-list-item-subtitle
-                    >MàJ :
+                    >{{ $t('common.lastUpdate') }} :
                     {{
                       $moment
                         .unix(mod.time_updated)
@@ -72,7 +72,7 @@
                     }}</v-list-item-subtitle
                   >
                   <v-list-item-subtitle
-                    >Taille :
+                    >{{ $t('common.size') }} :
                     {{ mod.file_size | formatBytes }}</v-list-item-subtitle
                   >
                 </v-list-item-content>

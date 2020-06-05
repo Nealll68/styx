@@ -3,6 +3,7 @@
     v-model="show"
     max-width="600px"
     persistent
+    :fullscreen="$vuetify.breakpoint.smAndDown"
   >
     <v-card>
       <v-card-title>

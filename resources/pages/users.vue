@@ -108,6 +108,7 @@
       v-model="dialog"
       persistent
       max-width="600px"
+      :fullscreen="$vuetify.breakpoint.smAndDown"
     >      
       <v-card>
         <v-card-text class="pt-5 pb-0">

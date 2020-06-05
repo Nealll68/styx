@@ -12,6 +12,7 @@
       v-model="dialog"
       scrollable
       max-width="500px"
+      :fullscreen="$vuetify.breakpoint.smAndDown"
     >
       <template v-slot:activator="{ on }">
         <v-btn 

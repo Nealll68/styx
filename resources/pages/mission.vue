@@ -24,8 +24,7 @@
           </template>
 
           <v-list nav>
-            <v-list-item 
-              :disabled="!$store.state.config.steamCmdPath"
+            <v-list-item
               @click="showWorkshopQuery = true"
             >
               <v-list-item-icon>

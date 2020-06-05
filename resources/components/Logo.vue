@@ -40,7 +40,7 @@ export default {
   stroke-width: 15;
   stroke-dasharray: 5175.60595703125;
   stroke-dashoffset: 0;
-  animation: draw 4s ease;
+  animation: draw 5s ease-in-out;
 }
 
 @keyframes draw {

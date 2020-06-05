@@ -21,11 +21,14 @@
 ## Features
 
 * Work on windows & linux
-* Full Steam Workshop support (Steam Guard, addon & mission download)
+* Full Steam Workshop support
+  * Steam Guard
+  * Download addon with SteamCMD and use symlink from steam folder to Arma 3 folder
+  * Download mission without SteamCMD (use Steam Web API) and store in MPMissions folder
 * Update game
 * Multiple profiles support (easy switch between profile)
-* Manage mods with a beautiful interface (no more -mod=)
-* Change startup params, edit configuration file, difficulty and more with ease
+* Manage addons with a beautiful interface (no more -mod=)
+* Change startup parameters, edit configuration or difficulty and more with ease
 * Create different account with different permission for your teammates 
 
 ## Author
@@ -34,7 +37,6 @@
 
 * Website: [nealll.dev](https://nealll.dev)
 * Twitter: [@Nealll68](https://twitter.com/Nealll68)
-* Github: [@Nealll68](https://github.com/Nealll68)
 
 ## 🤝 Contributing
 
@@ -44,3 +46,5 @@ Contributions, issues and feature requests are welcome!<br />Feel free to check 
 
 Copyright © 2020 [Nealll](https://github.com/Nealll68).<br />
 This project is [MIT](https://github.com/Nealll68/styx/blob/master/LICENCE) licensed.
+
+## Thanks to the CP17 Team for testing and feedback

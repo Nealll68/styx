@@ -123,6 +123,28 @@
                 pageText: `{0}-{1} ${$t('common.of')} {2}`
               }"
             >           
+              <template v-slot:item.name="{ item }">                
+                <v-avatar 
+                  v-if="item.source === 'Workshop'"
+                  size="36"
+                  class="mr-1"                  
+                >
+                  <v-img                    
+                    :src="item.image ? item.image : 'https://steamuserimages-a.akamaihd.net/ugc/1045345546241945983/B11E2E9F6FCF67B4FCA78F9A2A47604E98008655/'"
+                  ></v-img>                  
+                </v-avatar>
+
+                <v-avatar
+                  v-else
+                  size="36"
+                  class="mr-1" 
+                  color="secondary"
+                >
+                  <v-icon>{{ icons.mdiTarget }}</v-icon>
+                </v-avatar>
+                {{ item.name }}
+              </template>
+
 
               <template v-slot:item.updated_at="{ item }">
                 {{ $moment(item.updated_at).format('lll') }}
@@ -189,7 +211,8 @@ import {
   mdiRefresh,
   mdiMagnify,
   mdiUpdate,
-  mdiDelete
+  mdiDelete,
+  mdiTarget
 } from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
@@ -238,7 +261,8 @@ export default {
         mdiRefresh,
         mdiMagnify,
         mdiUpdate,
-        mdiDelete
+        mdiDelete,
+        mdiTarget
       }
     }
   },
@@ -273,7 +297,8 @@ export default {
         title: response.title,
         fileSize: response.file_size,
         fileUrl: response.file_url,
-        filename: response.filename
+        filename: response.filename,
+        image: response.preview_url
       }
 
       if (!payload.fileUrl) return this.$snackbar({

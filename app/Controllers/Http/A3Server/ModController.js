@@ -75,7 +75,8 @@ class ModController {
                         name: formatItemName,
                         size: workshopItemDetails.file_size,
                         workshop_id: workshopId,
-                        server_updated_at: Date.now()
+                        server_updated_at: Date.now(),
+                        image: workshopItemDetails.preview_url
                     })
                 }
             }

@@ -132,6 +132,27 @@
                 pageText: `{0}-{1} ${$t('common.of')} {2}`
               }"
             >           
+              <template v-slot:item.name="{ item }">                
+                <v-avatar 
+                  v-if="item.source === 'Workshop'"
+                  size="36"
+                  class="mr-1"                  
+                >
+                  <v-img                    
+                    :src="item.image ? item.image : 'https://steamuserimages-a.akamaihd.net/ugc/1045345546241945983/B11E2E9F6FCF67B4FCA78F9A2A47604E98008655/'"
+                  ></v-img>                  
+                </v-avatar>
+
+                <v-avatar
+                  v-else
+                  size="36"
+                  class="mr-1" 
+                  color="secondary"
+                >
+                  <v-icon>{{ icons.mdiToyBrick }}</v-icon>
+                </v-avatar>
+                {{ item.name }}
+              </template>
 
               <template v-slot:item.created_at="{ item }">
                 {{ $moment(item.created_at).format('ll') }}
@@ -258,7 +279,8 @@ import {
   mdiRefresh,
   mdiToyBrickSearch,
   mdiUpdate,
-  mdiDelete
+  mdiDelete,
+  mdiToyBrick
 } from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
@@ -310,7 +332,8 @@ export default {
         mdiRefresh,
         mdiToyBrickSearch,
         mdiUpdate,
-        mdiDelete
+        mdiDelete,
+        mdiToyBrick
       }
     }
   },
@@ -336,7 +359,7 @@ export default {
     },    
 
     async downloadMod (payload) {
-      const { workshopId, title, fileSize, isUpdate = false } = payload
+      const { workshopId, title, fileSize, image, isUpdate = false } = payload
 
       let modName = title
       let modSize = fileSize
@@ -353,7 +376,8 @@ export default {
         await this.$axios.$post('server/download/workshop', { 
           workshopItemID: workshopId, 
           workshopItemName: modName,
-          workshopItemSize: modSize
+          workshopItemSize: modSize,
+          workshopItemImage: image
         })
       } catch (ex) {
         if (ex.response.data === 'E_STEAM_GUARD_REQUIRED') {
@@ -364,6 +388,7 @@ export default {
               workshopItemID: workshopId,
               workshopItemName: modName,
               workshopItemSize: modSize,
+              workshopItemImage: image,
               steamGuard: steamGuard
             })
           }

@@ -141,11 +141,7 @@ export default {
   
   async mounted () {
     this.config = await this.$axios.$get(`server/config/${this.$route.params.name}`)
-    //this.missions = await this.$axios.$get('server/mission')
-    this.missions = [
-      { id: 1, filename: 'test.altis.pbo' },
-      { id: 2, filename: 'test5.stratis.pbo' }
-    ]
+    this.missions = await this.$axios.$get('server/mission')
     this.loading = false
   },
 

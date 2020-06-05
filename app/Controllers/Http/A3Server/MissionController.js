@@ -46,7 +46,7 @@ class MissionController {
     }
 
     async storeWorkshop ({ request, response }) {
-        const { workshopId, title, fileSize, fileUrl, filename } = request.all()
+        const { workshopId, title, fileSize, fileUrl, image, filename } = request.all()
 
         const downloadWS = Ws.getChannel('download-info').topic('download-info')
         
@@ -65,7 +65,8 @@ class MissionController {
                 size: fileSize,
                 filename,
                 source: 'Workshop',
-                workshop_id: workshopId
+                workshop_id: workshopId,
+                image
             })
 
             await mission.save()
@@ -76,7 +77,8 @@ class MissionController {
                 size: fileSize,
                 filename,
                 source: 'Workshop',
-                workshop_id: workshopId
+                workshop_id: workshopId,
+                image
             })
         }
 

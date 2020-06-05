@@ -87,7 +87,8 @@
                         mod.title,
                         mod.file_size,
                         mod.file_url,
-                        mod.filename
+                        mod.filename,
+                        mod.preview_url
                       )
                     "
                     :disabled="$store.state.downloadInfo.type ? true : false"
@@ -148,13 +149,14 @@ export default {
       return url
     },
 
-    downloadInfo(workshopId, title, fileSize, fileUrl, filename) {
+    downloadInfo(workshopId, title, fileSize, fileUrl, filename, image) {
       this.$emit('download-info', {
         workshopId,
         title,
         fileSize,
         fileUrl,
-        filename
+        filename,
+        image
       })
     },
 

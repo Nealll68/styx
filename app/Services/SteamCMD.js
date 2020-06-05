@@ -60,7 +60,7 @@ class SteamCMD {
         }
     }
 
-    async downloadWorkshop ({ workshopItemID, workshopItemName, workshopItemSize, steamGuard }) {
+    async downloadWorkshop ({ workshopItemID, workshopItemName, workshopItemSize, workshopItemImage, steamGuard }) {
         try {
             const config = await Config.first()      
 
@@ -97,7 +97,8 @@ class SteamCMD {
                     mod.merge({ 
                         name: formatItemName,
                         size: workshopItemSize,
-                        server_updated_at: Date.now()
+                        server_updated_at: Date.now(),
+                        image: workshopItemImage
                     })
 
                     await mod.save()
@@ -106,7 +107,8 @@ class SteamCMD {
                         name: formatItemName,
                         size: workshopItemSize,
                         workshop_id: workshopItemID,
-                        server_updated_at: Date.now()
+                        server_updated_at: Date.now(),
+                        image: workshopItemImage
                     })
                 }
 

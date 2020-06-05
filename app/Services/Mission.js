@@ -3,6 +3,8 @@
 const Drive = use('Drive')
 const Helpers = use('Helpers')
 
+const fs = Helpers.promisify(require('fs'))
+const axios = use('axios')
 const path = require('path')
 
 const Config = use('App/Models/Config')

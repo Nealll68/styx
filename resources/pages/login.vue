@@ -18,12 +18,13 @@
             <div class="font-weight-thin display-1">STYX</div>
           </v-card-title>
 
-					<v-card-text>
-						<v-form 
-              v-model="formIsValid" 
-              ref="form"
-            >
-							<v-text-field 
+          <v-form 
+            v-model="formIsValid" 
+            ref="form"
+            @submit.prevent="login()"
+          >
+            <v-card-text>
+              <v-text-field 
                 v-model="username"
                 :rules="requiredRule"
                 :label="$t('common.username')"
@@ -32,7 +33,7 @@
                 filled
               ></v-text-field>
 
-							<v-text-field 
+              <v-text-field 
                 v-model="password"
                 :rules="requiredRule"
                 :label="$t('common.password')"
@@ -43,18 +44,19 @@
                 @click:append="showPassword = !showPassword" 
                 filled
               ></v-text-field>
-						</v-form>
-					</v-card-text>
+            </v-card-text>
 
-					<v-card-actions>
-						<v-btn 
-              color="primary"
-              block
-              text
-              @click="login()"
-              :loading="loading"
-            >{{ $t('login.signIn') }}</v-btn>
-					</v-card-actions>
+            <v-card-actions>
+              <v-btn 
+                type="submit"
+                color="primary"
+                block
+                text
+                @click="login()"
+                :loading="loading"
+              >{{ $t('login.signIn') }}</v-btn>
+            </v-card-actions>
+					</v-form>
 				</v-card>
 			</v-col>
 		</v-row>

@@ -92,12 +92,13 @@
 
   "download": {
     "updateServer": "Updating server...",
-    "downloadMod": "Downloading mod {name}",
-    "downloadMission": "Downloading mission {name}",
+    "downloadMod": "Downloading mod: {name}",
+    "downloadMission": "Downloading mission: {name}",
     "serverUpdated": "Server updated",
     "modDownloaded": "Mod downloaded",
     "missionDownloaded": "Mission downloaded",
     "zipExtract": "Extracting ZIP...",
+    "zipExtracted": "ZIP extracted",
     "steamGuardCodeError": "Connection failed with Steam Guard code",
     "diskSpaceError": "Failed: not enough space or the specified account does not have Arma 3"
   },

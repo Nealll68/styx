@@ -8,11 +8,21 @@ export const mutations = {
     state.type = value.type
 
     switch (value.type) {
+      case 'updateServer':
+        state.title = this.app.i18n.t('download.updateServer')
+        break
       case 'downloadMod':
-        state.title = value.modName
+        state.title = this.app.i18n.t('download.downloadMod', {
+          name: value.modName
+        })
         break
       case 'downloadMission':
-        state.title = value.missionName
+        state.title = this.app.i18n.t('download.downloadMission', {
+          name: value.missionName
+        })
+        break
+      case 'zipExtract':
+        state.title = this.app.i18n.t('download.zipExtract')
         break
     }
   },
@@ -36,6 +46,12 @@ export const mutations = {
           this.app.$snackbar({
             type: 'success',
             message: this.app.i18n.t('download.missionDownloaded')
+          })
+          break
+        case 'zipExtract':
+          this.app.$snackbar({
+            type: 'success',
+            message: this.app.i18n.t('download.zipExtracted')
           })
           break
       }

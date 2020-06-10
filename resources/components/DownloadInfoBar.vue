@@ -17,8 +17,8 @@
       <v-container class="app-container">
         <v-row>
           <v-col class="text-truncate">
-            <v-icon>{{ icon }}</v-icon>
-            {{ title }}
+            <v-icon>{{ $store.state.downloadInfo.type === 'zipExtract' ? icons.mdiDownload : icons.mdiFolderZip }}</v-icon>
+            {{ $store.state.downloadInfo.title }}
           </v-col>
 
           <v-col class="d-flex justify-end">
@@ -60,22 +60,6 @@ export default {
       mdiFolderZip
     }
   }),
-
-  computed: {
-    title () {
-      if (this.$store.state.downloadInfo.type === 'downloadMission' || this.$store.state.downloadInfo.type === 'zipExtract') {
-        return this.$t(`download.${this.$store.state.downloadInfo.type}`)
-      } else {
-        return this.$t(`download.${this.$store.state.downloadInfo.type}`, {
-          name: this.$store.state.downloadInfo.title
-        })
-      }
-    },
-
-    icon () {
-      return this.$store.state.downloadInfo.type === 'zipExtract' ? this.icons.mdiDownload : this.icons.mdiFolderZip
-    }
-  },
 
   methods: {
     async cancel() {

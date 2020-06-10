@@ -19,14 +19,7 @@
         color="primary"
       >
         <v-list-item-icon>
-          <v-badge
-            :value="link.url === '/settings' && !$store.state.config.a3ServerPath"
-            :icon="icons.mdiExclamation"
-            color="error"
-            overlap
-          >
-            <v-icon>{{ link.icon }}</v-icon>
-          </v-badge>          
+          <v-icon>{{ link.icon }}</v-icon>    
         </v-list-item-icon>
 
         <v-list-item-content>
@@ -78,14 +71,7 @@
                 class="mx-1"
                 active-class="appbar-active-link"
               >
-                <v-badge
-                  :value="link.url === '/settings' && !$store.state.config.a3ServerPath"
-                  :icon="icons.mdiExclamation"
-                  color="error"
-                  overlap
-                >
-                  <v-icon>{{ link.icon }}</v-icon>
-                </v-badge>
+                <v-icon>{{ link.icon }}</v-icon>
               </v-btn>
             </template>
             <span>{{ link.name }}</span>

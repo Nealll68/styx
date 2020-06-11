@@ -31,6 +31,36 @@
 * Change startup parameters, edit configuration or difficulty and more with ease
 * Create different account with different permission for your teammates 
 
+## Installation
+1. Ensure you have NodeJS and Git installed
+
+You can follow the instructions on the NodeJS website to install it : https://nodejs.org<br />
+After installation, ensure you have installed build tools.
+On Linux you can install it with this command:
+```
+apt-get install -y build-essential
+```
+On Windows you have to check a case in the installation program.
+
+For Git, you can also follow the instructions on the Git website : https://git-scm.com/downloads
+
+2. Run styx-install NPX script to install Styx
+
+Create a directory named "styx" where you want on your system.<br/>Now in the newly created directory type this command:
+```
+npx https://www.github.com/Nealll68/styx-install
+```
+This script will clone this repository, install packages, create needed files and build the application for you.
+
+3. Update Styx
+
+To update Styx, go in the styx folder and type this command:
+```
+npx https://www.github.com/Nealll68/styx-install --update
+```
+This script will pulled this repository, check for newly packages or update it and rebuild the application for you.
+
+
 ## Author
 
 👤 **Nealll**

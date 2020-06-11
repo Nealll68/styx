@@ -61,6 +61,18 @@ npx https://www.github.com/Nealll68/styx-install --update
 This script will pulled this repository, check for newly packages or update it and rebuild the application for you.
 
 
+## TODO: open port and redirection
+
+## Launch Styx
+
+To launch Styx, in the styx folder you need to run this command:
+```
+npm run start
+```
+Now the interface is serving on the port 3000.
+
+## TODO: use pm2
+
 ## Author
 
 👤 **Nealll**

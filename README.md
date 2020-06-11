@@ -29,7 +29,8 @@
 * Multiple profiles support (easy switch between profile)
 * Manage addons with a beautiful interface (no more -mod=)
 * Change startup parameters, edit configuration or difficulty and more with ease
-* Create different account with different permission for your teammates 
+* Create different account with different permission for your teammates
+* English and french translations
 
 ## Installation
 1. Ensure you have NodeJS and Git installed

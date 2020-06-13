@@ -5,7 +5,7 @@ const path = require('path')
 
 const Config = use('App/Models/Config')
 
-const SteamCMDFolderUnavailablePath = use('App/Exceptions/SteamCMDFolderUnavailablePathException')
+const SteamCMDFolderUnavailablePath = use('App/Exceptions/SteamCmdFolderUnavailablePathException')
 
 class ConfigController {
   async index() {

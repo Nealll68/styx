@@ -1,10 +1,10 @@
 <template>
   <v-app dark>
-    <v-content>
+    <v-main>
       <v-slide-y-transition mode="out-in">
         <nuxt />
       </v-slide-y-transition>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

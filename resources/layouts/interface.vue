@@ -2,11 +2,11 @@
   <v-app dark>
     <app-bar />
 
-    <v-content>
+    <v-main>
       <v-slide-y-transition mode="out-in">
         <nuxt />
       </v-slide-y-transition>
-    </v-content>
+    </v-main>
 
     <download-info-bar />
   </v-app>

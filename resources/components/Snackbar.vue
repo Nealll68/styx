@@ -1,8 +1,11 @@
 <template>
   <v-snackbar
+    app
     :value="true"
     :timeout="6000"
     top
+    text
+    :color="type"
   >
     <v-icon
       v-if="type === 'info'"
@@ -30,13 +33,15 @@
 
     {{ message }}
     
-    <v-btn
-      icon
-      color="white"
-      @click="close"
-    >
-      <v-icon>{{ icons.mdiClose }}</v-icon>
-    </v-btn>
+    <template v-slot:action>
+      <v-btn
+        icon
+        color="white"
+        @click="close"
+      >
+        <v-icon :color="type">{{ icons.mdiClose }}</v-icon>
+      </v-btn>
+    </template>
   </v-snackbar>
 </template>
 

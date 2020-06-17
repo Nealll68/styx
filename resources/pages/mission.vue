@@ -101,6 +101,7 @@
               border="left"
               dense
               dismissible
+              :icon="icons.mdiAlertCircle"
             >{{ $t('mission.afterDeleteMessage') }}</v-alert>
 
             <v-skeleton-loader
@@ -212,7 +213,8 @@ import {
   mdiMagnify,
   mdiUpdate,
   mdiDelete,
-  mdiTarget
+  mdiTarget,
+  mdiAlertCircle
 } from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
@@ -262,7 +264,8 @@ export default {
         mdiMagnify,
         mdiUpdate,
         mdiDelete,
-        mdiTarget
+        mdiTarget,
+        mdiAlertCircle
       }
     }
   },

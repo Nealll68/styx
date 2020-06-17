@@ -157,6 +157,7 @@
           type="info"
           border="left"
           class="mt-4"
+          :icon="icons.mdiAlertCircle"
         >{{ $t('profiles.howToCreate') }}</v-alert>
 
         <nuxt-child @loading="loadingPage = $event" />
@@ -172,7 +173,8 @@ import {
   mdiStar,
   mdiStarOutline,
   mdiDelete,
-  mdiPlus
+  mdiPlus,
+  mdiAlertCircle
 } from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 
@@ -200,7 +202,8 @@ export default {
       mdiStar,
       mdiStarOutline,
       mdiDelete,
-      mdiPlus
+      mdiPlus,
+      mdiAlertCircle
     }
   }),
 

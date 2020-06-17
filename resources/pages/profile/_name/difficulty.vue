@@ -15,6 +15,7 @@
         type="warning"
         border="left"
         text
+        :icon="icons.mdiExclamationThick"
       >{{ $t('errors.serverStarted') }}</v-alert>
 
       <v-alert
@@ -22,6 +23,7 @@
         text 
         type="info" 
         dense
+        :icon="icons.mdiAlertCircle"
       >{{ $t('information.customDifficulty') }}</v-alert>
 
       <v-skeleton-loader
@@ -58,7 +60,11 @@
 </template>
 
 <script>
-import { mdiArrowUp } from '@mdi/js'
+import { 
+  mdiArrowUp,
+  mdiExclamationThick,
+  mdiAlertCircle
+} from '@mdi/js'
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -75,7 +81,9 @@ export default {
     fab: false,
     difficulty: null,
     icons: {
-      mdiArrowUp
+      mdiArrowUp,
+      mdiExclamationThick,
+      mdiAlertCircle
     }
   }),
   

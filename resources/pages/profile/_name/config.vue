@@ -34,6 +34,7 @@
             border="left"
             dense
             text
+            :icon="icons.mdiAlertCircle"
           >{{ $t('common.noData') }}</v-alert>
 
           <v-list 
@@ -71,6 +72,7 @@
       type="warning"
       border="left"
       text
+      :icon="icons.mdiExclamationThick"
     >{{ $t('errors.serverStarted') }}</v-alert>
     
     <v-skeleton-loader
@@ -109,7 +111,9 @@
 <script>
 import {
   mdiTarget,
-  mdiArrowUp
+  mdiArrowUp,
+  mdiAlertCircle,
+  mdiExclamationThick
 } from '@mdi/js'
 
 const PanelHeader = () => import('@/components/PanelHeader')
@@ -131,7 +135,9 @@ export default {
     missions: null,
     icons: {
       mdiTarget,
-      mdiArrowUp
+      mdiArrowUp,
+      mdiAlertCircle,
+      mdiExclamationThick
     }
   }),
 

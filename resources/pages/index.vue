@@ -194,9 +194,13 @@
               </div>
             </v-sheet>
 
-            <v-alert v-else type="info" border="left" text>{{
-              $t('index.noLogs')
-            }}</v-alert>
+            <v-alert 
+              v-else 
+              type="info" 
+              border="left" 
+              text
+              :icon="icons.mdiAlertCircle"
+            >{{ $t('index.noLogs') }}</v-alert>
           </v-card-text>
         </v-card>
       </v-col>
@@ -209,7 +213,8 @@ import {
   mdiChip,
   mdiMemory,
   mdiPost,
-  mdiRefresh
+  mdiRefresh,
+  mdiAlertCircle
 } from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 
@@ -234,7 +239,8 @@ export default {
       mdiChip,
       mdiMemory,
       mdiPost,
-      mdiRefresh
+      mdiRefresh,
+      mdiAlertCircle
     }
   }),
 

@@ -6,6 +6,7 @@
       text
       outlined
       v-if="users.find(element => element.username === 'admin')"
+      :icon="icons.mdiExclamationThick"
     >{{ $t('users.adminUserAlert') }}</v-alert>
 
     <v-row justify="center">
@@ -197,7 +198,8 @@ import {
   mdiLock,
   mdiEye,
   mdiEyeOff,
-  mdiHelp
+  mdiHelp,
+  mdiExclamationThick
 } from '@mdi/js'
 export default {
   layout: 'interface',
@@ -254,7 +256,8 @@ export default {
         mdiLock,
         mdiEye,
         mdiEyeOff,
-        mdiHelp
+        mdiHelp,
+        mdiExclamationThick
       }
     }
   },

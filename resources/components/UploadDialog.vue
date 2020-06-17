@@ -13,6 +13,7 @@
           border="left"
           text
           dense
+          :icon="mdiAlert"
         >{{ $t('upload.updateLocalModInfo') }}</v-alert>
 
         <v-alert
@@ -21,6 +22,7 @@
           border="left"
           text
           dense
+          :icon="mdiExclamationThick"
         >{{ $t('upload.importantPoints') }} :
           <ul>
             <li>{{ $t('upload.modNaming') }}</li>
@@ -34,6 +36,7 @@
           border="left"
           text
           dense
+          :icon="mdiAlertCircle"
         >{{ $t('upload.updateMission') }}</v-alert>
 
         <v-alert
@@ -42,6 +45,7 @@
           border="left"
           text
           dense
+          :icon="mdiExclamationThick"
         >{{ $t('upload.importantPoints') }} :
           <ul>
             <li>{{ $t('upload.missionNaming') }}</li>
@@ -105,7 +109,12 @@
 </template>
 
 <script>
-import { mdiUploadOff } from '@mdi/js'
+import { 
+  mdiUploadOff,
+  mdiAlert,
+  mdiExclamationThick,
+  mdiAlertCircle
+} from '@mdi/js'
 
 export default {
   props: {
@@ -120,7 +129,10 @@ export default {
     file: null,
     uploadPercentage: 0,
     source: null,
-    mdiUploadOff
+    mdiUploadOff,
+    mdiAlert,
+    mdiExclamationThick,
+    mdiAlertCircle
   }),
 
   methods: {

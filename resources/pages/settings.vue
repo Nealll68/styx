@@ -80,6 +80,7 @@
                 dense
                 type="warning"
                 border="left"
+                :icon="icons.mdiExclamationThick"
               >{{ $t('settings.steamWorkshopInfo') }}</v-alert>
 
               <v-text-field
@@ -120,7 +121,8 @@ import {
   mdiCogs,
   mdiContentSave,
   mdiGamepadSquare,
-  mdiSteam
+  mdiSteam,
+  mdiExclamationThick
 } from '@mdi/js'
 
 export default {
@@ -150,7 +152,8 @@ export default {
         mdiCogs,
         mdiContentSave,
         mdiGamepadSquare,
-        mdiSteam
+        mdiSteam,
+        mdiExclamationThick
       }
     }
   },

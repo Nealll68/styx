@@ -256,6 +256,7 @@
               type="info"
               border="left"
               text
+              :icon="icons.mdiAlertCircle"
             >{{ $t('mods.noLocalMod') }}</v-alert>
           </v-card-text>
         </v-card>
@@ -280,7 +281,8 @@ import {
   mdiToyBrickSearch,
   mdiUpdate,
   mdiDelete,
-  mdiToyBrick
+  mdiToyBrick,
+  mdiAlertCircle
 } from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
@@ -333,7 +335,8 @@ export default {
         mdiToyBrickSearch,
         mdiUpdate,
         mdiDelete,
-        mdiToyBrick
+        mdiToyBrick,
+        mdiAlertCircle
       }
     }
   },

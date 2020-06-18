@@ -244,6 +244,7 @@
 
   "login": {
     "signIn": "Se connecter",
+    "rememberMe": "Se souvenir de moi",
     "wrongCredentials": "Nom d'utilisateur ou mot de passe invalide"
   }
 }

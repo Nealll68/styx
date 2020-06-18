@@ -58,10 +58,12 @@ module.exports = {
     strategies: {
       local: {
         endpoints: {
-          login: { url: 'auth', method: 'post', propertyName: 'data.token' },
-          user: { url: 'auth', method: 'get', propertyName: 'data' },
-          logout: false
-        }
+          login: { url: 'auth/login', method: 'post' },
+          user: { url: 'auth/me', method: 'get', propertyName: 'data' },
+          logout: { url: 'auth/logout', method: 'get'}
+        },
+        tokenRequired: false,
+        tokenType: false
       }
     }
   },

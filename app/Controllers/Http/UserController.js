@@ -97,20 +97,25 @@ class UserController {
 	 * @param {Auth} ctx.auth
 	 */
 	async login ({ request, response, auth }) {
-		const { username, password } = request.all()
+		const { username, password, remember } = request.all()
 
 		try {
-			const token = await auth.attempt(username, password)
+      await auth
+        .remember(remember)
+        .attempt(username, password)
 
-			return response.ok({
-				data: token
-			})
+			return response.ok()
 		} catch (ex) {
 			return response
 				.status(ex.status)
 				.send(ex.code)
 		}
-	}
+  }
+  
+  async logout ({ response, auth }) {
+    await auth.logout()
+    return response.ok()
+  }
 
 	/**
 	 * Get logged user.
@@ -121,9 +126,9 @@ class UserController {
 	 * @param {Auth} ctx.auth
 	 */
 	async me ({ auth, response }) {
-        return response.ok({
-            data: auth.user
-        })
+      return response.ok({
+        data: auth.user
+      })
     }
 }
 

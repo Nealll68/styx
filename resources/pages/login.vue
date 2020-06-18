@@ -44,6 +44,13 @@
                 @click:append="showPassword = !showPassword" 
                 filled
               ></v-text-field>
+
+              <v-checkbox
+                v-model="remember"
+                :label="$t('login.rememberMe')"
+                color="primary"
+                class="mt-0"
+              ></v-checkbox>
             </v-card-text>
 
             <v-card-actions>
@@ -58,6 +65,12 @@
             </v-card-actions>
 					</v-form>
 				</v-card>
+
+        <v-card class="mt-3">
+          <v-card-text class="text-center">
+            Created by <a href="https://www.github.com/Nealll68/styx" target="_blank" rel="noopener noreferrer">Nealll</a>
+          </v-card-text>
+        </v-card>
 			</v-col>
 		</v-row>
 	</v-container>
@@ -88,6 +101,7 @@ export default {
       loading: false,
       username: '',
       password: '',
+      remember: false,
       requiredRule: [
         v => !!v || this.$t('rules.required')
       ],
@@ -113,12 +127,14 @@ export default {
           await this.$auth.loginWith('local', {
             data: {
               username: this.username,
-              password: this.password
+              password: this.password,
+              remember: this.remember
             }
           })
 
           this.$router.push('/')
         } catch (ex) {
+          console.log(ex)
           if (ex.response.data === 'E_PASSWORD_MISMATCH' || ex.response.data === 'E_USER_NOT_FOUND') {
             this.$snackbar({
               type: 'error', 

@@ -18,6 +18,7 @@
 
 * Can manage only one instance of server (maybe i will work on multiple instance support)
 * SteamCMD need to be already installed on the server
+* After installation, to login in the interface you need to use the default account (username: admin, password: admin). **After your first connection, go in the users page and create a new user and delete the default account**
 
 # Features
 

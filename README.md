@@ -82,7 +82,7 @@ $ npm run start
 # or
 $ yarn start
 ```
-Now the interface is serving on the port 3000.
+Now the interface is serving on the port configured in the .env file.
 
 **4. Serve the application**
 

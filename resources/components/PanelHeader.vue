@@ -2,6 +2,7 @@
 <v-banner
   app
   sticky
+  color="grey darken-4"
 >
   <slot></slot>
   

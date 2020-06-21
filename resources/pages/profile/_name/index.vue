@@ -22,7 +22,7 @@
     <v-card-text>
       <v-text-field
         v-model="modsSearch"
-        :append-icon="icons.mdiToyBrickSearch"
+        append-icon="mdi-toy-brick-search"
         :label="$t('common.search')"
         single-line
         hide-details
@@ -69,7 +69,6 @@
 </template>
 
 <script>
-import { mdiToyBrickSearch } from '@mdi/js'
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -91,10 +90,7 @@ export default {
         { text: '-mod', value: 'activated' },
         { text: '-serverMod', value: 'server_mod' }
       ],
-      paramsId: null,
-      icons: {
-        mdiToyBrickSearch
-      }
+      paramsId: null
     }
   },
 

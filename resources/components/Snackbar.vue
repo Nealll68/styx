@@ -11,25 +11,25 @@
       v-if="type === 'info'"
       color="info"
       left
-    >{{ icons.mdiAlertCircle }}</v-icon>
+    >mdi-alert-circle</v-icon>
 
     <v-icon
       v-if="type === 'error'"
       color="error"
       left
-    >{{ icons.mdiAlert }}</v-icon>
+    >mdi-alert</v-icon>
 
     <v-icon
       v-if="type === 'warning'"
       color="warning"
       left
-    >{{ icons.mdiExclamationThick }}</v-icon>
+    >mdi-exclamation-thick</v-icon>
 
     <v-icon
       v-if="type === 'success'"
       color="success"
       left
-    >{{ icons.mdiCheck }}</v-icon>
+    >mdi-check</v-icon>
 
     {{ message }}
     
@@ -39,33 +39,15 @@
         color="white"
         @click="close"
       >
-        <v-icon :color="type">{{ icons.mdiClose }}</v-icon>
+        <v-icon :color="type">mdi-close</v-icon>
       </v-btn>
     </template>
   </v-snackbar>
 </template>
 
 <script>
-import {
-  mdiAlertCircle,
-  mdiAlert,
-  mdiExclamationThick,
-  mdiCheck,
-  mdiClose
-} from '@mdi/js'
-
 export default {
   props: ['type', 'message'],
-
-  data: () => ({
-    icons: {
-      mdiAlertCircle,
-      mdiAlert,
-      mdiExclamationThick,
-      mdiCheck,
-      mdiClose
-    }
-  }),
 
   methods: {
     close () {

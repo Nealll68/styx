@@ -19,7 +19,7 @@
               class="float-right"
               :disabled="$store.state.downloadInfo.type ? true : false"
             >
-              <v-icon left>{{icons.mdiToyBrickPlus}}</v-icon>{{ $t('mods.add') }}
+              <v-icon left>mdi-toy-brick-plus</v-icon>{{ $t('mods.add') }}
             </v-btn>
           </template>
 
@@ -31,7 +31,7 @@
               @click="showModList = true"
             >
               <v-list-item-icon>
-                <v-icon>{{icons.mdiSteam}}</v-icon>
+                <v-icon>mdi-steam</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -44,7 +44,7 @@
               @click="detectWorkshopMods()"
             >
               <v-list-item-icon>
-                <v-icon>{{icons.mdiFolderSearch}}</v-icon>
+                <v-icon>mdi-folder-search</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -56,7 +56,7 @@
 
             <v-list-item @click="showModUpload = true">
               <v-list-item-icon>
-                <v-icon>{{icons.mdiUpload}}</v-icon>
+                <v-icon>mdi-upload</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -66,7 +66,7 @@
 
             <v-list-item @click="showLocalMods()">
               <v-list-item-icon>
-                <v-icon>{{icons.mdiPlusBox}}</v-icon>
+                <v-icon>mdi-plus-box</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -95,12 +95,12 @@
               class="mr-2"
               color="tertiary"
             >
-              <v-icon left>{{icons.mdiRefresh}}</v-icon>{{ $t('common.refresh') }}
+              <v-icon left>mdi-refresh</v-icon>{{ $t('common.refresh') }}
             </v-btn>
 
             <v-text-field
               v-model="modsSearch"
-              :append-icon="icons.mdiToyBrickSearch"
+              append-icon="mdi-toy-brick-search"
               :label="$t('common.search')"
               single-line
               hide-details
@@ -149,7 +149,7 @@
                   class="mr-1" 
                   color="secondary"
                 >
-                  <v-icon>{{ icons.mdiToyBrick }}</v-icon>
+                  <v-icon>mdi-toy-brick</v-icon>
                 </v-avatar>
                 {{ item.name }}
               </template>
@@ -176,7 +176,7 @@
                   rel="noopener noreferrer"
                   :disabled="loading"
                 >
-                  <v-icon>{{icons.mdiSteam}}</v-icon>  
+                  <v-icon>mdi-steam</v-icon>  
                 </v-btn>
 
                 <v-btn                    
@@ -186,7 +186,7 @@
                   @click="downloadMod({ workshopId: item.workshop_id, title: item.name, fileSize: item.size, isUpdate: true })"
                   :disabled="loading || $store.state.downloadInfo.type ? true : false"
                 >
-                  <v-icon>{{icons.mdiUpdate}}</v-icon>  
+                  <v-icon>mdi-update</v-icon>  
                 </v-btn>
 
                 <v-btn
@@ -197,7 +197,7 @@
                   @click="deleteMod(item)"
                   :disabled="modsTableLoading"
                 >
-                  <v-icon>{{icons.mdiDelete}}</v-icon>  
+                  <v-icon>mdi-delete</v-icon>  
                 </v-btn>         
               </template>                
             </v-data-table>
@@ -242,7 +242,7 @@
                     text
                     @click="addLocalMod(mod)"         
                   >
-                    <v-icon left>{{icons.mdiPlusBox}}</v-icon>{{ $t('common.add') }}
+                    <v-icon left>mdi-plus-box</v-icon>{{ $t('common.add') }}
                   </v-btn>
                 </v-list-item-action>
               </v-list-item>
@@ -256,7 +256,7 @@
               type="info"
               border="left"
               text
-              :icon="icons.mdiAlertCircle"
+              icon="mdi-alert-circle"
             >{{ $t('mods.noLocalMod') }}</v-alert>
           </v-card-text>
         </v-card>
@@ -271,19 +271,6 @@
 </template>
 
 <script>
-import {
-  mdiToyBrickPlus,
-  mdiSteam,
-  mdiFolderSearch,
-  mdiUpload,
-  mdiPlusBox,
-  mdiRefresh,
-  mdiToyBrickSearch,
-  mdiUpdate,
-  mdiDelete,
-  mdiToyBrick,
-  mdiAlertCircle
-} from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
 const WorkshopQuery = () => import('@/components/WorkshopQuery')
@@ -324,20 +311,7 @@ export default {
         { text: 'Workshop ID', value: 'workshop_id' },
         { text: this.$t('common.lastUpdate'), value: 'server_updated_at' },
         { text: '', value: 'action', sortable: false }
-      ],
-      icons: {
-        mdiToyBrickPlus,
-        mdiSteam,
-        mdiFolderSearch,
-        mdiUpload,
-        mdiPlusBox,
-        mdiRefresh,
-        mdiToyBrickSearch,
-        mdiUpdate,
-        mdiDelete,
-        mdiToyBrick,
-        mdiAlertCircle
-      }
+      ]
     }
   },
 

@@ -29,7 +29,7 @@
                 :rules="requiredRule"
                 :label="$t('common.username')"
                 name="username"
-                :prepend-inner-icon="icons.mdiAccount"
+                prepend-inner-icon="mdi-account"
                 filled
               ></v-text-field>
 
@@ -38,9 +38,9 @@
                 :rules="requiredRule"
                 :label="$t('common.password')"
                 name="password"
-                :prepend-inner-icon="icons.mdiLock"
+                prepend-inner-icon="mdi-lock"
                 :type="showPassword ? 'text' : 'password'"
-                :append-icon="showPassword ? icons.mdiEye : icons.mdiEyeOff"
+                :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
                 @click:append="showPassword = !showPassword" 
                 filled
               ></v-text-field>
@@ -77,12 +77,6 @@
 </template>
 
 <script>
-import {
-  mdiAccount,
-  mdiLock,
-  mdiEye,
-  mdiEyeOff
-} from '@mdi/js'
 const Logo = () => import('@/components/Logo')
 
 export default {
@@ -104,13 +98,7 @@ export default {
       remember: false,
       requiredRule: [
         v => !!v || this.$t('rules.required')
-      ],
-      icons: {
-        mdiAccount,
-        mdiLock,
-        mdiEye,
-        mdiEyeOff
-      }
+      ]
     }
   },
 

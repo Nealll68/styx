@@ -36,8 +36,7 @@ module.exports = {
     { src: '~/plugins/steamGuard.client', ssr: false },
     { src: '~/plugins/confirm.client', ssr: false },
     '~/plugins/snackbar',
-    '~/plugins/formatBytesFilter',
-    '~/plugins/vuetifyIcons'
+    '~/plugins/formatBytesFilter'
   ],
   /*
    ** Nuxt.js dev-modules
@@ -97,10 +96,6 @@ module.exports = {
           senary: '#72DEFF'
         }
       }
-    },
-
-    defaultAssets: {
-      icons: false
     }
   },
   /*
@@ -111,7 +106,7 @@ module.exports = {
      ** You can extend webpack config here
      */
     extend(config, ctx) {},
-
+    extractCSS: true,
     transpile: ['@adonisjs/websocket-client/index']
   }
 }

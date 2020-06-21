@@ -15,7 +15,7 @@
             <v-list>
               <v-list-item>
                 <v-list-item-icon class="mr-5">
-                  <v-icon size="50" color="tertiary">{{ icons.mdiChip }}</v-icon>
+                  <v-icon size="50" color="tertiary">mdi-chip</v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-content>
@@ -90,7 +90,7 @@
             <v-list>
               <v-list-item>
                 <v-list-item-icon class="mr-5">
-                  <v-icon size="50" color="quaternary">{{ icons.mdiMemory }}</v-icon>
+                  <v-icon size="50" color="quaternary">mdi-memory</v-icon>
                 </v-list-item-icon>
 
                 <v-list-item-content>
@@ -158,7 +158,7 @@
       <v-col cols="12">
         <v-card :loading="loading">
           <v-card-title>
-            <v-icon left>{{ icons.mdiPost }}</v-icon>
+            <v-icon left>mdi-post</v-icon>
             {{ $t('menu.logs') }}
 
             <v-spacer></v-spacer>
@@ -178,7 +178,7 @@
               color="tertiary"
               :disabled="loading || automaticRefresh || !$store.state.a3Server.isStarted"
             >
-              <v-icon left>{{ icons.mdiRefresh }}</v-icon> {{ $t('common.refresh') }}
+              <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
             </v-btn>
           </v-card-title>
           <v-card-text>
@@ -199,7 +199,6 @@
               type="info" 
               border="left" 
               text
-              :icon="icons.mdiAlertCircle"
             >{{ $t('index.noLogs') }}</v-alert>
           </v-card-text>
         </v-card>
@@ -209,13 +208,6 @@
 </template>
 
 <script>
-import {
-  mdiChip,
-  mdiMemory,
-  mdiPost,
-  mdiRefresh,
-  mdiAlertCircle
-} from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 
 export default {
@@ -234,14 +226,7 @@ export default {
   data: () => ({
     loading: false,
     interval: null,
-    automaticRefresh: false,
-    icons: {
-      mdiChip,
-      mdiMemory,
-      mdiPost,
-      mdiRefresh,
-      mdiAlertCircle
-    }
+    automaticRefresh: false
   }),
 
   computed: {

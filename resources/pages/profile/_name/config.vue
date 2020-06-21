@@ -20,7 +20,7 @@
           v-on="on"
           :disabled="loading"
         >
-          <v-icon left>{{icons.mdiTarget}}</v-icon>{{ $t('menu.missions') }}
+          <v-icon left>mdi-target</v-icon>{{ $t('menu.missions') }}
         </v-btn>
       </template>
 
@@ -34,7 +34,7 @@
             border="left"
             dense
             text
-            :icon="icons.mdiAlertCircle"
+            icon="mdi-alert-circle"
           >{{ $t('common.noData') }}</v-alert>
 
           <v-list 
@@ -72,7 +72,7 @@
       type="warning"
       border="left"
       text
-      :icon="icons.mdiExclamationThick"
+      icon="mdi-exclamation-thick"
     >{{ $t('errors.serverStarted') }}</v-alert>
     
     <v-skeleton-loader
@@ -102,20 +102,13 @@
       color="primary"
       @click="$vuetify.goTo(0)"
     >
-      <v-icon>{{icons.mdiArrowUp}}</v-icon>
+      <v-icon>mdi-arrow-up</v-icon>
     </v-btn>
   </v-fab-transition>
 </v-card>
 </template>
 
 <script>
-import {
-  mdiTarget,
-  mdiArrowUp,
-  mdiAlertCircle,
-  mdiExclamationThick
-} from '@mdi/js'
-
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -132,13 +125,7 @@ export default {
     dialog: false,
     fab: false,
     config: null,
-    missions: null,
-    icons: {
-      mdiTarget,
-      mdiArrowUp,
-      mdiAlertCircle,
-      mdiExclamationThick
-    }
+    missions: null
   }),
 
   components: {

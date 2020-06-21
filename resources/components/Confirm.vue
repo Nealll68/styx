@@ -15,13 +15,13 @@
           v-if="type === 'error'"
           left
           color="error"
-        >{{ icons.mdiAlert }}</v-icon>
+        >mdi-alert</v-icon>
 
         <v-icon 
           v-if="type === 'warning'"
           left
           color="warning"
-        >{{ icons.mdiExclamationThick }}</v-icon>
+        >mdi-exclamation-thick</v-icon>
         {{ title }}
       </v-card-title>
 
@@ -46,20 +46,11 @@
 </template>
 
 <script>
-import {
-  mdiAlert,
-  mdiExclamationThick
-} from '@mdi/js'
-
 export default {
   props: ['type', 'title', 'message', 'continueBtnText', 'cancelBtnText'],
 
   data: () => ({
-    value: false,
-    icons: {
-      mdiAlert,
-      mdiExclamationThick
-    }
+    value: false
   }),
 
   methods: {

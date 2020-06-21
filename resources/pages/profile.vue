@@ -15,9 +15,9 @@
                 text  
                 v-on="on"          
               >
-                <v-icon left>{{icons.mdiFolderCog}}</v-icon>
+                <v-icon left>mdi-folder-cog</v-icon>
                 {{ $route.params.name }}
-                <v-icon right>{{icons.mdiMenuDown}}</v-icon>
+                <v-icon right>mdi-menu-down</v-icon>
               </v-btn>
             </template>
 
@@ -35,7 +35,7 @@
                 </v-list-item-content>
 
                 <v-list-item-icon v-if="profile.isDefault">
-                  <v-icon color="primary">{{icons.mdiStar}}</v-icon>
+                  <v-icon color="primary">mdi-star</v-icon>
                 </v-list-item-icon>
               </v-list-item>
             </v-list>
@@ -48,7 +48,7 @@
             :disabled="disableSetDefault"
             @click="switchToDefault()"
           >
-            <v-icon :left="$vuetify.breakpoint.smAndUp">{{icons.mdiStarOutline}}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('profiles.setAsDefault') }}
+            <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-star-outline</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('profiles.setAsDefault') }}
           </v-btn>
 
           <v-btn
@@ -58,7 +58,7 @@
             :disabled="!$route.params.name || profiles.length === 1"
             @click="deleteProfile()"
           >
-            <v-icon :left="$vuetify.breakpoint.smAndUp">{{icons.mdiDelete}}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.delete') }}
+            <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-delete</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.delete') }}
           </v-btn>
 
           <v-spacer></v-spacer>
@@ -75,7 +75,7 @@
                   icon
                   color="primary"
                 >
-                  <v-icon>{{icons.mdiPlus}}</v-icon>
+                  <v-icon>mdi-plus</v-icon>
                 </v-btn>
             </template>
 
@@ -157,7 +157,7 @@
           type="info"
           border="left"
           class="mt-4"
-          :icon="icons.mdiAlertCircle"
+          icon="mdi-alert-circle"
         >{{ $t('profiles.howToCreate') }}</v-alert>
 
         <nuxt-child @loading="loadingPage = $event" />
@@ -167,15 +167,6 @@
 </template>
 
 <script>
-import {
-  mdiFolderCog,
-  mdiMenuDown,
-  mdiStar,
-  mdiStarOutline,
-  mdiDelete,
-  mdiPlus,
-  mdiAlertCircle
-} from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 
 export default {
@@ -195,16 +186,7 @@ export default {
     loading: false,
     loadingPage: false,
     profileName: '',
-    menu: false,
-    icons: {
-      mdiFolderCog,
-      mdiMenuDown,
-      mdiStar,
-      mdiStarOutline,
-      mdiDelete,
-      mdiPlus,
-      mdiAlertCircle
-    }
+    menu: false
   }),
 
   async validate ({ params, redirect, $axios }) {

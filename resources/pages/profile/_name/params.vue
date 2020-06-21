@@ -13,7 +13,7 @@
         target="_blank"
         rel="noopener noreferrer"
       >
-        <v-icon :left="$vuetify.breakpoint.smAndUp">{{icons.mdiHelpCircle}}</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
+        <v-icon :left="$vuetify.breakpoint.smAndUp">mdi-help-circle</v-icon>{{ $vuetify.breakpoint.xsOnly ? '' : $t('common.help') }}
       </v-btn>
     </template>
   </v-banner>
@@ -107,7 +107,6 @@
 </template>
 
 <script>
-import { mdiHelpCircle } from '@mdi/js'
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -118,10 +117,7 @@ export default {
   },
 
   data: () => ({
-    loading: false,
-    icons: {
-      mdiHelpCircle
-    }
+    loading: false
   }),
 
   components: {

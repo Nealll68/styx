@@ -19,7 +19,7 @@
               class="float-right"
               :disabled="$store.state.downloadInfo.type === 'updateServer'"
             >
-              <v-icon left>{{icons.mdiPlusBox}}</v-icon>{{ $t('mission.add') }}
+              <v-icon left>mdi-plus-box</v-icon>{{ $t('mission.add') }}
             </v-btn>
           </template>
 
@@ -28,7 +28,7 @@
               @click="showWorkshopQuery = true"
             >
               <v-list-item-icon>
-                <v-icon>{{icons.mdiSteam}}</v-icon>
+                <v-icon>mdi-steam</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -38,7 +38,7 @@
 
             <v-list-item @click="showUploadDialog = true">
               <v-list-item-icon>
-                <v-icon>{{icons.mdiUpload}}</v-icon>
+                <v-icon>mdi-upload</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -48,7 +48,7 @@
 
             <v-list-item @click="detectExistingMission()">
               <v-list-item-icon>
-                <v-icon>{{icons.mdiFileSearch}}</v-icon>
+                <v-icon>mdi-file-search</v-icon>
               </v-list-item-icon>
 
               <v-list-item-content>
@@ -77,12 +77,12 @@
               class="mr-2"
               color="tertiary"
             >
-              <v-icon left>{{icons.mdiRefresh}}</v-icon> {{ $t('common.refresh') }}
+              <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
             </v-btn>
 
             <v-text-field
               v-model="missionSearch"
-              :append-icon="icons.mdiMagnify"
+              append-icon="mdi-magnify"
               :label="$t('common.search')"
               single-line
               hide-details
@@ -101,7 +101,7 @@
               border="left"
               dense
               dismissible
-              :icon="icons.mdiAlertCircle"
+              icon="mdi-alert-circle"
             >{{ $t('mission.afterDeleteMessage') }}</v-alert>
 
             <v-skeleton-loader
@@ -141,7 +141,7 @@
                   class="mr-1" 
                   color="secondary"
                 >
-                  <v-icon>{{ icons.mdiTarget }}</v-icon>
+                  <v-icon>mdi-target</v-icon>
                 </v-avatar>
                 {{ item.name }}
               </template>
@@ -165,7 +165,7 @@
                     rel="noopener noreferrer"
                     :disabled="loading"
                   >
-                    <v-icon>{{icons.mdiSteam}}</v-icon>  
+                    <v-icon>mdi-steam</v-icon>  
                   </v-btn>
 
                   <v-btn                    
@@ -175,7 +175,7 @@
                     @click="updateMission(item.workshop_id)"
                     :disabled="loading || $store.state.downloadInfo.type ? true : false"
                   >
-                    <v-icon>{{icons.mdiUpdate}}</v-icon>  
+                    <v-icon>mdi-update</v-icon>  
                   </v-btn>
 
                 <v-btn
@@ -186,7 +186,7 @@
                   @click="deleteMission(item)"
                   :disabled="loading"
                 >
-                  <v-icon>{{ icons.mdiDelete }}</v-icon>  
+                  <v-icon>mdi-delete</v-icon>  
                 </v-btn>         
               </template>
             </v-data-table>
@@ -203,19 +203,6 @@
 </template>
 
 <script>
-import {
-  mdiPlusBox,
-  mdiPlusBoxMultiple,
-  mdiSteam,
-  mdiUpload,
-  mdiFileSearch,
-  mdiRefresh,
-  mdiMagnify,
-  mdiUpdate,
-  mdiDelete,
-  mdiTarget,
-  mdiAlertCircle
-} from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 const UploadDialog = () => import('@/components/UploadDialog')
 const WorkshopQuery = () => import('@/components/WorkshopQuery')
@@ -253,20 +240,7 @@ export default {
         { text: this.$t('common.lastUpdate'), value: 'updated_at' },
         { text: '', value: 'action', sortable: false }
       ],
-      showDeleteInfo: false,
-      icons: {
-        mdiPlusBox,
-        mdiPlusBoxMultiple,
-        mdiSteam,
-        mdiUpload,
-        mdiFileSearch,
-        mdiRefresh,
-        mdiMagnify,
-        mdiUpdate,
-        mdiDelete,
-        mdiTarget,
-        mdiAlertCircle
-      }
+      showDeleteInfo: false
     }
   },
 

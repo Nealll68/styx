@@ -18,12 +18,12 @@
           color="tertiary"
           :disabled="loading"
         >
-          <v-icon left>{{icons.mdiRefresh}}</v-icon> {{ $t('common.refresh') }}
+          <v-icon left>mdi-refresh</v-icon> {{ $t('common.refresh') }}
         </v-btn>
 
         <v-text-field
           v-model="logsSearch"
-          :append-icon="icons.mdiMagnify"
+          append-icon="mdi-magnify"
           :label="$t('common.search')"
           single-line
           hide-details
@@ -41,7 +41,7 @@
           color="error"
           @click="deleteSelected"
         >
-          <v-icon>{{ icons.mdiDeleteSweep }}</v-icon> {{ $t('logs.deleteSelected') }}
+          <v-icon>mdi-delete-sweep</v-icon> {{ $t('logs.deleteSelected') }}
         </v-btn>
 
         <v-skeleton-loader
@@ -78,7 +78,7 @@
               icon
               @click="showLog(item.profileName, item.name)"
             >
-              <v-icon>{{ icons.mdiEye }}</v-icon>  
+              <v-icon>mdi-eye</v-icon>  
             </v-btn>
 
             <v-btn
@@ -88,7 +88,7 @@
               :disabled="loading"
               @click="downloadLog(item.profileName, item.name)"
             >
-              <v-icon>{{ icons.mdiDownload }}</v-icon>  
+              <v-icon>mdi-download</v-icon>  
             </v-btn>
 
             <v-btn
@@ -98,7 +98,7 @@
               :disabled="loading"
               @click="deleteLog(item.profileName, item.name)"
             >
-              <v-icon>{{ icons.mdiDeleteForever }}</v-icon>  
+              <v-icon>mdi-delete-forever</v-icon>  
             </v-btn>
           </template>
         </v-data-table>
@@ -122,7 +122,7 @@
             icon
             @click="logViewer = !logViewer"
           >
-            <v-icon>{{ icons.mdiClose }}</v-icon>
+            <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>{{ logsContent.filename }}</v-toolbar-title>
         </v-app-bar>
@@ -153,15 +153,6 @@
 </template>
 
 <script>
-import { 
-  mdiDeleteSweep,
-  mdiMagnify,
-  mdiRefresh,
-  mdiDownload,
-  mdiEye,
-  mdiDeleteForever,
-  mdiClose
-} from '@mdi/js'
 const PathError = () => import('@/components/PathError')
 
 export default {
@@ -183,15 +174,6 @@ export default {
       loadingLogs: true,
       loadingContent: false,
       logViewer: false,
-      icons: {
-        mdiDeleteSweep,
-        mdiMagnify,
-        mdiRefresh,
-        mdiDownload,
-        mdiEye,
-        mdiDeleteForever,
-        mdiClose
-      },
       logsSearch: null,
       headers: [
         { text: this.$t('logs.file'), value: 'name' },

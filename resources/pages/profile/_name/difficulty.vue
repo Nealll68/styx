@@ -15,7 +15,7 @@
         type="warning"
         border="left"
         text
-        :icon="icons.mdiExclamationThick"
+        icon="mdi-exclamation-thick"
       >{{ $t('errors.serverStarted') }}</v-alert>
 
       <v-alert
@@ -23,7 +23,7 @@
         text 
         type="info" 
         dense
-        :icon="icons.mdiAlertCircle"
+        icon="mdi-alert-circle"
       >{{ $t('information.customDifficulty') }}</v-alert>
 
       <v-skeleton-loader
@@ -53,18 +53,13 @@
         color="primary"
         @click="$vuetify.goTo(0)"
       >
-        <v-icon>{{icons.mdiArrowUp}}</v-icon>
+        <v-icon>mdi-arrow-up</v-icon>
       </v-btn>
     </v-fab-transition>
 </v-card>
 </template>
 
 <script>
-import { 
-  mdiArrowUp,
-  mdiExclamationThick,
-  mdiAlertCircle
-} from '@mdi/js'
 const PanelHeader = () => import('@/components/PanelHeader')
 
 export default {
@@ -79,12 +74,7 @@ export default {
     loadingUpdate: false,
     loadingReset: false,
     fab: false,
-    difficulty: null,
-    icons: {
-      mdiArrowUp,
-      mdiExclamationThick,
-      mdiAlertCircle
-    }
+    difficulty: null
   }),
   
   components: {

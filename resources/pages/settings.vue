@@ -3,7 +3,7 @@
     <v-card>
       <v-toolbar flat>
         <v-toolbar-title>
-          <v-icon left>{{icons.mdiCogs}}</v-icon>{{ $t('settings.title') }}
+          <v-icon left>mdi-cogs</v-icon>{{ $t('settings.title') }}
         </v-toolbar-title>
 
         <v-spacer></v-spacer>
@@ -15,15 +15,15 @@
           :disabled="$store.state.downloadInfo.type === 'updateServer' || !valid "
           @click="save()"
         >
-          <v-icon left>{{icons.mdiContentSave}}</v-icon>{{ $t('common.save') }}
+          <v-icon left>mdi-content-save</v-icon>{{ $t('common.save') }}
         </v-btn>
       </v-toolbar>
       <v-tabs :vertical="$vuetify.breakpoint.smAndUp">
         <v-tab>
-          <v-icon left>{{icons.mdiGamepadSquare}}</v-icon>Arma 3
+          <v-icon left>mdi-gamepad-square</v-icon>Arma 3
         </v-tab>
         <v-tab>
-          <v-icon left>{{icons.mdiSteam}}</v-icon>Steam
+          <v-icon left>mdi-steam</v-icon>Steam
         </v-tab>
 
         <v-tab-item>
@@ -80,7 +80,7 @@
                 dense
                 type="warning"
                 border="left"
-                :icon="icons.mdiExclamationThick"
+                icon="mdi-exclamation-thick"
               >{{ $t('settings.steamWorkshopInfo') }}</v-alert>
 
               <v-text-field
@@ -117,14 +117,6 @@
 </template>
 
 <script>
-import {
-  mdiCogs,
-  mdiContentSave,
-  mdiGamepadSquare,
-  mdiSteam,
-  mdiExclamationThick
-} from '@mdi/js'
-
 export default {
   layout: 'interface',
   middleware: 'privilege_1',
@@ -147,14 +139,7 @@ export default {
         steam_password: ''
       },
       valid: false,
-      requiredRule: [v => !!v || this.$t('rules.required')],
-      icons: {
-        mdiCogs,
-        mdiContentSave,
-        mdiGamepadSquare,
-        mdiSteam,
-        mdiExclamationThick
-      }
+      requiredRule: [v => !!v || this.$t('rules.required')]
     }
   },
 

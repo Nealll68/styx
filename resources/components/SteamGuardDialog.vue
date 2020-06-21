@@ -11,7 +11,7 @@
     ></v-progress-linear>
 
     <v-card-title primary-title>
-      <v-icon left>{{ mdiSteam }}</v-icon> Steam Guard
+      <v-icon left>mdi-steam</v-icon> Steam Guard
     </v-card-title>
 
     <v-card-text>
@@ -46,8 +46,6 @@
 </template>
 
 <script>
-import { mdiSteam } from '@mdi/js'
-
 export default {
   props: ['continueBtnText', 'cancelBtnText', 'requiredRuleText', ],
 
@@ -56,8 +54,7 @@ export default {
     formValid: false,
     requiredRule: [
       v => !!v || this.requiredRuleText
-    ],
-    mdiSteam
+    ]
   }),
 
   methods: {

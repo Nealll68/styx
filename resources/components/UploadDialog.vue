@@ -13,7 +13,6 @@
           border="left"
           text
           dense
-          :icon="mdiAlert"
         >{{ $t('upload.updateLocalModInfo') }}</v-alert>
 
         <v-alert
@@ -22,7 +21,6 @@
           border="left"
           text
           dense
-          :icon="mdiExclamationThick"
         >{{ $t('upload.importantPoints') }} :
           <ul>
             <li>{{ $t('upload.modNaming') }}</li>
@@ -36,7 +34,6 @@
           border="left"
           text
           dense
-          :icon="mdiAlertCircle"
         >{{ $t('upload.updateMission') }}</v-alert>
 
         <v-alert
@@ -45,7 +42,6 @@
           border="left"
           text
           dense
-          :icon="mdiExclamationThick"
         >{{ $t('upload.importantPoints') }} :
           <ul>
             <li>{{ $t('upload.missionNaming') }}</li>
@@ -83,7 +79,7 @@
             small
             @click="cancelUpload"
           >
-            <v-icon left>{{ mdiUploadOff }}</v-icon>{{ $t('common.cancel') }}
+            <v-icon left>mdi-upload-off</v-icon>{{ $t('common.cancel') }}
           </v-btn>
         </v-sheet>
       </v-card-text>
@@ -109,13 +105,6 @@
 </template>
 
 <script>
-import { 
-  mdiUploadOff,
-  mdiAlert,
-  mdiExclamationThick,
-  mdiAlertCircle
-} from '@mdi/js'
-
 export default {
   props: {
     show: Boolean, 
@@ -128,11 +117,7 @@ export default {
   data: () => ({
     file: null,
     uploadPercentage: 0,
-    source: null,
-    mdiUploadOff,
-    mdiAlert,
-    mdiExclamationThick,
-    mdiAlertCircle
+    source: null
   }),
 
   methods: {

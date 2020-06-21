@@ -5,7 +5,6 @@
     type="error"
     text
     outlined
-    :icon="icon"
   >
   <v-row align="center">
     <v-col class="grow">{{ $t('errors.undefinedPath') }}</v-col>
@@ -21,15 +20,3 @@
   </v-alert>
 </v-container>
 </template>
-
-<script>
-import {
-  mdiAlert
-} from '@mdi/js'
-
-export default {
-  data: () => ({
-    icon: mdiAlert
-  })  
-}
-</script>

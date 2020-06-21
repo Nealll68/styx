@@ -17,7 +17,7 @@
       <v-container class="app-container">
         <v-row>
           <v-col class="text-truncate">
-            <v-icon>{{ $store.state.downloadInfo.type === 'zipExtract' ? icons.mdiDownload : icons.mdiFolderZip }}</v-icon>
+            <v-icon>{{ $store.state.downloadInfo.type === 'zipExtract' ? 'mdi-download' : 'mdi-folder-zip' }}</v-icon>
             {{ $store.state.downloadInfo.title }}
           </v-col>
 
@@ -34,7 +34,7 @@
               <v-icon 
                 :left="$vuetify.breakpoint.mdAndUp"
                 color="error"
-              >{{ icons.mdiDownloadOff }}</v-icon>
+              >mdi-download-off</v-icon>
               {{ $vuetify.breakpoint.smAndDown ? '' : $t('common.cancel') }}
             </v-btn>
           </v-col>
@@ -45,20 +45,9 @@
 </template>
 
 <script>
-import {
-  mdiDownload,
-  mdiDownloadOff,
-  mdiFolderZip
-} from '@mdi/js'
-
 export default {
   data: () => ({
-    loadingCancel: false,
-    icons: {
-      mdiDownload,
-      mdiDownloadOff,
-      mdiFolderZip
-    }
+    loadingCancel: false
   }),
 
   methods: {

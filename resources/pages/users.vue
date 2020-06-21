@@ -6,7 +6,7 @@
       text
       outlined
       v-if="users.find(element => element.username === 'admin')"
-      :icon="icons.mdiExclamationThick"
+      icon="mdi-exclamation-thick"
     >{{ $t('users.adminUserAlert') }}</v-alert>
 
     <v-row justify="center">
@@ -17,7 +17,7 @@
           class="float-right" 
           @click="dialog = !dialog"
         >
-          <v-icon left>{{icons.mdiAccountPlus}}</v-icon>{{ $t('users.add') }}
+          <v-icon left>mdi-account-plus</v-icon>{{ $t('users.add') }}
         </v-btn>
       </v-col>
 
@@ -30,7 +30,7 @@
             
             <v-text-field
               v-model="usersTableSearch"
-              :append-icon="icons.mdiAccountSearch"
+              append-icon="mdi-account-search"
               :label="$t('common.search')"
               single-line
               hide-details
@@ -73,7 +73,7 @@
                         icon
                         v-on="on"
                       >
-                        <v-icon>{{icons.mdiShieldAccount}}</v-icon>  
+                        <v-icon>mdi-shield-account</v-icon>  
                       </v-btn>
                     </template>
 
@@ -101,7 +101,7 @@
                     color="error"
                     @click="deleteUser(item)"
                   >
-                    <v-icon>{{icons.mdiAccountRemove}}</v-icon>  
+                    <v-icon>mdi-account-remove</v-icon>  
                   </v-btn>                  
                 </template>                
               </v-data-table>
@@ -127,7 +127,7 @@
               :rules="formRules.usernameRules"
               :label="$t('common.username')"
               name="username"
-              :prepend-inner-icon="icons.mdiAccount"
+              prepend-inner-icon="mdi-account"
               filled
             ></v-text-field>
 
@@ -136,16 +136,16 @@
               :rules="formRules.passwordRules"
               :label="$t('common.password')"
               name="password"
-              :prepend-inner-icon="icons.mdiLock"
+              prepend-inner-icon="mdi-lock"
               :type="showPassword ? 'text' : 'password'"
-              :append-icon="showPassword ? icons.mdiEye : icons.mdiEyeOff" 
+              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'" 
               @click:append="showPassword = !showPassword"
               filled
             >
               <template v-slot:append-outer>
                 <v-tooltip top>
                   <template v-slot:activator="{ on }">
-                    <v-icon v-on="on">{{icons.mdiHelp}}</v-icon>
+                    <v-icon v-on="on">mdi-help</v-icon>
                   </template>
                   <ul>
                     <li>{{ $t('rules.password.minLength') }}</li>
@@ -189,18 +189,6 @@
 </template>
 
 <script>
-import {
-  mdiAccountPlus,
-  mdiAccountSearch,
-  mdiShieldAccount,
-  mdiAccountRemove,
-  mdiAccount,
-  mdiLock,
-  mdiEye,
-  mdiEyeOff,
-  mdiHelp,
-  mdiExclamationThick
-} from '@mdi/js'
 export default {
   layout: 'interface',
   middleware: 'privilege_1',
@@ -246,19 +234,7 @@ export default {
         { text: this.$t('common.createdAt'), value: 'created_at' },
         { text: '', value: 'action', sortable: false }
       ],
-      privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')],
-      icons: {
-        mdiAccountPlus,
-        mdiAccountSearch,
-        mdiShieldAccount,
-        mdiAccountRemove,
-        mdiAccount,
-        mdiLock,
-        mdiEye,
-        mdiEyeOff,
-        mdiHelp,
-        mdiExclamationThick
-      }
+      privileges: [this.$t('privileges.sergeant'), this.$t('privileges.commander')]
     }
   },
 

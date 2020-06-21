@@ -91,7 +91,7 @@ To make Styx accessible from outside you will need to open some ports and redire
 * For Linux (Debian based system):
 
 **You can skip Step 2 and replace all hello.js with server.js in commands**<br/>
-https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-debian-10#step-1-—-installing-nodejs
+https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-debian-10
 
 * For Windows server:
 

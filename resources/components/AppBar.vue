@@ -174,24 +174,6 @@
             >
               <v-icon :left="$vuetify.breakpoint.mdAndUp">mdi-stop</v-icon>{{ $vuetify.breakpoint.smAndDown ? '' : $t('serverState.stop') }}
             </v-btn>
-            
-            <v-tooltip 
-              v-if="$auth.user.privilege === 1 && $store.state.config.steamCmdPath"
-              bottom
-            >
-              <template v-slot:activator="{ on }">
-                <v-btn
-                  icon
-                  :loading="loadingUpdate"
-                  v-on="on"
-                  @click="updateServer()"
-                  :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
-                >
-                  <v-icon>mdi-update</v-icon>
-                </v-btn>
-              </template>
-              {{ $t('menu.updateServer') }}
-            </v-tooltip>
           </v-col>
         </v-row>
       </v-container>
@@ -212,7 +194,6 @@ export default {
 
   data () {
     return {
-      loadingUpdate: false,
       navDrawer: false,
       a3ServerWs: null,
       links: [
@@ -288,28 +269,6 @@ export default {
         type: 'info',
         message: this.$t('serverState.stopProgress')
       })
-    },
-
-    async updateServer (guard = null) {
-      this.loadingUpdate = true
-
-      try {
-        await this.$axios.$post('server/download/update', {
-          steamGuard: null
-        })
-      } catch (ex) {
-        if (ex.response.data === 'E_STEAM_GUARD_REQUIRED') {
-          const steamGuard = await this.$steamGuard()
-
-          if (steamGuard) {
-            await this.$axios.$post('server/download/update', {
-              steamGuard: steamGuard
-            })
-          }
-        }
-      }
-
-      this.loadingUpdate = false
     },
 
     async logout () {

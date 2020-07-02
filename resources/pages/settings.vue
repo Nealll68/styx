@@ -9,6 +9,16 @@
         <v-spacer></v-spacer>
 
         <v-btn
+          text
+          :disabled="$store.state.downloadInfo.type === 'updateServer' || !$store.state.config.a3ServerPath"
+          class="mr-2"
+          :loading="loadingUpdate"
+          @click="updateServer()"
+        >
+          <v-icon left>mdi-update</v-icon> {{ $t('menu.updateServer') }}
+        </v-btn>
+
+        <v-btn
           outlined
           color="primary"
           :loading="loading"
@@ -130,6 +140,7 @@ export default {
   data () {
     return {
       loading: false,
+      loadingUpdate: false,
       config: {
         steamcmd_path: '',
         a3server_path: '',
@@ -168,7 +179,29 @@ export default {
       }
 
       this.loading = false
-    }
+    },
+
+    async updateServer (guard = null) {
+      this.loadingUpdate = true
+
+      try {
+        await this.$axios.$post('server/download/update', {
+          steamGuard: null
+        })
+      } catch (ex) {
+        if (ex.response.data === 'E_STEAM_GUARD_REQUIRED') {
+          const steamGuard = await this.$steamGuard()
+
+          if (steamGuard) {
+            await this.$axios.$post('server/download/update', {
+              steamGuard: steamGuard
+            })
+          }
+        }
+      }
+
+      this.loadingUpdate = false
+    },
   }
 }
 </script>

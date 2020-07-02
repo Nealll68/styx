@@ -195,7 +195,6 @@
                   icon
                   color="error"
                   @click="deleteMod(item)"
-                  :disabled="modsTableLoading"
                 >
                   <v-icon>mdi-delete</v-icon>  
                 </v-btn>         

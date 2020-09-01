@@ -57,14 +57,14 @@ For Git, you can also follow the instructions on the Git website : https://git-s
 
 Create a directory named "styx" where you want on your system.<br/>Now in the newly created directory type this command:
 ```
-$ npx https://www.github.com/Nealll68/styx-install
+$ npx https://www.github.com/coolguy1771/styx-install
 ```
 This script will clone this repository, install packages, create needed files and build the application for you.
 <br/>**Note**: if you want to use Yarn instead of NPM for packages, use flag : --yarn
 
 To update Styx, go in the styx folder and type this command:
 ```
-$ npx https://www.github.com/Nealll68/styx-install --update
+$ npx https://www.github.com/coolguy1771/styx-install --update
 ```
 
 **2. Configure Styx**

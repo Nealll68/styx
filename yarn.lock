@@ -132,7 +132,7 @@
     "@adonisjs/generic-exceptions" "^2.0.1"
     chance "^1.0.18"
     debug "^4.1.1"
-    knex "^0.16.5"
+    knex "^0.21.5"
     lodash "^4.17.11"
     moment "^2.24.0"
     pluralize "^7.0.0"
@@ -6259,10 +6259,10 @@ kleur@^2.0.1, kleur@^2.0.2:
   resolved "https://registry.yarnpkg.com/kleur/-/kleur-2.0.2.tgz#b704f4944d95e255d038f0cb05fb8a602c55a300"
   integrity sha512-77XF9iTllATmG9lSlIv0qdQ2BQ/h9t0bJllHlbvsQ0zUWfU7Yi0S8L5JXzPZgkefIiajLmBJJ4BsMJmqcf7oxQ==
 
-knex@^0.16.5:
-  version "0.16.5"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.16.5.tgz#8ba3806289a5d543dd42ed21420a31c578476993"
-  integrity sha512-1RVxMU8zGOBqgmXlAvs8vohg9MD14iiRZZPe0IeQXd554n4xxPmoMkbH4hlFeqfM6eOdFE3AVqVSncL3YuocqA==
+knex@^0.21.5:
+  version "0.21.5"
+  resolved "https://github.com/knex/knex/archive/0.21.5.tar.gz"
+#  integrity #sha512-1RVxMU8zGOBqgmXlAvs8vohg9MD14iiRZZPe0IeQXd554n4xxPmoMkbH4hlFeqfM6eOdFE3AVqVSncL3YuocqA==
   dependencies:
     "@babel/polyfill" "^7.4.3"
     "@types/bluebird" "^3.5.26"

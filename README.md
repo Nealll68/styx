@@ -1,5 +1,7 @@
 <h1 align="center">Styx</h1>
 
+<h1 align="center">This project is in WORK IN PROGRESS</h1>
+
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
   <a href="https://github.com/Nealll68/styx/blob/master/LICENCE" target="_blank" rel="noopener noreferrer">
@@ -57,14 +59,14 @@ For Git, you can also follow the instructions on the Git website : https://git-s
 
 Create a directory named "styx" where you want on your system.<br/>Now in the newly created directory type this command:
 ```
-$ npx https://www.github.com/coolguy1771/styx-install
+$ npx https://www.github.com/Nealll68/styx-install
 ```
 This script will clone this repository, install packages, create needed files and build the application for you.
 <br/>**Note**: if you want to use Yarn instead of NPM for packages, use flag : --yarn
 
 To update Styx, go in the styx folder and type this command:
 ```
-$ npx https://www.github.com/coolguy1771/styx-install --update
+$ npx https://www.github.com/Nealll68/styx-install --update
 ```
 
 **2. Configure Styx**

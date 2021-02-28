@@ -1,6 +1,6 @@
 <h1 align="center">Styx</h1>
 
-<h1 align="center">This project is in WORK IN PROGRESS</h1>
+<h1 align="center">THIS PROJECT IS NOT LONGER MAINTENED, I'm actually writing a new version here : <a href="https://github.com/Nealll68/styx-v2"></a></h1>
 
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
